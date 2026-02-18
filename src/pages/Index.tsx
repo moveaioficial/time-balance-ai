@@ -1,17 +1,23 @@
 import { Layout } from "@/components/layout/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
-import { WhyMoveAI } from "@/components/home/WhyMoveAI";
-import { ResultsSection } from "@/components/home/ResultsSection";
-import { ClientsSection } from "@/components/home/ClientsSection";
+import { ToolsMarquee } from "@/components/home/ToolsMarquee";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { ComparisonSection } from "@/components/home/ComparisonSection";
+import { HowItWorksSection } from "@/components/home/HowItWorksSection";
+import { PortfolioSection } from "@/components/home/PortfolioSection";
+import { FAQSection } from "@/components/home/FAQSection";
 import { CTASection } from "@/components/home/CTASection";
 
 const Index = () => {
   return (
     <Layout>
       <HeroSection />
-      <WhyMoveAI />
-      <ResultsSection />
-      <ClientsSection />
+      <ToolsMarquee />
+      <ServicesSection />
+      <ComparisonSection />
+      <HowItWorksSection />
+      <PortfolioSection />
+      <FAQSection />
       <CTASection />
     </Layout>
   );

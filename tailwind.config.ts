@@ -8,9 +8,7 @@ export default {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      screens: { "2xl": "1400px" },
     },
     extend: {
       colors: {
@@ -48,8 +46,15 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          purple: "hsl(var(--brand-purple))",
-          blue: "hsl(var(--brand-blue))",
+          purple: "#7C3AED",
+          blue: "#3B82F6",
+          "purple-dark": "#6D28D9",
+          "blue-dark": "#2563EB",
+        },
+        navy: {
+          DEFAULT: "#0A0F1E",
+          light: "#0F1629",
+          card: "#111827",
         },
       },
       borderRadius: {
