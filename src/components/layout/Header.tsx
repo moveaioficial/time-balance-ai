@@ -43,7 +43,12 @@ export function Header() {
             onClick={(e) => { e.preventDefault(); handleNavClick("#inicio"); }}
             className="flex items-center"
           >
-            <img src={logoFullWhite} alt="MoveAI" className="h-12 lg:h-14 w-auto" />
+            <img
+              src={logoFullWhite}
+              alt="MoveAI"
+              className="h-9 lg:h-11 w-auto object-contain"
+              style={{ background: "none", boxShadow: "none", border: "none" }}
+            />
           </a>
 
           {/* Desktop Navigation */}

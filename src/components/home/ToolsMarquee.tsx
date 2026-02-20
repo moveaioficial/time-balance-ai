@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 const tools = [
   {
     name: "OpenAI",
@@ -49,35 +51,70 @@ const tools = [
   },
 ];
 
+// Duplicate list for seamless loop
+const doubled = [...tools, ...tools];
+
+function LogoItem({ tool }: { tool: typeof tools[0] }) {
+  return (
+    <div className="flex flex-col items-center justify-center gap-2 mx-8 flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300">
+      {tool.colorLogo ? (
+        <img
+          src={tool.colorLogo}
+          alt={tool.name}
+          className="h-9 w-9 object-contain"
+          loading="lazy"
+        />
+      ) : (
+        <div className="h-9 w-9 flex items-center justify-center">
+          <span className="text-[10px] font-bold text-foreground/80 text-center leading-tight tracking-wider">
+            SERP
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ToolsMarquee() {
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseEnter = () => {
+    if (trackRef.current) {
+      trackRef.current.style.animationPlayState = "paused";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (trackRef.current) {
+      trackRef.current.style.animationPlayState = "running";
+    }
+  };
+
   return (
     <section className="py-16 border-y border-white/6 bg-card/40">
       <div className="section-container">
         <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium text-center mb-12">
           Tecnologias que dominamos
         </p>
+      </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-          {tools.map((tool) => (
-            <div
-              key={tool.name}
-              className="flex flex-col items-center gap-3 p-5 rounded-xl border border-white/8 bg-white/4 backdrop-blur-sm hover:border-white/16 hover:bg-white/8 hover:scale-105 transition-all duration-300 cursor-default"
-            >
-              {tool.colorLogo ? (
-                <img
-                  src={tool.colorLogo}
-                  alt={tool.name}
-                  className="h-10 w-10 object-contain flex-shrink-0"
-                />
-              ) : (
-                <div className="h-10 w-10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-bold text-foreground/80 text-center leading-tight">SERP</span>
-                </div>
-              )}
-              <span className="text-xs font-medium text-muted-foreground text-center leading-tight">
-                {tool.name}
-              </span>
-            </div>
+      {/* Marquee strip — full bleed */}
+      <div className="relative overflow-hidden">
+        {/* Left fade */}
+        <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-[hsl(var(--background))] to-transparent" />
+        {/* Right fade */}
+        <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10 bg-gradient-to-l from-[hsl(var(--background))] to-transparent" />
+
+        <div
+          ref={trackRef}
+          className="flex animate-marquee"
+          style={{ width: "max-content" }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={handleMouseEnter}
+        >
+          {doubled.map((tool, i) => (
+            <LogoItem key={`${tool.name}-${i}`} tool={tool} />
           ))}
         </div>
       </div>
