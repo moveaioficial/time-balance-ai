@@ -59,8 +59,6 @@ export function HeroSection() {
         style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)" }} />
       <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] rounded-full opacity-15 animate-orb2 pointer-events-none"
         style={{ background: "radial-gradient(circle, #3B82F6 0%, transparent 70%)" }} />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full opacity-8 animate-float-slow pointer-events-none"
-        style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)" }} />
 
       {/* Grid texture overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
