@@ -7,6 +7,7 @@ const navLinks = [
   { href: "#solucoes", label: "Soluções" },
   { href: "#casos",    label: "Cases" },
   { href: "#faq",      label: "FAQ" },
+  { href: "#contato",  label: "Contato" },
 ];
 
 export function Header() {
@@ -46,7 +47,7 @@ export function Header() {
             <img
               src={moveaiWordmark}
               alt="MoveAI"
-              className="h-7 lg:h-8 w-auto"
+              className="h-10 lg:h-12 w-auto"
             />
           </a>
 
