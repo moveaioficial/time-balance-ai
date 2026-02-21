@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import logoFullWhite from "@/assets/logo-full-white.png";
+
 
 const navLinks = [
   { href: "#inicio",   label: "Início" },
@@ -43,12 +43,9 @@ export function Header() {
             onClick={(e) => { e.preventDefault(); handleNavClick("#inicio"); }}
             className="flex items-center"
           >
-            <img
-              src={logoFullWhite}
-              alt="MoveAI"
-              className="h-9 lg:h-11 w-auto object-contain"
-              style={{ background: "none", boxShadow: "none", border: "none" }}
-            />
+            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white select-none">
+              MoveAI
+            </span>
           </a>
 
           {/* Desktop Navigation */}
