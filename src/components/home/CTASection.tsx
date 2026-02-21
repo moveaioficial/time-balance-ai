@@ -1,6 +1,32 @@
-import { ArrowRight, Calendar } from "lucide-react";
+import { useState } from "react";
+import { Calendar } from "lucide-react";
 
 export function CTASection() {
+  const [form, setForm] = useState({ nome: "", telefone: "", email: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const errs: Record<string, string> = {};
+    if (!form.nome.trim()) errs.nome = "Nome é obrigatório";
+    if (!form.telefone.trim()) errs.telefone = "Telefone é obrigatório";
+    if (!form.email.trim()) errs.email = "Email é obrigatório";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      errs.email = "Email inválido";
+    return errs;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      return;
+    }
+    setErrors({});
+    setSubmitted(true);
+  };
+
   return (
     <section id="contato" className="py-20 lg:py-32 relative overflow-hidden">
       {/* BG glows */}
@@ -31,17 +57,56 @@ export function CTASection() {
               Resposta em até 24 horas — <strong className="text-foreground">sem cartão de crédito.</strong>
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://wa.me/5511999999999?text=Olá!%20Quero%20conhecer%20as%20soluções%20da%20MoveAI."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gradient text-base px-10 py-4 animate-pulse-glow"
-              >
-                Falar com um Especialista
-                <ArrowRight className="ml-2 h-5 w-5 inline" />
-              </a>
-            </div>
+            {submitted ? (
+              <div className="rounded-xl border border-border bg-card/60 p-8 text-center max-w-md mx-auto">
+                <div className="text-2xl mb-3">✅</div>
+                <p className="text-foreground font-medium">
+                  Recebemos suas informações. Nossa equipe entrará em contato em breve.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4 text-left">
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Nome</label>
+                  <input
+                    type="text"
+                    value={form.nome}
+                    onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="Seu nome"
+                  />
+                  {errors.nome && <p className="text-destructive text-xs mt-1">{errors.nome}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Telefone</label>
+                  <input
+                    type="tel"
+                    value={form.telefone}
+                    onChange={(e) => setForm({ ...form, telefone: e.target.value })}
+                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="(00) 00000-0000"
+                  />
+                  {errors.telefone && <p className="text-destructive text-xs mt-1">{errors.telefone}</p>}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                    placeholder="seu@email.com"
+                  />
+                  {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
+                </div>
+
+                <button type="submit" className="btn-gradient w-full text-sm py-3 mt-2">
+                  Solicitar Contato
+                </button>
+              </form>
+            )}
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
