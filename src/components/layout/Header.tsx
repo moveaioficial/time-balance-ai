@@ -37,17 +37,17 @@ export function Header() {
       }`}
     >
       <div className="section-container">
-        <nav className="flex items-center justify-between h-16 lg:h-20">
+        <nav className="flex items-center justify-between h-18 lg:h-22">
           {/* Logo */}
           <a
             href="#inicio"
             onClick={(e) => { e.preventDefault(); handleNavClick("#inicio"); }}
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
           >
             <img
               src={moveaiWordmark}
               alt="MoveAI"
-              className="h-10 lg:h-12 w-auto"
+              className="h-12 lg:h-14 w-auto"
             />
           </a>
 
