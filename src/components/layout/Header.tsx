@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-
+import moveaiWordmark from "@/assets/moveai-wordmark.png";
 
 const navLinks = [
   { href: "#inicio",   label: "Início" },
@@ -43,9 +43,11 @@ export function Header() {
             onClick={(e) => { e.preventDefault(); handleNavClick("#inicio"); }}
             className="flex items-center"
           >
-            <span className="text-xl lg:text-2xl font-bold tracking-tight text-white select-none">
-              MoveAI
-            </span>
+            <img
+              src={moveaiWordmark}
+              alt="MoveAI"
+              className="h-7 lg:h-8 w-auto"
+            />
           </a>
 
           {/* Desktop Navigation */}
