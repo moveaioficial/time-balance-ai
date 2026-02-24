@@ -37,7 +37,7 @@ export function Header() {
       }`}
     >
       <div className="section-container">
-        <nav className="flex items-center justify-between h-18 lg:h-22">
+        <nav className="flex items-center justify-between h-20 lg:h-24">
           {/* Logo */}
           <a
             href="#inicio"
@@ -47,7 +47,7 @@ export function Header() {
             <img
               src={moveaiWordmark}
               alt="MoveAI"
-              className="h-12 lg:h-14 w-auto"
+              className="h-14 lg:h-16 w-auto"
             />
           </a>
 
@@ -58,7 +58,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors link-underline cursor-pointer"
+                className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors link-underline cursor-pointer"
               >
                 {link.label}
               </a>
@@ -69,7 +69,7 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={() => handleNavClick("#contato")}
-              className="btn-gradient text-sm animate-pulse-glow"
+              className="btn-gradient text-base"
             >
               Fale com Vendas
             </button>
@@ -94,7 +94,7 @@ export function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className="text-sm font-medium py-2 px-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors cursor-pointer"
+                  className="text-base font-medium py-2 px-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors cursor-pointer"
                 >
                   {link.label}
                 </a>
@@ -102,7 +102,7 @@ export function Header() {
               <div className="pt-4 border-t border-white/6">
                 <button
                   onClick={() => handleNavClick("#contato")}
-                  className="btn-gradient w-full text-sm"
+                  className="btn-gradient w-full text-base"
                 >
                   Fale com Vendas
                 </button>
