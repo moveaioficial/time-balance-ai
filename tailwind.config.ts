@@ -46,9 +46,7 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         brand: {
-          purple: "#7C3AED",
           blue: "#3B82F6",
-          "purple-dark": "#6D28D9",
           "blue-dark": "#2563EB",
         },
         navy: {

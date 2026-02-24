@@ -54,12 +54,6 @@ export function HeroSection() {
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Animated background orbs */}
-      <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full opacity-20 animate-orb1 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #7C3AED 0%, transparent 70%)" }} />
-      <div className="absolute bottom-[-15%] left-[-10%] w-[700px] h-[700px] rounded-full opacity-15 animate-orb2 pointer-events-none"
-        style={{ background: "radial-gradient(circle, #3B82F6 0%, transparent 70%)" }} />
-
       {/* Grid texture overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -79,7 +73,7 @@ export function HeroSection() {
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.08] mb-6 animate-fade-in-up animation-delay-200">
             Tornamos a tecnologia{" "}
-            <span className="text-gradient">mais humana</span>
+            <span className="text-primary">mais humana</span>
             {", acessível e útil"}
           </h1>
 
@@ -93,7 +87,7 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up animation-delay-600">
             <button
               onClick={() => handleCTA("#contato")}
-              className="btn-gradient text-base px-8 py-4 animate-pulse-glow"
+              className="btn-gradient text-base px-8 py-4"
             >
               Começar Agora
               <ArrowRight className="ml-2 h-5 w-5 inline" />
@@ -110,7 +104,7 @@ export function HeroSection() {
           <div className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 animate-fade-in-up animation-delay-800">
             {counters.map((c) => (
               <div key={c.label} className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-gradient mb-2">
+                <div className="text-4xl lg:text-5xl font-bold text-primary mb-2">
                   <AnimatedCounter value={c.value} suffix={c.suffix} />
                 </div>
                 <p className="text-sm text-muted-foreground">{c.label}</p>

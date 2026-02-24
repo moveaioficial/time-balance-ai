@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { MessageSquare, BarChart3, Users, BrainCircuit, Sparkles } from "lucide-react";
 
 const services = [
@@ -79,7 +79,7 @@ export function ServicesSection() {
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Automação que se adapta ao{" "}
-            <span className="text-gradient">seu negócio</span>
+            <span className="text-primary">seu negócio</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Não mudamos o que funciona. Potencializamos com IA.
@@ -93,8 +93,7 @@ export function ServicesSection() {
               <TiltCard>
                 <div className="gradient-border-card h-full p-8 cursor-default group">
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110"
-                    style={{ background: "linear-gradient(135deg, #7C3AED, #3B82F6)" }}
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 bg-primary"
                   >
                     <service.icon className="h-7 w-7 text-white" />
                   </div>
@@ -118,8 +117,7 @@ export function ServicesSection() {
 
         {/* Custom solutions CTA */}
         <div className="mt-8 reveal">
-          <div className="rounded-2xl p-8 lg:p-10 border border-primary/25 text-center"
-            style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(59,130,246,0.08) 100%)" }}>
+          <div className="rounded-2xl p-8 lg:p-10 border border-primary/25 text-center bg-primary/5">
             <Sparkles className="h-8 w-8 mx-auto mb-4 text-primary" />
             <h3 className="text-2xl font-bold text-foreground mb-3">Solução Customizada</h3>
             <p className="text-muted-foreground max-w-xl mx-auto mb-6">
