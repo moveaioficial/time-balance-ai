@@ -21,17 +21,18 @@ const tools = [
 
 const doubled = [...tools, ...tools];
 
-function LogoItem({ tool }: { tool: typeof tools[0] }) {
+function LogoItem({ tool }: { tool: (typeof tools)[0] }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 mx-10 flex-shrink-0 group cursor-default">
-      <div className="relative transition-all duration-300 ease-out group-hover:scale-110">
-        <img
-          src={tool.logo}
-          alt={tool.name}
-          className="h-10 w-10 object-contain brightness-110 contrast-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.25)] transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_14px_rgba(59,130,246,0.4)]"
-          loading="lazy"
-        />
-      </div>
+    <div className="flex items-center justify-center mx-12 flex-shrink-0 group cursor-default">
+      <img
+        src={tool.logo}
+        alt={tool.name}
+        className="h-11 w-11 object-contain transition-all duration-300 ease-out group-hover:scale-110 group-hover:brightness-125"
+        style={{
+          filter: "brightness(1.15) contrast(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.12))",
+        }}
+        loading="lazy"
+      />
     </div>
   );
 }
@@ -47,9 +48,9 @@ export function ToolsMarquee() {
   };
 
   return (
-    <section className="py-8 lg:py-10 border-y border-white/[0.06] bg-white/[0.02]">
+    <section className="py-8 lg:py-10 border-y border-white/[0.06] bg-white/[0.03]">
       <div className="section-container">
-        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-semibold text-center mb-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold text-center mb-6">
           Tecnologias que dominamos
         </p>
       </div>
@@ -60,7 +61,7 @@ export function ToolsMarquee() {
 
         <div
           ref={trackRef}
-          className="flex animate-marquee"
+          className="flex items-center animate-marquee"
           style={{ width: "max-content" }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
