@@ -53,7 +53,7 @@ export function HeroSection() {
   };
 
   return (
-    <section id="inicio" className="relative flex items-center overflow-hidden" style={{ minHeight: "calc(100vh - 6rem)" }}>
+    <section id="inicio" className="relative overflow-hidden">
       {/* Grid texture overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -62,7 +62,7 @@ export function HeroSection() {
         }}
       />
 
-      <div className="section-container relative z-10 py-10 lg:py-14">
+      <div className="section-container relative z-10 pt-16 lg:pt-20 pb-10 lg:pb-14">
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/12 bg-white/5 backdrop-blur mb-5 animate-fade-in-up">
