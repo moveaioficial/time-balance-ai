@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import logoOpenai from "@/assets/logo-openai.png";
+import logoOpenai from "@/assets/logo-openai-white.jpg";
 import logoSerpapi from "@/assets/logo-serpapi.webp";
-import logoApify from "@/assets/logo-apify.png";
+import logoApify from "@/assets/logo-apify.svg";
 import logoLovable from "@/assets/logo-lovable.png";
 
 const tools = [
@@ -23,13 +23,15 @@ const doubled = [...tools, ...tools];
 
 function LogoItem({ tool }: { tool: typeof tools[0] }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-2 mx-10 flex-shrink-0 opacity-70 hover:opacity-100 transition-opacity duration-300">
-      <img
-        src={tool.logo}
-        alt={tool.name}
-        className="h-12 w-12 object-contain"
-        loading="lazy"
-      />
+    <div className="flex flex-col items-center justify-center gap-2 mx-10 flex-shrink-0 group cursor-default">
+      <div className="relative transition-all duration-300 ease-out group-hover:scale-110">
+        <img
+          src={tool.logo}
+          alt={tool.name}
+          className="h-10 w-10 object-contain brightness-110 contrast-110 drop-shadow-[0_0_8px_rgba(59,130,246,0.25)] transition-all duration-300 group-hover:brightness-125 group-hover:drop-shadow-[0_0_14px_rgba(59,130,246,0.4)]"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 }
@@ -45,9 +47,9 @@ export function ToolsMarquee() {
   };
 
   return (
-    <section className="py-8 lg:py-10 border-y border-white/6 bg-card/40">
+    <section className="py-8 lg:py-10 border-y border-white/[0.06] bg-white/[0.02]">
       <div className="section-container">
-        <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium text-center mb-6">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground/80 font-semibold text-center mb-6">
           Tecnologias que dominamos
         </p>
       </div>
