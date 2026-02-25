@@ -45,9 +45,9 @@ export function ToolsMarquee() {
   };
 
   return (
-    <section className="py-16 border-y border-white/6 bg-card/40">
+    <section className="py-8 lg:py-10 border-y border-white/6 bg-card/40">
       <div className="section-container">
-        <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium text-center mb-12">
+        <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium text-center mb-6">
           Tecnologias que dominamos
         </p>
       </div>
