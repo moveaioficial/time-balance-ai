@@ -13,11 +13,11 @@ export function useContactModal() {
 
 export function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [form, setForm] = useState({ nome: "", email: "", whatsapp: "" });
+  const [form, setForm] = useState({ nome: "", email: "", whatsapp: "", problema: "" });
   const [submitted, setSubmitted] = useState(false);
 
   const openModal = () => {
-    setForm({ nome: "", email: "", whatsapp: "" });
+    setForm({ nome: "", email: "", whatsapp: "", problema: "" });
     setSubmitted(false);
     setIsOpen(true);
   };
@@ -59,7 +59,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               <>
                 <h3 className="text-2xl font-bold text-foreground mb-1">Fale com a MoveAI</h3>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Preencha seus dados e entraremos em contato em até 24h.
+                  Preencha seus dados e entraremos em contato.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -93,6 +93,16 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="(00) 00000-0000"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Descreva seu problema</label>
+                    <textarea
+                      value={form.problema}
+                      onChange={(e) => setForm({ ...form, problema: e.target.value })}
+                      className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      placeholder="Ex: Preciso automatizar meu processo de vendas..."
+                      rows={3}
                     />
                   </div>
                   <button type="submit" className="btn-gradient w-full py-3 text-sm mt-2">

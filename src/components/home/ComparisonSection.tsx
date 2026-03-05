@@ -6,8 +6,8 @@ const rows = [
   { label: "Tempo para contratar", moveai: "Poucas Horas", freelancers: "5–7 dias", agencias: "2–3 Semanas" },
   { label: "Nível de Experiência", moveai: "Nível Sênior", freelancers: "Iniciante / Júnior", agencias: "Confie na Sorte" },
   { label: "Comunicação", moveai: "Diária", freelancers: "Inconsistente", agencias: "Fantasma" },
-  { label: "Primeira Entrega", moveai: "2–3 dias", freelancers: "Várias Semanas", agencias: "2–3 Meses" },
-  { label: "Rescisão", moveai: "Um clique, zero multas", freelancers: "Demorada", agencias: "Multas contratuais" },
+  { label: "Primeira Entrega", moveai: "5–7 dias", freelancers: "Várias Semanas", agencias: "2–3 Meses" },
+  { label: "Rescisão", moveai: "Fácil", freelancers: "Demorada", agencias: "Multas contratuais" },
 ];
 
 export function ComparisonSection() {
@@ -35,7 +35,7 @@ export function ComparisonSection() {
                     <img
                       src={moveaiWordmark}
                       alt="MoveAI"
-                      className="h-6 w-auto"
+                      className="h-12 w-auto"
                       style={{ mixBlendMode: "screen" }}
                     />
                     <Check className="h-4 w-4 text-green-400" />

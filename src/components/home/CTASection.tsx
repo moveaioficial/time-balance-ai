@@ -20,9 +20,8 @@ export function CTASection() {
             </h2>
 
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              Descubra como a MoveAI pode transformar seus processos em dias, não meses.
-              Resposta em até 24 horas —{" "}
-              <strong className="text-foreground">sem cartão de crédito.</strong>
+              Descubra como a MoveAI pode transformar seus processos em dias, não meses.{" "}
+              <strong className="text-foreground">Sem cartão de crédito.</strong>
             </p>
 
             <button onClick={openModal} className="btn-gradient px-10 py-4 text-base">
@@ -32,7 +31,7 @@ export function CTASection() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                Resposta em até 24h
+                Resposta ágil
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400" />

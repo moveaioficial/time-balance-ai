@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const faqs = [
-  { q: "Quanto tempo leva para implementar uma automação?", a: "A maioria das automações é entregue em 2 a 5 dias úteis após o diagnóstico. Projetos mais complexos com múltiplas integrações podem levar de 1 a 2 semanas. Sempre comunicamos prazos claros antes de iniciar." },
+  { q: "Quanto tempo leva para implementar uma automação?", a: "A maioria das automações é entregue em 3 a 7 dias úteis após o diagnóstico. Projetos mais complexos com múltiplas integrações podem levar de 1 a 2 semanas. Sempre comunicamos prazos claros antes de iniciar." },
   { q: "Preciso mudar meu sistema atual para usar a MoveAI?", a: "Não. Essa é nossa principal diferença. Nós nos adaptamos ao que você já usa — seu CRM, WhatsApp, ferramentas internas. Não forçamos a adoção de novas plataformas." },
   { q: "Como funciona o modelo de contratação?", a: "Trabalhamos com contratos flexíveis sem multas de rescisão. Você pode cancelar a qualquer momento. Oferecemos tanto projetos pontuais (por escopo) quanto contratos de retainer mensal para automações contínuas." },
   { q: "Minha equipe precisa aprender a usar as ferramentas?", a: "O objetivo é o oposto: reduzir o trabalho da sua equipe. As automações rodam em background. Onde houver interface, entregamos treinamento simples e documentação clara." },

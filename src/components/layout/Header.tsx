@@ -49,7 +49,7 @@ export function Header() {
             <img
               src={moveaiWordmark}
               alt="MoveAI"
-              className="h-16 lg:h-20 w-auto"
+              className="h-20 sm:h-24 lg:h-28 w-auto"
               style={{ mixBlendMode: "screen" }}
             />
           </a>

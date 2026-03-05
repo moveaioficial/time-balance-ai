@@ -36,7 +36,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <a href="#inicio" onClick={(e) => { e.preventDefault(); handleAnchor("#inicio"); }}>
-              <img src={logoGradient} alt="MoveAI" className="h-14 w-auto mb-6" />
+              <img src={logoGradient} alt="MoveAI" className="h-20 sm:h-24 w-auto mb-6" style={{ mixBlendMode: "screen" }} />
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Tornamos a tecnologia mais humana, acessível e útil. Libertamos pessoas do trabalho operacional para que foquem em pensar, criar e decidir.
