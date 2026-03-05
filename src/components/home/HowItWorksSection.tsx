@@ -1,4 +1,5 @@
 import { MessageCircle, Search, Code, Rocket, TrendingUp } from "lucide-react";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const steps = [
   { icon: MessageCircle, number: "01", title: "Diagnóstico", description: "Você nos conta sobre seus desafios e processos atuais. Escutamos ativamente." },
@@ -9,6 +10,7 @@ const steps = [
 ];
 
 export function HowItWorksSection() {
+  const { openModal } = useContactModal();
   return (
     <section id="processo" className="py-20 lg:py-32">
       <div className="section-container">
@@ -66,7 +68,7 @@ export function HowItWorksSection() {
 
         <div className="text-center mt-20 reveal">
           <button
-            onClick={() => document.querySelector("#contato")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={openModal}
             className="btn-gradient px-8 py-4 text-base"
           >
             Iniciar minha automação

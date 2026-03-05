@@ -1,31 +1,8 @@
-import { useState } from "react";
 import { Calendar } from "lucide-react";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 export function CTASection() {
-  const [form, setForm] = useState({ nome: "", telefone: "", email: "", mensagem: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const validate = () => {
-    const errs: Record<string, string> = {};
-    if (!form.nome.trim()) errs.nome = "Nome é obrigatório";
-    if (!form.telefone.trim()) errs.telefone = "Telefone é obrigatório";
-    if (!form.email.trim()) errs.email = "Email é obrigatório";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      errs.email = "Email inválido";
-    return errs;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
-    setErrors({});
-    setSubmitted(true);
-  };
+  const { openModal } = useContactModal();
 
   return (
     <section id="contato" className="py-20 lg:py-32 relative overflow-hidden">
@@ -44,69 +21,13 @@ export function CTASection() {
 
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
               Descubra como a MoveAI pode transformar seus processos em dias, não meses.
-              Resposta em até 24 horas — <strong className="text-foreground">sem cartão de crédito.</strong>
+              Resposta em até 24 horas —{" "}
+              <strong className="text-foreground">sem cartão de crédito.</strong>
             </p>
 
-            {submitted ? (
-              <div className="rounded-xl border border-border bg-card/60 p-8 text-center max-w-md mx-auto">
-                <div className="text-2xl mb-3">✅</div>
-                <p className="text-foreground font-medium">
-                  Recebemos suas informações. Nossa equipe entrará em contato em breve.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-4 text-left">
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Nome</label>
-                  <input
-                    type="text"
-                    value={form.nome}
-                    onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="Seu nome"
-                  />
-                  {errors.nome && <p className="text-destructive text-xs mt-1">{errors.nome}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Telefone</label>
-                  <input
-                    type="tel"
-                    value={form.telefone}
-                    onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="(00) 00000-0000"
-                  />
-                  {errors.telefone && <p className="text-destructive text-xs mt-1">{errors.telefone}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Email</label>
-                  <input
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                    placeholder="seu@email.com"
-                  />
-                  {errors.email && <p className="text-destructive text-xs mt-1">{errors.email}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-1.5">Conte-nos mais sobre o seu projeto</label>
-                  <textarea
-                    value={form.mensagem}
-                    onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-                    className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px] resize-y"
-                    placeholder="Descreva brevemente o que precisa..."
-                  />
-                </div>
-
-                <button type="submit" className="btn-gradient w-full text-sm py-3 mt-2">
-                  Solicitar Contato
-                </button>
-              </form>
-            )}
+            <button onClick={openModal} className="btn-gradient px-10 py-4 text-base">
+              Fale com a MoveAI
+            </button>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">

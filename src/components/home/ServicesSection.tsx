@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { MessageSquare, BarChart3, Users, BrainCircuit, Sparkles } from "lucide-react";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const services = [
   {
@@ -68,6 +69,7 @@ function TiltCard({ children }: { children: React.ReactNode }) {
 }
 
 export function ServicesSection() {
+  const { openModal } = useContactModal();
   return (
     <section id="solucoes" className="py-20 lg:py-32">
       <div className="section-container">
@@ -124,7 +126,7 @@ export function ServicesSection() {
               Seu processo é único. Nós analisamos sua operação e desenhamos uma automação sob medida. <strong className="text-foreground">Você pede, nós cumprimos.</strong>
             </p>
             <button
-              onClick={() => document.querySelector("#contato")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={openModal}
               className="btn-gradient px-8 py-3"
             >
               Solicitar Proposta Personalizada

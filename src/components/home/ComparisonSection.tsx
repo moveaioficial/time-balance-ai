@@ -1,14 +1,18 @@
 import { Check, X } from "lucide-react";
+import moveaiWordmark from "@/assets/moveai-wordmark.png";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const rows = [
-  { label: "Tempo para contratar", moveai: "Poucas Horas", freelancers: "5–7 dias", interno: "Meses", agencias: "2–3 Semanas" },
-  { label: "Nível de Experiência", moveai: "Nível Sênior", freelancers: "Iniciante / Júnior", interno: "Risco de rotatividade", agencias: "Confie na Sorte" },
-  { label: "Comunicação", moveai: "Diária", freelancers: "Inconsistente", interno: "Reuniões longas", agencias: "Fantasma" },
-  { label: "Primeira Entrega", moveai: "2–3 dias", freelancers: "Várias Semanas", interno: "6–7 Semanas", agencias: "2–3 Meses" },
-  { label: "Rescisão", moveai: "Um clique, zero multas", freelancers: "Demorada", interno: "Custos trabalhistas altos", agencias: "Multas contratuais" },
+  { label: "Tempo para contratar", moveai: "Poucas Horas", freelancers: "5–7 dias", agencias: "2–3 Semanas" },
+  { label: "Nível de Experiência", moveai: "Nível Sênior", freelancers: "Iniciante / Júnior", agencias: "Confie na Sorte" },
+  { label: "Comunicação", moveai: "Diária", freelancers: "Inconsistente", agencias: "Fantasma" },
+  { label: "Primeira Entrega", moveai: "2–3 dias", freelancers: "Várias Semanas", agencias: "2–3 Meses" },
+  { label: "Rescisão", moveai: "Um clique, zero multas", freelancers: "Demorada", agencias: "Multas contratuais" },
 ];
 
 export function ComparisonSection() {
+  const { openModal } = useContactModal();
+
   return (
     <section id="compare" className="py-20 lg:py-32 bg-card/30">
       <div className="section-container">
@@ -22,18 +26,23 @@ export function ComparisonSection() {
         </div>
 
         <div className="reveal overflow-x-auto">
-          <table className="w-full min-w-[640px]">
+          <table className="w-full min-w-[520px]">
             <thead>
               <tr>
-                <th className="text-left py-4 px-4 text-sm text-muted-foreground font-medium w-1/5">Critério</th>
-                <th className="py-4 px-4 w-1/5">
-                  <div className="rounded-xl py-3 px-4 text-center bg-primary/10 border border-primary/30">
-                    <span className="text-sm font-bold text-foreground">MoveAI</span>
-                    <div className="mt-1"><Check className="h-4 w-4 text-green-400 mx-auto" /></div>
+                <th className="text-left py-4 px-4 text-sm text-muted-foreground font-medium w-1/4">Critério</th>
+                <th className="py-4 px-4 w-1/4">
+                  <div className="rounded-xl py-3 px-4 text-center bg-primary/10 border border-primary/30 flex flex-col items-center gap-1">
+                    <img
+                      src={moveaiWordmark}
+                      alt="MoveAI"
+                      className="h-6 w-auto"
+                      style={{ mixBlendMode: "screen" }}
+                    />
+                    <Check className="h-4 w-4 text-green-400" />
                   </div>
                 </th>
-                {["FREELANCERS", "EQUIPE INTERNA", "OUTRAS AGÊNCIAS"].map((col) => (
-                  <th key={col} className="py-4 px-4 w-1/5">
+                {["FREELANCERS", "OUTRAS AGÊNCIAS"].map((col) => (
+                  <th key={col} className="py-4 px-4 w-1/4">
                     <div className="rounded-xl py-3 px-4 text-center bg-white/3 border border-white/6">
                       <span className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wide">{col}</span>
                       <div className="mt-1"><X className="h-4 w-4 text-red-400/70 mx-auto" /></div>
@@ -51,7 +60,7 @@ export function ComparisonSection() {
                       {row.moveai}
                     </span>
                   </td>
-                  {[row.freelancers, row.interno, row.agencias].map((val, j) => (
+                  {[row.freelancers, row.agencias].map((val, j) => (
                     <td key={j} className="py-4 px-4 text-center">
                       <span className="text-sm text-muted-foreground/60">{val}</span>
                     </td>
@@ -64,7 +73,7 @@ export function ComparisonSection() {
 
         <div className="text-center mt-12 reveal">
           <button
-            onClick={() => document.querySelector("#contato")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={openModal}
             className="btn-gradient px-8 py-4 text-base"
           >
             Quero trabalhar com a MoveAI

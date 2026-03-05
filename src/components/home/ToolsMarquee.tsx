@@ -1,11 +1,10 @@
 import { useRef } from "react";
-import logoOpenai from "@/assets/logo-openai-white.jpg";
 import logoSerpapi from "@/assets/logo-serpapi.webp";
 import logoApify from "@/assets/logo-apify.svg";
 import logoLovable from "@/assets/logo-lovable.png";
 
 const tools = [
-  { name: "OpenAI", logo: logoOpenai },
+  { name: "OpenAI", logo: "https://cdn.simpleicons.org/openai", invert: true },
   { name: "Google Gemini", logo: "https://cdn.simpleicons.org/googlegemini/4285F4" },
   { name: "Google Workspace", logo: "https://cdn.simpleicons.org/google/4285F4" },
   { name: "Supabase", logo: "https://cdn.simpleicons.org/supabase/3ECF8E" },
@@ -17,11 +16,11 @@ const tools = [
   { name: "Chatwoot", logo: "https://cdn.simpleicons.org/chatwoot/1F93FF" },
   { name: "SerpAPI", logo: logoSerpapi },
   { name: "Apify", logo: logoApify },
-];
+] as { name: string; logo: string; invert?: boolean }[];
 
 const doubled = [...tools, ...tools];
 
-function LogoItem({ tool }: { tool: (typeof tools)[0] }) {
+function LogoItem({ tool }: { tool: { name: string; logo: string; invert?: boolean } }) {
   return (
     <div className="flex items-center justify-center mx-12 flex-shrink-0 group cursor-default">
       <img
@@ -29,7 +28,7 @@ function LogoItem({ tool }: { tool: (typeof tools)[0] }) {
         alt={tool.name}
         className="h-11 w-11 object-contain transition-all duration-300 ease-out group-hover:scale-110 group-hover:brightness-125"
         style={{
-          filter: "brightness(1.15) contrast(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.12))",
+          filter: `${tool.invert ? "invert(1) " : ""}brightness(1.15) contrast(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.12))`,
         }}
         loading="lazy"
       />

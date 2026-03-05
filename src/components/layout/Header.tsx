@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import moveaiWordmark from "@/assets/moveai-wordmark.png";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const navLinks = [
   { href: "#inicio",   label: "Início" },
@@ -13,6 +14,7 @@ const navLinks = [
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -47,7 +49,8 @@ export function Header() {
             <img
               src={moveaiWordmark}
               alt="MoveAI"
-              className="h-14 lg:h-16 w-auto"
+              className="h-16 lg:h-20 w-auto"
+              style={{ mixBlendMode: "screen" }}
             />
           </a>
 
@@ -68,7 +71,7 @@ export function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <button
-              onClick={() => handleNavClick("#contato")}
+              onClick={openModal}
               className="btn-gradient text-base"
             >
               Fale com Vendas
@@ -101,7 +104,7 @@ export function Header() {
               ))}
               <div className="pt-4 border-t border-white/6">
                 <button
-                  onClick={() => handleNavClick("#contato")}
+                  onClick={openModal}
                   className="btn-gradient w-full text-base"
                 >
                   Fale com Vendas

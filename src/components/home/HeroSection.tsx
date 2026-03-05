@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const counters = [
   { value: 5000, suffix: "+", label: "Horas Salvas" },
@@ -47,6 +48,8 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export function HeroSection() {
+  const { openModal } = useContactModal();
+
   const handleCTA = (anchor: string) => {
     const el = document.querySelector(anchor);
     if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -86,7 +89,7 @@ export function HeroSection() {
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in-up animation-delay-600">
             <button
-              onClick={() => handleCTA("#contato")}
+              onClick={openModal}
               className="btn-gradient text-base px-8 py-3.5"
             >
               Começar Agora

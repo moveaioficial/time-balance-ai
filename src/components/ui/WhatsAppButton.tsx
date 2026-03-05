@@ -2,7 +2,7 @@ export function WhatsAppButton() {
   const message = encodeURIComponent(
     "Olá! Vim pelo site da MoveAI e quero saber mais sobre automação com IA."
   );
-  const url = `https://wa.me/5511999999999?text=${message}`;
+  const url = `https://wa.me/5511971858103?text=${message}`;
 
   return (
     <a
