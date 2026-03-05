@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { X } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 interface ContactModalContextType {
   openModal: () => void;
@@ -15,6 +16,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", whatsapp: "", problema: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const openModal = () => {
     setForm({ nome: "", email: "", whatsapp: "", problema: "" });
@@ -24,9 +27,24 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
   const closeModal = () => setIsOpen(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    const { error } = await supabase.from("formulario").insert({
+      nome: form.nome,
+      email: form.email,
+      descricao: form.problema,
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setError("Erro ao enviar. Tente novamente.");
+    } else {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -105,8 +123,11 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       rows={3}
                     />
                   </div>
-                  <button type="submit" className="btn-gradient w-full py-3 text-sm mt-2">
-                    Enviar mensagem
+                  {error && (
+                    <p className="text-red-400 text-xs text-center">{error}</p>
+                  )}
+                  <button type="submit" disabled={loading} className="btn-gradient w-full py-3 text-sm mt-2 disabled:opacity-60">
+                    {loading ? "Enviando..." : "Enviar mensagem"}
                   </button>
                 </form>
               </>
