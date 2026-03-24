@@ -20,12 +20,12 @@ export function CTASection() {
             </h2>
 
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              Descubra como a MoveAI pode transformar seus processos em dias, não meses.{" "}
+              Descubra como a Move AI pode transformar seus processos em dias, não meses.{" "}
               <strong className="text-foreground">Sem cartão de crédito.</strong>
             </p>
 
             <button onClick={openModal} className="btn-gradient px-10 py-4 text-base">
-              Fale com a MoveAI
+              Fale com a Move AI
             </button>
 
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">

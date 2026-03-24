@@ -3,10 +3,11 @@ import { Plus, Minus } from "lucide-react";
 
 const faqs = [
   { q: "Quanto tempo leva para implementar uma automação?", a: "A maioria das automações é entregue em 3 a 7 dias úteis após o diagnóstico. Projetos mais complexos com múltiplas integrações podem levar de 1 a 2 semanas. Sempre comunicamos prazos claros antes de iniciar." },
-  { q: "Preciso mudar meu sistema atual para usar a MoveAI?", a: "Não. Essa é nossa principal diferença. Nós nos adaptamos ao que você já usa — seu CRM, WhatsApp, ferramentas internas. Não forçamos a adoção de novas plataformas." },
-  { q: "Como funciona o modelo de contratação?", a: "Trabalhamos com contratos flexíveis sem multas de rescisão. Você pode cancelar a qualquer momento. Oferecemos tanto projetos pontuais (por escopo) quanto contratos de retainer mensal para automações contínuas." },
-  { q: "Minha equipe precisa aprender a usar as ferramentas?", a: "O objetivo é o oposto: reduzir o trabalho da sua equipe. As automações rodam em background. Onde houver interface, entregamos treinamento simples e documentação clara." },
+  { q: "Preciso mudar meu sistema atual para usar a Move AI?", a: "Não. Essa é nossa principal diferença. Nós nos adaptamos ao que você já usa: seu CRM, WhatsApp, ferramentas internas. Não forçamos a adoção de novas plataformas." },
+  { q: "Como funciona o modelo de contratação?", a: "Trabalhamos com contratos flexíveis sem multas de rescisão. Você pode cancelar a qualquer momento. Oferecemos tanto projetos pontuais (por escopo) quanto contratos de retainer mensal para automações contínuas. Novos clientes ainda contam com 7 dias de teste gratuito." },
+  { q: "Minha equipe precisa aprender a usar as ferramentas?", a: "O objetivo é o oposto: reduzir o trabalho da sua equipe. As automações rodam em segundo plano. Onde houver interface, entregamos treinamento simples e documentação clara." },
   { q: "Quais tipos de processos vocês conseguem automatizar?", a: "Atendimento ao cliente (WhatsApp, e-mail, redes sociais), geração e qualificação de leads, relatórios e dashboards, CRM, onboarding de clientes, integração entre sistemas, análise de dados com IA, e muito mais." },
+  { q: "A Move AI cria ou faz redesign de sites?", a: "Sim! Além de automação e IA, oferecemos serviços completos de criação e redesign de sites, design gráfico e criação visual. Desenvolvemos sites do zero, reformulamos interfaces existentes e entregamos artes e materiais visuais alinhados à identidade da sua marca." },
   { q: "Como garantem a qualidade das entregas?", a: "Cada projeto passa por fase de testes com cenários reais antes do lançamento. Acompanhamos o go-live e disponibilizamos suporte nas primeiras semanas. Monitoramos métricas continuamente." },
 ];
 
@@ -19,7 +20,7 @@ export function FAQSection() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16 reveal">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-              Perguntas <span className="text-primary">Frequentes</span>
+              Perguntas <span className="text-highlight">Frequentes</span>
             </h2>
             <p className="text-lg text-muted-foreground">Tire suas dúvidas antes de conversar com a gente.</p>
           </div>

@@ -50,18 +50,18 @@ function CaseModal({ c, onClose }: { c: typeof cases[0]; onClose: () => void }) 
         </button>
 
         <div className="p-6 pb-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-          <span className="text-xs px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-primary font-medium">{c.tag}</span>
+          <span className="text-xs px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-highlight font-medium">{c.tag}</span>
           <h3 className="text-2xl font-bold text-foreground mt-3 mb-1">{c.title}</h3>
           <p className="text-muted-foreground">{c.summary}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 p-6 pb-4">
           <div className="rounded-xl p-4 text-center bg-primary/10 border border-primary/20">
-            <div className="text-3xl font-bold text-primary">{c.metric}</div>
+            <div className="text-3xl font-bold text-highlight">{c.metric}</div>
             <div className="text-xs text-muted-foreground mt-1">{c.metricLabel}</div>
           </div>
           <div className="rounded-xl p-4 text-center bg-primary/10 border border-primary/20">
-            <div className="text-3xl font-bold text-primary">{c.metric2}</div>
+            <div className="text-3xl font-bold text-highlight">{c.metric2}</div>
             <div className="text-xs text-muted-foreground mt-1">{c.metricLabel2}</div>
           </div>
         </div>
@@ -72,7 +72,7 @@ function CaseModal({ c, onClose }: { c: typeof cases[0]; onClose: () => void }) 
             <p className="text-sm text-muted-foreground leading-relaxed">{c.problem}</p>
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2"><Zap className="h-4 w-4 text-primary" /> Solução</h4>
+            <h4 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2"><Zap className="h-4 w-4 text-highlight" /> Solução</h4>
             <p className="text-sm text-muted-foreground leading-relaxed">{c.solution}</p>
           </div>
           <div>
@@ -103,7 +103,7 @@ export function PortfolioSection() {
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center mb-16 reveal">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Cases de <span className="text-primary">Sucesso</span>
+            Cases de <span className="text-highlight">Sucesso</span>
           </h2>
           <p className="text-lg text-muted-foreground">Resultados reais de empresas reais. Clique para ver os detalhes.</p>
         </div>
@@ -113,14 +113,14 @@ export function PortfolioSection() {
             <div key={c.title} className="reveal cursor-pointer" style={{ transitionDelay: `${i * 100}ms` }} onClick={() => setSelected(c)}>
               <div className="gradient-border-card p-6 lg:p-8 h-full group hover:shadow-[0_8px_32px_rgba(59,130,246,0.2)] transition-shadow">
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-xs px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-primary font-medium">{c.tag}</span>
+                  <span className="text-xs px-3 py-1 rounded-full bg-primary/15 border border-primary/20 text-highlight font-medium">{c.tag}</span>
                   <TrendingUp className="h-5 w-5 text-green-400 opacity-70" />
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{c.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">{c.summary}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-primary">{c.result}</span>
-                  <span className="text-xs text-primary hover:text-foreground transition-colors font-medium">Ver detalhes →</span>
+                  <span className="text-2xl font-bold text-highlight">{c.result}</span>
+                  <span className="text-xs text-highlight hover:text-foreground transition-colors font-medium">Ver detalhes →</span>
                 </div>
               </div>
             </div>

@@ -16,7 +16,7 @@ export function HowItWorksSection() {
       <div className="section-container">
         <div className="max-w-3xl mx-auto text-center mb-20 reveal">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Como <span className="text-primary">funciona</span>
+            Como <span className="text-highlight">funciona</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Um processo transparente do início ao fim. Sem surpresas.
@@ -27,37 +27,37 @@ export function HowItWorksSection() {
           {/* Vertical line — solid blue */}
           <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-primary/20" />
 
-          <div className="space-y-12 lg:space-y-0">
+          <div className="space-y-8 lg:space-y-0">
             {steps.map((step, i) => (
               <div
                 key={step.number}
-                className={`reveal lg:flex items-center lg:gap-12 ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"}`}
+                className={`reveal flex flex-col lg:flex lg:flex-row lg:items-center lg:gap-12 ${i % 2 === 0 ? "" : "lg:flex-row-reverse"}`}
                 style={{ transitionDelay: `${i * 120}ms` }}
               >
-                <div className={`lg:w-5/12 ${i % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
-                  <div className="gradient-border-card p-6 lg:p-8">
-                    <span className="text-sm font-bold text-primary">{step.number}</span>
-                    <h3 className="text-xl font-semibold text-foreground mt-2 mb-3">{step.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-
-                {/* Center dot */}
-                <div className="hidden lg:flex w-2/12 justify-center">
-                  <div className="relative">
-                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center z-10 relative bg-primary"
-                      style={{ boxShadow: "0 0 24px rgba(59,130,246,0.4)" }}>
-                      <step.icon className="h-6 w-6 text-white" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Mobile icon */}
-                <div className="lg:hidden flex items-center gap-4 mb-4">
+                {/* Mobile icon — comes first in DOM = first on mobile */}
+                <div className="lg:hidden flex items-center gap-4 mb-3">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-primary">
                     <step.icon className="h-5 w-5 text-white" />
                   </div>
                   <span className="text-sm font-bold text-primary">{step.number} — {step.title}</span>
+                </div>
+
+                <div className={`lg:w-5/12 ${i % 2 === 0 ? "lg:text-right" : "lg:text-left"}`}>
+                  <div className="gradient-border-card p-5 lg:p-8">
+                    <span className="hidden lg:block text-sm font-bold text-primary">{step.number}</span>
+                    <h3 className="hidden lg:block text-xl font-semibold text-foreground mt-2 mb-3">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">{step.description}</p>
+                  </div>
+                </div>
+
+                {/* Center dot — desktop only */}
+                <div className="hidden lg:flex w-2/12 justify-center">
+                  <div className="relative">
+                    <div className="w-14 h-14 rounded-2xl flex items-center justify-center z-10 relative bg-primary"
+                      style={{ boxShadow: "0 0 24px rgba(96,165,250,0.4)" }}>
+                      <step.icon className="h-6 w-6 text-white" />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="hidden lg:block lg:w-5/12" />

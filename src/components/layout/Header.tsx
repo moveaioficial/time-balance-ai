@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import moveaiWordmark from "@/assets/moveai-wordmark.png";
+import moveaiLogoSvg from "@/assets/moveai-logo.svg";
 import { useContactModal } from "@/components/ui/ContactModal";
 
 const navLinks = [
@@ -39,7 +39,7 @@ export function Header() {
       }`}
     >
       <div className="section-container">
-        <nav className="flex items-center justify-between h-20 lg:h-24">
+        <nav className="flex items-center justify-between h-14 lg:h-16">
           {/* Logo */}
           <a
             href="#inicio"
@@ -47,10 +47,9 @@ export function Header() {
             className="flex items-center flex-shrink-0"
           >
             <img
-              src={moveaiWordmark}
-              alt="MoveAI"
-              className="h-20 sm:h-24 lg:h-28 w-auto"
-              style={{ mixBlendMode: "screen" }}
+              src={moveaiLogoSvg}
+              alt="Move AI"
+              className="h-10 sm:h-11 lg:h-12 w-auto"
             />
           </a>
 
@@ -72,9 +71,9 @@ export function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={openModal}
-              className="btn-gradient text-base"
+              className="btn-gradient btn-shimmer text-base"
             >
-              Fale com Vendas
+              Avaliação Gratuita
             </button>
           </div>
 
@@ -107,7 +106,7 @@ export function Header() {
                   onClick={openModal}
                   className="btn-gradient w-full text-base"
                 >
-                  Fale com Vendas
+                  Avaliação Gratuita
                 </button>
               </div>
             </div>

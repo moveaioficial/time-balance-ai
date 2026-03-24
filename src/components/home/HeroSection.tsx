@@ -75,9 +75,12 @@ export function HeroSection() {
 
           {/* Headline */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] mb-4 animate-fade-in-up animation-delay-200">
-            Tornamos a tecnologia{" "}
-            <span className="text-primary">mais humana</span>
-            {", acessível e útil"}
+            Tornamos a tecnologia mais{" "}
+            <span className="text-highlight">humana</span>
+            {", "}
+            <span className="text-highlight">acessível</span>
+            {" e "}
+            <span className="text-highlight">útil</span>
           </h1>
 
           {/* Subheadline */}
@@ -107,7 +110,7 @@ export function HeroSection() {
           <div className="mt-10 grid grid-cols-3 gap-6 animate-fade-in-up animation-delay-800">
             {counters.map((c) => (
               <div key={c.label} className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold text-primary mb-1">
+                <div className="text-3xl lg:text-4xl font-bold text-white mb-1">
                   <AnimatedCounter value={c.value} suffix={c.suffix} />
                 </div>
                 <p className="text-xs lg:text-sm text-muted-foreground">{c.label}</p>

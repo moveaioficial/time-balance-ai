@@ -23,15 +23,17 @@ const doubled = [...tools, ...tools];
 function LogoItem({ tool }: { tool: { name: string; logo: string; invert?: boolean } }) {
   return (
     <div className="flex items-center justify-center mx-12 flex-shrink-0 group cursor-default">
-      <img
-        src={tool.logo}
-        alt={tool.name}
-        className="h-11 w-11 object-contain transition-all duration-300 ease-out group-hover:scale-110 group-hover:brightness-125"
-        style={{
-          filter: `${tool.invert ? "invert(1) " : ""}brightness(1.15) contrast(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.12))`,
-        }}
-        loading="lazy"
-      />
+      <div className="w-16 h-16 flex items-center justify-center">
+        <img
+          src={tool.logo}
+          alt={tool.name}
+          className="h-11 w-11 object-contain transition-all duration-300 ease-out group-hover:scale-125 group-hover:brightness-125"
+          style={{
+            filter: `${tool.invert ? "invert(1) " : ""}brightness(1.15) contrast(1.1) drop-shadow(0 0 6px rgba(255,255,255,0.12))`,
+          }}
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 }
@@ -55,8 +57,6 @@ export function ToolsMarquee() {
       </div>
 
       <div className="relative overflow-hidden">
-        <div className="pointer-events-none absolute left-0 top-0 h-full w-24 z-10 bg-gradient-to-r from-[hsl(var(--background))] to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 h-full w-24 z-10 bg-gradient-to-l from-[hsl(var(--background))] to-transparent" />
 
         <div
           ref={trackRef}

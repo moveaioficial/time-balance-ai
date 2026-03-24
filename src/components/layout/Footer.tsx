@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoGradient from "@/assets/logo-gradient.png";
+import moveaiLogo2 from "@/assets/moveai-logo2.svg";
 
 const footerLinks = {
   solucoes: [
@@ -36,7 +36,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <a href="#inicio" onClick={(e) => { e.preventDefault(); handleAnchor("#inicio"); }}>
-              <img src={logoGradient} alt="MoveAI" className="h-20 sm:h-24 w-auto mb-6" style={{ mixBlendMode: "screen" }} />
+              <img src={moveaiLogo2} alt="Move AI" className="h-12 sm:h-14 w-auto mb-6" />
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-xs">
               Tornamos a tecnologia mais humana, acessível e útil. Libertamos pessoas do trabalho operacional para que foquem em pensar, criar e decidir.
@@ -131,9 +131,13 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-white/6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-muted-foreground">
-            © 2026 MoveAI. Tornando a tecnologia mais humana.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-3">
+            <p className="text-xs text-muted-foreground">
+              © 2026 Move AI. Tornando a tecnologia mais humana.
+            </p>
+            <span className="hidden sm:block text-xs text-muted-foreground/40">|</span>
+            <p className="text-xs text-muted-foreground/60">CNPJ: XX.XXX.XXX/XXXX-XX</p>
+          </div>
           <div className="flex gap-6 text-xs text-muted-foreground">
             <a href="#" className="hover:text-foreground transition-colors">Termos de Uso</a>
             <a href="#" className="hover:text-foreground transition-colors">Política de Privacidade</a>

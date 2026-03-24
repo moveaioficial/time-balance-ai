@@ -38,7 +38,7 @@ export function ResultsSection() {
             Impacto <span className="text-gradient">comprovado</span> nos nossos clientes
           </h2>
           <p className="text-lg text-muted-foreground">
-            Resultados reais de empresas que automatizaram seus processos com a MoveAI
+            Resultados reais de empresas que automatizaram seus processos com a Move AI
           </p>
         </div>
 

@@ -12,23 +12,75 @@ export function useContactModal() {
   return useContext(ContactModalContext);
 }
 
+// Formata o número enquanto o usuário digita: (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
+function formatWhatsApp(value: string): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 2) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+}
+
+function validateWhatsApp(value: string): boolean {
+  const digits = value.replace(/\D/g, "");
+  return digits.length === 10 || digits.length === 11;
+}
+
+function validateEmail(value: string): boolean {
+  // Validação mais estrita: deve ter domínio com extensão real
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+}
+
 export function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", email: "", whatsapp: "", problema: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ email?: string; whatsapp?: string }>({});
 
   const openModal = () => {
     setForm({ nome: "", email: "", whatsapp: "", problema: "" });
     setSubmitted(false);
+    setError(null);
+    setFieldErrors({});
     setIsOpen(true);
   };
 
   const closeModal = () => setIsOpen(false);
 
+  const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatWhatsApp(e.target.value);
+    setForm({ ...form, whatsapp: formatted });
+    if (fieldErrors.whatsapp) {
+      setFieldErrors((prev) => ({ ...prev, whatsapp: undefined }));
+    }
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, email: e.target.value });
+    if (fieldErrors.email) {
+      setFieldErrors((prev) => ({ ...prev, email: undefined }));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const errors: { email?: string; whatsapp?: string } = {};
+
+    if (!validateEmail(form.email)) {
+      errors.email = "Informe um e-mail válido (ex: nome@dominio.com)";
+    }
+    if (!validateWhatsApp(form.whatsapp)) {
+      errors.whatsapp = "Número inválido. Use DDD + número (10 ou 11 dígitos)";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -75,7 +127,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               </div>
             ) : (
               <>
-                <h3 className="text-2xl font-bold text-foreground mb-1">Fale com a MoveAI</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-1">Fale com a Move AI</h3>
                 <p className="text-sm text-muted-foreground mb-6">
                   Preencha seus dados e entraremos em contato.
                 </p>
@@ -97,10 +149,15 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       type="email"
                       required
                       value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      onChange={handleEmailChange}
+                      className={`w-full rounded-lg border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
+                        fieldErrors.email ? "border-red-400/60" : "border-border"
+                      }`}
                       placeholder="seu@email.com"
                     />
+                    {fieldErrors.email && (
+                      <p className="text-red-400 text-xs mt-1">{fieldErrors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">WhatsApp</label>
@@ -108,10 +165,15 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       type="tel"
                       required
                       value={form.whatsapp}
-                      onChange={(e) => setForm({ ...form, whatsapp: e.target.value })}
-                      className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                      placeholder="(00) 00000-0000"
+                      onChange={handleWhatsAppChange}
+                      className={`w-full rounded-lg border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
+                        fieldErrors.whatsapp ? "border-red-400/60" : "border-border"
+                      }`}
+                      placeholder="(11) 99999-9999"
                     />
+                    {fieldErrors.whatsapp && (
+                      <p className="text-red-400 text-xs mt-1">{fieldErrors.whatsapp}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">Descreva seu problema</label>

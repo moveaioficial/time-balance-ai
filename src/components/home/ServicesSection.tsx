@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { MessageSquare, BarChart3, Users, BrainCircuit, Sparkles } from "lucide-react";
+import { MessageSquare, BarChart3, Users, Sparkles, Palette } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
 
 const services = [
@@ -25,11 +25,11 @@ const services = [
     tags: ["OpenAI", "AWS", "SQL"],
   },
   {
-    icon: BrainCircuit,
-    title: "CRM Inteligente + IA",
+    icon: Palette,
+    title: "Criação e Redesign",
     description:
-      "Enriqueça seu CRM com automações que registram, atualizam e priorizam contatos sem esforço manual.",
-    tags: ["Zapier", "HubSpot", "IA"],
+      "Criamos sites do zero, reformulamos interfaces e entregamos design gráfico alinhado à sua marca. Da montagem de páginas à criação visual completa.",
+    tags: ["Sites", "Redesign", "Design Gráfico"],
   },
 ];
 
@@ -81,7 +81,7 @@ export function ServicesSection() {
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             Automação que se adapta ao{" "}
-            <span className="text-primary">seu negócio</span>
+            <span className="text-highlight">seu negócio</span>
           </h2>
           <p className="text-lg text-muted-foreground">
             Não mudamos o que funciona. Potencializamos com IA.
