@@ -89,7 +89,7 @@ export function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-white/6 animate-fade-in-up">
+          <div className="lg:hidden py-4 border-t border-white/6 animate-fade-in-up relative z-50">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <a

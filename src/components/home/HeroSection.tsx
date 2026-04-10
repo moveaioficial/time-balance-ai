@@ -90,17 +90,17 @@ export function HeroSection() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in-up animation-delay-600">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-in-up animation-delay-600 relative z-20">
             <button
               onClick={openModal}
-              className="btn-gradient text-base px-8 py-3.5"
+              className="btn-gradient text-base px-8 py-3.5 min-h-[48px] touch-manipulation"
             >
               Começar Agora
               <ArrowRight className="ml-2 h-5 w-5 inline" />
             </button>
             <button
               onClick={() => handleCTA("#solucoes")}
-              className="px-8 py-3.5 rounded-xl border border-white/12 bg-white/5 text-sm font-medium text-foreground hover:bg-white/10 transition-all duration-300"
+              className="px-8 py-3.5 min-h-[48px] touch-manipulation rounded-xl border border-white/12 bg-white/5 text-sm font-medium text-foreground hover:bg-white/10 transition-all duration-300"
             >
               Ver Soluções
             </button>

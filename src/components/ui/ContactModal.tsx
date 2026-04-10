@@ -33,14 +33,14 @@ function validateEmail(value: string): boolean {
 
 export function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [form, setForm] = useState({ nome: "", email: "", whatsapp: "", problema: "" });
+  const [form, setForm] = useState({ nome: "", empresa: "", email: "", whatsapp: "", problema: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; whatsapp?: string }>({});
 
   const openModal = () => {
-    setForm({ nome: "", email: "", whatsapp: "", problema: "" });
+    setForm({ nome: "", empresa: "", email: "", whatsapp: "", problema: "" });
     setSubmitted(false);
     setError(null);
     setFieldErrors({});
@@ -86,7 +86,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
     const { error } = await supabase.from("formulario").insert({
       nome: form.nome,
+      empresa: form.empresa,
       email: form.email,
+      whatsapp: form.whatsapp,
       descricao: form.problema,
     });
 
@@ -141,6 +143,17 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       onChange={(e) => setForm({ ...form, nome: e.target.value })}
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="Seu nome"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Empresa</label>
+                    <input
+                      type="text"
+                      required
+                      value={form.empresa}
+                      onChange={(e) => setForm({ ...form, empresa: e.target.value })}
+                      className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                      placeholder="Nome da sua empresa"
                     />
                   </div>
                   <div>

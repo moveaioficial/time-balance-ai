@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import moveaiLogo2 from "@/assets/moveai-logo2.svg";
+import { useContactModal } from "@/components/ui/ContactModal";
 
 const footerLinks = {
   solucoes: [
@@ -136,11 +137,11 @@ export function Footer() {
               © 2026 Move AI. Tornando a tecnologia mais humana.
             </p>
             <span className="hidden sm:block text-xs text-muted-foreground/40">|</span>
-            <p className="text-xs text-muted-foreground/60">CNPJ: XX.XXX.XXX/XXXX-XX</p>
+            <p className="text-xs text-muted-foreground/60">Guarulhos, SP.</p>
           </div>
           <div className="flex gap-6 text-xs text-muted-foreground">
-            <a href="#" className="hover:text-foreground transition-colors">Termos de Uso</a>
-            <a href="#" className="hover:text-foreground transition-colors">Política de Privacidade</a>
+            <Link to="/termos-de-uso" className="hover:text-foreground transition-colors">Termos de Uso</Link>
+            <Link to="/politica-de-privacidade" className="hover:text-foreground transition-colors">Política de Privacidade</Link>
           </div>
         </div>
       </div>
