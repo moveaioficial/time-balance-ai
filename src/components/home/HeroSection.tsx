@@ -3,9 +3,9 @@ import { ArrowRight } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
 
 const counters = [
-  { value: 333, suffix: "+", label: "Horas Salvas" },
-  { value: 8,   suffix: "+", label: "Processos Automatizados" },
-  { value: 2,   suffix: "+", label: "Integrações Entregues" },
+  { value: 650, suffix: "+", label: "Horas Salvas" },
+  { value: 100, suffix: "+", label: "Processos Automatizados" },
+  { value: 20,  suffix: "+", label: "Integrações Entregues" },
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
