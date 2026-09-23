@@ -1,6 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, lazy, Suspense, useContext, useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
+
+// Agendador carregado só depois do envio do formulário
+const Scheduler = lazy(() => import("@/components/scheduling/Scheduler").then((m) => ({ default: m.Scheduler })));
 
 interface ContactModalContextType {
   openModal: () => void;
@@ -34,6 +37,8 @@ function validateEmail(value: string): boolean {
 export function ContactModalProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({ nome: "", empresa: "", email: "", whatsapp: "", problema: "" });
+  // Campo invisível para humanos: se vier preenchido, é bot (anti-spam)
+  const [honeypot, setHoneypot] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,10 +49,21 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     setSubmitted(false);
     setError(null);
     setFieldErrors({});
+    setHoneypot("");
     setIsOpen(true);
   };
 
   const closeModal = () => setIsOpen(false);
+
+  // Fecha com a tecla Esc
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
 
   const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatWhatsApp(e.target.value);
@@ -81,23 +97,29 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       return;
     }
 
+    // Bot preencheu o campo oculto: finge sucesso e não grava nada
+    if (honeypot) {
+      setSubmitted(true);
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
-    const { error } = await supabase.from("formulario").insert({
-      nome: form.nome,
-      empresa: form.empresa,
-      email: form.email,
-      whatsapp: form.whatsapp,
-      descricao: form.problema,
-    });
-
-    setLoading(false);
-
-    if (error) {
-      setError("Erro ao enviar. Tente novamente.");
-    } else {
+    try {
+      const { error } = await (await getSupabase()).from("formulario").insert({
+        nome: form.nome.trim(),
+        empresa: form.empresa.trim(),
+        email: form.email.trim().toLowerCase(),
+        whatsapp: form.whatsapp,
+        descricao: form.problema.trim() || null,
+      });
+      if (error) throw error;
       setSubmitted(true);
+    } catch {
+      setError("Erro ao enviar. Tente novamente ou fale conosco pelo WhatsApp.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -110,7 +132,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
-          <div className="relative z-10 w-full max-w-md rounded-2xl bg-card border border-white/10 p-8 shadow-2xl animate-fade-in-up">
+          <div role="dialog" aria-modal="true" aria-label="Fale com a Move AI" className={`relative z-10 w-full ${submitted ? "max-w-xl" : "max-w-md"} max-h-[92vh] overflow-y-auto rounded-2xl bg-card border border-white/10 p-8 shadow-2xl animate-fade-in-up`}>
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
@@ -120,13 +142,18 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
             </button>
 
             {submitted ? (
-              <div className="text-center py-6">
-                <div className="text-4xl mb-4">✅</div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Mensagem enviada!</h3>
-                <p className="text-muted-foreground text-sm">
-                  Nossa equipe entrará em contato em breve.
-                </p>
-              </div>
+              <Suspense fallback={<div className="py-16 text-center text-sm text-muted-foreground">Carregando agenda…</div>}>
+              <Scheduler
+                  lead={{
+                    nome: form.nome.trim(),
+                    empresa: form.empresa.trim() || undefined,
+                    email: form.email.trim().toLowerCase(),
+                    whatsapp: form.whatsapp,
+                    descricao: form.problema.trim() || undefined,
+                  }}
+                  onClose={closeModal}
+                />
+              </Suspense>
             ) : (
               <>
                 <h3 className="text-2xl font-bold text-foreground mb-1">Fale com a Move AI</h3>
@@ -134,6 +161,16 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   Preencha seus dados e entraremos em contato.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                  />
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">Nome</label>
                     <input
@@ -141,6 +178,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       required
                       value={form.nome}
                       onChange={(e) => setForm({ ...form, nome: e.target.value })}
+                      maxLength={120}
+                      autoComplete="name"
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="Seu nome"
                     />
@@ -152,6 +191,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       required
                       value={form.empresa}
                       onChange={(e) => setForm({ ...form, empresa: e.target.value })}
+                      maxLength={160}
+                      autoComplete="organization"
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="Nome da sua empresa"
                     />
@@ -163,6 +204,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       required
                       value={form.email}
                       onChange={handleEmailChange}
+                      maxLength={254}
+                      autoComplete="email"
                       className={`w-full rounded-lg border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
                         fieldErrors.email ? "border-red-400/60" : "border-border"
                       }`}
@@ -179,6 +222,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       required
                       value={form.whatsapp}
                       onChange={handleWhatsAppChange}
+                      autoComplete="tel"
                       className={`w-full rounded-lg border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring ${
                         fieldErrors.whatsapp ? "border-red-400/60" : "border-border"
                       }`}
@@ -193,6 +237,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     <textarea
                       value={form.problema}
                       onChange={(e) => setForm({ ...form, problema: e.target.value })}
+                      maxLength={2000}
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                       placeholder="Ex: Preciso automatizar meu processo de vendas..."
                       rows={3}

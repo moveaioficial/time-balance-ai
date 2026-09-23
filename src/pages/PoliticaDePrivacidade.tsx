@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { usePageTitle } from "@/hooks/use-page-title";
 
 export default function PoliticaDePrivacidade() {
+  usePageTitle("Política de Privacidade | Move AI");
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
@@ -15,7 +17,7 @@ export default function PoliticaDePrivacidade() {
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Política de Privacidade</h1>
         <p className="text-sm text-muted-foreground mb-10">
-          Última atualização: 10 de abril de 2026
+          Última atualização: 22 de setembro de 2026
         </p>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-8 text-muted-foreground leading-relaxed">
@@ -74,8 +76,8 @@ export default function PoliticaDePrivacidade() {
             </ul>
             <p className="mt-2">
               Para exercer esses direitos, entre em contato pelo e-mail{" "}
-              <a href="mailto:contato@moveai.com.br" className="text-primary hover:underline">
-                contato@moveai.com.br
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">
+                moveaioficial@gmail.com
               </a>.
             </p>
           </section>
@@ -105,8 +107,8 @@ export default function PoliticaDePrivacidade() {
             <h2 className="text-lg font-semibold text-foreground mb-3">10. Contato</h2>
             <p>
               Para dúvidas, solicitações ou reclamações sobre o tratamento de dados pessoais, entre em contato pelo e-mail{" "}
-              <a href="mailto:contato@moveai.com.br" className="text-primary hover:underline">
-                contato@moveai.com.br
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">
+                moveaioficial@gmail.com
               </a>.
             </p>
           </section>
