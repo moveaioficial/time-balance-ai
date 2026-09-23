@@ -18,4 +18,16 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Separa o React num arquivo próprio (cache melhor entre deploys)
+        manualChunks(id) {
+          if (/node_modules\/(react|react-dom|react-router|react-router-dom|scheduler)\//.test(id)) {
+            return "react";
+          }
+        },
+      },
+    },
+  },
 }));

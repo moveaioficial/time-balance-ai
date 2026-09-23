@@ -1,73 +1,28 @@
-# Welcome to your Lovable project
+# Agenda (Edge Function `agenda`)
 
-## Project info
+Mostra horários livres do Google Agenda da Move AI e marca reuniões de 30 min com Google Meet.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Regras** (em `slots.ts`): seg–sex, 08:00–18:00 (Brasília), 30 min, antecedência mínima de 2h, até 14 dias à frente.
+Ocupado = qualquer evento na agenda principal `moveaioficial@gmail.com` ou na agenda "Team Move AI".
+Para bloquear um horário, basta criar um evento no Google Agenda.
 
-## How can I edit this code?
+**Proteções**: 1 reunião futura por e-mail, 3 agendamentos por IP/dia, índice único por horário,
+nova checagem no Google antes de criar o evento. Registros em `public.agendamentos` (só service_role).
 
-There are several ways of editing your application.
+## Configuração (uma vez)
 
-**Use Lovable**
+Segredos em Supabase → Edge Functions → Secrets:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+| Nome | Valor |
+|---|---|
+| `GOOGLE_CLIENT_ID` | ID do cliente OAuth (Google Cloud) |
+| `GOOGLE_CLIENT_SECRET` | Chave secreta do cliente OAuth |
+| `GOOGLE_REFRESH_TOKEN` | Refresh token da conta moveaioficial@gmail.com |
 
-Changes made via Lovable will be committed automatically to this repo.
+Escopos: `https://www.googleapis.com/auth/calendar.events` e `https://www.googleapis.com/auth/calendar.freebusy`.
+O app OAuth precisa estar **publicado (Em produção)** — em "Teste" o refresh token expira em 7 dias.
 
-**Use your preferred IDE**
+Sem os segredos a função responde `503 agenda_nao_configurada` e o site mostra o botão do WhatsApp.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Deploy
+`supabase functions deploy agenda` (verify_jwt ligado; o site chama com a chave pública).
