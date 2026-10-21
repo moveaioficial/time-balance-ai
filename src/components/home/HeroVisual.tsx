@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import icone from "@/assets/move-ai-icone-app.png";
 
 // Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito e é rolado também.
@@ -71,13 +72,17 @@ const passos = [
   ["3", "Retire fresquinho", "Ou receba em casa."],
 ];
 
-function SiteBom() {
+function SiteBom({ video }: { video: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#FBF6F0] text-[#2B1D16]">
       <div className="hv-scroll-b flex flex-col">
         {/* Abertura com foto em tela cheia */}
         <div className="relative h-[44cqw] shrink-0 overflow-hidden">
-          <img src="/img/confeitaria-hero.webp" alt="" className="hv-zoom absolute inset-0 h-full w-full object-cover" />
+          {video ? (
+            <video src="/video/confeitaria.mp4" poster="/img/confeitaria-hero.webp" autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+          ) : (
+            <img src="/img/confeitaria-hero.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-[#1B110C]/90 via-[#1B110C]/55 to-transparent" />
 
           <div className="relative flex items-center justify-between px-[4cqw] py-[2.6cqw] text-white">
@@ -153,7 +158,17 @@ function SiteBom() {
   );
 }
 
+// faíscas que saem do botão no clique (ângulos em graus)
+const sparks = [-80, -55, -30, -10, 10, 30, 55, 80, -120, 120, -150, 150];
+
 export function HeroVisual() {
+  // o vídeo só carrega no desktop, onde a animação aparece
+  const [video, setVideo] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
+    setVideo(mq.matches);
+  }, []);
+
   return (
     <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-16" aria-hidden="true">
       {/* luz de fundo para destacar a janela */}
@@ -161,6 +176,7 @@ export function HeroVisual() {
 
       <div className="relative [perspective:1600px]">
         <div className="animate-float" style={{ ["--r" as string]: "0deg" }}>
+         <div className="hv-bump">
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 shadow-[0_50px_140px_-30px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.04)] [transform:rotateY(-7deg)_rotateX(2deg)]">
             <div className="flex items-center gap-1.5 bg-[#1A1226] px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#FF5F57]/80" />
@@ -171,13 +187,23 @@ export function HeroVisual() {
             <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ containerType: "inline-size" }}>
               <SiteFeio />
               <div className="hv-good absolute inset-0">
-                <SiteBom />
+                <SiteBom video={video} />
               </div>
               <span className="hv-edge pointer-events-none absolute inset-y-0 w-[4px] -translate-x-1/2 bg-[#4DDDE7] shadow-[0_0_40px_12px_rgba(0,195,208,0.65)]" />
               <span className="hv-flash pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(77,221,231,0.55),transparent_60%)]" />
             </div>
           </div>
+         </div>
         </div>
+      </div>
+
+      {/* Onda de choque e faíscas do clique */}
+      <div className="pointer-events-none absolute bottom-[28px] left-1/2 z-[5] h-0 w-0">
+        <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#4DDDE7] shadow-[0_0_40px_rgba(0,195,208,0.7),inset_0_0_40px_rgba(167,139,250,0.5)]" />
+        <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.18s" }} />
+        {sparks.map((a, i) => (
+          <span key={a} className="hv-spark absolute left-0 top-0 h-2.5 w-2.5 rounded-full" style={{ ["--a" as string]: `${a}deg`, background: i % 2 ? "#A78BFA" : "#4DDDE7", boxShadow: `0 0 12px ${i % 2 ? "#A78BFA" : "#4DDDE7"}`, animationDelay: `${(i % 3) * 0.04}s` }} />
+        ))}
       </div>
 
       {/* Botão que "ativa a Move" */}

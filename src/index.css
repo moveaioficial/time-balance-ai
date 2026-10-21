@@ -1,3 +1,5 @@
+@property --r { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -304,6 +306,26 @@
     77%, 82% { transform: translateY(-56cqw); }
     89%, 100% { transform: translateY(0); }
   }
+  .hv-bump { animation: hv-bump 18s cubic-bezier(.3,1.5,.5,1) infinite both; }
+  .hv-shock { animation: hv-shock 18s cubic-bezier(.1,.7,.3,1) infinite both; }
+  .hv-spark { animation: hv-spark 18s cubic-bezier(.1,.8,.3,1) infinite both; }
+  @keyframes hv-bump {
+    0%, 38.6% { transform: scale(1); }
+    39.6% { transform: scale(.965); }
+    42.5% { transform: scale(1.025); }
+    46%, 100% { transform: scale(1); }
+  }
+  @keyframes hv-shock {
+    0%, 39% { opacity: 0; transform: translate(-50%, -50%) scale(.2); }
+    39.5% { opacity: 1; transform: translate(-50%, -50%) scale(.3); }
+    50%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(5); }
+  }
+  @keyframes hv-spark {
+    0%, 39% { opacity: 0; transform: rotate(var(--a)) translateY(0) scale(.4); }
+    40% { opacity: 1; transform: rotate(var(--a)) translateY(-20px) scale(1.2); }
+    49%, 100% { opacity: 0; transform: rotate(var(--a)) translateY(-190px) scale(.6); }
+  }
+
   @keyframes hv-wipe {
     0%, 40% { clip-path: inset(0 100% 0 0); }
     47%, 92% { clip-path: inset(0 0 0 0); }
@@ -360,10 +382,26 @@
     86%, 100% { left: 88%; top: 74%; opacity: 0; }
   }
 
-  /* "Depois" do antes e depois: luz azul em movimento e anel do mostrador */
-  .ba-aurora { animation: mesh-drift 16s ease-in-out infinite alternate; }
-  .ba-spin { animation: ba-spin 9s linear infinite; }
-  @keyframes ba-spin { to { transform: rotate(360deg); } }
+  /* "Depois" do antes e depois: o site começa "quente" e esfria em onda quando o ar liga */
+  .ba-heat {
+    --r: 0%;
+    background: linear-gradient(160deg, rgba(251, 146, 60, 0.7), rgba(194, 65, 12, 0.7));
+    mix-blend-mode: color;
+    -webkit-mask-image: radial-gradient(circle at var(--x) var(--y), transparent var(--r), #000 calc(var(--r) + 14%));
+    mask-image: radial-gradient(circle at var(--x) var(--y), transparent var(--r), #000 calc(var(--r) + 14%));
+    transition: --r 1.8s cubic-bezier(.3, .6, .2, 1);
+  }
+  .ba-heat.ba-cool { --r: 170%; }
+  .ba-air { stroke-dasharray: 26 30; animation: ba-air 2.4s linear infinite; }
+  .ba-flake { animation: ba-flake 2.6s ease-in infinite both; }
+  .ba-pulse { animation: ba-pulse 1.6s ease-in-out infinite; }
+  @keyframes ba-air { to { stroke-dashoffset: -112; } }
+  @keyframes ba-flake {
+    0% { opacity: 0; transform: translateY(0) scale(.6); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(18em) translateX(1.5em) scale(1); }
+  }
+  @keyframes ba-pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.08); } }
 
   .reveal {
     opacity: 0;
@@ -373,9 +411,9 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-aurora, .ba-spin { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-air, .ba-flake, .ba-pulse { animation: none !important; }
     .hv-good { clip-path: none; }
-    .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo { opacity: 0; }
+    .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo, .hv-shock, .hv-spark { opacity: 0; }
     .hv-in, .hv-on { opacity: 1; }
     .hv-scroll-a, .hv-scroll-b { transform: none; }
     .hv-cursor { display: none; }
