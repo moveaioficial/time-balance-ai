@@ -63,6 +63,8 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Space Grotesk", "Inter", "system-ui", "sans-serif"],
+        accent: ["Instrument Serif", "Georgia", "serif"],
       },
       keyframes: {
         "accordion-down": {

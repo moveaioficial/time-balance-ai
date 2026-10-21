@@ -31,7 +31,7 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">2. Descrição dos Serviços</h2>
             <p>
-              A Move AI oferece serviços de automação com inteligência artificial, incluindo automação de atendimento, geração de leads, análise de dados, integração de sistemas, criação e redesign de sites, e consultoria em IA. Os serviços são prestados conforme acordado em contrato individual com cada cliente.
+              A Move AI é um estúdio digital que oferece criação e redesign de sites, identidade visual e marca, design de conteúdo para redes sociais e desenvolvimento de produtos digitais sob medida. Os serviços são prestados conforme acordado em contrato individual com cada cliente.
             </p>
           </section>
 

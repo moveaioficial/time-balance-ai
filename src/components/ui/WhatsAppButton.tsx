@@ -1,8 +1,7 @@
+import { WHATSAPP_URL } from "@/lib/contato";
+
 export function WhatsAppButton() {
-  const message = encodeURIComponent(
-    "Olá! Vim pelo site da Move AI e quero saber mais sobre automação com IA."
-  );
-  const url = `https://wa.me/5511971858103?text=${message}`;
+  const url = WHATSAPP_URL;
 
   return (
     <a

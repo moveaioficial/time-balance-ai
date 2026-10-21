@@ -44,7 +44,7 @@ export default function PoliticaDePrivacidade() {
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li>Responder solicitações de contato e propostas comerciais;</li>
               <li>Qualificar leads e personalizar a comunicação;</li>
-              <li>Prestar e melhorar nossos serviços de automação e IA;</li>
+              <li>Prestar e melhorar nossos serviços de site, marca, redes sociais e produto digital;</li>
               <li>Enviar comunicações relevantes sobre nossos serviços (com consentimento);</li>
               <li>Cumprir obrigações legais e regulatórias.</li>
             </ul>

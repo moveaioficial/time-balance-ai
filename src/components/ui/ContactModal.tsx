@@ -156,9 +156,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               </Suspense>
             ) : (
               <>
-                <h3 className="text-2xl font-bold text-foreground mb-1">Fale com a Move AI</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-1">Peça sua análise gratuita</h3>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Preencha seus dados e entraremos em contato.
+                  Conte rapidinho sobre a sua empresa. Depois você já escolhe um horário para conversar com a gente.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input
@@ -233,13 +233,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Descreva seu problema</label>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">O que você precisa?</label>
                     <textarea
                       value={form.problema}
                       onChange={(e) => setForm({ ...form, problema: e.target.value })}
                       maxLength={2000}
                       className="w-full rounded-lg border border-border bg-background/60 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                      placeholder="Ex: Preciso automatizar meu processo de vendas..."
+                      placeholder="Ex.: quero um site novo, minha marca precisa de cara nova, meu Instagram não passa confiança..."
                       rows={3}
                     />
                   </div>

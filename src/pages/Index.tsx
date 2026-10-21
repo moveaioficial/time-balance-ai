@@ -1,24 +1,26 @@
 import { Layout } from "@/components/layout/Layout";
-import { HeroSection } from "@/components/home/HeroSection";
-import { ToolsMarquee } from "@/components/home/ToolsMarquee";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { ComparisonSection } from "@/components/home/ComparisonSection";
-import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { PortfolioSection } from "@/components/home/PortfolioSection";
-import { FAQSection } from "@/components/home/FAQSection";
-import { CTASection } from "@/components/home/CTASection";
+import { Hero } from "@/components/home/Hero";
+import { WordsMarquee } from "@/components/home/WordsMarquee";
+import { Services } from "@/components/home/Services";
+import { Method } from "@/components/home/Method";
+import { Process } from "@/components/home/Process";
+import { Work } from "@/components/home/Work";
+import { ForWho } from "@/components/home/ForWho";
+import { Faq } from "@/components/home/Faq";
+import { FinalCta } from "@/components/home/FinalCta";
 
 const Index = () => {
   return (
     <Layout>
-      <HeroSection />
-      <ToolsMarquee />
-      <ServicesSection />
-      <ComparisonSection />
-      <HowItWorksSection />
-      <PortfolioSection />
-      <FAQSection />
-      <CTASection />
+      <Hero />
+      <WordsMarquee />
+      <Services />
+      <Method />
+      <Work />
+      <ForWho />
+      <Process />
+      <Faq />
+      <FinalCta />
     </Layout>
   );
 };
