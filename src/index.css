@@ -74,7 +74,7 @@
 
   /* Botão principal: degradê da marca, texto branco */
   .btn-gradient {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white rounded-full transition-all duration-300 cursor-pointer select-none;
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold whitespace-nowrap text-white rounded-full transition-all duration-300 cursor-pointer select-none;
     background: var(--brand-gradient);
     box-shadow: 0 10px 30px -10px rgba(85, 31, 126, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   }
@@ -86,7 +86,7 @@
 
   /* Botão claro: fundo branco, texto escuro */
   .btn-light {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-full transition-all duration-300 cursor-pointer select-none;
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold whitespace-nowrap rounded-full transition-all duration-300 cursor-pointer select-none;
     background: #fff;
     color: #0C0416;
   }
@@ -94,7 +94,7 @@
 
   /* Botão contorno */
   .btn-ghost {
-    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold rounded-full transition-all duration-300 cursor-pointer select-none;
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold whitespace-nowrap rounded-full transition-all duration-300 cursor-pointer select-none;
     border: 1px solid rgba(255, 255, 255, 0.22);
     color: #fff;
   }
@@ -250,7 +250,6 @@
     to { transform: translateX(-50%); }
   }
   .animate-marquee { animation: marquee 40s linear infinite; }
-  .animate-marquee-rev { animation: marquee 48s linear infinite reverse; }
 
   /* Logo com troca de cor no hover (BrandLogo) */
   .logo-mask {
@@ -274,49 +273,74 @@
   .logo-link:focus-visible .logo-mask::after { opacity: 1; animation: logo-flow 2.4s linear infinite; }
   @keyframes logo-flow { to { background-position: 300% 0; } }
 
-  /* Animação da abertura (HeroVisual): site feio, clique em "Ativar a Move", site bom. Ciclo de 12s. */
-  .hv-good { animation: hv-wipe 12s cubic-bezier(.7,0,.2,1) infinite both; }
-  .hv-edge { animation: hv-edge 12s cubic-bezier(.7,0,.2,1) infinite both; }
-  .hv-in { animation: hv-in 12s cubic-bezier(.2,.7,.2,1) infinite both; }
-  .hv-press { animation: hv-press 12s ease-out infinite both; }
-  .hv-off { animation: hv-off 12s ease infinite both; }
-  .hv-on { animation: hv-on 12s ease infinite both; }
-  .hv-cursor { animation: hv-cursor 12s cubic-bezier(.5,0,.3,1) infinite both; }
+  /* Animação da abertura (HeroVisual): site feio, clique em "Ativar a Move", site bom. Ciclo de 14s.
+     0-28% site feio e cursor passeando; 28-39% cursor parado no botão (brilho de hover); 39% clique;
+     40-47% faixa de luz troca o site; 47-92% site bom; 92-100% volta ao início. */
+  .hv-good { animation: hv-wipe 14s cubic-bezier(.7,0,.2,1) infinite both; }
+  .hv-edge { animation: hv-edge 14s cubic-bezier(.7,0,.2,1) infinite both; }
+  .hv-flash { animation: hv-flash 14s ease-out infinite both; }
+  .hv-in { animation: hv-in 14s cubic-bezier(.2,.7,.2,1) infinite both; }
+  .hv-zoom { animation: hv-zoom 14s ease-out infinite both; }
+  .hv-btn { animation: hv-btn 14s cubic-bezier(.3,1.4,.5,1) infinite both; }
+  .hv-halo { animation: hv-halo 14s ease infinite both; }
+  .hv-ring { animation: hv-ring 14s ease-out infinite both; }
+  .hv-off { animation: hv-off 14s ease infinite both; }
+  .hv-on { animation: hv-on 14s ease infinite both; }
+  .hv-cursor { animation: hv-cursor 14s cubic-bezier(.5,0,.3,1) infinite both; }
 
   @keyframes hv-wipe {
-    0%, 37% { clip-path: inset(0 100% 0 0); }
-    45%, 90% { clip-path: inset(0 0 0 0); }
-    97%, 100% { clip-path: inset(0 0 0 100%); }
+    0%, 40% { clip-path: inset(0 100% 0 0); }
+    47%, 92% { clip-path: inset(0 0 0 0); }
+    98%, 100% { clip-path: inset(0 0 0 100%); }
   }
   @keyframes hv-edge {
-    0%, 37% { left: 0%; opacity: 0; }
-    38% { opacity: 1; }
-    45% { left: 100%; opacity: 1; }
-    46%, 100% { left: 100%; opacity: 0; }
+    0%, 39.9% { left: 0%; opacity: 0; }
+    40% { left: 0%; opacity: 1; }
+    47% { left: 100%; opacity: 1; }
+    48%, 100% { left: 100%; opacity: 0; }
   }
+  @keyframes hv-flash { 0%, 40% { opacity: 0; } 43% { opacity: 1; } 52%, 100% { opacity: 0; } }
   @keyframes hv-in {
-    0%, 43% { opacity: 0; transform: translateY(12px); }
-    52%, 90% { opacity: 1; transform: translateY(0); }
-    97%, 100% { opacity: 0; transform: translateY(0); }
+    0%, 45% { opacity: 0; transform: translateY(14px); }
+    54%, 92% { opacity: 1; transform: translateY(0); }
+    98%, 100% { opacity: 0; transform: translateY(0); }
   }
-  @keyframes hv-press {
-    0%, 33% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(0, 195, 208, 0); }
-    35% { transform: translateX(-50%) scale(.92); box-shadow: 0 0 0 0 rgba(0, 195, 208, .8); }
-    38% { transform: translateX(-50%) scale(1); }
-    46%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 18px rgba(0, 195, 208, 0); }
+  @keyframes hv-zoom { 0%, 41% { transform: scale(1.12); } 70%, 100% { transform: scale(1); } }
+  @keyframes hv-btn {
+    0%, 27% { transform: translateX(-50%) scale(1); }
+    31%, 37.5% { transform: translateX(-50%) scale(1.06); }
+    39% { transform: translateX(-50%) scale(.9); }
+    43% { transform: translateX(-50%) scale(1.14); }
+    48%, 92% { transform: translateX(-50%) scale(1.08); }
+    98%, 100% { transform: translateX(-50%) scale(1); }
   }
-  @keyframes hv-off { 0%, 36% { opacity: 1; } 38%, 92% { opacity: 0; } 97%, 100% { opacity: 1; } }
-  @keyframes hv-on { 0%, 36% { opacity: 0; } 38%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+  @keyframes hv-halo {
+    0%, 27% { opacity: 0; transform: scale(.9); }
+    32% { opacity: .9; transform: scale(1.05); }
+    35% { opacity: .5; transform: scale(1); }
+    38% { opacity: 1; transform: scale(1.08); }
+    41% { opacity: 1; transform: scale(1.3); }
+    50%, 92% { opacity: .55; transform: scale(1.1); }
+    98%, 100% { opacity: 0; transform: scale(.9); }
+  }
+  @keyframes hv-ring {
+    0%, 39% { opacity: 0; transform: scale(1); }
+    39.5% { opacity: 1; transform: scale(1); }
+    52%, 100% { opacity: 0; transform: scale(1.35, 1.7); }
+  }
+  @keyframes hv-off { 0%, 39% { opacity: 1; } 40.5%, 92% { opacity: 0; } 98%, 100% { opacity: 1; } }
+  @keyframes hv-on { 0%, 39% { opacity: 0; } 40.5%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
   @keyframes hv-cursor {
-    0% { left: 86%; top: 80%; opacity: 0; transform: scale(1); }
-    6% { opacity: 1; }
-    18% { left: 34%; top: 40%; }
-    26% { left: 62%; top: 56%; }
-    33% { left: 52%; top: 92%; transform: scale(1); }
-    35% { transform: scale(.8); }
-    38% { left: 52%; top: 92%; transform: scale(1); }
-    58% { left: 74%; top: 52%; opacity: 1; }
-    72%, 100% { left: 86%; top: 80%; opacity: 0; }
+    0% { left: 88%; top: 74%; opacity: 0; transform: scale(1); }
+    5% { opacity: 1; }
+    13% { left: 30%; top: 28%; }
+    21% { left: 64%; top: 46%; }
+    28% { left: 52%; top: 93%; transform: scale(1); }
+    38% { left: 52%; top: 93%; transform: scale(1); }
+    39% { transform: scale(.75); }
+    41% { left: 52%; top: 93%; transform: scale(1); }
+    60% { left: 80%; top: 40%; opacity: 1; }
+    72%, 100% { left: 88%; top: 74%; opacity: 0; }
   }
 
   .reveal {
@@ -327,9 +351,9 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .animate-marquee-rev, .mesh span, .hv * { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv * { animation: none !important; }
     .hv-good { clip-path: none; }
-    .hv-off { opacity: 0; }
+    .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo { opacity: 0; }
     .hv-in, .hv-on { opacity: 1; }
     .hv-cursor { display: none; }
     .reveal { opacity: 1; transform: none; transition: none; }

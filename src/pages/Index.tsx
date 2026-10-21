@@ -1,6 +1,6 @@
 import { Layout } from "@/components/layout/Layout";
 import { Hero } from "@/components/home/Hero";
-import { WordsMarquee } from "@/components/home/WordsMarquee";
+import { TrustStrip } from "@/components/home/TrustStrip";
 import { Services } from "@/components/home/Services";
 import { Method } from "@/components/home/Method";
 import { Process } from "@/components/home/Process";
@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <Layout>
       <Hero />
-      <WordsMarquee />
+      <TrustStrip />
       <Services />
       <Method />
       <BeforeAfter />

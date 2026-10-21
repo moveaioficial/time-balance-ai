@@ -9,11 +9,11 @@ export function Hero() {
     <section id="inicio" className="grain relative overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-28">
       <div className="mesh" aria-hidden="true"><span className="m1" /><span className="m2" /><span className="m3" /></div>
 
-      <div className="section-container relative z-[2] grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-10 items-center">
+      <div className="section-container relative z-[2] grid lg:grid-cols-[0.95fr_1.15fr] gap-14 lg:gap-14 items-center">
         <div>
           <p className="kicker animate-fade-in">Estúdio digital · Guarulhos, SP</p>
 
-          <h1 className="mt-7 text-[2.8rem] leading-[1.02] sm:text-6xl lg:text-[5.2rem] font-bold tracking-[-0.035em] animate-fade-in-up">
+          <h1 className="mt-7 text-[2.8rem] leading-[1.02] sm:text-6xl lg:text-[4.3rem] xl:text-[5rem] font-bold tracking-[-0.035em] animate-fade-in-up">
             Sua empresa, construída para ser <span className="accent-word">vista</span>.
           </h1>
 

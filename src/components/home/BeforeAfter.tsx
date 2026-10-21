@@ -78,73 +78,68 @@ function Antes() {
 
 function Depois() {
   const services = [
-    { Icon: Snowflake, t: "Instalação", d: "Do furo na parede ao primeiro ligar." },
-    { Icon: Wrench, t: "Manutenção", d: "Limpeza e revisão com hora marcada." },
-    { Icon: ClipboardCheck, t: "Contrato PMOC", d: "Para empresas que precisam do laudo em dia." },
+    { src: "/img/clima-instalacao.webp", t: "Instalação", d: "Split e multi-split, com acabamento limpo." },
+    { src: "/img/clima-manutencao.webp", t: "Manutenção", d: "Limpeza, carga de gás e revisão." },
+    { src: "/img/clima-contrato.webp", t: "Contrato PMOC", d: "Plano mensal e laudo para empresas." },
   ];
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#F3F7FB] text-[#0B1B3A]">
-      <div className="pointer-events-none absolute -right-[8em] -top-[10em] h-[30em] w-[30em] rounded-full bg-[#BFE3FF] opacity-70 blur-[4em]" />
-
-      <div className="relative flex items-center justify-between px-[3em] py-[1.3em]">
+    <div className="absolute inset-0 flex flex-col overflow-hidden bg-white text-[#0E1B2C]" style={{ fontFamily: "Inter, sans-serif" }}>
+      <div className="flex items-center justify-between border-b border-[#0E1B2C]/[0.08] px-[3em] py-[1.1em]">
         <span className="flex items-center gap-[0.6em]">
-          <span className="flex h-[2.2em] w-[2.2em] items-center justify-center rounded-[0.7em] bg-[#0B1B3A] text-white">
-            <Snowflake className="h-[1.2em] w-[1.2em]" />
+          <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.55em] bg-[#0E5BD8] text-white">
+            <Snowflake className="h-[1.15em] w-[1.15em]" strokeWidth={2.4} />
           </span>
-          <span className="leading-none">
-            <span className="block font-display text-[1.35em] font-bold">Sua Empresa</span>
-            <span className="block text-[0.8em] text-[#0B1B3A]/55">climatização</span>
-          </span>
+          <span className="font-display text-[1.3em] font-bold tracking-[-0.02em]">Sua Empresa<span className="text-[#0E5BD8]">.</span></span>
         </span>
-        <span className="hidden sm:flex items-center gap-[2em] text-[0.9em] text-[#0B1B3A]/70">
-          <span>Serviços</span><span>Sobre</span><span>Contato</span>
-          <span className="flex items-center gap-[0.4em] rounded-full border border-[#0B1B3A]/15 bg-white px-[1em] py-[0.5em] font-semibold text-[#0B1B3A]">
-            <Phone className="h-[1em] w-[1em]" /> (11) 0000-0000
-          </span>
+        <span className="hidden sm:flex items-center gap-[2em] text-[0.9em] font-medium text-[#0E1B2C]/70">
+          <span>Serviços</span><span>Para empresas</span><span>Sobre</span>
+          <span className="flex items-center gap-[0.45em] font-semibold text-[#0E1B2C]"><Phone className="h-[1em] w-[1em] text-[#0E5BD8]" /> (11) 0000-0000</span>
+          <span className="rounded-[0.5em] bg-[#0E1B2C] px-[1.1em] py-[0.6em] font-semibold text-white">Orçamento</span>
         </span>
       </div>
 
-      <div className="relative grid flex-1 items-center gap-[2em] px-[3em] sm:grid-cols-[1.25fr_1fr]">
-        <div>
-          <p className="text-[0.8em] font-semibold uppercase tracking-[0.22em] text-[#1E6BFF]">Instalação · Manutenção · Contratos</p>
-          <p className="mt-[0.5em] font-display text-[3.3em] font-bold leading-[0.98] tracking-[-0.035em]">
-            Ar-condicionado instalado, limpo e <span className="font-accent font-normal italic text-[#1E6BFF]">gelando</span>.
+      <div className="grid flex-1 sm:grid-cols-[1.1fr_1fr]">
+        <div className="flex flex-col justify-center px-[3em] py-[1.6em] sm:py-0">
+          <p className="inline-flex w-fit items-center gap-[0.5em] rounded-full bg-[#E8F0FE] px-[0.9em] py-[0.35em] text-[0.78em] font-semibold text-[#0E5BD8]">
+            <span className="h-[0.5em] w-[0.5em] rounded-full bg-[#16A34A]" /> Atendimento de segunda a sábado
           </p>
-          <p className="mt-[0.9em] max-w-[30em] text-[1.05em] leading-snug text-[#0B1B3A]/65">
-            Para casas e empresas. Orçamento sem custo e técnico com horário marcado.
+          <p className="mt-[0.8em] font-display text-[3em] font-bold leading-[1.02] tracking-[-0.035em]">
+            Ar-condicionado instalado do jeito certo, <span className="text-[#0E5BD8]">no dia combinado.</span>
           </p>
-          <div className="mt-[1.4em] flex flex-wrap gap-[0.8em]">
-            <span className="rounded-full bg-[#1E6BFF] px-[1.6em] py-[0.8em] text-[0.95em] font-semibold text-white shadow-[0_0.6em_1.6em_-0.4em_rgba(30,107,255,0.6)]">Pedir orçamento</span>
-            <span className="flex items-center gap-[0.5em] rounded-full border border-[#0B1B3A]/15 bg-white px-[1.4em] py-[0.8em] text-[0.95em] font-semibold">
+          <p className="mt-[0.9em] max-w-[30em] text-[1em] leading-relaxed text-[#0E1B2C]/65">
+            Instalação, manutenção e contratos PMOC para casas, lojas e escritórios.
+          </p>
+          <div className="mt-[1.3em] flex flex-wrap gap-[0.7em]">
+            <span className="rounded-[0.6em] bg-[#0E5BD8] px-[1.5em] py-[0.85em] text-[0.95em] font-semibold text-white">Pedir orçamento</span>
+            <span className="flex items-center gap-[0.5em] rounded-[0.6em] border border-[#0E1B2C]/15 px-[1.3em] py-[0.85em] text-[0.95em] font-semibold">
               <MessageCircle className="h-[1.1em] w-[1.1em] text-[#16A34A]" /> WhatsApp
             </span>
           </div>
-        </div>
-
-        {/* aparelho desenhado */}
-        <div className="relative hidden sm:block">
-          <div className="relative mx-auto w-[90%] rounded-[1.4em] bg-white p-[1.2em] shadow-[0_1.6em_3em_-1em_rgba(11,27,58,0.25)]">
-            <div className="h-[4.4em] rounded-[0.8em] bg-gradient-to-b from-white to-[#E7EEF6] ring-1 ring-[#0B1B3A]/10" />
-            <div className="mx-[1em] -mt-[0.9em] h-[0.5em] rounded-full bg-[#0B1B3A]/15" />
-            <div className="mt-[1.4em] space-y-[0.6em] px-[1.4em]">
-              {[100, 80, 60].map((w) => (
-                <span key={w} className="block h-[0.35em] rounded-full bg-gradient-to-r from-[#7CC4FF] to-transparent" style={{ width: `${w}%` }} />
-              ))}
-            </div>
+          <div className="mt-[1.5em] hidden sm:flex gap-[1.6em] text-[0.8em] text-[#0E1B2C]/60">
+            <span className="flex items-center gap-[0.4em]"><ClipboardCheck className="h-[1.2em] w-[1.2em] text-[#0E5BD8]" /> Orçamento sem custo</span>
+            <span className="flex items-center gap-[0.4em]"><Wrench className="h-[1.2em] w-[1.2em] text-[#0E5BD8]" /> Garantia no serviço</span>
           </div>
-          <div className="absolute -bottom-[1.4em] left-0 flex items-center gap-[0.6em] rounded-[1em] bg-[#0B1B3A] px-[1em] py-[0.7em] text-white shadow-xl">
-            <span className="h-[0.6em] w-[0.6em] rounded-full bg-[#4ADE80]" />
-            <span className="text-[0.8em] font-semibold">Técnico confirmado · 14h</span>
+        </div>
+        <div className="relative hidden sm:block">
+          <img src="/img/clima-hero.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute bottom-[1.4em] left-[1.4em] flex items-center gap-[0.7em] rounded-[0.8em] bg-white/95 px-[1em] py-[0.7em] shadow-lg">
+            <span className="flex h-[2.2em] w-[2.2em] items-center justify-center rounded-full bg-[#E8F0FE] text-[#0E5BD8]"><Wrench className="h-[1.1em] w-[1.1em]" /></span>
+            <span className="leading-tight">
+              <span className="block text-[0.85em] font-semibold">Técnico com hora marcada</span>
+              <span className="block text-[0.72em] text-[#0E1B2C]/55">Você recebe a confirmação no WhatsApp</span>
+            </span>
           </div>
         </div>
       </div>
 
-      <div className="relative grid grid-cols-3 gap-[1em] px-[3em] pb-[2.2em] pt-[2em]">
-        {services.map(({ Icon, t, d }) => (
-          <div key={t} className="rounded-[1.1em] bg-white p-[1.1em] ring-1 ring-[#0B1B3A]/[0.06]">
-            <Icon className="h-[1.5em] w-[1.5em] text-[#1E6BFF]" />
-            <p className="mt-[0.6em] font-display text-[1.05em] font-semibold">{t}</p>
-            <p className="mt-[0.3em] hidden sm:block text-[0.8em] leading-snug text-[#0B1B3A]/60">{d}</p>
+      <div className="grid grid-cols-3 gap-[1em] bg-[#F5F7FA] px-[3em] py-[1.2em]">
+        {services.map(({ src, t, d }) => (
+          <div key={t} className="overflow-hidden rounded-[0.8em] bg-white ring-1 ring-[#0E1B2C]/[0.06]">
+            <img src={src} alt="" className="aspect-[16/6] w-full object-cover" />
+            <div className="px-[0.9em] py-[0.7em]">
+              <p className="font-display text-[1.05em] font-semibold">{t}</p>
+              <p className="mt-[0.2em] hidden sm:block text-[0.78em] text-[#0E1B2C]/60">{d}</p>
+            </div>
           </div>
         ))}
       </div>

@@ -1,8 +1,8 @@
 import icone from "@/assets/move-ai-icone-app.png";
 
 // Animação da abertura: um site fraco, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito.
-// Tudo em CSS (classes hv-* em index.css), ciclo de 12s. Com movimento reduzido, mostra só o site bom.
-// A confeitaria é fictícia, só para ilustrar.
+// Tudo em CSS (classes hv-* em index.css), ciclo de 14s. Com movimento reduzido, mostra só o site bom.
+// A confeitaria é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
 
 function SiteFeio() {
   return (
@@ -15,7 +15,7 @@ function SiteFeio() {
         <span className="text-[4.6cqw] text-[#C71585]" style={{ fontFamily: "'Brush Script MT', 'Comic Sans MS', cursive" }}>Sua Confeitaria</span>
         <span className="text-[1.7cqw] font-bold text-[#6A0DAD]">INÍCIO | BOLOS | DOCES | FALE CONOSCO</span>
       </div>
-      <div className="relative mx-[3cqw] flex h-[34cqw] items-center justify-center bg-gradient-to-b from-[#F9C5D5] to-[#F4A3BC] text-center">
+      <div className="relative mx-[3cqw] flex h-[32cqw] items-center justify-center bg-gradient-to-b from-[#F9C5D5] to-[#F4A3BC] text-center">
         <span className="absolute left-[1.5cqw] text-[4cqw] text-white/80">‹</span>
         <span className="absolute right-[1.5cqw] text-[4cqw] text-white/80">›</span>
         <div>
@@ -41,52 +41,55 @@ function SiteFeio() {
   );
 }
 
+const produtos = [
+  { src: "/img/confeitaria-bolos.webp", t: "Bolos inteiros", d: "Encomenda com 1 dia" },
+  { src: "/img/confeitaria-doces.webp", t: "Doces finos", d: "Caixas de 6 a 50" },
+  { src: "/img/confeitaria-tortas.webp", t: "Tortas e fatias", d: "Todo dia na vitrine" },
+];
+
 function SiteBom() {
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#FBF5EE] text-[#2A1A14]">
-      <div className="hv-in flex items-center justify-between px-[4cqw] py-[2.6cqw]">
-        <span className="font-accent text-[4cqw] italic leading-none">Sua Confeitaria</span>
-        <span className="flex gap-[2.6cqw] text-[1.9cqw] text-[#2A1A14]/70">
-          <span>Cardápio</span><span>Encomendas</span><span>Onde estamos</span>
-        </span>
-      </div>
+    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#FBF6F0] text-[#2B1D16]">
+      {/* Abertura com foto em tela cheia */}
+      <div className="relative h-[58%] shrink-0 overflow-hidden">
+        <img src="/img/confeitaria-hero.webp" alt="" className="hv-zoom absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1B110C]/90 via-[#1B110C]/55 to-transparent" />
 
-      <div className="relative grid flex-1 grid-cols-[1.15fr_1fr] items-center gap-[2cqw] px-[4cqw]">
-        <div>
-          <p className="hv-in text-[1.6cqw] font-semibold uppercase tracking-[0.25em] text-[#B4532A]" style={{ animationDelay: "0.1s" }}>Feito hoje de manhã</p>
-          <p className="hv-in mt-[1.2cqw] font-display text-[6.4cqw] font-bold leading-[0.98] tracking-[-0.03em]" style={{ animationDelay: "0.2s" }}>
-            Bolo de verdade, <span className="font-accent font-normal italic text-[#B4532A]">sem pressa</span>.
-          </p>
-          <p className="hv-in mt-[1.6cqw] max-w-[90%] text-[2cqw] leading-snug text-[#2A1A14]/70" style={{ animationDelay: "0.3s" }}>
-            Encomende até as 18h e retire no dia seguinte.
-          </p>
-          <span className="hv-in mt-[2.4cqw] inline-flex rounded-full bg-[#2A1A14] px-[3cqw] py-[1.4cqw] text-[1.9cqw] font-semibold text-[#FBF5EE]" style={{ animationDelay: "0.4s" }}>
-            Encomendar pelo WhatsApp
+        <div className="relative flex items-center justify-between px-[4cqw] py-[2.6cqw] text-white">
+          <span className="font-accent text-[3.8cqw] italic leading-none">Sua Confeitaria</span>
+          <span className="flex items-center gap-[2.6cqw] text-[1.75cqw] text-white/80">
+            <span>Cardápio</span><span>Encomendas</span><span>Onde estamos</span>
+            <span className="rounded-full bg-white px-[1.8cqw] py-[0.8cqw] font-semibold text-[#2B1D16]">Encomendar</span>
           </span>
         </div>
 
-        {/* bolo desenhado em CSS */}
-        <div className="hv-in relative mx-auto flex aspect-square w-[88%] items-end justify-center rounded-full bg-[#F2D9C4]" style={{ animationDelay: "0.25s" }}>
-          <div className="mb-[18%] flex w-[64%] flex-col items-center">
-            <span className="h-[3cqw] w-[3cqw] -mb-[0.6cqw] rounded-full bg-[#C0392B] z-10" />
-            <span className="h-[5cqw] w-[70%] rounded-t-[2cqw] bg-[#FFF4E8] shadow-[inset_0_-1.2cqw_0_#E8B58A]" />
-            <span className="h-[7cqw] w-full rounded-t-[2cqw] bg-[#6B3E26] shadow-[inset_0_1.6cqw_0_#FFF4E8]" />
-            <span className="h-[1.6cqw] w-[112%] rounded-full bg-[#E9E0D6]" />
+        <div className="relative px-[4cqw] pt-[3cqw] text-white">
+          <p className="hv-in text-[1.5cqw] font-semibold uppercase tracking-[0.28em] text-[#F2C9A0]">Confeitaria artesanal</p>
+          <p className="hv-in mt-[1.2cqw] max-w-[62%] font-accent text-[6.8cqw] leading-[0.95]" style={{ animationDelay: "0.1s" }}>
+            Bolo de verdade, feito <span className="italic text-[#F2C9A0]">todo dia</span>.
+          </p>
+          <div className="hv-in mt-[2.4cqw] flex gap-[1.4cqw]" style={{ animationDelay: "0.2s" }}>
+            <span className="rounded-full bg-[#F2C9A0] px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold text-[#2B1D16]">Ver cardápio</span>
+            <span className="rounded-full border border-white/50 px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold">Pedir pelo WhatsApp</span>
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-[2cqw] px-[4cqw] pb-[3.6cqw] pt-[2cqw]">
-        {[
-          { t: "Bolos", c: "#6B3E26" },
-          { t: "Doces finos", c: "#B4532A" },
-          { t: "Festas", c: "#E8B58A" },
-        ].map(({ t, c }, i) => (
-          <div key={t} className="hv-in flex items-center gap-[1.4cqw] rounded-[1.6cqw] bg-white px-[1.6cqw] py-[1.4cqw] shadow-[0_0.6cqw_2cqw_rgba(42,26,20,0.08)]" style={{ animationDelay: `${0.45 + i * 0.08}s` }}>
-            <span className="h-[3.6cqw] w-[3.6cqw] rounded-full" style={{ background: c }} />
-            <span className="text-[2cqw] font-semibold">{t}</span>
-          </div>
-        ))}
+      {/* Mais pedidos */}
+      <div className="flex flex-1 flex-col px-[4cqw] pt-[2.6cqw]">
+        <div className="hv-in flex items-end justify-between" style={{ animationDelay: "0.3s" }}>
+          <p className="font-accent text-[3.4cqw] leading-none">Mais pedidos</p>
+          <p className="text-[1.6cqw] font-semibold text-[#9A5B34]">Ver tudo →</p>
+        </div>
+        <div className="mt-[2cqw] grid grid-cols-3 gap-[2cqw]">
+          {produtos.map((p, i) => (
+            <div key={p.t} className="hv-in" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
+              <img src={p.src} alt="" className="aspect-[4/3] w-full rounded-[1.2cqw] object-cover" />
+              <p className="mt-[1cqw] text-[1.8cqw] font-semibold">{p.t}</p>
+              <p className="text-[1.5cqw] text-[#2B1D16]/55">{p.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -94,36 +97,48 @@ function SiteBom() {
 
 export function HeroVisual() {
   return (
-    <div className="hv relative w-full max-w-[600px] mx-auto pb-10" aria-hidden="true">
-      <div className="animate-float" style={{ ["--r" as string]: "-1.5deg" }}>
-        <div className="overflow-hidden rounded-2xl ring-1 ring-white/15 shadow-[0_40px_120px_-30px_rgba(85,31,126,0.9)]">
-          <div className="flex items-center gap-1.5 bg-[#1A1226] px-4 py-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-            <span className="ml-3 rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px] text-white/60">seusite.com.br</span>
-          </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ containerType: "inline-size" }}>
-            <SiteFeio />
-            <div className="hv-good absolute inset-0">
-              <SiteBom />
+    <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-16" aria-hidden="true">
+      {/* luz de fundo para destacar a janela */}
+      <div className="pointer-events-none absolute -inset-10 rounded-[3rem] bg-[radial-gradient(60%_55%_at_50%_45%,rgba(0,195,208,0.28),rgba(85,31,126,0.25)_45%,transparent_75%)] blur-2xl" />
+
+      <div className="relative [perspective:1600px]">
+        <div className="animate-float" style={{ ["--r" as string]: "0deg" }}>
+          <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 shadow-[0_50px_140px_-30px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.04)] [transform:rotateY(-7deg)_rotateX(2deg)]">
+            <div className="flex items-center gap-1.5 bg-[#1A1226] px-4 py-3">
+              <span className="h-3 w-3 rounded-full bg-[#FF5F57]/80" />
+              <span className="h-3 w-3 rounded-full bg-[#FEBC2E]/80" />
+              <span className="h-3 w-3 rounded-full bg-[#28C840]/80" />
+              <span className="ml-3 flex-1 max-w-[260px] rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px] text-white/60">seusite.com.br</span>
             </div>
-            <span className="hv-edge pointer-events-none absolute inset-y-0 w-[3px] -translate-x-1/2 bg-[#4DDDE7] shadow-[0_0_30px_8px_rgba(0,195,208,0.6)]" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ containerType: "inline-size" }}>
+              <SiteFeio />
+              <div className="hv-good absolute inset-0">
+                <SiteBom />
+              </div>
+              <span className="hv-edge pointer-events-none absolute inset-y-0 w-[4px] -translate-x-1/2 bg-[#4DDDE7] shadow-[0_0_40px_12px_rgba(0,195,208,0.65)]" />
+              <span className="hv-flash pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(77,221,231,0.55),transparent_60%)]" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Botão que "ativa a Move" */}
-      <div className="hv-press absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-2.5 whitespace-nowrap rounded-full border border-white/15 bg-[#0C0416]/90 py-2 pl-2 pr-5 backdrop-blur-xl">
-        <img src={icone} alt="" className="h-8 w-8 rounded-lg" />
-        <span className="grid font-display text-sm font-semibold text-white">
-          <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
-          <span className="hv-on [grid-area:1/1] text-[#4DDDE7]">Move ativada ✓</span>
-        </span>
+      <div className="hv-btn absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
+        <span className="hv-halo absolute -inset-3 rounded-full bg-[#00C3D0]/30 blur-md" />
+        <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#4DDDE7]" />
+        <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.25s" }} />
+        <div className="relative flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-[#0C0416] py-2.5 pl-2.5 pr-7 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)]">
+          <span className="hv-on absolute inset-0" style={{ background: "var(--brand-gradient)" }} />
+          <img src={icone} alt="" className="relative h-10 w-10 rounded-xl ring-1 ring-white/20" />
+          <span className="relative grid font-display text-lg font-bold text-white">
+            <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
+            <span className="hv-on [grid-area:1/1]">Move ativada ✦</span>
+          </span>
+        </div>
       </div>
 
       {/* Cursor */}
-      <svg className="hv-cursor absolute z-10 h-6 w-6 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]" viewBox="0 0 24 24">
+      <svg className="hv-cursor absolute z-20 h-7 w-7 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]" viewBox="0 0 24 24">
         <path d="M4 2l15 9.5-6.6 1.4L9.6 20z" fill="#fff" stroke="#07040C" strokeWidth="1.2" strokeLinejoin="round" />
       </svg>
     </div>
