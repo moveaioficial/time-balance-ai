@@ -6,7 +6,7 @@ import { useContactModal } from "@/components/ui/ContactModal";
 const navLinks = [
   { href: "#servicos", label: "Serviços" },
   { href: "#metodo", label: "Método" },
-  { href: "#trabalho", label: "Feito por nós" },
+  { href: "#na-pratica", label: "Na prática" },
   { href: "#processo", label: "Como trabalhamos" },
   { href: "#faq", label: "Dúvidas" },
 ];

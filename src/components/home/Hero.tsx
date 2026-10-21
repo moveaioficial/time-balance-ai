@@ -1,12 +1,6 @@
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
-
-// Carrosséis reais que a Move AI criou para o próprio Instagram
-const stack = [
-  { src: "/work/linha-01.webp", alt: "Carrossel da Move AI sobre a história da IA", r: "-9deg", cls: "left-0 top-16 z-10" },
-  { src: "/work/meta-01.webp", alt: "Carrossel da Move AI sobre anúncios em vídeo da Meta", r: "4deg", cls: "left-[30%] top-0 z-20" },
-  { src: "/work/google-01.webp", alt: "Carrossel da Move AI sobre a busca com IA do Google", r: "11deg", cls: "right-0 top-24 z-10" },
-];
+import { HeroVisual } from "./HeroVisual";
 
 export function Hero() {
   const { openModal } = useContactModal();
@@ -42,27 +36,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="relative h-[420px] sm:h-[520px] lg:h-[600px] max-w-[560px] w-full mx-auto" aria-label="Exemplos do nosso trabalho">
-          {stack.map((s, i) => (
-            <figure
-              key={s.src}
-              className={`absolute w-[46%] sm:w-[44%] animate-float ${s.cls}`}
-              style={{ ["--r" as string]: s.r, animationDelay: `${i * -2.3}s` }}
-            >
-              <img
-                src={s.src}
-                alt={s.alt}
-                width={720}
-                height={900}
-                className="w-full h-auto rounded-xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10"
-                loading={i === 1 ? "eager" : "lazy"}
-              />
-            </figure>
-          ))}
-          <p className="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap font-accent italic text-lg text-white/60">
-            feito aqui, para o nosso Instagram
-          </p>
-        </div>
+        <HeroVisual />
       </div>
     </section>
   );

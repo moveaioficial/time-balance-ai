@@ -4,7 +4,7 @@ import { WordsMarquee } from "@/components/home/WordsMarquee";
 import { Services } from "@/components/home/Services";
 import { Method } from "@/components/home/Method";
 import { Process } from "@/components/home/Process";
-import { Work } from "@/components/home/Work";
+import { BeforeAfter } from "@/components/home/BeforeAfter";
 import { ForWho } from "@/components/home/ForWho";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
@@ -16,7 +16,7 @@ const Index = () => {
       <WordsMarquee />
       <Services />
       <Method />
-      <Work />
+      <BeforeAfter />
       <ForWho />
       <Process />
       <Faq />
