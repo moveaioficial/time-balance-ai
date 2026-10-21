@@ -11,15 +11,14 @@ export function Hero() {
 
       <div className="section-container relative z-[2] grid lg:grid-cols-[0.95fr_1.15fr] gap-14 lg:gap-14 items-center">
         <div>
-          <p className="kicker animate-fade-in">Estúdio digital · Guarulhos, SP</p>
 
-          <h1 className="mt-7 text-[2.8rem] leading-[1.02] sm:text-6xl lg:text-[4.3rem] xl:text-[5rem] font-bold tracking-[-0.035em] animate-fade-in-up">
+          <h1 className="text-[2.8rem] leading-[1.02] sm:text-6xl lg:text-[4.3rem] xl:text-[5rem] font-bold tracking-[-0.035em] animate-fade-in-up">
             Sua empresa, construída para ser <span className="accent-word">vista</span>.
           </h1>
 
           <p className="mt-7 max-w-xl text-lg sm:text-xl leading-relaxed text-white/75 animate-fade-in-up" style={{ animationDelay: "120ms" }}>
-            Site, marca, redes sociais e produto digital para pequenas e médias empresas.
-            Acabamento de agência e conversa direta com quem faz.
+            Antes de falar com você, o cliente já decidiu se confia na sua empresa.
+            A gente cuida do seu site, da sua marca e das suas redes para essa decisão ser a seu favor.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-3 animate-fade-in-up" style={{ animationDelay: "220ms" }}>
@@ -30,10 +29,6 @@ export function Hero() {
               Ver o que fazemos <ArrowDown className="w-4 h-4" />
             </a>
           </div>
-
-          <p className="mt-5 text-sm text-white/55 animate-fade-in" style={{ animationDelay: "320ms" }}>
-            Sem compromisso. A gente olha o seu site e as suas redes e diz o que ajustar primeiro.
-          </p>
         </div>
 
         <HeroVisual />

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MousePointerClick, Smartphone, MessageCircle, ChevronsLeftRight, Snowflake, Wrench, ClipboardCheck, Phone } from "lucide-react";
+import { MousePointerClick, Smartphone, MessageCircle, ChevronsLeftRight, Snowflake } from "lucide-react";
 
 // Antes e depois arrastável do MESMO site (empresa fictícia de climatização, só para ilustrar).
 // As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
@@ -78,70 +78,88 @@ function Antes() {
 
 function Depois() {
   const services = [
-    { src: "/img/clima-instalacao.webp", t: "Instalação", d: "Split e multi-split, com acabamento limpo." },
-    { src: "/img/clima-manutencao.webp", t: "Manutenção", d: "Limpeza, carga de gás e revisão." },
-    { src: "/img/clima-contrato.webp", t: "Contrato PMOC", d: "Plano mensal e laudo para empresas." },
+    { src: "/img/clima-tecnico.webp", t: "Instalação" },
+    { src: "/img/clima-manutencao.webp", t: "Manutenção" },
+    { src: "/img/clima-contrato.webp", t: "Contrato PMOC" },
   ];
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-white text-[#0E1B2C]" style={{ fontFamily: "Inter, sans-serif" }}>
-      <div className="flex items-center justify-between border-b border-[#0E1B2C]/[0.08] px-[3em] py-[1.1em]">
-        <span className="flex items-center gap-[0.6em]">
-          <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.55em] bg-[#0E5BD8] text-white">
-            <Snowflake className="h-[1.15em] w-[1.15em]" strokeWidth={2.4} />
-          </span>
-          <span className="font-display text-[1.3em] font-bold tracking-[-0.02em]">Sua Empresa<span className="text-[#0E5BD8]">.</span></span>
+    <div className="absolute inset-0 overflow-hidden bg-[#08131F] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* foto: coluna da direita no desktop, fundo no celular */}
+      <div className="absolute inset-0 sm:left-auto sm:w-[40%]">
+        <img src="/img/clima-sala.webp" alt="" className="h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-[#08131F]/80 sm:bg-transparent sm:bg-[linear-gradient(90deg,#08131F_0%,rgba(8,19,31,0.35)_22%,transparent_45%)]" />
+      </div>
+      <div className="pointer-events-none absolute -left-[10em] top-[20%] h-[30em] w-[30em] rounded-full bg-[#38BDF8] opacity-[0.16] blur-[6em]" />
+
+      {/* menu flutuante */}
+      <div className="relative z-10 mx-[2.4em] mt-[1.4em] flex items-center justify-between rounded-full border border-white/10 bg-white/[0.06] py-[0.6em] pl-[1.2em] pr-[0.6em] backdrop-blur-xl">
+        <span className="flex items-center gap-[0.55em] font-display text-[1.15em] font-bold tracking-[-0.02em]">
+          <Snowflake className="h-[1.1em] w-[1.1em] text-[#7DD3FC]" strokeWidth={2.4} /> Sua Empresa
         </span>
-        <span className="hidden sm:flex items-center gap-[2em] text-[0.9em] font-medium text-[#0E1B2C]/70">
-          <span>Serviços</span><span>Para empresas</span><span>Sobre</span>
-          <span className="flex items-center gap-[0.45em] font-semibold text-[#0E1B2C]"><Phone className="h-[1em] w-[1em] text-[#0E5BD8]" /> (11) 0000-0000</span>
-          <span className="rounded-[0.5em] bg-[#0E1B2C] px-[1.1em] py-[0.6em] font-semibold text-white">Orçamento</span>
+        <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/70">
+          <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
         </span>
+        <span className="rounded-full bg-[#7DD3FC] px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#08131F]">Agendar visita</span>
       </div>
 
-      <div className="grid flex-1 sm:grid-cols-[1.1fr_1fr]">
-        <div className="flex flex-col justify-center px-[3em] py-[1.6em] sm:py-0">
-          <p className="inline-flex w-fit items-center gap-[0.5em] rounded-full bg-[#E8F0FE] px-[0.9em] py-[0.35em] text-[0.78em] font-semibold text-[#0E5BD8]">
-            <span className="h-[0.5em] w-[0.5em] rounded-full bg-[#16A34A]" /> Atendimento de segunda a sábado
+      <div className="relative z-10 flex h-[calc(100%-4.5em)] flex-col px-[3em] pb-[2em] sm:w-[64%]">
+        <div className="flex flex-1 flex-col justify-center">
+          <p className="flex items-center gap-[0.6em] text-[0.8em] font-medium uppercase tracking-[0.28em] text-[#7DD3FC]">
+            <span className="h-px w-[2.4em] bg-[#7DD3FC]" /> Climatização residencial e comercial
           </p>
-          <p className="mt-[0.8em] font-display text-[3em] font-bold leading-[1.02] tracking-[-0.035em]">
-            Ar-condicionado instalado do jeito certo, <span className="text-[#0E5BD8]">no dia combinado.</span>
+          <p className="mt-[0.7em] font-display text-[4.4em] font-bold leading-[0.92] tracking-[-0.045em]">
+            Frio na medida.
+            <span className="block bg-gradient-to-r from-[#BAE6FD] via-[#7DD3FC] to-[#38BDF8] bg-clip-text font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
           </p>
-          <p className="mt-[0.9em] max-w-[30em] text-[1em] leading-relaxed text-[#0E1B2C]/65">
-            Instalação, manutenção e contratos PMOC para casas, lojas e escritórios.
+          <p className="mt-[1em] max-w-[28em] text-[1.05em] leading-relaxed text-white/65">
+            Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
           </p>
-          <div className="mt-[1.3em] flex flex-wrap gap-[0.7em]">
-            <span className="rounded-[0.6em] bg-[#0E5BD8] px-[1.5em] py-[0.85em] text-[0.95em] font-semibold text-white">Pedir orçamento</span>
-            <span className="flex items-center gap-[0.5em] rounded-[0.6em] border border-[#0E1B2C]/15 px-[1.3em] py-[0.85em] text-[0.95em] font-semibold">
-              <MessageCircle className="h-[1.1em] w-[1.1em] text-[#16A34A]" /> WhatsApp
+          <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
+            <span className="flex items-center gap-[0.6em] rounded-full bg-white px-[1.6em] py-[0.85em] text-[0.95em] font-semibold text-[#08131F]">
+              Pedir orçamento <span className="flex h-[1.5em] w-[1.5em] items-center justify-center rounded-full bg-[#08131F] text-[0.8em] text-white">→</span>
             </span>
-          </div>
-          <div className="mt-[1.5em] hidden sm:flex gap-[1.6em] text-[0.8em] text-[#0E1B2C]/60">
-            <span className="flex items-center gap-[0.4em]"><ClipboardCheck className="h-[1.2em] w-[1.2em] text-[#0E5BD8]" /> Orçamento sem custo</span>
-            <span className="flex items-center gap-[0.4em]"><Wrench className="h-[1.2em] w-[1.2em] text-[#0E5BD8]" /> Garantia no serviço</span>
-          </div>
-        </div>
-        <div className="relative hidden sm:block">
-          <img src="/img/clima-hero.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute bottom-[1.4em] left-[1.4em] flex items-center gap-[0.7em] rounded-[0.8em] bg-white/95 px-[1em] py-[0.7em] shadow-lg">
-            <span className="flex h-[2.2em] w-[2.2em] items-center justify-center rounded-full bg-[#E8F0FE] text-[#0E5BD8]"><Wrench className="h-[1.1em] w-[1.1em]" /></span>
-            <span className="leading-tight">
-              <span className="block text-[0.85em] font-semibold">Técnico com hora marcada</span>
-              <span className="block text-[0.72em] text-[#0E1B2C]/55">Você recebe a confirmação no WhatsApp</span>
+            <span className="flex items-center gap-[0.5em] text-[0.95em] font-medium text-white/80">
+              <MessageCircle className="h-[1.2em] w-[1.2em] text-[#4ADE80]" /> Falar no WhatsApp
             </span>
           </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-3 gap-[1em] bg-[#F5F7FA] px-[3em] py-[1.2em]">
-        {services.map(({ src, t, d }) => (
-          <div key={t} className="overflow-hidden rounded-[0.8em] bg-white ring-1 ring-[#0E1B2C]/[0.06]">
-            <img src={src} alt="" className="aspect-[16/6] w-full object-cover" />
-            <div className="px-[0.9em] py-[0.7em]">
-              <p className="font-display text-[1.05em] font-semibold">{t}</p>
-              <p className="mt-[0.2em] hidden sm:block text-[0.78em] text-[#0E1B2C]/60">{d}</p>
+        <div className="grid grid-cols-3 gap-[0.8em]">
+          {services.map(({ src, t }) => (
+            <div key={t} className="relative h-[6.6em] overflow-hidden rounded-[1em] ring-1 ring-white/10">
+              <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#08131F] via-[#08131F]/40 to-transparent" />
+              <p className="absolute bottom-[0.7em] left-[0.9em] right-[0.9em] flex items-center justify-between text-[0.95em] font-semibold">
+                {t} <span className="text-[#7DD3FC]">↗</span>
+              </p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      {/* cartões de vidro sobre a foto */}
+      <div className="absolute right-[3%] top-[22%] z-10 hidden sm:block w-[13em] rounded-[1.2em] border border-white/15 bg-[#08131F]/55 p-[1.1em] backdrop-blur-xl">
+        <div className="flex items-center justify-between text-[0.75em] text-white/60">
+          <span>Sala de estar</span>
+          <span className="flex items-center gap-[0.35em] text-[#4ADE80]"><span className="h-[0.5em] w-[0.5em] rounded-full bg-[#4ADE80]" /> Ligado</span>
+        </div>
+        <p className="mt-[0.3em] font-display text-[3.2em] font-bold leading-none tracking-[-0.04em]">22<span className="text-[0.5em] align-top text-[#7DD3FC]">°C</span></p>
+        <div className="mt-[0.7em] h-[0.35em] overflow-hidden rounded-full bg-white/10">
+          <div className="h-full w-[62%] rounded-full bg-gradient-to-r from-[#38BDF8] to-[#BAE6FD]" />
+        </div>
+        <p className="mt-[0.5em] text-[0.72em] text-white/55">Modo silencioso · filtro limpo</p>
+      </div>
+
+      <div className="absolute bottom-[6%] right-[3%] z-10 hidden sm:flex w-[19.5em] items-center gap-[0.8em] rounded-[1.1em] bg-white p-[0.8em] text-[#08131F] shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]">
+        <span className="flex h-[2.6em] w-[2.6em] shrink-0 flex-col items-center justify-center rounded-[0.7em] bg-[#E0F2FE] leading-none text-[#0369A1]">
+          <span className="text-[0.55em] font-semibold uppercase">Amanhã</span>
+          <span className="text-[1.05em] font-bold">9h</span>
+        </span>
+        <span className="flex-1 leading-tight">
+          <span className="block text-[0.85em] font-semibold">Próxima visita livre</span>
+          <span className="block text-[0.72em] text-[#08131F]/55">Confirmação pelo WhatsApp</span>
+        </span>
+        <span className="rounded-full bg-[#08131F] px-[0.9em] py-[0.45em] text-[0.72em] font-semibold text-white">Agendar</span>
       </div>
     </div>
   );
