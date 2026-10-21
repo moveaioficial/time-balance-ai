@@ -1,90 +1,150 @@
-import { useState } from "react";
-import { MousePointerClick, Smartphone, MessageCircle, ChevronsLeftRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { MousePointerClick, Smartphone, MessageCircle, ChevronsLeftRight, Snowflake, Wrench, ClipboardCheck, Phone } from "lucide-react";
 
-// Antes e depois arrastável. "Sua empresa" é genérica de propósito: não é cliente, é o leitor.
-// As duas telas usam unidades cqw para escalar junto com a largura do quadro.
+// Antes e depois arrastável do MESMO site (empresa fictícia de climatização, só para ilustrar).
+// As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
 
 function Antes() {
   return (
-    <div className="absolute inset-0 flex flex-col bg-[#ECECEC] text-[#333]" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
-      <div className="bg-[#2B4C9B] px-[3cqw] py-[1.6cqw] text-white" style={{ fontFamily: "Arial, sans-serif" }}>
-        <p className="text-[clamp(14px,3.4cqw,30px)] font-bold tracking-wide">SUA EMPRESA LTDA</p>
-        <p className="mt-[0.4cqw] text-[clamp(9px,1.4cqw,13px)] underline opacity-90">Home | Quem Somos | Serviços | Galeria | Contato</p>
+    <div className="absolute inset-0 flex flex-col bg-white text-[#555]" style={{ fontFamily: "Arial, Helvetica, sans-serif" }}>
+      <div className="flex justify-between bg-[#1F3A93] px-[3em] py-[0.5em] text-[0.8em] text-white">
+        <span>☎ (11) 0000-0000 &nbsp;|&nbsp; ✉ contato@seusite.com.br</span>
+        <span className="hidden sm:inline">Siga-nos: f &nbsp; in &nbsp; ▶</span>
       </div>
-      <div className="flex-1 px-[3cqw] py-[2.4cqw]">
-        <p className="text-center text-[clamp(15px,3cqw,28px)] font-bold text-[#B22222]">Seja bem-vindo ao nosso site!!</p>
-        <div className="mt-[2cqw] flex flex-col sm:flex-row gap-[2.4cqw]">
-          <div className="flex h-[clamp(70px,16cqw,150px)] sm:w-[34%] shrink-0 items-center justify-center border-2 border-dashed border-[#999] bg-[#D6D6D6] text-[clamp(10px,1.4cqw,13px)] text-[#777]">
-            foto_fachada_2014.jpg
-          </div>
-          <p className="text-[clamp(10px,1.45cqw,14px)] leading-snug text-[#555]">
-            A Sua Empresa atua no mercado há muitos anos oferecendo soluções de qualidade com excelência,
-            comprometimento e responsabilidade para todos os nossos clientes e parceiros. Nossa missão é superar
-            as expectativas através de um atendimento diferenciado. Para mais informações sobre nossos produtos
-            e serviços, entre em contato pelo telefone ou e-mail ou visite a nossa sede.
+
+      <div className="flex items-center justify-between px-[3em] py-[1.2em] border-b-[0.3em] border-[#F7941D]">
+        <span className="flex items-center gap-[0.6em]">
+          <span className="flex h-[2.4em] w-[2.4em] items-center justify-center rounded-full bg-[#29ABE2] text-[1.3em] text-white">❄</span>
+          <span className="leading-none">
+            <span className="block text-[1.7em] font-bold text-[#1F3A93]">SUA EMPRESA</span>
+            <span className="block text-[1em] italic text-[#F7941D]">Climatização</span>
+          </span>
+        </span>
+        <span className="hidden sm:flex gap-[1.6em] text-[0.85em] font-bold text-[#777]">
+          <span className="text-[#F7941D]">HOME</span><span>EMPRESA</span><span>SERVIÇOS</span><span>GALERIA</span><span>CONTATO</span>
+        </span>
+        <span className="sm:hidden text-[1.6em] text-[#777]">≡</span>
+      </div>
+
+      <div
+        className="relative flex h-[17em] items-center justify-center text-center"
+        style={{
+          backgroundColor: "#7D8FA6",
+          backgroundImage:
+            "radial-gradient(circle at 30% 40%, rgba(255,255,255,.35), transparent 40%), radial-gradient(circle at 75% 60%, rgba(40,60,90,.5), transparent 45%), repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 2px, transparent 2px 5px)",
+        }}
+      >
+        <span className="absolute left-[1em] text-[2.6em] text-white/70">‹</span>
+        <span className="absolute right-[1em] text-[2.6em] text-white/70">›</span>
+        <div className="px-[4em]">
+          <p className="text-[2em] font-bold uppercase leading-tight text-white" style={{ textShadow: "2px 2px 4px #000" }}>
+            Qualidade e compromisso em climatização
           </p>
+          <p className="mt-[0.6em] text-[1em] text-white" style={{ textShadow: "1px 1px 2px #000" }}>
+            Há anos oferecendo as melhores soluções em ar-condicionado para você e sua empresa!
+          </p>
+          <span className="mt-[1em] inline-block bg-[#F7941D] px-[1.4em] py-[0.5em] text-[0.9em] font-bold text-white">SAIBA MAIS</span>
         </div>
-        <p className="mt-[2cqw] text-[clamp(10px,1.5cqw,14px)] text-[#0000EE] underline">Clique aqui para saber mais</p>
-        <p className="mt-[3cqw] text-[clamp(12px,2cqw,20px)] font-bold text-[#2B4C9B]">NOSSOS PRODUTOS</p>
-        <div className="mt-[1.4cqw] grid w-full sm:w-[62%] grid-cols-3 gap-[1.6cqw]">
-          {[1, 2, 3].map((n) => (
-            <div key={n} className="flex aspect-[16/10] items-center justify-center border border-[#AAA] bg-[#DCDCDC] text-[clamp(9px,1.3cqw,13px)] text-[#777]">
-              produto{n}.jpg
+        <div className="absolute bottom-[0.8em] flex gap-[0.5em]">
+          <span className="h-[0.6em] w-[0.6em] rounded-full bg-white" />
+          <span className="h-[0.6em] w-[0.6em] rounded-full bg-white/50" />
+          <span className="h-[0.6em] w-[0.6em] rounded-full bg-white/50" />
+        </div>
+      </div>
+
+      <div className="flex-1 px-[3em] py-[1.6em] text-center">
+        <p className="text-[1.4em] font-bold text-[#1F3A93]">NOSSOS SERVIÇOS</p>
+        <span className="mx-auto mt-[0.3em] block h-[0.25em] w-[4em] bg-[#F7941D]" />
+        <div className="mt-[1.4em] grid grid-cols-3 gap-[1.6em]">
+          {["INSTALAÇÃO", "MANUTENÇÃO", "CONTRATO PMOC"].map((t) => (
+            <div key={t}>
+              <span className="mx-auto flex h-[3em] w-[3em] items-center justify-center rounded-full bg-[#F7941D] text-[1.2em] text-white">✔</span>
+              <p className="mt-[0.6em] text-[0.95em] font-bold text-[#1F3A93]">{t}</p>
+              <p className="mt-[0.4em] hidden sm:block text-[0.75em] leading-snug">
+                Realizamos serviços com qualidade e excelência, sempre buscando a total satisfação dos nossos clientes.
+              </p>
+              <p className="mt-[0.4em] text-[0.75em] font-bold text-[#F7941D]">LEIA MAIS »</p>
             </div>
           ))}
         </div>
-        <p className="mt-[2cqw] text-center text-[clamp(9px,1.3cqw,13px)] text-[#777]">Você é o visitante nº 004187</p>
       </div>
-      <div className="bg-[#C9C9C9] px-[3cqw] py-[1cqw] text-[clamp(8px,1.1cqw,11px)] text-[#666]" style={{ fontFamily: "Arial, sans-serif" }}>
-        Melhor visualizado em 1024x768 · Última atualização: 03/2014
+
+      <div className="bg-[#333] px-[3em] py-[0.6em] text-center text-[0.7em] text-[#aaa]">
+        © 2014 Sua Empresa Climatização · Todos os direitos reservados
       </div>
     </div>
   );
 }
 
 function Depois() {
+  const services = [
+    { Icon: Snowflake, t: "Instalação", d: "Do furo na parede ao primeiro ligar." },
+    { Icon: Wrench, t: "Manutenção", d: "Limpeza e revisão com hora marcada." },
+    { Icon: ClipboardCheck, t: "Contrato PMOC", d: "Para empresas que precisam do laudo em dia." },
+  ];
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#0B0614] text-white">
-      <div className="pointer-events-none absolute -right-[10cqw] -top-[14cqw] h-[48cqw] w-[48cqw] rounded-full bg-[#551F7E] opacity-60 blur-[8cqw]" />
-      <div className="pointer-events-none absolute -bottom-[18cqw] left-[20cqw] h-[40cqw] w-[40cqw] rounded-full bg-[#225C9E] opacity-50 blur-[8cqw]" />
+    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[#F3F7FB] text-[#0B1B3A]">
+      <div className="pointer-events-none absolute -right-[8em] -top-[10em] h-[30em] w-[30em] rounded-full bg-[#BFE3FF] opacity-70 blur-[4em]" />
 
-      <div className="relative flex items-center justify-between px-[4cqw] py-[2.2cqw]">
-        <span className="flex items-center gap-[1cqw] font-display text-[clamp(12px,1.9cqw,18px)] font-bold">
-          <span className="h-[clamp(14px,2.2cqw,22px)] w-[clamp(14px,2.2cqw,22px)] rounded-[30%]" style={{ background: "var(--brand-gradient)" }} />
-          Sua empresa
+      <div className="relative flex items-center justify-between px-[3em] py-[1.3em]">
+        <span className="flex items-center gap-[0.6em]">
+          <span className="flex h-[2.2em] w-[2.2em] items-center justify-center rounded-[0.7em] bg-[#0B1B3A] text-white">
+            <Snowflake className="h-[1.2em] w-[1.2em]" />
+          </span>
+          <span className="leading-none">
+            <span className="block font-display text-[1.35em] font-bold">Sua Empresa</span>
+            <span className="block text-[0.8em] text-[#0B1B3A]/55">climatização</span>
+          </span>
         </span>
-        <span className="hidden sm:flex gap-[2.4cqw] text-[clamp(9px,1.3cqw,13px)] text-white/60">
-          <span>O que fazemos</span><span>Como funciona</span><span>Contato</span>
+        <span className="hidden sm:flex items-center gap-[2em] text-[0.9em] text-[#0B1B3A]/70">
+          <span>Serviços</span><span>Sobre</span><span>Contato</span>
+          <span className="flex items-center gap-[0.4em] rounded-full border border-[#0B1B3A]/15 bg-white px-[1em] py-[0.5em] font-semibold text-[#0B1B3A]">
+            <Phone className="h-[1em] w-[1em]" /> (11) 0000-0000
+          </span>
         </span>
       </div>
 
-      <div className="relative flex flex-1 flex-col justify-center px-[4cqw] pb-[3cqw]">
-        <p className="font-display text-[clamp(9px,1.2cqw,12px)] font-semibold uppercase tracking-[0.25em] text-[#4DDDE7]">Atendimento em todo o estado</p>
-        <p className="mt-[1.4cqw] max-w-[80%] font-display text-[clamp(22px,5.4cqw,54px)] font-bold leading-[1.02] tracking-[-0.03em]">
-          O que você faz, entendido <span className="font-accent font-normal italic text-[#4DDDE7]">de relance</span>.
-        </p>
-        <p className="mt-[1.6cqw] max-w-[62%] text-[clamp(11px,1.6cqw,16px)] leading-snug text-white/70">
-          Uma frase clara, uma prova de confiança e um caminho direto até a conversa.
-        </p>
-        <div className="mt-[2.6cqw] flex flex-wrap items-center gap-[1.4cqw]">
-          <span className="rounded-full px-[2.6cqw] py-[1.1cqw] text-[clamp(10px,1.4cqw,14px)] font-semibold" style={{ background: "var(--brand-gradient)" }}>
-            Pedir orçamento
-          </span>
-          <span className="flex items-center gap-[0.8cqw] rounded-full border border-white/20 px-[2.2cqw] py-[1.1cqw] text-[clamp(10px,1.4cqw,14px)] text-white/85">
-            <MessageCircle className="h-[1.2em] w-[1.2em]" /> WhatsApp
-          </span>
+      <div className="relative grid flex-1 items-center gap-[2em] px-[3em] sm:grid-cols-[1.25fr_1fr]">
+        <div>
+          <p className="text-[0.8em] font-semibold uppercase tracking-[0.22em] text-[#1E6BFF]">Instalação · Manutenção · Contratos</p>
+          <p className="mt-[0.5em] font-display text-[3.3em] font-bold leading-[0.98] tracking-[-0.035em]">
+            Ar-condicionado instalado, limpo e <span className="font-accent font-normal italic text-[#1E6BFF]">gelando</span>.
+          </p>
+          <p className="mt-[0.9em] max-w-[30em] text-[1.05em] leading-snug text-[#0B1B3A]/65">
+            Para casas e empresas. Orçamento sem custo e técnico com horário marcado.
+          </p>
+          <div className="mt-[1.4em] flex flex-wrap gap-[0.8em]">
+            <span className="rounded-full bg-[#1E6BFF] px-[1.6em] py-[0.8em] text-[0.95em] font-semibold text-white shadow-[0_0.6em_1.6em_-0.4em_rgba(30,107,255,0.6)]">Pedir orçamento</span>
+            <span className="flex items-center gap-[0.5em] rounded-full border border-[#0B1B3A]/15 bg-white px-[1.4em] py-[0.8em] text-[0.95em] font-semibold">
+              <MessageCircle className="h-[1.1em] w-[1.1em] text-[#16A34A]" /> WhatsApp
+            </span>
+          </div>
+        </div>
+
+        {/* aparelho desenhado */}
+        <div className="relative hidden sm:block">
+          <div className="relative mx-auto w-[90%] rounded-[1.4em] bg-white p-[1.2em] shadow-[0_1.6em_3em_-1em_rgba(11,27,58,0.25)]">
+            <div className="h-[4.4em] rounded-[0.8em] bg-gradient-to-b from-white to-[#E7EEF6] ring-1 ring-[#0B1B3A]/10" />
+            <div className="mx-[1em] -mt-[0.9em] h-[0.5em] rounded-full bg-[#0B1B3A]/15" />
+            <div className="mt-[1.4em] space-y-[0.6em] px-[1.4em]">
+              {[100, 80, 60].map((w) => (
+                <span key={w} className="block h-[0.35em] rounded-full bg-gradient-to-r from-[#7CC4FF] to-transparent" style={{ width: `${w}%` }} />
+              ))}
+            </div>
+          </div>
+          <div className="absolute -bottom-[1.4em] left-0 flex items-center gap-[0.6em] rounded-[1em] bg-[#0B1B3A] px-[1em] py-[0.7em] text-white shadow-xl">
+            <span className="h-[0.6em] w-[0.6em] rounded-full bg-[#4ADE80]" />
+            <span className="text-[0.8em] font-semibold">Técnico confirmado · 14h</span>
+          </div>
         </div>
       </div>
 
-      <div className="relative grid grid-cols-3 gap-[1.6cqw] px-[4cqw] pb-[4cqw]">
-        {[
-          { t: "Instalação", c: "linear-gradient(135deg,#48156F,#225C9E)" },
-          { t: "Manutenção", c: "linear-gradient(160deg,#225C9E,#00C3D0)" },
-          { t: "Projetos", c: "linear-gradient(200deg,#551F7E,#48156F)" },
-        ].map(({ t, c }) => (
-          <div key={t} className="overflow-hidden rounded-[1.6cqw] bg-white/[0.05] ring-1 ring-white/10">
-            <div className="aspect-[16/9]" style={{ background: c }} />
-            <p className="px-[1.6cqw] py-[1.2cqw] font-display text-[clamp(10px,1.5cqw,15px)] font-semibold">{t}</p>
+      <div className="relative grid grid-cols-3 gap-[1em] px-[3em] pb-[2.2em] pt-[2em]">
+        {services.map(({ Icon, t, d }) => (
+          <div key={t} className="rounded-[1.1em] bg-white p-[1.1em] ring-1 ring-[#0B1B3A]/[0.06]">
+            <Icon className="h-[1.5em] w-[1.5em] text-[#1E6BFF]" />
+            <p className="mt-[0.6em] font-display text-[1.05em] font-semibold">{t}</p>
+            <p className="mt-[0.3em] hidden sm:block text-[0.8em] leading-snug text-[#0B1B3A]/60">{d}</p>
           </div>
         ))}
       </div>
@@ -94,12 +154,54 @@ function Depois() {
 
 const points = [
   { Icon: MousePointerClick, title: "Entende na hora", text: "O visitante sabe o que você faz antes de rolar a página." },
-  { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, que é onde muita gente vai te conhecer." },
+  { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, sem zoom e sem texto cortado." },
   { Icon: MessageCircle, title: "Leva até a conversa", text: "Cada seção aponta para o mesmo lugar: falar com você." },
 ];
 
+const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
 export function BeforeAfter() {
   const [pos, setPos] = useState(50);
+  const [touched, setTouched] = useState(false);
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  // Enquanto ninguém mexe, o divisor vai e volta sozinho a cada poucos segundos para mostrar que dá para arrastar.
+  useEffect(() => {
+    if (touched || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = frameRef.current;
+    if (!el) return;
+
+    let raf = 0;
+    let timer = 0;
+    let visible = false;
+    const path = [50, 18, 82, 50];
+    const legMs = 1100;
+
+    const sweep = () => {
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = (now - start) / legMs;
+        const leg = Math.min(Math.floor(t), path.length - 2);
+        const k = Math.min(t - leg, 1);
+        setPos(path[leg] + (path[leg + 1] - path[leg]) * ease(k));
+        if (t < path.length - 1) raf = requestAnimationFrame(step);
+        else timer = window.setTimeout(() => visible && sweep(), 4500);
+      };
+      raf = requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver(([entry]) => {
+      const was = visible;
+      visible = entry.isIntersecting;
+      if (visible && !was) timer = window.setTimeout(sweep, 900);
+      if (!visible) { cancelAnimationFrame(raf); clearTimeout(timer); setPos(50); }
+    }, { threshold: 0.5 });
+    io.observe(el);
+
+    return () => { io.disconnect(); cancelAnimationFrame(raf); clearTimeout(timer); };
+  }, [touched]);
+
+  const stopHint = () => setTouched(true);
 
   return (
     <section id="na-pratica" className="grain relative overflow-hidden py-24 lg:py-32">
@@ -107,10 +209,10 @@ export function BeforeAfter() {
         <div className="max-w-3xl reveal">
           <p className="kicker">Na prática</p>
           <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] leading-[1.03]">
-            Mesma empresa. <span className="accent-word">Outra</span> primeira impressão.
+            Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. De um lado, o site que só existe. Do outro, o site que trabalha por você.
+            Arraste e compare. É o mesmo negócio, contado de outro jeito.
           </p>
         </div>
 
@@ -118,19 +220,22 @@ export function BeforeAfter() {
           <div className="mb-4 flex items-center justify-between font-display text-xs font-semibold uppercase tracking-[0.2em]">
             <span className="text-white/55">Antes</span>
             <span className="hidden sm:block font-accent text-base normal-case italic tracking-normal text-white/50">arraste para comparar</span>
-            <span className="text-[#4DDDE7]">Depois</span>
+            <span className="text-[#4DDDE7]">Com a Move</span>
           </div>
           <div
-            className="relative aspect-[4/5] sm:aspect-[16/10] w-full overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-[0_40px_120px_-40px_rgba(85,31,126,0.8)] select-none"
+            ref={frameRef}
+            className="relative aspect-[3/4] sm:aspect-[16/9] w-full overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-[0_40px_120px_-40px_rgba(85,31,126,0.8)] select-none"
             style={{ containerType: "inline-size" }}
           >
-            <Antes />
-            <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-              <Depois />
+            <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
+              <Antes />
+              <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
+                <Depois />
+              </div>
             </div>
 
             <div className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_20px_rgba(0,195,208,0.8)]" style={{ left: `${pos}%` }}>
-              <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0C0416] shadow-xl">
+              <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0C0416] shadow-xl ring-4 ring-[#00C3D0]/30">
                 <ChevronsLeftRight className="h-5 w-5" />
               </span>
             </div>
@@ -139,8 +244,12 @@ export function BeforeAfter() {
               type="range"
               min={0}
               max={100}
+              step={0.5}
               value={pos}
               onChange={(e) => setPos(Number(e.target.value))}
+              onPointerDown={stopHint}
+              onKeyDown={stopHint}
+              onFocus={stopHint}
               aria-label="Arraste para comparar o antes e o depois"
               className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
             />

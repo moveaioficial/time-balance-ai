@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
-import logo from "@/assets/move-ai-logo-branca.png";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { EMAIL, INSTAGRAM_URL, LINKEDIN_URL, WHATSAPP_URL } from "@/lib/contato";
 
 const sections = [
@@ -18,7 +18,7 @@ export function Footer() {
     <footer className="relative bg-[#07040C] border-t border-white/10">
       <div className="section-container py-16 grid gap-12 md:grid-cols-[1.3fr_1fr_1fr]">
         <div>
-          <img src={logo} alt="Move AI" className="h-9 w-auto" />
+          <Link to="/" className="logo-link inline-flex"><BrandLogo className="h-9" /></Link>
           <p className="mt-5 max-w-sm text-white/65 leading-relaxed">
             Estúdio digital de site, marca, redes sociais e produto digital para pequenas e médias empresas.
           </p>

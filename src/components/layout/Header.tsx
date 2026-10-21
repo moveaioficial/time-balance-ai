@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "@/assets/move-ai-logo-branca.png";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { useContactModal } from "@/components/ui/ContactModal";
 
 const navLinks = [
@@ -36,8 +36,8 @@ export function Header() {
     >
       <div className="section-container">
         <nav className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#inicio" onClick={(e) => { e.preventDefault(); go("#inicio"); }} className="flex items-center flex-shrink-0">
-            <img src={logo} alt="Move AI" className="h-8 lg:h-9 w-auto" />
+          <a href="#inicio" onClick={(e) => { e.preventDefault(); go("#inicio"); }} className="logo-link flex items-center flex-shrink-0">
+            <BrandLogo className="h-8 lg:h-9" />
           </a>
 
           <div className="hidden lg:flex items-center gap-8">
