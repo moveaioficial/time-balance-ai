@@ -273,21 +273,37 @@
   .logo-link:focus-visible .logo-mask::after { opacity: 1; animation: logo-flow 2.4s linear infinite; }
   @keyframes logo-flow { to { background-position: 300% 0; } }
 
-  /* Animação da abertura (HeroVisual): site feio, clique em "Ativar a Move", site bom. Ciclo de 14s.
-     0-28% site feio e cursor passeando; 28-39% cursor parado no botão (brilho de hover); 39% clique;
-     40-47% faixa de luz troca o site; 47-92% site bom; 92-100% volta ao início. */
-  .hv-good { animation: hv-wipe 14s cubic-bezier(.7,0,.2,1) infinite both; }
-  .hv-edge { animation: hv-edge 14s cubic-bezier(.7,0,.2,1) infinite both; }
-  .hv-flash { animation: hv-flash 14s ease-out infinite both; }
-  .hv-in { animation: hv-in 14s cubic-bezier(.2,.7,.2,1) infinite both; }
-  .hv-zoom { animation: hv-zoom 14s ease-out infinite both; }
-  .hv-btn { animation: hv-btn 14s cubic-bezier(.3,1.4,.5,1) infinite both; }
-  .hv-halo { animation: hv-halo 14s ease infinite both; }
-  .hv-ring { animation: hv-ring 14s ease-out infinite both; }
-  .hv-off { animation: hv-off 14s ease infinite both; }
-  .hv-on { animation: hv-on 14s ease infinite both; }
-  .hv-cursor { animation: hv-cursor 14s cubic-bezier(.5,0,.3,1) infinite both; }
+  /* Animação da abertura (HeroVisual): site feio, clique em "Ativar a Move", site bom. Ciclo de 18s.
+     O site feio rola, o cursor clica no botão (39%), a faixa de luz troca o site e o site bom rola também. */
+  .hv-good { animation: hv-wipe 18s cubic-bezier(.7,0,.2,1) infinite both; }
+  .hv-edge { animation: hv-edge 18s cubic-bezier(.7,0,.2,1) infinite both; }
+  .hv-flash { animation: hv-flash 18s ease-out infinite both; }
+  .hv-in { animation: hv-in 18s cubic-bezier(.2,.7,.2,1) infinite both; }
+  .hv-zoom { animation: hv-zoom 18s ease-out infinite both; }
+  .hv-btn { animation: hv-btn 18s cubic-bezier(.3,1.4,.5,1) infinite both; }
+  .hv-halo { animation: hv-halo 18s ease infinite both; }
+  .hv-ring { animation: hv-ring 18s ease-out infinite both; }
+  .hv-off { animation: hv-off 18s ease infinite both; }
+  .hv-on { animation: hv-on 18s ease infinite both; }
+  .hv-cursor { animation: hv-cursor 18s cubic-bezier(.5,0,.3,1) infinite both; }
 
+  .hv-scroll-a { animation: hv-scroll-a 18s cubic-bezier(.45,0,.2,1) infinite both; }
+  .hv-scroll-b { animation: hv-scroll-b 18s cubic-bezier(.45,0,.2,1) infinite both; }
+
+  @keyframes hv-scroll-a {
+    0%, 9% { transform: translateY(0); }
+    16% { transform: translateY(-20cqw); }
+    18% { transform: translateY(-20cqw); }
+    25%, 49% { transform: translateY(-38cqw); }
+    51%, 100% { transform: translateY(0); }
+  }
+  @keyframes hv-scroll-b {
+    0%, 58% { transform: translateY(0); }
+    66% { transform: translateY(-30cqw); }
+    69% { transform: translateY(-30cqw); }
+    77%, 82% { transform: translateY(-56cqw); }
+    89%, 100% { transform: translateY(0); }
+  }
   @keyframes hv-wipe {
     0%, 40% { clip-path: inset(0 100% 0 0); }
     47%, 92% { clip-path: inset(0 0 0 0); }
@@ -333,15 +349,21 @@
   @keyframes hv-cursor {
     0% { left: 88%; top: 74%; opacity: 0; transform: scale(1); }
     5% { opacity: 1; }
-    13% { left: 30%; top: 28%; }
-    21% { left: 64%; top: 46%; }
-    28% { left: 52%; top: 93%; transform: scale(1); }
+    10% { left: 62%; top: 46%; }
+    25% { left: 64%; top: 54%; }
+    31% { left: 52%; top: 93%; transform: scale(1); }
     38% { left: 52%; top: 93%; transform: scale(1); }
     39% { transform: scale(.75); }
     41% { left: 52%; top: 93%; transform: scale(1); }
-    60% { left: 80%; top: 40%; opacity: 1; }
-    72%, 100% { left: 88%; top: 74%; opacity: 0; }
+    54% { left: 70%; top: 44%; }
+    78% { left: 68%; top: 52%; opacity: 1; }
+    86%, 100% { left: 88%; top: 74%; opacity: 0; }
   }
+
+  /* "Depois" do antes e depois: luz azul em movimento e anel do mostrador */
+  .ba-aurora { animation: mesh-drift 16s ease-in-out infinite alternate; }
+  .ba-spin { animation: ba-spin 9s linear infinite; }
+  @keyframes ba-spin { to { transform: rotate(360deg); } }
 
   .reveal {
     opacity: 0;
@@ -351,10 +373,11 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .mesh span, .hv * { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-aurora, .ba-spin { animation: none !important; }
     .hv-good { clip-path: none; }
     .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo { opacity: 0; }
     .hv-in, .hv-on { opacity: 1; }
+    .hv-scroll-a, .hv-scroll-b { transform: none; }
     .hv-cursor { display: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
   }

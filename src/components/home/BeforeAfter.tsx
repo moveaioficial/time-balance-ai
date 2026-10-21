@@ -77,89 +77,106 @@ function Antes() {
 }
 
 function Depois() {
-  const services = [
-    { src: "/img/clima-tecnico.webp", t: "Instalação" },
-    { src: "/img/clima-manutencao.webp", t: "Manutenção" },
-    { src: "/img/clima-contrato.webp", t: "Contrato PMOC" },
-  ];
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#08131F] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
-      {/* foto: coluna da direita no desktop, fundo no celular */}
-      <div className="absolute inset-0 sm:left-auto sm:w-[40%]">
-        <img src="/img/clima-sala.webp" alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-[#08131F]/80 sm:bg-transparent sm:bg-[linear-gradient(90deg,#08131F_0%,rgba(8,19,31,0.35)_22%,transparent_45%)]" />
-      </div>
-      <div className="pointer-events-none absolute -left-[10em] top-[20%] h-[30em] w-[30em] rounded-full bg-[#38BDF8] opacity-[0.16] blur-[6em]" />
-
-      {/* menu flutuante */}
-      <div className="relative z-10 mx-[2.4em] mt-[1.4em] flex items-center justify-between rounded-full border border-white/10 bg-white/[0.06] py-[0.6em] pl-[1.2em] pr-[0.6em] backdrop-blur-xl">
-        <span className="flex items-center gap-[0.55em] font-display text-[1.15em] font-bold tracking-[-0.02em]">
-          <Snowflake className="h-[1.1em] w-[1.1em] text-[#7DD3FC]" strokeWidth={2.4} /> Sua Empresa
-        </span>
-        <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/70">
-          <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
-        </span>
-        <span className="rounded-full bg-[#7DD3FC] px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#08131F]">Agendar visita</span>
+    <div
+      className="absolute inset-0 flex flex-col overflow-hidden bg-[#050B14] text-white"
+      style={{
+        fontFamily: "Inter, sans-serif",
+        backgroundImage:
+          "linear-gradient(rgba(125,211,252,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.05) 1px, transparent 1px)",
+        backgroundSize: "3.2em 3.2em",
+      }}
+    >
+      {/* luz azul em movimento */}
+      <div className="pointer-events-none absolute inset-0">
+        <span className="ba-aurora absolute -left-[8em] -top-[10em] h-[28em] w-[28em] rounded-full bg-[#0EA5E9] opacity-30 blur-[6em]" />
+        <span className="ba-aurora absolute right-[-6em] top-[6em] h-[24em] w-[24em] rounded-full bg-[#6366F1] opacity-25 blur-[6em]" style={{ animationDelay: "-6s" }} />
+        <span className="ba-aurora absolute bottom-[-12em] left-[30%] h-[26em] w-[26em] rounded-full bg-[#22D3EE] opacity-20 blur-[6em]" style={{ animationDelay: "-11s" }} />
       </div>
 
-      <div className="relative z-10 flex h-[calc(100%-4.5em)] flex-col px-[3em] pb-[2em] sm:w-[64%]">
-        <div className="flex flex-1 flex-col justify-center">
-          <p className="flex items-center gap-[0.6em] text-[0.8em] font-medium uppercase tracking-[0.28em] text-[#7DD3FC]">
-            <span className="h-px w-[2.4em] bg-[#7DD3FC]" /> Climatização residencial e comercial
+      {/* menu */}
+      <div className="relative flex items-center justify-between px-[2.4em] py-[1.2em]">
+        <span className="flex items-center gap-[0.6em]">
+          <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.65em] bg-gradient-to-br from-[#7DD3FC] to-[#2563EB] shadow-[0_0_1.6em_rgba(56,189,248,0.55)]">
+            <Snowflake className="h-[1.15em] w-[1.15em] text-white" strokeWidth={2.4} />
+          </span>
+          <span className="font-display text-[1.2em] font-bold tracking-[-0.02em]">Sua Empresa</span>
+        </span>
+        <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/60">
+          <span className="text-white">Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
+        </span>
+        <span className="rounded-full bg-[#7DD3FC] px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#050B14] shadow-[0_0_2em_rgba(125,211,252,0.5)]">Agendar visita</span>
+      </div>
+
+      {/* grade em blocos */}
+      <div className="relative grid flex-1 grid-cols-1 sm:grid-cols-12 sm:grid-rows-2 gap-[0.9em] px-[2.4em] pb-[2em]">
+        {/* bloco principal */}
+        <div className="relative flex flex-col justify-between overflow-hidden rounded-[1.6em] border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.01] p-[2em] backdrop-blur-xl sm:col-span-7 sm:row-span-2">
+          <p className="flex w-fit items-center gap-[0.5em] rounded-full border border-white/10 bg-white/[0.06] px-[0.9em] py-[0.4em] text-[0.78em] text-white/75">
+            <span className="h-[0.5em] w-[0.5em] rounded-full bg-[#4ADE80] shadow-[0_0_0.6em_#4ADE80]" /> Técnicos disponíveis hoje
           </p>
-          <p className="mt-[0.7em] font-display text-[4.4em] font-bold leading-[0.92] tracking-[-0.045em]">
-            Frio na medida.
-            <span className="block bg-gradient-to-r from-[#BAE6FD] via-[#7DD3FC] to-[#38BDF8] bg-clip-text font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
-          </p>
-          <p className="mt-[1em] max-w-[28em] text-[1.05em] leading-relaxed text-white/65">
-            Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
-          </p>
-          <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
-            <span className="flex items-center gap-[0.6em] rounded-full bg-white px-[1.6em] py-[0.85em] text-[0.95em] font-semibold text-[#08131F]">
-              Pedir orçamento <span className="flex h-[1.5em] w-[1.5em] items-center justify-center rounded-full bg-[#08131F] text-[0.8em] text-white">→</span>
+          <div>
+            <p className="font-display text-[4.3em] font-bold leading-[0.9] tracking-[-0.05em]">
+              Frio na medida.
+              <span className="block bg-gradient-to-r from-[#E0F2FE] via-[#7DD3FC] to-[#38BDF8] bg-clip-text pb-[0.08em] font-accent text-[1.1em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
+            </p>
+            <p className="mt-[0.9em] max-w-[26em] text-[1em] leading-relaxed text-white/60">
+              Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-[0.8em]">
+            <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#050B14]">
+              Pedir orçamento
+              <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#050B14] text-white">→</span>
             </span>
-            <span className="flex items-center gap-[0.5em] text-[0.95em] font-medium text-white/80">
-              <MessageCircle className="h-[1.2em] w-[1.2em] text-[#4ADE80]" /> Falar no WhatsApp
+            <span className="flex items-center gap-[0.5em] rounded-full border border-white/15 px-[1.3em] py-[0.75em] text-[0.95em] font-medium text-white/85">
+              <MessageCircle className="h-[1.15em] w-[1.15em] text-[#4ADE80]" /> WhatsApp
             </span>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-[0.8em]">
-          {services.map(({ src, t }) => (
-            <div key={t} className="relative h-[6.6em] overflow-hidden rounded-[1em] ring-1 ring-white/10">
-              <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08131F] via-[#08131F]/40 to-transparent" />
-              <p className="absolute bottom-[0.7em] left-[0.9em] right-[0.9em] flex items-center justify-between text-[0.95em] font-semibold">
-                {t} <span className="text-[#7DD3FC]">↗</span>
-              </p>
+        {/* mostrador de temperatura */}
+        <div className="relative flex items-center justify-between overflow-hidden rounded-[1.6em] border border-white/10 bg-white/[0.04] p-[1.6em] backdrop-blur-xl sm:col-span-5">
+          <div>
+            <p className="text-[0.8em] text-white/50">Sala de estar</p>
+            <p className="mt-[0.3em] font-display text-[1.35em] font-semibold leading-tight">Modo silencioso</p>
+            <div className="mt-[0.9em] flex gap-[0.4em]">
+              {["Frio", "Seco", "Auto"].map((m, i) => (
+                <span key={m} className={`rounded-full px-[0.8em] py-[0.3em] text-[0.72em] ${i === 0 ? "bg-[#7DD3FC] font-semibold text-[#050B14]" : "border border-white/15 text-white/60"}`}>{m}</span>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="relative flex h-[8em] w-[8em] shrink-0 items-center justify-center">
+            <span className="ba-spin absolute inset-0 rounded-full" style={{ background: "conic-gradient(from 0deg, #38BDF8, #6366F1, #22D3EE, transparent 75%)" }} />
+            <span className="absolute inset-[0.45em] rounded-full bg-[#07111D]" />
+            <span className="relative text-center leading-none">
+              <span className="font-display text-[2.6em] font-bold tracking-[-0.05em]">22°</span>
+              <span className="mt-[0.3em] block text-[0.65em] uppercase tracking-[0.2em] text-[#7DD3FC]">ligado</span>
+            </span>
+          </div>
         </div>
-      </div>
 
-      {/* cartões de vidro sobre a foto */}
-      <div className="absolute right-[3%] top-[22%] z-10 hidden sm:block w-[13em] rounded-[1.2em] border border-white/15 bg-[#08131F]/55 p-[1.1em] backdrop-blur-xl">
-        <div className="flex items-center justify-between text-[0.75em] text-white/60">
-          <span>Sala de estar</span>
-          <span className="flex items-center gap-[0.35em] text-[#4ADE80]"><span className="h-[0.5em] w-[0.5em] rounded-full bg-[#4ADE80]" /> Ligado</span>
+        {/* foto do técnico */}
+        <div className="relative hidden sm:block overflow-hidden rounded-[1.6em] border border-white/10 sm:col-span-3">
+          <img src="/img/clima-tecnico.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/30 to-transparent" />
+          <p className="absolute bottom-[1em] left-[1.1em] right-[1.1em] leading-tight">
+            <span className="block font-display text-[1.05em] font-semibold">Técnico no horário</span>
+            <span className="block text-[0.75em] text-white/60">Instalação, manutenção e PMOC</span>
+          </p>
         </div>
-        <p className="mt-[0.3em] font-display text-[3.2em] font-bold leading-none tracking-[-0.04em]">22<span className="text-[0.5em] align-top text-[#7DD3FC]">°C</span></p>
-        <div className="mt-[0.7em] h-[0.35em] overflow-hidden rounded-full bg-white/10">
-          <div className="h-full w-[62%] rounded-full bg-gradient-to-r from-[#38BDF8] to-[#BAE6FD]" />
-        </div>
-        <p className="mt-[0.5em] text-[0.72em] text-white/55">Modo silencioso · filtro limpo</p>
-      </div>
 
-      <div className="absolute bottom-[6%] right-[3%] z-10 hidden sm:flex w-[19.5em] items-center gap-[0.8em] rounded-[1.1em] bg-white p-[0.8em] text-[#08131F] shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]">
-        <span className="flex h-[2.6em] w-[2.6em] shrink-0 flex-col items-center justify-center rounded-[0.7em] bg-[#E0F2FE] leading-none text-[#0369A1]">
-          <span className="text-[0.55em] font-semibold uppercase">Amanhã</span>
-          <span className="text-[1.05em] font-bold">9h</span>
-        </span>
-        <span className="flex-1 leading-tight">
-          <span className="block text-[0.85em] font-semibold">Próxima visita livre</span>
-          <span className="block text-[0.72em] text-[#08131F]/55">Confirmação pelo WhatsApp</span>
-        </span>
-        <span className="rounded-full bg-[#08131F] px-[0.9em] py-[0.45em] text-[0.72em] font-semibold text-white">Agendar</span>
+        {/* agenda */}
+        <div className="relative hidden sm:flex flex-col justify-between overflow-hidden rounded-[1.6em] bg-[#7DD3FC] p-[1.2em] text-[#050B14] sm:col-span-2">
+          <p className="text-[0.75em] font-semibold uppercase tracking-[0.18em] opacity-70">Próxima visita</p>
+          <p className="font-display leading-none">
+            <span className="block text-[0.95em] font-semibold">Amanhã</span>
+            <span className="block text-[2.8em] font-bold tracking-[-0.05em]">9h</span>
+          </p>
+          <span className="flex items-center justify-between rounded-full bg-[#050B14] px-[0.9em] py-[0.45em] text-[0.75em] font-semibold text-white">
+            Agendar <span>→</span>
+          </span>
+        </div>
       </div>
     </div>
   );
