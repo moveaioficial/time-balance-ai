@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { useContactModal } from "@/components/ui/ContactModal";
 
@@ -54,7 +54,7 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex">
-            <button onClick={openModal} className="btn-gradient">Análise gratuita</button>
+            <button onClick={openModal} className="btn-gradient">Quero mais clientes <ArrowRight className="h-4 w-4" /></button>
           </div>
 
           <button
@@ -81,7 +81,7 @@ export function Header() {
                 </a>
               ))}
               <button onClick={() => { setIsMenuOpen(false); openModal(); }} className="btn-gradient w-full mt-4 text-base">
-                Análise gratuita
+                Quero mais clientes
               </button>
             </div>
           </div>

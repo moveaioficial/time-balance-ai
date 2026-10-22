@@ -23,7 +23,9 @@ export function Hero() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-3 animate-fade-in-up" style={{ animationDelay: "220ms" }}>
             <button onClick={openModal} className="btn-gradient text-base">
-              Quero minha análise gratuita <ArrowRight className="w-4 h-4" />
+              Quero parar de perder clientes
+              <span className="rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider">análise gratuita</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
             <a href="#servicos" className="btn-ghost text-base">
               Ver o que fazemos <ArrowDown className="w-4 h-4" />

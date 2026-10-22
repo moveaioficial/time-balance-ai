@@ -210,7 +210,7 @@ export function HeroVisual() {
   }, []);
 
   return (
-    <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-16" aria-hidden="true">
+    <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-24" aria-hidden="true">
       {/* luz de fundo para destacar a janela */}
       <div className="pointer-events-none absolute -inset-10 rounded-[3rem] bg-[radial-gradient(60%_55%_at_50%_45%,rgba(0,195,208,0.28),rgba(85,31,126,0.25)_45%,transparent_75%)] blur-2xl" />
 
@@ -238,7 +238,7 @@ export function HeroVisual() {
       </div>
 
       {/* Onda de choque e faíscas do clique */}
-      <div className="pointer-events-none absolute bottom-[28px] left-1/2 z-[5] h-0 w-0">
+      <div className="pointer-events-none absolute bottom-[22px] left-[80%] z-[5] h-0 w-0">
         <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#4DDDE7] shadow-[0_0_40px_rgba(0,195,208,0.7),inset_0_0_40px_rgba(167,139,250,0.5)]" />
         <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.18s" }} />
         {sparks.map((a, i) => (
@@ -247,14 +247,14 @@ export function HeroVisual() {
       </div>
 
       {/* Botão que "ativa a Move" */}
-      <div className="hv-btn absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
+      <div className="hv-btn absolute bottom-0 left-[80%] z-10 -translate-x-1/2">
         <span className="hv-halo absolute -inset-3 rounded-full bg-[#00C3D0]/30 blur-md" />
         <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#4DDDE7]" />
         <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.25s" }} />
-        <div className="relative flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-[#0C0416] py-2.5 pl-2.5 pr-7 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)]">
+        <div className="relative flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-[#0C0416] py-1.5 pl-1.5 pr-5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)]">
           <span className="hv-on absolute inset-0" style={{ background: "var(--brand-gradient)" }} />
-          <img src={icone} alt="" className="relative h-10 w-10 rounded-xl ring-1 ring-white/20" />
-          <span className="relative grid font-display text-lg font-bold text-white">
+          <img src={icone} alt="" className="relative h-8 w-8 rounded-lg ring-1 ring-white/20" />
+          <span className="relative grid font-display text-[15px] font-bold text-white">
             <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
             <span className="hv-on [grid-area:1/1]">Move ativada ✦</span>
           </span>

@@ -76,8 +76,8 @@ function Antes() {
   );
 }
 
-// Ponto de onde sai o ar frio (centro do aparelho na foto), em % do quadro. Usado pela onda fria e pela área de clique.
-const AR = { x: 76, y: 27 };
+// Ponto de onde sai o ar frio (centro do aparelho na foto de fundo), em % do quadro. Usado pela onda fria e pela área de clique.
+const AR = { x: 64, y: 33 };
 
 function Depois({ on }: { on: boolean }) {
   // a temperatura desce de 31° para 22° quando o ar liga
@@ -89,7 +89,7 @@ function Depois({ on }: { on: boolean }) {
   }, [on]);
 
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden bg-[radial-gradient(120%_90%_at_80%_10%,#0B3B6E_0%,#061A33_45%,#030B17_100%)] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
+    <div className="absolute inset-0 overflow-hidden bg-[#041228] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
       {/* filtros: ondulação do calor e névoa fria */}
       <svg width="0" height="0" className="absolute" aria-hidden="true">
         <filter id="ba-haze" x="0" y="0" width="100%" height="100%">
@@ -105,103 +105,111 @@ function Depois({ on }: { on: boolean }) {
         </filter>
       </svg>
 
-      <div className="relative z-10 flex flex-1 flex-col" style={{ filter: on ? "none" : "url(#ba-haze)" }}>
-      {/* menu */}
-      <div className="relative z-10 flex items-center justify-between px-[3em] py-[1.3em]">
-        <span className="flex items-center gap-[0.6em]">
-          <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.65em] bg-gradient-to-br from-[#BAE6FD] to-[#2563EB]">
-            <Snowflake className="h-[1.15em] w-[1.15em] text-white" strokeWidth={2.4} />
+      <div className="absolute inset-0" style={{ filter: on ? "none" : "url(#ba-haze)" }}>
+        {/* a sala é o fundo do site: a foto ocupa a lateral e se funde no azul */}
+        <div className="absolute inset-0 sm:left-[32%]">
+          <img src="/img/clima-sala-wide.webp" alt="" className="h-full w-full object-cover" />
+          {/* gradação de cor: a sala fica na mesma noite azul do site */}
+          <div className="absolute inset-0 bg-[#0A2A55] mix-blend-multiply opacity-80" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,#041228_0%,rgba(4,18,40,0.85)_18%,rgba(4,18,40,0.15)_45%,transparent_70%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#041228] via-transparent to-[#041228]/60" />
+        </div>
+        <div className="absolute inset-0 bg-[#041228]/75 sm:hidden" />
+
+        {/* luz fria que o aparelho joga na parede quando liga */}
+        <div
+          className={`pointer-events-none absolute h-[70%] w-[34%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(125,211,252,0.45),transparent)] blur-[1.5em] transition-opacity duration-[1500ms] ${on ? "opacity-100" : "opacity-0"}`}
+          style={{ left: `${AR.x}%`, top: `${AR.y}%` }}
+        />
+
+        {/* névoa fria saindo do aparelho */}
+        <div className={`ba-mist-wrap absolute h-[62%] w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 7}%` }}>
+          {[0, 1].map((k) => (
+            <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
+              <rect width="200" height="340" filter="url(#ba-fog)" />
+            </svg>
+          ))}
+        </div>
+
+        {/* luz do aparelho */}
+        <span
+          className={`absolute h-[0.45em] w-[0.45em] rounded-full transition-colors ${on ? "bg-[#4ADE80] shadow-[0_0_0.8em_#4ADE80]" : "bg-white/30"}`}
+          style={{ left: `${AR.x + 9.4}%`, top: `${AR.y + 4.6}%` }}
+        />
+
+        {!on && (
+          <span className="ba-pulse absolute flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full border border-white/15 bg-[#041228]/80 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur" style={{ left: `${AR.x}%`, top: `${AR.y - 3}%` }}>
+            <span className="h-[0.55em] w-[0.55em] rounded-full bg-[#FB923C]" /> Toque para ligar
           </span>
-          <span className="font-display text-[1.2em] font-bold tracking-[-0.02em]">Sua Empresa</span>
-        </span>
-        <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/65">
-          <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
-        </span>
-        <span className="rounded-full bg-white px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#061A33]">Agendar visita</span>
-      </div>
+        )}
 
-      <div className="relative z-10 grid flex-1 grid-cols-1 sm:grid-cols-[1.12fr_0.88fr] items-center gap-[2em] px-[3em] pb-[1.4em]">
-        {/* texto */}
-        <div>
-          <p className="flex items-center gap-[0.6em] text-[0.78em] font-medium uppercase tracking-[0.28em] text-[#7DD3FC]">
-            <span className="h-px w-[2.4em] bg-[#7DD3FC]" /> Climatização residencial e comercial
-          </p>
-          <div className="mt-[0.7em] grid font-display text-[4.3em] font-bold leading-[0.92] tracking-[-0.045em]">
-            <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
-              Tá calor aí?
-              <span className="block font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-[#FDBA74]">A gente resolve.</span>
-            </p>
-            <p className={`[grid-area:1/1] transition-all delay-300 duration-700 ${on ? "opacity-100" : "translate-y-[0.3em] opacity-0 blur-sm"}`}>
-              Frio na medida.
-              <span className="block bg-gradient-to-r from-[#E0F2FE] via-[#7DD3FC] to-[#38BDF8] bg-clip-text pb-[0.08em] font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
-            </p>
-          </div>
-          <p className="mt-[1em] max-w-[27em] text-[1.02em] leading-relaxed text-white/65">
-            Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
-          </p>
-          <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
-            <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#061A33]">
-              Pedir orçamento
-              <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#061A33] text-white">→</span>
-            </span>
-            <span className="flex items-center gap-[0.5em] rounded-full border border-white/20 px-[1.3em] py-[0.75em] text-[0.95em] font-medium text-white/85">
-              <MessageCircle className="h-[1.15em] w-[1.15em] text-[#4ADE80]" /> WhatsApp
-            </span>
-          </div>
-          <p className="mt-[1.6em] hidden sm:flex items-center gap-[0.9em] text-[0.8em] text-white/45">
-            <span>Casas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-            <span>Apartamentos</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-            <span>Lojas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-            <span>Escritórios</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-            <span>Clínicas</span>
-          </p>
-        </div>
-
-        {/* aparelho com o ar saindo */}
-        <div className="relative mx-auto h-[16em] sm:h-[33em] w-full max-w-[28em]">
-          <div className="absolute inset-0 overflow-hidden rounded-[1.8em] ring-1 ring-white/15 shadow-[0_2em_5em_-1.5em_rgba(0,0,0,0.7)]">
-            <img src="/img/clima-ar.webp" alt="" className="h-full w-full object-cover object-top" />
-            <div className={`absolute inset-0 transition-colors duration-[1500ms] ${on ? "bg-[#0B3B6E]/25" : "bg-[#9A3412]/30"}`} />
-
-            {/* névoa fria saindo do aparelho */}
-            <div className={`ba-mist-wrap absolute -inset-x-[15%] top-[26%] h-[85%] transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`}>
-              {[0, 1].map((k) => (
-                <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
-                  <rect width="200" height="340" filter="url(#ba-fog)" />
-                </svg>
-              ))}
-            </div>
-            <div className={`absolute inset-x-[10%] top-[22%] h-[14%] rounded-full bg-[#BAE6FD] blur-[2em] transition-opacity duration-1000 ${on ? "opacity-50" : "opacity-0"}`} />
-
-            {/* luz do aparelho */}
-            <span className={`absolute right-[22%] top-[24%] h-[0.5em] w-[0.5em] rounded-full transition-colors ${on ? "bg-[#4ADE80] shadow-[0_0_0.8em_#4ADE80]" : "bg-white/40"}`} />
-
-            {!on && (
-              <span className="ba-pulse absolute left-1/2 top-[19%] flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full bg-[#061A33]/85 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur">
-                <span className="h-[0.55em] w-[0.55em] rounded-full bg-[#FB923C]" /> Toque para ligar
+        {/* conteúdo */}
+        <div className="relative z-10 flex h-full flex-col">
+          <div className="flex items-center justify-between px-[3em] py-[1.3em]">
+            <span className="flex items-center gap-[0.6em]">
+              <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.65em] bg-gradient-to-br from-[#BAE6FD] to-[#2563EB]">
+                <Snowflake className="h-[1.15em] w-[1.15em] text-white" strokeWidth={2.4} />
               </span>
-            )}
+              <span className="font-display text-[1.2em] font-bold tracking-[-0.02em]">Sua Empresa</span>
+            </span>
+            <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/70">
+              <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
+            </span>
+            <span className="rounded-full bg-white px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#041228]">Agendar visita</span>
           </div>
 
-          {/* cartão de temperatura */}
-          <div className="absolute -left-[2.2em] bottom-[2.4em] hidden sm:block w-[13em] rounded-[1.2em] border border-white/15 bg-[#061A33]/70 p-[1.1em] backdrop-blur-xl shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]">
-            <div className="flex items-center justify-between text-[0.75em] text-white/60">
-              <span>Sala de estar</span>
-              <span className={`flex items-center gap-[0.35em] ${on ? "text-[#4ADE80]" : "text-[#FDBA74]"}`}>
-                <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> {on ? "Ligado" : "Desligado"}
+          <div className="flex flex-1 flex-col justify-center px-[3em] pb-[2em] sm:max-w-[52%]">
+            <p className="flex items-center gap-[0.6em] text-[0.78em] font-medium uppercase tracking-[0.28em] text-[#7DD3FC]">
+              <span className="h-px w-[2.4em] bg-[#7DD3FC]" /> Climatização residencial e comercial
+            </p>
+            <div className="mt-[0.7em] grid font-display text-[4.4em] font-bold leading-[0.92] tracking-[-0.045em]">
+              <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
+                Tá calor aí?
+                <span className="block font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-[#FDBA74]">A gente resolve.</span>
+              </p>
+              <p className={`[grid-area:1/1] transition-all delay-300 duration-700 ${on ? "opacity-100" : "translate-y-[0.3em] opacity-0 blur-sm"}`}>
+                Frio na medida.
+                <span className="block bg-gradient-to-r from-[#E0F2FE] via-[#7DD3FC] to-[#38BDF8] bg-clip-text pb-[0.08em] font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
+              </p>
+            </div>
+            <p className="mt-[1em] max-w-[27em] text-[1.02em] leading-relaxed text-white/70">
+              Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
+            </p>
+            <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
+              <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#041228]">
+                Pedir orçamento
+                <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#041228] text-white">→</span>
+              </span>
+              <span className="flex items-center gap-[0.5em] rounded-full border border-white/25 bg-white/[0.04] px-[1.3em] py-[0.75em] text-[0.95em] font-medium text-white/90 backdrop-blur">
+                <MessageCircle className="h-[1.15em] w-[1.15em] text-[#4ADE80]" /> WhatsApp
               </span>
             </div>
-            <p className="mt-[0.3em] font-display text-[3.2em] font-bold leading-none tracking-[-0.04em] tabular-nums">
-              {temp}<span className={`align-top text-[0.5em] ${on ? "text-[#7DD3FC]" : "text-[#FDBA74]"}`}>°C</span>
+            <p className="mt-[1.6em] hidden sm:flex items-center gap-[0.9em] text-[0.8em] text-white/50">
+              <span>Casas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
+              <span>Apartamentos</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
+              <span>Lojas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
+              <span>Escritórios</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
+              <span>Clínicas</span>
             </p>
-            <div className="mt-[0.7em] h-[0.35em] overflow-hidden rounded-full bg-white/10">
-              <div className="h-full rounded-full bg-gradient-to-r from-[#38BDF8] to-[#BAE6FD] transition-all duration-[1400ms]" style={{ width: on ? "62%" : "0%" }} />
-            </div>
-            <p className="mt-[0.5em] text-[0.72em] text-white/55">{on ? "Modo silencioso · filtro limpo" : "Ambiente abafado"}</p>
           </div>
         </div>
-      </div>
 
+        {/* cartão de temperatura, flutuando na cena */}
+        <div className="absolute bottom-[9%] right-[3.5%] z-10 hidden sm:block w-[13em] rounded-[1.2em] border border-white/15 bg-[#041228]/60 p-[1.1em] backdrop-blur-xl shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]">
+          <div className="flex items-center justify-between text-[0.75em] text-white/60">
+            <span>Sala de estar</span>
+            <span className={`flex items-center gap-[0.35em] ${on ? "text-[#4ADE80]" : "text-[#FDBA74]"}`}>
+              <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> {on ? "Ligado" : "Desligado"}
+            </span>
+          </div>
+          <p className="mt-[0.3em] font-display text-[3.2em] font-bold leading-none tracking-[-0.04em] tabular-nums">
+            {temp}<span className={`align-top text-[0.5em] ${on ? "text-[#7DD3FC]" : "text-[#FDBA74]"}`}>°C</span>
+          </p>
+          <div className="mt-[0.7em] h-[0.35em] overflow-hidden rounded-full bg-white/10">
+            <div className="h-full rounded-full bg-gradient-to-r from-[#38BDF8] to-[#BAE6FD] transition-all duration-[1400ms]" style={{ width: on ? "62%" : "0%" }} />
+          </div>
+          <p className="mt-[0.5em] text-[0.72em] text-white/55">{on ? "Modo silencioso · filtro limpo" : "Ambiente abafado"}</p>
+        </div>
       </div>
 
       {/* lufada de névoa que cobre e limpa o site quando o ar liga */}
@@ -332,7 +340,7 @@ export function BeforeAfter() {
                 type="button"
                 onClick={() => { stopHint(); setArLigado(true); }}
                 aria-label="Ligar o ar-condicionado do site de exemplo"
-                className="absolute z-10 hidden sm:block h-[22%] w-[24%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl"
+                className="absolute z-10 hidden sm:block h-[24%] w-[26%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl"
                 style={{ left: `${AR.x}%`, top: `${AR.y}%` }}
               />
             )}
