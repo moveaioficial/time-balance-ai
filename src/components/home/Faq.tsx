@@ -21,14 +21,6 @@ const faqs = [
     q: "Preciso entender de tecnologia?",
     a: "Não. A gente explica tudo sem jargão e cuida da parte técnica, como domínio, hospedagem e publicação.",
   },
-  {
-    q: "Vocês fazem automação, chatbot ou agente de IA?",
-    a: "Não é o nosso foco hoje. A gente trabalha com site, marca, redes sociais e produto digital. Se o seu projeto pedir outra coisa, conversamos e dizemos com sinceridade se dá para ajudar.",
-  },
-  {
-    q: "Vocês atendem só Guarulhos?",
-    a: "Não. Estamos em Guarulhos, SP, e atendemos por videochamada e WhatsApp, onde você estiver.",
-  },
 ];
 
 export function Faq() {
