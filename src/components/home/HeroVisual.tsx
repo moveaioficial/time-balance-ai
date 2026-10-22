@@ -210,7 +210,7 @@ export function HeroVisual() {
   }, []);
 
   return (
-    <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-24" aria-hidden="true">
+    <div className="hv relative hidden lg:block w-full lg:-mr-10 xl:-mr-20 pb-6" aria-hidden="true">
       {/* luz de fundo para destacar a janela */}
       <div className="pointer-events-none absolute -inset-10 rounded-[3rem] bg-[radial-gradient(60%_55%_at_50%_45%,rgba(0,195,208,0.28),rgba(85,31,126,0.25)_45%,transparent_75%)] blur-2xl" />
 
@@ -223,6 +223,29 @@ export function HeroVisual() {
               <span className="h-3 w-3 rounded-full bg-[#FEBC2E]/80" />
               <span className="h-3 w-3 rounded-full bg-[#28C840]/80" />
               <span className="ml-3 flex-1 max-w-[260px] rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px] text-white/60">seusite.com.br</span>
+
+              {/* Botão que "ativa a Move", na própria barra do navegador */}
+              <div className="hv-btn2 relative ml-auto">
+                <span className="hv-halo absolute -inset-2 rounded-full bg-[#00C3D0]/35 blur-md" />
+                <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#4DDDE7]" />
+                <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.25s" }} />
+                <div className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-white/[0.06] py-1 pl-1 pr-3.5">
+                  <span className="hv-on absolute inset-0" style={{ background: "var(--brand-gradient)" }} />
+                  <img src={icone} alt="" className="relative h-5 w-5 rounded-md" />
+                  <span className="relative grid font-display text-[12px] font-semibold leading-none text-white">
+                    <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
+                    <span className="hv-on [grid-area:1/1]">Move ativada ✦</span>
+                  </span>
+                </div>
+                {/* onda de choque e faíscas saem do botão para dentro do site */}
+                <div className="pointer-events-none absolute left-1/2 top-1/2 h-0 w-0">
+                  <span className="hv-shock absolute left-1/2 top-1/2 h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#4DDDE7] shadow-[0_0_40px_rgba(0,195,208,0.7),inset_0_0_40px_rgba(167,139,250,0.5)]" />
+                  <span className="hv-shock absolute left-1/2 top-1/2 h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.18s" }} />
+                  {sparks.map((a, i) => (
+                    <span key={a} className="hv-spark absolute left-0 top-0 h-2 w-2 rounded-full" style={{ ["--a" as string]: `${a + 180}deg`, background: i % 2 ? "#A78BFA" : "#4DDDE7", boxShadow: `0 0 12px ${i % 2 ? "#A78BFA" : "#4DDDE7"}`, animationDelay: `${(i % 3) * 0.04}s` }} />
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ containerType: "inline-size" }}>
               <SiteFeio />
@@ -234,30 +257,6 @@ export function HeroVisual() {
             </div>
           </div>
          </div>
-        </div>
-      </div>
-
-      {/* Onda de choque e faíscas do clique */}
-      <div className="pointer-events-none absolute bottom-[22px] left-[80%] z-[5] h-0 w-0">
-        <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-[3px] border-[#4DDDE7] shadow-[0_0_40px_rgba(0,195,208,0.7),inset_0_0_40px_rgba(167,139,250,0.5)]" />
-        <span className="hv-shock absolute left-1/2 top-1/2 h-[180px] w-[180px] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.18s" }} />
-        {sparks.map((a, i) => (
-          <span key={a} className="hv-spark absolute left-0 top-0 h-2.5 w-2.5 rounded-full" style={{ ["--a" as string]: `${a}deg`, background: i % 2 ? "#A78BFA" : "#4DDDE7", boxShadow: `0 0 12px ${i % 2 ? "#A78BFA" : "#4DDDE7"}`, animationDelay: `${(i % 3) * 0.04}s` }} />
-        ))}
-      </div>
-
-      {/* Botão que "ativa a Move" */}
-      <div className="hv-btn absolute bottom-0 left-[80%] z-10 -translate-x-1/2">
-        <span className="hv-halo absolute -inset-3 rounded-full bg-[#00C3D0]/30 blur-md" />
-        <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#4DDDE7]" />
-        <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.25s" }} />
-        <div className="relative flex items-center gap-3 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-[#0C0416] py-1.5 pl-1.5 pr-5 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.9)]">
-          <span className="hv-on absolute inset-0" style={{ background: "var(--brand-gradient)" }} />
-          <img src={icone} alt="" className="relative h-8 w-8 rounded-lg ring-1 ring-white/20" />
-          <span className="relative grid font-display text-[15px] font-bold text-white">
-            <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
-            <span className="hv-on [grid-area:1/1]">Move ativada ✦</span>
-          </span>
         </div>
       </div>
 

@@ -77,7 +77,7 @@ function Antes() {
 }
 
 // Ponto de onde sai o ar frio (centro do aparelho na foto de fundo), em % do quadro. Usado pela onda fria e pela área de clique.
-const AR = { x: 64, y: 33 };
+const AR = { x: 71, y: 34 };
 
 function Depois({ on }: { on: boolean }) {
   // a temperatura desce de 31° para 22° quando o ar liga
@@ -89,7 +89,7 @@ function Depois({ on }: { on: boolean }) {
   }, [on]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden bg-[#041228] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
+    <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(90%_80%_at_72%_30%,#0B3566_0%,#06203F_42%,#030D1C_100%)] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
       {/* filtros: ondulação do calor e névoa fria */}
       <svg width="0" height="0" className="absolute" aria-hidden="true">
         <filter id="ba-haze" x="0" y="0" width="100%" height="100%">
@@ -106,15 +106,15 @@ function Depois({ on }: { on: boolean }) {
       </svg>
 
       <div className="absolute inset-0" style={{ filter: on ? "none" : "url(#ba-haze)" }}>
-        {/* a sala é o fundo do site: a foto ocupa a lateral e se funde no azul */}
-        <div className="absolute inset-0 sm:left-[32%]">
-          <img src="/img/clima-sala-wide.webp" alt="" className="h-full w-full object-cover" />
-          {/* gradação de cor: a sala fica na mesma noite azul do site */}
-          <div className="absolute inset-0 bg-[#0A2A55] mix-blend-multiply opacity-80" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,#041228_0%,rgba(4,18,40,0.85)_18%,rgba(4,18,40,0.15)_45%,transparent_70%)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#041228] via-transparent to-[#041228]/60" />
+        {/* temperatura gigante e apagada no fundo, dando profundidade */}
+        <p className="pointer-events-none absolute right-[-2%] top-[8%] hidden sm:block font-display text-[26em] font-bold leading-none tracking-[-0.06em] text-white/[0.035] tabular-nums">{temp}°</p>
+
+        {/* o aparelho, recortado, flutuando no azul do site */}
+        <div className="absolute hidden sm:block w-[34%] -translate-x-1/2" style={{ left: `${AR.x}%`, top: "22%" }}>
+          <div className={`absolute -inset-[18%] rounded-full bg-[radial-gradient(closest-side,rgba(125,211,252,0.35),transparent)] blur-[2em] transition-opacity duration-[1500ms] ${on ? "opacity-100" : "opacity-40"}`} />
+          <img src="/img/clima-ar-recorte.webp" alt="" className="relative w-full drop-shadow-[0_2.4em_2.4em_rgba(0,0,0,0.55)]" />
+          <div className={`absolute inset-0 rounded-[1em] bg-[#7DD3FC] mix-blend-multiply transition-opacity duration-[1500ms] ${on ? "opacity-20" : "opacity-0"}`} />
         </div>
-        <div className="absolute inset-0 bg-[#041228]/75 sm:hidden" />
 
         {/* luz fria que o aparelho joga na parede quando liga */}
         <div
@@ -123,7 +123,7 @@ function Depois({ on }: { on: boolean }) {
         />
 
         {/* névoa fria saindo do aparelho */}
-        <div className={`ba-mist-wrap absolute h-[62%] w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 7}%` }}>
+        <div className={`ba-mist-wrap absolute h-[62%] w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 10}%` }}>
           {[0, 1].map((k) => (
             <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
               <rect width="200" height="340" filter="url(#ba-fog)" />
@@ -131,14 +131,8 @@ function Depois({ on }: { on: boolean }) {
           ))}
         </div>
 
-        {/* luz do aparelho */}
-        <span
-          className={`absolute h-[0.45em] w-[0.45em] rounded-full transition-colors ${on ? "bg-[#4ADE80] shadow-[0_0_0.8em_#4ADE80]" : "bg-white/30"}`}
-          style={{ left: `${AR.x + 9.4}%`, top: `${AR.y + 4.6}%` }}
-        />
-
         {!on && (
-          <span className="ba-pulse absolute flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full border border-white/15 bg-[#041228]/80 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur" style={{ left: `${AR.x}%`, top: `${AR.y - 3}%` }}>
+          <span className="ba-pulse absolute flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full border border-white/15 bg-[#041228]/80 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur" style={{ left: `${AR.x}%`, top: `${AR.y - 2}%` }}>
             <span className="h-[0.55em] w-[0.55em] rounded-full bg-[#FB923C]" /> Toque para ligar
           </span>
         )}

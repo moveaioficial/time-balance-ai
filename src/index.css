@@ -282,7 +282,7 @@
   .hv-flash { animation: hv-flash 18s ease-out infinite both; }
   .hv-in { animation: hv-in 18s cubic-bezier(.2,.7,.2,1) infinite both; }
   .hv-zoom { animation: hv-zoom 18s ease-out infinite both; }
-  .hv-btn { animation: hv-btn 18s cubic-bezier(.3,1.4,.5,1) infinite both; }
+  .hv-btn2 { animation: hv-btn2 18s cubic-bezier(.3,1.4,.5,1) infinite both; }
   .hv-halo { animation: hv-halo 18s ease infinite both; }
   .hv-ring { animation: hv-ring 18s ease-out infinite both; }
   .hv-off { animation: hv-off 18s ease infinite both; }
@@ -344,13 +344,13 @@
     98%, 100% { opacity: 0; transform: translateY(0); }
   }
   @keyframes hv-zoom { 0%, 41% { transform: scale(1.12); } 70%, 100% { transform: scale(1); } }
-  @keyframes hv-btn {
-    0%, 27% { transform: translateX(-50%) scale(1); }
-    31%, 37.5% { transform: translateX(-50%) scale(1.06); }
-    39% { transform: translateX(-50%) scale(.9); }
-    43% { transform: translateX(-50%) scale(1.14); }
-    48%, 92% { transform: translateX(-50%) scale(1.08); }
-    98%, 100% { transform: translateX(-50%) scale(1); }
+  @keyframes hv-btn2 {
+    0%, 27% { transform: scale(1); }
+    31%, 37.5% { transform: scale(1.12); }
+    39% { transform: scale(.88); }
+    43% { transform: scale(1.22); }
+    48%, 92% { transform: scale(1.08); }
+    98%, 100% { transform: scale(1); }
   }
   @keyframes hv-halo {
     0%, 27% { opacity: 0; transform: scale(.9); }
@@ -373,10 +373,10 @@
     5% { opacity: 1; }
     10% { left: 62%; top: 46%; }
     25% { left: 64%; top: 54%; }
-    31% { left: 78%; top: 95%; transform: scale(1); }
-    38% { left: 78%; top: 95%; transform: scale(1); }
+    31% { left: 88%; top: 5%; transform: scale(1); }
+    38% { left: 88%; top: 5%; transform: scale(1); }
     39% { transform: scale(.75); }
-    41% { left: 78%; top: 95%; transform: scale(1); }
+    41% { left: 88%; top: 5%; transform: scale(1); }
     54% { left: 70%; top: 44%; }
     78% { left: 68%; top: 52%; opacity: 1; }
     86%, 100% { left: 88%; top: 74%; opacity: 0; }
@@ -393,8 +393,10 @@
   }
   .ba-heat.ba-cool { --r: 170%; }
   .ba-mist-wrap {
-    -webkit-mask-image: radial-gradient(60% 95% at 50% 0%, #000 25%, transparent 78%);
-    mask-image: radial-gradient(60% 95% at 50% 0%, #000 25%, transparent 78%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 45%, transparent 92%), radial-gradient(55% 90% at 50% 10%, #000 30%, transparent 80%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 45%, transparent 92%), radial-gradient(55% 90% at 50% 10%, #000 30%, transparent 80%);
+    mask-composite: intersect;
   }
   .ba-mist { animation: ba-mist 7s linear infinite both; }
   .ba-burst { opacity: 0; }

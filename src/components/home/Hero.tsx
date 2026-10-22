@@ -23,7 +23,7 @@ export function Hero() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-3 animate-fade-in-up" style={{ animationDelay: "220ms" }}>
             <button onClick={openModal} className="btn-gradient text-base">
-              Quero parar de perder clientes
+              Quero ser escolhido
               <span className="rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider">análise gratuita</span>
               <ArrowRight className="w-4 h-4" />
             </button>
