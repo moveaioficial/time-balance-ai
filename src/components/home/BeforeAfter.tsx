@@ -106,8 +106,20 @@ function Depois({ on }: { on: boolean }) {
       </svg>
 
       <div className="absolute inset-0" style={{ filter: on ? "none" : "url(#ba-haze)" }}>
-        {/* temperatura gigante e apagada no fundo, dando profundidade */}
-        <p className="pointer-events-none absolute right-[-2%] top-[8%] hidden sm:block font-display text-[26em] font-bold leading-none tracking-[-0.06em] text-white/[0.035] tabular-nums">{temp}°</p>
+        {/* fundo: trama de pontos e linhas de vento que partem do aparelho */}
+        <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:radial-gradient(rgba(125,211,252,0.18)_1px,transparent_1.2px)] [background-size:1.6em_1.6em] [mask-image:radial-gradient(70%_80%_at_70%_40%,#000,transparent_80%)]" />
+        <svg className="ba-wind pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 800 300" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="ba-wind-g" x1="0" x2="1">
+              <stop offset="0" stopColor="#7DD3FC" stopOpacity="0" />
+              <stop offset="0.55" stopColor="#7DD3FC" stopOpacity="0.28" />
+              <stop offset="1" stopColor="#A78BFA" stopOpacity="0.12" />
+            </linearGradient>
+          </defs>
+          {["M-20 40 C 160 10, 300 80, 480 46 S 760 4, 840 50","M-20 66 C 160 34, 300 106, 480 72 S 760 30, 840 76","M-20 92 C 160 58, 300 132, 480 98 S 760 56, 840 102","M-20 118 C 160 82, 300 158, 480 124 S 760 82, 840 128","M-20 144 C 160 106, 300 184, 480 150 S 760 108, 840 154","M-20 170 C 160 130, 300 210, 480 176 S 760 134, 840 180","M-20 196 C 160 154, 300 236, 480 202 S 760 160, 840 206","M-20 222 C 160 178, 300 262, 480 228 S 760 186, 840 232","M-20 248 C 160 202, 300 288, 480 254 S 760 212, 840 258"].map((d, i) => (
+            <path key={i} d={d} fill="none" stroke="url(#ba-wind-g)" strokeWidth={i % 3 === 0 ? 1.4 : 0.8} style={{ animationDelay: `${i * -1.3}s` }} />
+          ))}
+        </svg>
 
         {/* o aparelho, recortado, flutuando no azul do site */}
         <div className="absolute hidden sm:block w-[34%] -translate-x-1/2" style={{ left: `${AR.x}%`, top: "22%" }}>

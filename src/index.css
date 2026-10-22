@@ -401,6 +401,8 @@
   .ba-mist { animation: ba-mist 7s linear infinite both; }
   .ba-burst { opacity: 0; }
   .ba-burst-on { animation: ba-burst 2.4s cubic-bezier(.2, .7, .3, 1) both; }
+  .ba-wind path { stroke-dasharray: 220 140; animation: ba-wind 14s linear infinite; }
+  @keyframes ba-wind { to { stroke-dashoffset: -720; } }
   .ba-pulse { animation: ba-pulse 1.6s ease-in-out infinite; }
   @keyframes ba-mist {
     0% { opacity: 0; transform: translateY(-40%) scaleX(.8); }
@@ -423,7 +425,7 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-mist, .ba-burst-on, .ba-pulse { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-mist, .ba-burst-on, .ba-pulse, .ba-wind path { animation: none !important; }
     .hv-good { clip-path: none; }
     .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo, .hv-shock, .hv-spark { opacity: 0; }
     .hv-in, .hv-on { opacity: 1; }
