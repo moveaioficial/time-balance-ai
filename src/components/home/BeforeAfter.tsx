@@ -79,8 +79,6 @@ function Antes() {
 // Ponto de onde sai o ar frio (centro do aparelho na foto), em % do quadro. Usado pela onda fria e pela área de clique.
 const AR = { x: 76, y: 27 };
 
-const flakes = [8, 18, 27, 36, 44, 52, 61, 70, 79, 88, 14, 40, 66, 92];
-
 function Depois({ on }: { on: boolean }) {
   // a temperatura desce de 31° para 22° quando o ar liga
   const [temp, setTemp] = useState(31);
@@ -92,6 +90,22 @@ function Depois({ on }: { on: boolean }) {
 
   return (
     <div className="absolute inset-0 flex flex-col overflow-hidden bg-[radial-gradient(120%_90%_at_80%_10%,#0B3B6E_0%,#061A33_45%,#030B17_100%)] text-white" style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* filtros: ondulação do calor e névoa fria */}
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <filter id="ba-haze" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.03" numOctaves="2" seed="4" result="n">
+            <animate attributeName="baseFrequency" dur="5s" values="0.004 0.03;0.006 0.04;0.004 0.03" repeatCount="indefinite" />
+          </feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <filter id="ba-fog" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.016 0.028" numOctaves="4" seed="7" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.92  0 0 0 0 0.97  0 0 0 0 1  0 0 0 2.4 -1" />
+          <feGaussianBlur stdDeviation="1.4" />
+        </filter>
+      </svg>
+
+      <div className="relative z-10 flex flex-1 flex-col" style={{ filter: on ? "none" : "url(#ba-haze)" }}>
       {/* menu */}
       <div className="relative z-10 flex items-center justify-between px-[3em] py-[1.3em]">
         <span className="flex items-center gap-[0.6em]">
@@ -149,32 +163,15 @@ function Depois({ on }: { on: boolean }) {
             <img src="/img/clima-ar.webp" alt="" className="h-full w-full object-cover object-top" />
             <div className={`absolute inset-0 transition-colors duration-[1500ms] ${on ? "bg-[#0B3B6E]/25" : "bg-[#9A3412]/30"}`} />
 
-            {/* fluxo de ar */}
-            <svg className={`absolute left-[8%] top-[30%] h-[62%] w-[84%] blur-[2px] transition-opacity duration-700 ${on ? "opacity-100" : "opacity-0"}`} viewBox="0 0 100 100" preserveAspectRatio="none">
-              {[12, 28, 44, 60, 76, 90].map((x, i) => (
-                <path
-                  key={x}
-                  d={`M${x} 0 C ${x - 6} 25, ${x + 8} 50, ${x - 4} 75 S ${x + 6} 95, ${x} 100`}
-                  fill="none"
-                  stroke="url(#ba-air)"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  className="ba-air"
-                  style={{ animationDelay: `${i * -0.35}s` }}
-                />
+            {/* névoa fria saindo do aparelho */}
+            <div className={`ba-mist-wrap absolute -inset-x-[15%] top-[26%] h-[85%] transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`}>
+              {[0, 1].map((k) => (
+                <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
+                  <rect width="200" height="340" filter="url(#ba-fog)" />
+                </svg>
               ))}
-              <defs>
-                <linearGradient id="ba-air" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stopColor="#E0F2FE" stopOpacity="0.95" />
-                  <stop offset="1" stopColor="#7DD3FC" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-            </svg>
-
-            {/* flocos */}
-            {on && flakes.map((x, i) => (
-              <span key={i} className="ba-flake absolute top-[30%] h-[0.45em] w-[0.45em] rounded-full bg-white/80 blur-[0.5px]" style={{ left: `${x}%`, animationDelay: `${(i * 0.37) % 2.4}s` }} />
-            ))}
+            </div>
+            <div className={`absolute inset-x-[10%] top-[22%] h-[14%] rounded-full bg-[#BAE6FD] blur-[2em] transition-opacity duration-1000 ${on ? "opacity-50" : "opacity-0"}`} />
 
             {/* luz do aparelho */}
             <span className={`absolute right-[22%] top-[24%] h-[0.5em] w-[0.5em] rounded-full transition-colors ${on ? "bg-[#4ADE80] shadow-[0_0_0.8em_#4ADE80]" : "bg-white/40"}`} />
@@ -203,6 +200,13 @@ function Depois({ on }: { on: boolean }) {
             <p className="mt-[0.5em] text-[0.72em] text-white/55">{on ? "Modo silencioso · filtro limpo" : "Ambiente abafado"}</p>
           </div>
         </div>
+      </div>
+
+      </div>
+
+      {/* lufada de névoa que cobre e limpa o site quando o ar liga */}
+      <div className={`ba-burst pointer-events-none absolute inset-0 z-[15] ${on ? "ba-burst-on" : ""}`} style={{ transformOrigin: `${AR.x}% ${AR.y}%` }}>
+        <svg className="h-full w-full" viewBox="0 0 400 225" preserveAspectRatio="none"><rect width="400" height="225" filter="url(#ba-fog)" /></svg>
       </div>
 
       {/* calor por cima do site: some em onda a partir do aparelho quando o ar liga */}

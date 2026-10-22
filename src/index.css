@@ -392,14 +392,24 @@
     transition: --r 1.8s cubic-bezier(.3, .6, .2, 1);
   }
   .ba-heat.ba-cool { --r: 170%; }
-  .ba-air { stroke-dasharray: 26 30; animation: ba-air 2.4s linear infinite; }
-  .ba-flake { animation: ba-flake 2.6s ease-in infinite both; }
+  .ba-mist-wrap {
+    -webkit-mask-image: radial-gradient(60% 95% at 50% 0%, #000 25%, transparent 78%);
+    mask-image: radial-gradient(60% 95% at 50% 0%, #000 25%, transparent 78%);
+  }
+  .ba-mist { animation: ba-mist 7s linear infinite both; }
+  .ba-burst { opacity: 0; }
+  .ba-burst-on { animation: ba-burst 2.4s cubic-bezier(.2, .7, .3, 1) both; }
   .ba-pulse { animation: ba-pulse 1.6s ease-in-out infinite; }
-  @keyframes ba-air { to { stroke-dashoffset: -112; } }
-  @keyframes ba-flake {
-    0% { opacity: 0; transform: translateY(0) scale(.6); }
-    15% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(18em) translateX(1.5em) scale(1); }
+  @keyframes ba-mist {
+    0% { opacity: 0; transform: translateY(-40%) scaleX(.8); }
+    18% { opacity: 1; }
+    82% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(0) scaleX(1.15); }
+  }
+  @keyframes ba-burst {
+    0% { opacity: 0; transform: scale(.4); }
+    22% { opacity: .95; transform: scale(1.05); }
+    100% { opacity: 0; transform: scale(1.35); }
   }
   @keyframes ba-pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.08); } }
 
@@ -411,7 +421,7 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-air, .ba-flake, .ba-pulse { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-mist, .ba-burst-on, .ba-pulse { animation: none !important; }
     .hv-good { clip-path: none; }
     .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo, .hv-shock, .hv-spark { opacity: 0; }
     .hv-in, .hv-on { opacity: 1; }

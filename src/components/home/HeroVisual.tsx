@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import icone from "@/assets/move-ai-icone-app.png";
 
 // Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito e é rolado também.
@@ -72,6 +72,46 @@ const passos = [
   ["3", "Retire fresquinho", "Ou receba em casa."],
 ];
 
+// Montagem de abertura da confeitaria: farinha, cobertura e decoração (Pexels 8477794, 8477936 e 8478028).
+// Cada trecho toca alguns segundos e passa para o próximo com fusão suave.
+const cenas = [
+  { src: "/video/confeitaria-1.mp4", inicio: 1 },
+  { src: "/video/confeitaria-2.mp4", inicio: 4 },
+  { src: "/video/confeitaria-3.mp4", inicio: 3 },
+];
+const DURACAO_CENA = 3.2;
+
+function Montagem() {
+  const [atual, setAtual] = useState(0);
+  const refs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  useEffect(() => {
+    const v = refs.current[atual];
+    if (!v) return;
+    v.currentTime = cenas[atual].inicio;
+    v.play().catch(() => {});
+    const t = window.setTimeout(() => setAtual((i) => (i + 1) % cenas.length), DURACAO_CENA * 1000);
+    return () => clearTimeout(t);
+  }, [atual]);
+
+  return (
+    <>
+      {cenas.map((c, i) => (
+        <video
+          key={c.src}
+          ref={(el) => { refs.current[i] = el; }}
+          src={c.src}
+          poster={i === 0 ? "/img/confeitaria-hero.webp" : undefined}
+          muted
+          playsInline
+          preload="auto"
+          className={`hv-cena absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === atual ? "opacity-100" : "opacity-0"}`}
+        />
+      ))}
+    </>
+  );
+}
+
 function SiteBom({ video }: { video: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#FBF6F0] text-[#2B1D16]">
@@ -79,7 +119,7 @@ function SiteBom({ video }: { video: boolean }) {
         {/* Abertura com foto em tela cheia */}
         <div className="relative h-[44cqw] shrink-0 overflow-hidden">
           {video ? (
-            <video src="/video/confeitaria.mp4" poster="/img/confeitaria-hero.webp" autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover" />
+            <Montagem />
           ) : (
             <img src="/img/confeitaria-hero.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
           )}
