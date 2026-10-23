@@ -10,14 +10,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const TOKEN = process.env.IG_TOKEN;
+// Aceita o segredo colado com espaços, quebras de linha ou com o prefixo "IG_TOKEN=".
+const TOKEN = (process.env.IG_TOKEN || "").trim().replace(/^IG_TOKENs*=s*/, "").replace(/^["']|["']$/g, "").trim();
 const VER = process.env.IG_API_VERSION || 'v26.0';
 const BASE = process.env.SITE_URL || 'https://www.moveai.tech';
 const JANELA_H = 6; // só publica itens atrasados até 6 h (evita postar algo velho de surpresa)
 const API = `https://graph.instagram.com/${VER}`;
 const raiz = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..');
 
-if (!TOKEN) { console.error('Segredo IG_TOKEN não configurado.'); process.exit(1); }
+if (!TOKEN) { console.error('Segredo IG_TOKEN não configurado (vazio). Confira em Settings > Secrets and variables > Actions.'); process.exit(1); }
+console.log(`Segredo lido: ${TOKEN.length} caracteres, começa com ${TOKEN.slice(0, 4)}.`);
 
 async function call(method, endpoint, params = {}) {
   const body = new URLSearchParams({ ...params, access_token: TOKEN });
