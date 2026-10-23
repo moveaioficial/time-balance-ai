@@ -39,6 +39,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
   const [form, setForm] = useState({ nome: "", empresa: "", email: "", whatsapp: "", problema: "" });
   // Campo invisível para humanos: se vier preenchido, é bot (anti-spam)
   const [honeypot, setHoneypot] = useState("");
+  // Consentimento LGPD: o envio só acontece com a caixa marcada
+  const [aceite, setAceite] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,6 +52,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     setError(null);
     setFieldErrors({});
     setHoneypot("");
+    setAceite(false);
     setIsOpen(true);
   };
 
@@ -94,6 +97,11 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
+      return;
+    }
+
+    if (!aceite) {
+      setError("Para enviar, marque que leu e concorda com a Política de Privacidade.");
       return;
     }
 
@@ -243,8 +251,22 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       rows={3}
                     />
                   </div>
+                  <label className="flex items-start gap-3 text-xs leading-relaxed text-muted-foreground">
+                    <input
+                      type="checkbox"
+                      checked={aceite}
+                      onChange={(e) => { setAceite(e.target.checked); if (e.target.checked) setError(null); }}
+                      className="mt-0.5 h-4 w-4 flex-none accent-[#00C3D0]"
+                      required
+                    />
+                    <span>
+                      Li e concordo com a{" "}
+                      <a href="/politica-de-privacidade" target="_blank" rel="noopener noreferrer" className="text-primary underline">Política de Privacidade</a>.
+                      Usamos os seus dados só para responder ao seu pedido e preparar a sua proposta.
+                    </span>
+                  </label>
                   {error && (
-                    <p className="text-red-400 text-xs text-center">{error}</p>
+                    <p className="text-red-400 text-xs text-center" role="alert">{error}</p>
                   )}
                   <button type="submit" disabled={loading} className="btn-gradient w-full py-3 text-sm mt-2 disabled:opacity-60">
                     {loading ? "Enviando..." : "Enviar mensagem"}

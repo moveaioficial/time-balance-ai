@@ -12,8 +12,14 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-[#0C0416]"
+      >
+        Pular para o conteúdo
+      </a>
       <Header />
-      <main className="flex-1">
+      <main id="conteudo" className="flex-1">
         {children}
       </main>
       <Footer />

@@ -17,7 +17,7 @@ export default function TermosDeUso() {
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Termos de Uso</h1>
         <p className="text-sm text-muted-foreground mb-10">
-          Última atualização: 22 de setembro de 2026
+          Última atualização: 23 de outubro de 2026
         </p>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-8 text-muted-foreground leading-relaxed">
@@ -56,33 +56,43 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">5. Propriedade Intelectual</h2>
             <p>
-              Todo o conteúdo do site — incluindo textos, imagens, logotipos, design, código-fonte e materiais gráficos — é de propriedade da Move AI ou de seus licenciadores, protegido pela legislação brasileira de propriedade intelectual e direitos autorais.
+              Os textos, o design, a marca e o código deste site são da Move AI ou usados com licença, e são protegidos pela legislação brasileira de direitos autorais e de propriedade intelectual. Algumas fotos e vídeos de exemplo vêm de bancos de imagens gratuitos (Unsplash e Pexels), usados conforme as licenças deles. Os negócios mostrados nos exemplos do site, como a confeitaria e a empresa de climatização, são fictícios.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground mb-3">6. Limitação de Responsabilidade</h2>
+            <h2 className="text-lg font-semibold text-foreground mb-3">6. Contratação, pagamento e cancelamento</h2>
+            <p>
+              Este site não vende nada direto. Todo serviço é contratado por proposta escrita, que traz o escopo, o prazo, o valor, a forma de pagamento e o que for combinado sobre cancelamento daquele projeto. Nada aqui no site substitui o que estiver na proposta aceita.
+            </p>
+            <p className="mt-2">
+              As informações do site, como prazos e etapas, são gerais. A Move AI não promete resultados de vendas, de alcance ou de posição no Google, porque eles dependem de fatores que fogem do nosso controle.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-foreground mb-3">7. Limitação de Responsabilidade</h2>
             <p>
               A Move AI se esforça para manter o site e os serviços disponíveis de forma contínua e sem erros. No entanto, não garante disponibilidade ininterrupta e não se responsabiliza por danos indiretos, lucros cessantes ou perda de dados decorrentes do uso ou impossibilidade de uso dos serviços.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground mb-3">7. Modificações dos Termos</h2>
+            <h2 className="text-lg font-semibold text-foreground mb-3">8. Modificações dos Termos</h2>
             <p>
               A Move AI reserva-se o direito de alterar estes Termos a qualquer momento. As alterações serão publicadas nesta página com a data de atualização. O uso continuado do site após alterações constitui aceitação dos novos termos.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground mb-3">8. Legislação Aplicável</h2>
+            <h2 className="text-lg font-semibold text-foreground mb-3">9. Legislação Aplicável</h2>
             <p>
               Estes Termos são regidos pela legislação da República Federativa do Brasil. Fica eleito o foro da Comarca de Guarulhos, Estado de São Paulo, para dirimir quaisquer controvérsias.
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-foreground mb-3">9. Contato</h2>
+            <h2 className="text-lg font-semibold text-foreground mb-3">10. Contato</h2>
             <p>
               Em caso de dúvidas sobre estes Termos, entre em contato pelo e-mail{" "}
               <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">
