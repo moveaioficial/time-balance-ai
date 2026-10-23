@@ -38,6 +38,10 @@ async function esperar(id) {
   throw new Error(`container ${id} não terminou de processar`);
 }
 
+// Confere o token em toda execução, mesmo sem nada para publicar, para o problema aparecer antes do horário do post.
+const conta = await call('GET', 'me', { fields: 'username' });
+console.log(`Token válido para @${conta.username}.`);
+
 const agenda = JSON.parse(fs.readFileSync(path.join(raiz, 'public/ig/agenda.json'), 'utf8'));
 const agora = Date.now();
 const devidos = agenda.filter(i => {
