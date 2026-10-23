@@ -11,7 +11,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // Aceita o segredo colado com espaços, quebras de linha ou com o prefixo "IG_TOKEN=".
-const TOKEN = (process.env.IG_TOKEN || "").trim().replace(/^IG_TOKENs*=s*/, "").replace(/^["']|["']$/g, "").trim();
+const TOKEN = (process.env.IG_TOKEN || "").trim().replace(/^IG_TOKEN\s*=\s*/, "").replace(/^["']|["']$/g, "").trim();
 const VER = process.env.IG_API_VERSION || 'v26.0';
 const BASE = process.env.SITE_URL || 'https://www.moveai.tech';
 const JANELA_H = 6; // só publica itens atrasados até 6 h (evita postar algo velho de surpresa)
