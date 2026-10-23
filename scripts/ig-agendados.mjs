@@ -18,8 +18,13 @@ const JANELA_H = 6; // só publica itens atrasados até 6 h (evita postar algo v
 const API = `https://graph.instagram.com/${VER}`;
 const raiz = path.resolve(path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1')), '..');
 
-if (!TOKEN) { console.error('Segredo IG_TOKEN não configurado (vazio). Confira em Settings > Secrets and variables > Actions.'); process.exit(1); }
-console.log(`Segredo lido: ${TOKEN.length} caracteres, começa com ${TOKEN.slice(0, 4)}.`);
+// No GitHub, "::notice::" e "::error::" viram avisos visíveis no resumo do run (o log completo exige login).
+const GH = !!process.env.GITHUB_ACTIONS;
+const aviso = msg => console.log(GH ? `::notice::${msg}` : msg);
+const erro = msg => console.error(GH ? `::error::${msg}` : msg);
+
+if (!TOKEN) { erro('Segredo IG_TOKEN não configurado (vazio). Confira em Settings > Secrets and variables > Actions.'); process.exit(1); }
+aviso(`Segredo lido: ${TOKEN.length} caracteres, começa com ${TOKEN.slice(0, 4)}.`);
 
 async function call(method, endpoint, params = {}) {
   const body = new URLSearchParams({ ...params, access_token: TOKEN });
@@ -41,8 +46,10 @@ async function esperar(id) {
 }
 
 // Confere o token em toda execução, mesmo sem nada para publicar, para o problema aparecer antes do horário do post.
-const conta = await call('GET', 'me', { fields: 'username' });
-console.log(`Token válido para @${conta.username}.`);
+let conta;
+try { conta = await call('GET', 'me', { fields: 'username' }); }
+catch (e) { erro(`Token recusado pelo Instagram: ${e.message}`); process.exit(1); }
+aviso(`Token válido para @${conta.username}.`);
 
 const agenda = JSON.parse(fs.readFileSync(path.join(raiz, 'public/ig/agenda.json'), 'utf8'));
 const agora = Date.now();
@@ -77,10 +84,10 @@ for (const item of devidos) {
     await esperar(car.id);
     const pub = await call('POST', `${id}/media_publish`, { creation_id: car.id });
     const post = await call('GET', pub.id, { fields: 'permalink' });
-    console.log(`${item.slug}: publicado em ${post.permalink}`);
+    aviso(`${item.slug}: publicado em ${post.permalink}`);
   } catch (e) {
     falhou = true;
-    console.error(`${item.slug}: ERRO ${e.message}`);
+    erro(`${item.slug}: ERRO ${e.message}`);
   }
 }
 process.exit(falhou ? 1 : 0);
