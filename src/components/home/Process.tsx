@@ -16,7 +16,7 @@ export function Process() {
               Do primeiro papo ao site no ar, <span className="accent-word">sem mistério</span>.
             </h2>
             <div className="mt-10 inline-flex items-center gap-5 rounded-2xl p-6 pr-8 text-white" style={{ background: "var(--brand-gradient)" }}>
-              <span className="font-display text-6xl font-bold leading-none">7</span>
+              <span className="font-display text-6xl font-bold leading-none">3</span>
               <span className="font-display text-lg font-semibold leading-tight">dias de teste<br /><span className="font-sans text-sm font-normal text-white/80">para você conhecer o nosso trabalho</span></span>
             </div>
           </div>

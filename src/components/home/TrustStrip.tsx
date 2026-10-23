@@ -5,7 +5,7 @@ import { SearchCheck, FileCheck2, CalendarCheck, Handshake } from "lucide-react"
 const items = [
   { Icon: SearchCheck, title: "Análise gratuita", text: "Olhamos seu site e suas redes antes de qualquer proposta." },
   { Icon: FileCheck2, title: "Preço fechado", text: "Escopo e valor definidos antes de começar." },
-  { Icon: CalendarCheck, title: "7 dias de teste", text: "Tempo para conhecer o nosso trabalho na prática." },
+  { Icon: CalendarCheck, title: "3 dias de teste", text: "Tempo para conhecer o nosso trabalho na prática." },
   { Icon: Handshake, title: "Fala com quem faz", text: "Você conversa direto com os sócios, sem intermediário." },
 ];
 

@@ -10,7 +10,7 @@ const faqs = [
     a: "O prazo vai por escrito na proposta, junto com o escopo. Uma landing page sai bem mais rápido que um site completo com marca nova, e a gente te diz isso logo no começo.",
   },
   {
-    q: "Como funcionam os 7 dias de teste?",
+    q: "Como funcionam os 3 dias de teste?",
     a: "É o seu período para conhecer o nosso jeito de trabalhar antes de seguir com a gente. Os detalhes entram na proposta, por escrito.",
   },
   {
