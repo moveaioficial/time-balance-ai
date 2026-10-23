@@ -59,7 +59,6 @@ export default function PoliticaDePrivacidade() {
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="text-foreground">Supabase:</strong> banco de dados onde ficam as mensagens do formulário.</li>
               <li><strong className="text-foreground">Vercel:</strong> hospedagem do site e estatísticas anônimas de visita.</li>
-              <li><strong className="text-foreground">Google Fonts:</strong> entrega as fontes do site, o que faz o seu navegador se conectar aos servidores do Google.</li>
               <li><strong className="text-foreground">WhatsApp (Meta) e Gmail (Google):</strong> quando você fala com a gente por esses canais.</li>
             </ul>
             <p className="mt-2">

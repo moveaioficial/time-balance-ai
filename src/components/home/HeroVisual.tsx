@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import icone from "@/assets/move-ai-icone-app.png";
+import icone from "@/assets/move-ai-icone-app.webp";
 
 // Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito e é rolado também.
 // Tudo em CSS (classes hv-* em index.css), ciclo de 18s. Com movimento reduzido, mostra só o site bom, parado no topo.
