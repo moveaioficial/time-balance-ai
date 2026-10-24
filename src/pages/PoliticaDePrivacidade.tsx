@@ -6,7 +6,7 @@ export default function PoliticaDePrivacidade() {
   usePageTitle("Política de Privacidade | Move AI");
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
+      <main className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
@@ -17,18 +17,18 @@ export default function PoliticaDePrivacidade() {
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Política de Privacidade</h1>
         <p className="text-sm text-muted-foreground mb-10">
-          Última atualização: 23 de outubro de 2026
+          Última atualização: 24 de outubro de 2026
         </p>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-8 text-muted-foreground leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Quem somos</h2>
             <p>
-              A Move AI é um estúdio digital de Guarulhos, SP, que cria sites, marcas, conteúdo para redes sociais e produtos digitais. Nesta política, "Move AI", "nós" e "a gente" se referem ao estúdio, responsável pelos dados pessoais tratados neste site, nos termos da Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018). A Move AI ainda não tem CNPJ; por enquanto, quem responde pelos dados são os sócios do estúdio.
+              A Move AI é um estúdio digital de Guarulhos, SP, que cria sites, marcas, conteúdo para redes sociais e produtos digitais. Nesta política, "Move AI", "nós" e "a gente" se referem ao estúdio, responsável pelos dados pessoais tratados neste site, nos termos da Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018). A Move AI ainda não tem CNPJ. Por enquanto, quem decide sobre o uso dos dados (os controladores, na LGPD) são os sócios do estúdio, Leonardo Cortelline e Rafael Alcantara Ribeiro.
             </p>
             <p className="mt-2">
               Contato para qualquer assunto de privacidade e dados pessoais:{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">moveaioficial@gmail.com</a>.
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline">moveaioficial@gmail.com</a>.
             </p>
           </section>
 
@@ -36,6 +36,7 @@ export default function PoliticaDePrivacidade() {
             <h2 className="text-lg font-semibold text-foreground mb-3">2. Que dados coletamos</h2>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="text-foreground">No formulário de contato:</strong> nome, empresa, e-mail, WhatsApp e a descrição do que você precisa. Só pedimos o necessário para responder ao seu pedido.</li>
+              <li><strong className="text-foreground">Ao agendar uma conversa:</strong> os mesmos dados do formulário e o horário escolhido. Para evitar abuso na agenda, guardamos também um código (hash) gerado a partir do seu endereço IP, em vez do IP em si.</li>
               <li><strong className="text-foreground">No WhatsApp ou no e-mail:</strong> o que você escolher nos enviar na conversa.</li>
               <li><strong className="text-foreground">Na navegação:</strong> estatísticas de visita agregadas e anônimas (páginas vistas, país, tipo de aparelho e tempo de carregamento), sem identificar você e sem cookies.</li>
             </ul>
@@ -46,6 +47,8 @@ export default function PoliticaDePrivacidade() {
             <h2 className="text-lg font-semibold text-foreground mb-3">3. Para que usamos e com qual base legal</h2>
             <ul className="list-disc pl-6 mt-2 space-y-1">
               <li><strong className="text-foreground">Responder ao seu contato e preparar uma análise ou proposta:</strong> com base no seu consentimento, dado no formulário, e nos procedimentos preliminares de um contrato que você pediu (art. 7º, I e V, da LGPD).</li>
+              <li><strong className="text-foreground">Marcar a conversa que você agendou:</strong> criamos o convite na nossa agenda e mandamos para o seu e-mail (art. 7º, V).</li>
+              <li><strong className="text-foreground">Proteger a agenda contra abuso:</strong> usamos o código gerado a partir do IP para limitar a 3 agendamentos por dia, pelo nosso legítimo interesse em manter o site funcionando (art. 7º, IX).</li>
               <li><strong className="text-foreground">Prestar o serviço contratado:</strong> para executar o contrato (art. 7º, V).</li>
               <li><strong className="text-foreground">Melhorar o site:</strong> com as estatísticas anônimas de visita, que não identificam ninguém.</li>
               <li><strong className="text-foreground">Cumprir obrigações legais:</strong> quando a lei exigir (art. 7º, II).</li>
@@ -57,8 +60,9 @@ export default function PoliticaDePrivacidade() {
             <h2 className="text-lg font-semibold text-foreground mb-3">4. Com quem os dados são compartilhados</h2>
             <p>Não vendemos nem alugamos dados pessoais. Para o site funcionar, usamos estes fornecedores, que tratam os dados em nosso nome:</p>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li><strong className="text-foreground">Supabase:</strong> banco de dados onde ficam as mensagens do formulário.</li>
-              <li><strong className="text-foreground">Vercel:</strong> hospedagem do site e estatísticas anônimas de visita.</li>
+              <li><strong className="text-foreground">Supabase:</strong> banco de dados onde ficam as mensagens do formulário e os agendamentos.</li>
+              <li><strong className="text-foreground">Google Agenda e Google Meet:</strong> quando você agenda uma conversa, o convite com os seus dados e o link da chamada é criado na agenda da Move AI e enviado para o seu e-mail.</li>
+              <li><strong className="text-foreground">Vercel:</strong> hospedagem do site e estatísticas anônimas de visita e de velocidade das páginas.</li>
               <li><strong className="text-foreground">WhatsApp (Meta) e Gmail (Google):</strong> quando você fala com a gente por esses canais.</li>
             </ul>
             <p className="mt-2">
@@ -76,7 +80,7 @@ export default function PoliticaDePrivacidade() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">6. Por quanto tempo guardamos</h2>
             <ul className="list-disc pl-6 mt-2 space-y-1">
-              <li>Contatos que não viraram projeto: até 12 meses depois da última conversa. Depois disso, apagamos.</li>
+              <li>Contatos e agendamentos que não viraram projeto: até 12 meses depois da última conversa. Depois disso, apagamos.</li>
               <li>Se virar cliente: pelo tempo do contrato e, depois, pelo prazo que a lei exigir para documentos fiscais e contratuais.</li>
               <li>Se você pedir a exclusão antes, apagamos, salvo quando a lei obrigar a manter.</li>
             </ul>
@@ -101,7 +105,7 @@ export default function PoliticaDePrivacidade() {
             </ul>
             <p className="mt-2">
               É só escrever para{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">moveaioficial@gmail.com</a>. Confirmamos o recebimento assim que lermos e respondemos por completo em até 15 dias. Você também pode reclamar na Autoridade Nacional de Proteção de Dados (ANPD).
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline">moveaioficial@gmail.com</a>. Confirmamos o recebimento assim que lermos e respondemos por completo em até 15 dias. Você também pode reclamar na Autoridade Nacional de Proteção de Dados (ANPD).
             </p>
           </section>
 
@@ -112,7 +116,7 @@ export default function PoliticaDePrivacidade() {
             </p>
           </section>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

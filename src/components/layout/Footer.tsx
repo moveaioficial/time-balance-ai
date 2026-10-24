@@ -75,7 +75,10 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <div className="section-container py-6 flex flex-col sm:flex-row gap-3 justify-between text-xs text-white/50">
-          <p>© {new Date().getFullYear()} Move AI. Todos os direitos reservados.</p>
+          <p>
+            © {new Date().getFullYear()} Move AI. Todos os direitos reservados.
+            <span className="block mt-1">Responsáveis: Leonardo Cortelline e Rafael Alcantara Ribeiro.</span>
+          </p>
           <div className="flex gap-5">
             <Link to="/termos-de-uso" className="hover:text-white transition-colors">Termos de Uso</Link>
             <Link to="/politica-de-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>

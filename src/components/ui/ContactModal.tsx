@@ -1,4 +1,4 @@
-import { createContext, lazy, Suspense, useContext, useEffect, useState } from "react";
+import { createContext, lazy, Suspense, useContext, useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
 
@@ -45,8 +45,12 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; whatsapp?: string }>({});
+  const dialogRef = useRef<HTMLDivElement>(null);
+  // Botão que abriu o formulário: o foco volta para ele ao fechar
+  const lastFocus = useRef<HTMLElement | null>(null);
 
   const openModal = () => {
+    lastFocus.current = document.activeElement as HTMLElement | null;
     setForm({ nome: "", empresa: "", email: "", whatsapp: "", problema: "" });
     setSubmitted(false);
     setError(null);
@@ -58,14 +62,29 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
 
   const closeModal = () => setIsOpen(false);
 
-  // Fecha com a tecla Esc
+  // Teclado: o foco entra no formulário, o Tab fica preso dentro dele, o Esc fecha
+  // e, ao fechar, o foco volta para o botão que abriu
   useEffect(() => {
     if (!isOpen) return;
+    const dialog = dialogRef.current;
+    (dialog?.querySelector<HTMLElement>('input:not([tabindex="-1"])') ?? dialog?.querySelector<HTMLElement>("button"))?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
+      if (e.key !== "Tab" || !dialog) return;
+      const items = Array.from(
+        dialog.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input:not([tabindex="-1"]), textarea'),
+      );
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      lastFocus.current?.focus();
+    };
   }, [isOpen]);
 
   const handleWhatsAppChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,7 +159,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
           onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
         >
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={closeModal} />
-          <div role="dialog" aria-modal="true" aria-label="Fale com a Move AI" className={`relative z-10 w-full ${submitted ? "max-w-xl" : "max-w-md"} max-h-[92vh] overflow-y-auto rounded-2xl bg-card border border-white/10 p-8 shadow-2xl animate-fade-in-up`}>
+          <div ref={dialogRef} role="dialog" aria-modal="true" aria-label="Fale com a Move AI" className={`relative z-10 w-full ${submitted ? "max-w-xl" : "max-w-md"} max-h-[92vh] overflow-y-auto rounded-2xl bg-card border border-white/10 p-8 shadow-2xl animate-fade-in-up`}>
             <button
               onClick={closeModal}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors"
@@ -180,8 +199,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     className="absolute -left-[9999px] h-0 w-0 opacity-0"
                   />
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Nome</label>
+                    <label htmlFor="contato-nome" className="block text-sm font-medium text-foreground mb-1.5">Nome</label>
                     <input
+                      id="contato-nome"
                       type="text"
                       required
                       value={form.nome}
@@ -193,8 +213,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Empresa</label>
+                    <label htmlFor="contato-empresa" className="block text-sm font-medium text-foreground mb-1.5">Empresa</label>
                     <input
+                      id="contato-empresa"
                       type="text"
                       required
                       value={form.empresa}
@@ -206,10 +227,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">E-mail</label>
+                    <label htmlFor="contato-email" className="block text-sm font-medium text-foreground mb-1.5">E-mail</label>
                     <input
+                      id="contato-email"
                       type="email"
                       required
+                      aria-invalid={!!fieldErrors.email}
+                      aria-describedby={fieldErrors.email ? "contato-email-erro" : undefined}
                       value={form.email}
                       onChange={handleEmailChange}
                       maxLength={254}
@@ -220,14 +244,17 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       placeholder="seu@email.com"
                     />
                     {fieldErrors.email && (
-                      <p className="text-red-400 text-xs mt-1">{fieldErrors.email}</p>
+                      <p id="contato-email-erro" className="text-red-400 text-xs mt-1">{fieldErrors.email}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">WhatsApp</label>
+                    <label htmlFor="contato-whatsapp" className="block text-sm font-medium text-foreground mb-1.5">WhatsApp</label>
                     <input
+                      id="contato-whatsapp"
                       type="tel"
                       required
+                      aria-invalid={!!fieldErrors.whatsapp}
+                      aria-describedby={fieldErrors.whatsapp ? "contato-whatsapp-erro" : undefined}
                       value={form.whatsapp}
                       onChange={handleWhatsAppChange}
                       autoComplete="tel"
@@ -237,12 +264,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                       placeholder="(11) 99999-9999"
                     />
                     {fieldErrors.whatsapp && (
-                      <p className="text-red-400 text-xs mt-1">{fieldErrors.whatsapp}</p>
+                      <p id="contato-whatsapp-erro" className="text-red-400 text-xs mt-1">{fieldErrors.whatsapp}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">O que você precisa?</label>
+                    <label htmlFor="contato-descricao" className="block text-sm font-medium text-foreground mb-1.5">O que você precisa?</label>
                     <textarea
+                      id="contato-descricao"
                       value={form.problema}
                       onChange={(e) => setForm({ ...form, problema: e.target.value })}
                       maxLength={2000}

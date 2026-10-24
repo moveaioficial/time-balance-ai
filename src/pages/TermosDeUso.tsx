@@ -6,7 +6,7 @@ export default function TermosDeUso() {
   usePageTitle("Termos de Uso | Move AI");
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
+      <main className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
@@ -17,14 +17,14 @@ export default function TermosDeUso() {
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Termos de Uso</h1>
         <p className="text-sm text-muted-foreground mb-10">
-          Última atualização: 23 de outubro de 2026
+          Última atualização: 24 de outubro de 2026
         </p>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-8 text-muted-foreground leading-relaxed">
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">1. Aceitação dos Termos</h2>
             <p>
-              Ao acessar e utilizar o site e os serviços da Move AI ("Empresa"), você concorda integralmente com estes Termos de Uso. Caso não concorde com alguma disposição, solicitamos que não utilize nossos serviços.
+              Ao acessar e utilizar o site e os serviços da Move AI, você concorda integralmente com estes Termos de Uso. Caso não concorde com alguma disposição, solicitamos que não utilize nossos serviços.
             </p>
           </section>
 
@@ -32,6 +32,9 @@ export default function TermosDeUso() {
             <h2 className="text-lg font-semibold text-foreground mb-3">2. Descrição dos Serviços</h2>
             <p>
               A Move AI é um estúdio digital que oferece criação e redesign de sites, identidade visual e marca, design de conteúdo para redes sociais e desenvolvimento de produtos digitais sob medida. Os serviços são prestados conforme acordado em contrato individual com cada cliente.
+            </p>
+            <p className="mt-2">
+              A Move AI ainda não tem CNPJ. Os responsáveis são os sócios Leonardo Cortelline e Rafael Alcantara Ribeiro, de Guarulhos, SP. Os dados completos de quem presta o serviço vão na proposta e no contrato.
             </p>
           </section>
 
@@ -66,6 +69,12 @@ export default function TermosDeUso() {
               Este site não vende nada direto. Todo serviço é contratado por proposta escrita, que traz o escopo, o prazo, o valor, a forma de pagamento e o que for combinado sobre cancelamento daquele projeto. Nada aqui no site substitui o que estiver na proposta aceita.
             </p>
             <p className="mt-2">
+              <strong className="text-foreground">Desistência e reembolso.</strong> Quando a contratação acontece fora de um estabelecimento físico (pelo site, por WhatsApp ou por e-mail) e você contrata como consumidor, você pode desistir em até 7 dias depois de aceitar a proposta e receber de volta o que pagou (art. 49 do Código de Defesa do Consumidor). Depois desse prazo, valem as regras de cancelamento e de reembolso escritas na proposta.
+            </p>
+            <p className="mt-2">
+              Os 3 dias de teste são uma oferta da Move AI. As condições ficam na proposta.
+            </p>
+            <p className="mt-2">
               As informações do site, como prazos e etapas, são gerais. A Move AI não promete resultados de vendas, de alcance ou de posição no Google, porque eles dependem de fatores que fogem do nosso controle.
             </p>
           </section>
@@ -73,7 +82,7 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">7. Limitação de Responsabilidade</h2>
             <p>
-              A Move AI se esforça para manter o site e os serviços disponíveis de forma contínua e sem erros. No entanto, não garante disponibilidade ininterrupta e não se responsabiliza por danos indiretos, lucros cessantes ou perda de dados decorrentes do uso ou impossibilidade de uso dos serviços.
+              A Move AI se esforça para manter o site e os serviços disponíveis de forma contínua e sem erros. No entanto, não garante disponibilidade ininterrupta do site e, nos limites permitidos pela lei, não responde por danos indiretos decorrentes do uso ou da impossibilidade de uso do site. Nada nestes Termos afasta os direitos que o Código de Defesa do Consumidor garante a você. A responsabilidade sobre cada projeto é a que estiver na proposta e no contrato.
             </p>
           </section>
 
@@ -87,7 +96,7 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">9. Legislação Aplicável</h2>
             <p>
-              Estes Termos são regidos pela legislação da República Federativa do Brasil. Fica eleito o foro da Comarca de Guarulhos, Estado de São Paulo, para dirimir quaisquer controvérsias.
+              Estes Termos são regidos pela legislação da República Federativa do Brasil. Fica eleito o foro da Comarca de Guarulhos, Estado de São Paulo, para dirimir quaisquer controvérsias, sem prejuízo do foro do domicílio do consumidor, quando a lei garantir.
             </p>
           </section>
 
@@ -95,13 +104,13 @@ export default function TermosDeUso() {
             <h2 className="text-lg font-semibold text-foreground mb-3">10. Contato</h2>
             <p>
               Em caso de dúvidas sobre estes Termos, entre em contato pelo e-mail{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline">
                 moveaioficial@gmail.com
               </a>.
             </p>
           </section>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
