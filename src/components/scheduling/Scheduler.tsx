@@ -27,6 +27,8 @@ const ERROR_MESSAGES: Record<string, string> = {
   dados_invalidos: "Não conseguimos validar seus dados. Fale com a gente pelo WhatsApp.",
 };
 
+const FECHA_EM = 12; // segundos até o aviso de reunião marcada fechar
+
 export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }) {
   const [status, setStatus] = useState<Status>("loading");
   const [days, setDays] = useState<AgendaDay[]>([]);
@@ -55,6 +57,16 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
   useEffect(() => {
     load();
   }, [load]);
+
+  // Confirmação única: depois de marcar, o aviso fecha sozinho e a pessoa volta ao site (pausa com o mouse em cima)
+  const [resta, setResta] = useState(FECHA_EM);
+  const [pausado, setPausado] = useState(false);
+  useEffect(() => {
+    if (status !== "done" || pausado) return;
+    if (resta <= 0) { onClose(); return; }
+    const id = window.setTimeout(() => setResta((r) => r - 1), 1000);
+    return () => window.clearTimeout(id);
+  }, [status, pausado, resta, onClose]);
 
   const currentDay = useMemo(() => days.find((d) => d.date === selectedDate), [days, selectedDate]);
 
@@ -99,7 +111,7 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
       end: new Date(booking.fim),
     };
     return (
-      <div className="text-center py-2">
+      <div className="text-center py-2" onMouseEnter={() => setPausado(true)} onMouseLeave={() => setPausado(false)}>
         <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/15">
           <CalendarCheck className="h-7 w-7 text-primary" />
         </div>
@@ -147,9 +159,14 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
             <Download className="h-4 w-4" /> Apple / .ics
           </button>
         </div>
-        <button type="button" onClick={onClose} className="mt-6 text-sm text-muted-foreground hover:text-foreground">
-          Fechar
-        </button>
+        <div className="mt-6">
+          <div className="mx-auto h-1 w-40 overflow-hidden rounded-full bg-white/10">
+            <div className="h-full rounded-full bg-primary transition-[width] duration-1000 ease-linear" style={{ width: `${(resta / FECHA_EM) * 100}%` }} />
+          </div>
+          <button type="button" onClick={onClose} className="mt-3 text-sm text-muted-foreground hover:text-foreground">
+            {pausado ? "Voltar ao site" : `Voltando ao site em ${resta}s`}
+          </button>
+        </div>
       </div>
     );
   }

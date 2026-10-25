@@ -58,13 +58,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     setIsOpen(true);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
-    // Depois de um envio, fecha mostrando a página de obrigado (o endereço já foi trocado no envio)
-    if (submitted && window.location.pathname === "/obrigado") {
-      window.dispatchEvent(new PopStateEvent("popstate"));
-    }
-  };
+  const closeModal = () => setIsOpen(false);
 
   // Fecha com a tecla Esc
   useEffect(() => {
@@ -132,8 +126,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       });
       if (error) throw error;
       setSubmitted(true);
-      // Conta como conversão: o Vercel Analytics registra a visita em /obrigado
-      if (window.location.pathname !== "/obrigado") window.history.pushState({}, "", "/obrigado");
+      // Conta como conversão: o Vercel Analytics registra uma visita em /obrigado, sem sair da página
+      (window as unknown as { va?: (e: string, p: object) => void }).va?.("pageview", { route: "/obrigado", path: "/obrigado" });
     } catch {
       setError("Erro ao enviar. Tente novamente ou fale conosco pelo WhatsApp.");
     } finally {
