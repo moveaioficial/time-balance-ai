@@ -1,16 +1,22 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# Quem entra: buscadores, redes sociais e agentes de IA podem ler o site inteiro.
+# Só a página de obrigado fica fora do índice (é a confirmação de um pedido, não conteúdo).
 
 User-agent: *
 Allow: /
+Disallow: /obrigado
+
+# Agentes e buscadores de IA (aparecer nas respostas do ChatGPT, Claude, Perplexity e Gemini)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /obrigado
 
 Sitemap: https://www.moveai.tech/sitemap.xml

@@ -1,6 +1,7 @@
 import { createContext, lazy, Suspense, useContext, useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
+import { PRAZO_RESPOSTA } from "@/lib/contato";
 
 // Agendador carregado só depois do envio do formulário
 const Scheduler = lazy(() => import("@/components/scheduling/Scheduler").then((m) => ({ default: m.Scheduler })));
@@ -56,7 +57,13 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     setIsOpen(true);
   };
 
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    // Depois de um envio, fecha mostrando a página de obrigado (o endereço já foi trocado no envio)
+    if (submitted && window.location.pathname === "/obrigado") {
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    }
+  };
 
   // Fecha com a tecla Esc
   useEffect(() => {
@@ -124,6 +131,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       });
       if (error) throw error;
       setSubmitted(true);
+      // Conta como conversão: o Vercel Analytics registra a visita em /obrigado
+      if (window.location.pathname !== "/obrigado") window.history.pushState({}, "", "/obrigado");
     } catch {
       setError("Erro ao enviar. Tente novamente ou fale conosco pelo WhatsApp.");
     } finally {
@@ -166,7 +175,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
               <>
                 <h3 className="text-2xl font-bold text-foreground mb-1">Peça sua análise gratuita</h3>
                 <p className="text-sm text-muted-foreground mb-6">
-                  Conte rapidinho sobre a sua empresa. Depois você já escolhe um horário para conversar com a gente.
+                  Conte rapidinho sobre a sua empresa. Depois você já escolhe um horário para conversar com a gente. A gente {PRAZO_RESPOSTA}.
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input

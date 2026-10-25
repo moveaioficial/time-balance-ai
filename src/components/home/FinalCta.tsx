@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
-import { WHATSAPP_URL } from "@/lib/contato";
+import { PRAZO_RESPOSTA, WHATSAPP_URL } from "@/lib/contato";
 
 export function FinalCta() {
   const { openModal } = useContactModal();
@@ -24,6 +24,7 @@ export function FinalCta() {
             Chamar no WhatsApp
           </a>
         </div>
+        <p className="reveal mt-6 text-sm text-white/60">A gente {PRAZO_RESPOSTA}.</p>
       </div>
     </section>
   );

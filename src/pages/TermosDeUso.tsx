@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { usePageTitle } from "@/hooks/use-page-title";
 
 export default function TermosDeUso() {
@@ -7,13 +6,7 @@ export default function TermosDeUso() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Voltar ao site
-        </Link>
+        <Breadcrumbs items={[{ label: "Termos de Uso", to: "/termos-de-uso" }]} />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Termos de Uso</h1>
         <p className="text-sm text-muted-foreground mb-10">

@@ -23,9 +23,17 @@ const faqs = [
   },
 ];
 
+// FAQPage: as perguntas viram resposta citável no Google e nas IAs
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+
 export function Faq() {
   return (
     <section id="faq" className="relative bg-[#0C0416] py-24 lg:py-32 border-t border-white/10">
+      <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       <div className="section-container grid lg:grid-cols-[0.8fr_1.2fr] gap-14">
         <div className="reveal">
           <p className="kicker">Dúvidas</p>
@@ -33,6 +41,10 @@ export function Faq() {
             Perguntas que a gente <span className="accent-word">sempre</span> ouve.
           </h2>
           <p className="mt-5 text-white/70">Não achou a sua? Manda no WhatsApp que a gente responde.</p>
+          <p className="mt-3 text-white/70">
+            Quer ver as etapas? Está em <a href="#processo" className="text-[#00C3D0] hover:underline">como trabalhamos</a>. E tem um exemplo real em{" "}
+            <a href="#na-pratica" className="text-[#00C3D0] hover:underline">na prática</a>.
+          </p>
         </div>
         <div className="divide-y divide-white/10 border-y border-white/10">
           {faqs.map((f) => (

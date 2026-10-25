@@ -1,6 +1,7 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { MobileCta } from "@/components/ui/MobileCta";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 interface LayoutProps {
@@ -23,6 +24,7 @@ export function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <MobileCta />
       <WhatsAppButton />
     </div>
   );

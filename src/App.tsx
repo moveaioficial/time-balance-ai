@@ -13,6 +13,7 @@ import Index from "./pages/Index";
 // Páginas secundárias carregadas sob demanda (reduz o bundle inicial)
 const TermosDeUso = lazy(() => import("./pages/TermosDeUso"));
 const PoliticaDePrivacidade = lazy(() => import("./pages/PoliticaDePrivacidade"));
+const Obrigado = lazy(() => import("./pages/Obrigado"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/termos-de-uso" element={<TermosDeUso />} />
               <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
+              <Route path="/obrigado" element={<Obrigado />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
