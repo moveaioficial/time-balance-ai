@@ -2,6 +2,7 @@ import { createContext, lazy, Suspense, useContext, useEffect, useState } from "
 import { X } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
 import { PRAZO_RESPOSTA } from "@/lib/contato";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 // Agendador carregado só depois do envio do formulário
 const Scheduler = lazy(() => import("@/components/scheduling/Scheduler").then((m) => ({ default: m.Scheduler })));
@@ -124,10 +125,10 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
     try {
       const { error } = await (await getSupabase()).from("formulario").insert({
         nome: form.nome.trim(),
-        empresa: form.empresa.trim(),
+        empresa: form.empresa.trim() || null,
         email: form.email.trim().toLowerCase(),
         whatsapp: form.whatsapp,
-        descricao: form.problema.trim() || null,
+        descricao: form.problema.trim(),
       });
       if (error) throw error;
       setSubmitted(true);
@@ -202,10 +203,9 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Empresa</label>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Empresa <span className="font-normal text-muted-foreground">(opcional)</span></label>
                     <input
                       type="text"
-                      required
                       value={form.empresa}
                       onChange={(e) => setForm({ ...form, empresa: e.target.value })}
                       maxLength={160}
@@ -233,7 +233,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">WhatsApp</label>
+                    <label className="flex items-center gap-1.5 text-sm font-medium text-foreground mb-1.5"><WhatsAppIcon className="h-4 w-4 text-[#25D366]" /> WhatsApp</label>
                     <input
                       type="tel"
                       required
@@ -252,6 +252,8 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-1.5">O que você precisa?</label>
                     <textarea
+                      required
+                      minLength={3}
                       value={form.problema}
                       onChange={(e) => setForm({ ...form, problema: e.target.value })}
                       maxLength={2000}

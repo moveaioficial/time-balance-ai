@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { Instagram, Linkedin, Mail } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { EMAIL, INSTAGRAM_URL, LINKEDIN_URL, WHATSAPP_URL } from "@/lib/contato";
 
@@ -26,7 +27,7 @@ export function Footer() {
             {[
               { href: INSTAGRAM_URL, label: "Instagram", Icon: Instagram },
               { href: LINKEDIN_URL, label: "LinkedIn", Icon: Linkedin },
-              { href: WHATSAPP_URL, label: "WhatsApp", Icon: MessageCircle },
+              { href: WHATSAPP_URL, label: "WhatsApp", Icon: WhatsAppIcon },
             ].map(({ href, label, Icon }) => (
               <a
                 key={label}
@@ -60,7 +61,7 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-white/70">
             <li>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white transition-colors">
-                <MessageCircle className="h-4 w-4" /> WhatsApp
+                <WhatsAppIcon className="h-4 w-4" /> WhatsApp
               </a>
             </li>
             <li>

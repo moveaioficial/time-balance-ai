@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { useContactModal } from "@/components/ui/ContactModal";
 import { WHATSAPP_URL } from "@/lib/contato";
 
@@ -58,7 +59,7 @@ const NotFound = () => {
             Quero minha análise gratuita <ArrowRight className="h-4 w-4" />
           </button>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost text-base">
-            <MessageCircle className="h-4 w-4" /> Chamar no WhatsApp
+            <WhatsAppIcon className="h-4 w-4" /> Chamar no WhatsApp
           </a>
         </div>
 

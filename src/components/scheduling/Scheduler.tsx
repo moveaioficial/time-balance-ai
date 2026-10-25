@@ -11,6 +11,7 @@ import {
   type Booking,
   type Lead,
 } from "@/lib/agenda";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { downloadIcs, googleCalendarUrl, outlookCalendarUrl, type CalendarEvent } from "@/lib/calendar-links";
 
 const WHATSAPP_URL =
@@ -186,7 +187,7 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
           </p>
           <div className="flex flex-col sm:flex-row gap-2 justify-center">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient px-5 py-2.5 text-sm">
-              Falar no WhatsApp
+              <WhatsAppIcon className="h-4 w-4" /> Falar no WhatsApp
             </a>
             <button type="button" onClick={() => load()} className="rounded-lg border border-border px-5 py-2.5 text-sm text-foreground hover:bg-white/5">
               Tentar de novo

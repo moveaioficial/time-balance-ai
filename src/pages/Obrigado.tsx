@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CheckCircle2, Instagram, MessageCircle } from "lucide-react";
+import { CheckCircle2, Instagram } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { usePageTitle } from "@/hooks/use-page-title";
 import { INSTAGRAM_URL, PRAZO_RESPOSTA, WHATSAPP_URL } from "@/lib/contato";
@@ -31,7 +32,7 @@ export default function Obrigado() {
 
         <div className="mt-10 flex flex-col sm:flex-row gap-3">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient text-base">
-            <MessageCircle className="h-4 w-4" /> Adiantar pelo WhatsApp
+            <WhatsAppIcon className="h-4 w-4" /> Adiantar pelo WhatsApp
           </a>
           <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost text-base">
             <Instagram className="h-4 w-4" /> Ver nosso Instagram

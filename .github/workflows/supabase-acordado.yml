@@ -1,0 +1,24 @@
+# O plano grátis do Supabase pausa o projeto depois de alguns dias sem uso, e aí o formulário do site para.
+# Este workflow faz uma consulta leve a cada 2 dias para manter o banco acordado.
+# Usa a chave publicável que já está no .env do site (é pública, vai no navegador de qualquer visitante).
+name: Supabase acordado
+
+on:
+  schedule:
+    - cron: "17 9 */2 * *"
+  workflow_dispatch:
+
+jobs:
+  cutucar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Consultar o banco
+        run: |
+          set -a; . ./.env; set +a
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "$VITE_SUPABASE_URL/rest/v1/agendamentos?select=id&limit=1" \
+            -H "apikey: $VITE_SUPABASE_PUBLISHABLE_KEY" -H "Authorization: Bearer $VITE_SUPABASE_PUBLISHABLE_KEY")
+          echo "::notice::Supabase respondeu HTTP $code"
+          # 540 = projeto pausado
+          [ "$code" != "540" ]

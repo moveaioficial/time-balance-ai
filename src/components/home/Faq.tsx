@@ -1,4 +1,6 @@
 import { Plus } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { WHATSAPP_URL } from "@/lib/contato";
 
 const faqs = [
   {
@@ -40,7 +42,11 @@ export function Faq() {
           <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-[-0.03em]">
             Perguntas que a gente <span className="accent-word">sempre</span> ouve.
           </h2>
-          <p className="mt-5 text-white/70">Não achou a sua? Manda no WhatsApp que a gente responde.</p>
+          <p className="mt-5 text-white/70">Não achou a sua? Manda no{" "}
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-white hover:text-[#25D366]">
+              <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />WhatsApp
+            </a>{" "}
+            que a gente responde.</p>
           <p className="mt-3 text-white/70">
             Quer ver as etapas? Está em <a href="#processo" className="text-[#00C3D0] hover:underline">como trabalhamos</a>. E tem um exemplo real em{" "}
             <a href="#na-pratica" className="text-[#00C3D0] hover:underline">na prática</a>.

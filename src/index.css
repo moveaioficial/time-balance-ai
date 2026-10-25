@@ -382,6 +382,51 @@
     86%, 100% { left: 88%; top: 74%; opacity: 0; }
   }
 
+  /* Exageros da Move Doces no mesmo ciclo de 18s: pop-up no site feio; título palavra por palavra, granulado,
+     cartão que levanta e pedidos chegando no WhatsApp no site bom */
+  .hv-popup { animation: hv-popup 18s cubic-bezier(.3,1.6,.5,1) infinite both; }
+  .hv-word { animation: hv-word 18s cubic-bezier(.2,1.3,.4,1) infinite both; }
+  .hv-marq { animation: hv-marq 12s linear infinite; }
+  .hv-tilt { animation: hv-tilt 18s cubic-bezier(.3,1.3,.5,1) infinite both; transform-origin: 50% 100%; }
+  .hv-sprinkle { animation: hv-sprinkle 18s cubic-bezier(.4,0,.8,.6) infinite both; }
+  .hv-toast1 { animation: hv-toast1 18s cubic-bezier(.2,1.2,.4,1) infinite both; }
+  .hv-toast2 { animation: hv-toast2 18s cubic-bezier(.2,1.2,.4,1) infinite both; }
+  @keyframes hv-popup {
+    0%, 11% { opacity: 0; transform: translateX(-50%) scale(.5) rotate(-6deg); }
+    13% { opacity: 1; transform: translateX(-50%) scale(1.06) rotate(2deg); }
+    14.5%, 47% { opacity: 1; transform: translateX(-50%) scale(1) rotate(-1.5deg); }
+    49%, 100% { opacity: 0; transform: translateX(-50%) scale(.9) rotate(0); }
+  }
+  @keyframes hv-word {
+    0%, 45% { opacity: 0; transform: translateY(.55em) rotate(7deg); filter: blur(6px); }
+    51%, 92% { opacity: 1; transform: none; filter: blur(0); }
+    98%, 100% { opacity: 0; transform: none; }
+  }
+  @keyframes hv-marq { to { transform: translateX(-50%); } }
+  @keyframes hv-tilt {
+    0%, 55% { transform: none; box-shadow: none; }
+    58%, 70% { transform: translateY(-1.6cqw) rotateX(9deg) rotateY(-12deg) scale(1.07); box-shadow: 0 3cqw 4cqw -1.5cqw rgba(43,29,22,.55); }
+    74%, 100% { transform: none; box-shadow: none; }
+  }
+  @keyframes hv-sprinkle {
+    0%, 40% { opacity: 0; transform: translateY(-6cqw) rotate(var(--rot)); }
+    41% { opacity: 1; }
+    54% { opacity: 1; }
+    57%, 100% { opacity: 0; transform: translateY(78cqw) rotate(calc(var(--rot) + 540deg)); }
+  }
+  @keyframes hv-toast1 {
+    0%, 60% { opacity: 0; transform: translateX(115%); }
+    63% { opacity: 1; transform: translateX(-5%); }
+    64.5%, 90% { opacity: 1; transform: none; }
+    94%, 100% { opacity: 0; transform: translateX(10%); }
+  }
+  @keyframes hv-toast2 {
+    0%, 71% { opacity: 0; transform: translateX(115%); }
+    74% { opacity: 1; transform: translateX(-5%); }
+    75.5%, 90% { opacity: 1; transform: none; }
+    94%, 100% { opacity: 0; transform: translateX(10%); }
+  }
+
   /* "Depois" do antes e depois: o site começa "quente" e esfria em onda quando o ar liga */
   .ba-heat {
     --r: 0%;
@@ -428,7 +473,8 @@
     .animate-float, .animate-marquee, .mesh span, .hv *, .ba-mist, .ba-burst-on, .ba-pulse, .ba-wind path { animation: none !important; }
     .hv-good { clip-path: none; }
     .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo, .hv-shock, .hv-spark { opacity: 0; }
-    .hv-in, .hv-on { opacity: 1; }
+    .hv-in, .hv-on, .hv-word { opacity: 1; }
+    .hv-popup, .hv-sprinkle, .hv-toast1, .hv-toast2 { display: none; }
     .hv-scroll-a, .hv-scroll-b { transform: none; }
     .hv-cursor { display: none; }
     .reveal { opacity: 1; transform: none; transition: none; }

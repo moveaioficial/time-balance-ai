@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { PRAZO_RESPOSTA, WHATSAPP_URL } from "@/lib/contato";
 
 export function FinalCta() {
@@ -21,7 +22,7 @@ export function FinalCta() {
             Quero minha análise <ArrowRight className="w-4 h-4" />
           </button>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost text-base">
-            Chamar no WhatsApp
+            <WhatsAppIcon className="h-5 w-5" /> Chamar no WhatsApp
           </a>
         </div>
         <p className="reveal mt-6 text-sm text-white/60">A gente {PRAZO_RESPOSTA}.</p>

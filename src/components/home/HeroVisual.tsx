@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import icone from "@/assets/move-ai-icone-app.webp";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 // Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito e é rolado também.
 // Tudo em CSS (classes hv-* em index.css), ciclo de 18s. Com movimento reduzido, mostra só o site bom, parado no topo.
-// A confeitaria é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
+// A confeitaria (Move Doces, movedoces.com.br) é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
 
 function SiteFeio() {
   return (
@@ -11,10 +12,10 @@ function SiteFeio() {
       <div className="hv-scroll-a flex flex-col">
         <div className="flex justify-between bg-[#E75480] px-[3cqw] py-[0.8cqw] text-[1.8cqw] text-white">
           <span>☎ (11) 0000-0000</span>
-          <span>contato@seusite.com.br</span>
+          <span>contato@movedoces.com.br</span>
         </div>
         <div className="flex items-center justify-between px-[3cqw] py-[1.8cqw]">
-          <span className="text-[4.6cqw] text-[#C71585]" style={{ fontFamily: "'Brush Script MT', 'Comic Sans MS', cursive" }}>Sua Confeitaria</span>
+          <span className="text-[4.6cqw] text-[#C71585]" style={{ fontFamily: "'Brush Script MT', 'Comic Sans MS', cursive" }}>Move Doces</span>
           <span className="text-[1.7cqw] font-bold text-[#6A0DAD]">INÍCIO | BOLOS | DOCES | FALE CONOSCO</span>
         </div>
         <div className="relative mx-[3cqw] flex h-[32cqw] shrink-0 items-center justify-center bg-gradient-to-b from-[#F9C5D5] to-[#F4A3BC] text-center">
@@ -42,7 +43,7 @@ function SiteFeio() {
         <div className="px-[3cqw] pb-[2cqw]">
           <p className="text-[2.6cqw] font-bold text-[#C71585]">QUEM SOMOS</p>
           <p className="mt-[0.8cqw] text-[1.6cqw] leading-snug text-[#666]">
-            A Sua Confeitaria nasceu de um sonho e hoje é referência em qualidade e sabor. Trabalhamos com os melhores
+            A Move Doces nasceu de um sonho e hoje é referência em qualidade e sabor. Trabalhamos com os melhores
             ingredientes para oferecer produtos de excelência para você e sua família. Faça já a sua encomenda! Aceitamos
             encomendas para festas, aniversários, casamentos e eventos em geral. Consulte nossos preços.
           </p>
@@ -53,8 +54,16 @@ function SiteFeio() {
         </div>
         <div className="mx-[3cqw] mt-[2cqw] flex h-[14cqw] shrink-0 items-center justify-center bg-[#E5E5E5] text-[1.6cqw] text-[#999]">mapa_localizacao.jpg</div>
         <div className="mt-[2cqw] bg-[#E75480] px-[3cqw] py-[1.2cqw] text-center text-[1.4cqw] text-white">
-          © 2014 Sua Confeitaria · Todos os direitos reservados · Visitas: 004321
+          © 2014 Move Doces · Todos os direitos reservados · Visitas: 004321
         </div>
+      </div>
+      {/* pop-up que tapa o site feio no meio da rolagem */}
+      <div className="hv-popup absolute left-1/2 top-[22%] w-[56%] border-[0.5cqw] border-[#FF00AA] bg-[#FFFF66] p-[2.4cqw] text-center shadow-[0.8cqw_0.8cqw_0_#6A0DAD]" style={{ fontFamily: "'Comic Sans MS', cursive" }}>
+        <span className="absolute right-[1.2cqw] top-[0.6cqw] text-[2.4cqw] text-[#999]">✕</span>
+        <p className="text-[3.2cqw] font-bold text-[#FF0000]">🎉 PARABÉNS!!! 🎉</p>
+        <p className="mt-[0.8cqw] text-[1.9cqw] text-[#333]">Você é o VISITANTE Nº 1.000.000!!! Cadastre seu e-mail e ganhe 5% OFF*</p>
+        <p className="mt-[0.6cqw] text-[1.2cqw] text-[#777]">*válido para compras acima de R$ 300 às terças-feiras</p>
+        <span className="mt-[1.2cqw] inline-block bg-[#00AA00] px-[2cqw] py-[0.6cqw] text-[1.8cqw] font-bold text-white">QUERO MEU DESCONTO!!!</span>
       </div>
     </div>
   );
@@ -126,7 +135,7 @@ function SiteBom({ video }: { video: boolean }) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#1B110C]/90 via-[#1B110C]/55 to-transparent" />
 
           <div className="relative flex items-center justify-between px-[4cqw] py-[2.6cqw] text-white">
-            <span className="font-accent text-[3.8cqw] italic leading-none">Sua Confeitaria</span>
+            <span className="font-accent text-[3.8cqw] italic leading-none">Move Doces</span>
             <span className="flex items-center gap-[2.6cqw] text-[1.75cqw] text-white/80">
               <span>Cardápio</span><span>Encomendas</span><span>Onde estamos</span>
               <span className="rounded-full bg-white px-[1.8cqw] py-[0.8cqw] font-semibold text-[#2B1D16]">Encomendar</span>
@@ -135,13 +144,25 @@ function SiteBom({ video }: { video: boolean }) {
 
           <div className="relative px-[4cqw] pt-[3cqw] text-white">
             <p className="hv-in text-[1.5cqw] font-semibold uppercase tracking-[0.28em] text-[#F2C9A0]">Confeitaria artesanal</p>
-            <p className="hv-in mt-[1.2cqw] max-w-[62%] font-accent text-[6.8cqw] leading-[0.95]" style={{ animationDelay: "0.1s" }}>
-              Bolo de verdade, feito <span className="italic text-[#F2C9A0]">todo dia</span>.
+            <p className="mt-[1.2cqw] max-w-[62%] font-accent text-[6.8cqw] leading-[0.95]">
+              {["Bolo", "de", "verdade,", "feito"].map((w, i) => (
+                <span key={w} className="hv-word inline-block" style={{ animationDelay: `${0.05 + i * 0.07}s` }}>{w}&nbsp;</span>
+              ))}
+              <span className="hv-word inline-block italic text-[#F2C9A0]" style={{ animationDelay: "0.35s" }}>todo dia.</span>
             </p>
             <div className="hv-in mt-[2.4cqw] flex gap-[1.4cqw]" style={{ animationDelay: "0.2s" }}>
               <span className="rounded-full bg-[#F2C9A0] px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold text-[#2B1D16]">Ver cardápio</span>
-              <span className="rounded-full border border-white/50 px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold">Pedir pelo WhatsApp</span>
+              <span className="flex items-center gap-[0.8cqw] rounded-full border border-white/50 px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold"><WhatsAppIcon className="h-[2.2cqw] w-[2.2cqw]" colorido /> Pedir pelo WhatsApp</span>
             </div>
+          </div>
+        </div>
+
+        {/* sabores correndo */}
+        <div className="overflow-hidden whitespace-nowrap bg-[#2B1D16] py-[1.1cqw] text-[1.7cqw] font-semibold uppercase tracking-[0.2em] text-[#F2C9A0]">
+          <div className="hv-marq inline-block">
+            {[0, 1].map((k) => (
+              <span key={k}>Pistache ✦ Red velvet ✦ Ninho com morango ✦ Brigadeiro belga ✦ Limão siciliano ✦ Doce de leite ✦&nbsp;</span>
+            ))}
           </div>
         </div>
 
@@ -153,8 +174,8 @@ function SiteBom({ video }: { video: boolean }) {
           </div>
           <div className="mt-[2cqw] grid grid-cols-3 gap-[2cqw]">
             {produtos.map((p, i) => (
-              <div key={p.t} className="hv-in" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
-                <img src={p.src} alt="" className="aspect-[4/3] w-full rounded-[1.2cqw] object-cover" />
+              <div key={p.t} className="hv-in [perspective:60cqw]" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
+                <img src={p.src} alt="" className={`aspect-[4/3] w-full rounded-[1.2cqw] object-cover ${i === 0 ? "hv-tilt" : ""}`} />
                 <p className="mt-[1cqw] text-[1.8cqw] font-semibold">{p.t}</p>
                 <p className="text-[1.5cqw] text-[#2B1D16]/55">{p.d}</p>
               </div>
@@ -189,14 +210,24 @@ function SiteBom({ video }: { video: boolean }) {
         </div>
 
         <div className="mt-[3cqw] flex items-center justify-between bg-[#2B1D16] px-[4cqw] py-[2.6cqw] text-[1.5cqw] text-white/70">
-          <span className="font-accent text-[2.6cqw] italic text-white">Sua Confeitaria</span>
+          <span className="font-accent text-[2.6cqw] italic text-white">Move Doces</span>
           <span>Ter a dom · 8h às 19h</span>
-          <span>@suaconfeitaria</span>
+          <span>@movedoces</span>
         </div>
       </div>
     </div>
   );
 }
+
+// granulado colorido (posição em %, cor, giro e atraso)
+const cores = ["#F472B6", "#FDE68A", "#7DD3FC", "#A78BFA", "#FB923C", "#FFFFFF"];
+const granulado = Array.from({ length: 34 }, (_, i) => ({ x: (i * 29) % 100, c: cores[i % cores.length], r: (i * 47) % 180, d: ((i * 13) % 10) * 0.035 }));
+
+// notificações de pedido (fictícias, como a confeitaria)
+const pedidos = [
+  { t: "Novo pedido · Move Doces", d: "Bolo de pistache para sábado, 15h" },
+  { t: "Encomenda confirmada", d: "Caixa com 30 doces finos" },
+];
 
 // faíscas que saem do botão no clique (ângulos em graus)
 const sparks = [-80, -55, -30, -10, 10, 30, 55, 80, -120, 120, -150, 150];
@@ -222,7 +253,10 @@ export function HeroVisual() {
               <span className="h-3 w-3 rounded-full bg-[#FF5F57]/80" />
               <span className="h-3 w-3 rounded-full bg-[#FEBC2E]/80" />
               <span className="h-3 w-3 rounded-full bg-[#28C840]/80" />
-              <span className="ml-3 flex-1 max-w-[260px] rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px] text-white/60">seusite.com.br</span>
+              <span className="ml-3 grid flex-1 max-w-[260px] rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px]">
+                <span className="hv-off [grid-area:1/1] truncate text-[#FF8A80]">⚠ Não seguro · movedoces.com.br</span>
+                <span className="hv-on [grid-area:1/1] truncate text-white/75">🔒 movedoces.com.br</span>
+              </span>
 
               {/* Botão que "ativa a Move", na própria barra do navegador */}
               <div className="hv-btn2 relative ml-auto">
@@ -251,6 +285,24 @@ export function HeroVisual() {
               <SiteFeio />
               <div className="hv-good absolute inset-0">
                 <SiteBom video={video} />
+              </div>
+              {/* granulado que cai quando a Move ativa */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                {granulado.map((g, i) => (
+                  <span key={i} className="hv-sprinkle absolute top-0 h-[1.8cqw] w-[0.55cqw] rounded-full" style={{ left: `${g.x}%`, background: g.c, ["--rot" as string]: `${g.r}deg`, animationDelay: `${g.d}s` }} />
+                ))}
+              </div>
+              {/* pedidos chegando no WhatsApp */}
+              <div className="pointer-events-none absolute right-[2.4cqw] top-[2.4cqw] flex w-[44%] flex-col gap-[1.2cqw]">
+                {pedidos.map((p, i) => (
+                  <div key={p.t} className={`${["hv-toast1", "hv-toast2"][i]} flex items-center gap-[1.4cqw] rounded-[1.6cqw] bg-white/95 p-[1.4cqw] text-[#111] shadow-[0_2cqw_4cqw_-1cqw_rgba(0,0,0,0.5)]`}>
+                    <span className="flex h-[4.4cqw] w-[4.4cqw] flex-none items-center justify-center rounded-[1.1cqw] bg-[#25D366]"><WhatsAppIcon className="h-[2.6cqw] w-[2.6cqw] text-white" /></span>
+                    <span className="min-w-0 leading-tight">
+                      <span className="block text-[1.5cqw] font-semibold">{p.t}</span>
+                      <span className="block truncate text-[1.35cqw] text-[#555]">{p.d}</span>
+                    </span>
+                  </div>
+                ))}
               </div>
               <span className="hv-edge pointer-events-none absolute inset-y-0 w-[4px] -translate-x-1/2 bg-[#4DDDE7] shadow-[0_0_40px_12px_rgba(0,195,208,0.65)]" />
               <span className="hv-flash pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(77,221,231,0.55),transparent_60%)]" />

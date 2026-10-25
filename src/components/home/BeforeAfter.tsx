@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { MousePointerClick, Smartphone, MessageCircle, ChevronsLeftRight, Snowflake } from "lucide-react";
+import { MousePointerClick, Smartphone, ChevronsLeftRight, Snowflake, Wrench, Clock, CalendarCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
-// Antes e depois arrastável do MESMO site (empresa fictícia de climatização, só para ilustrar).
+// Antes e depois arrastável do MESMO site (MoveAR, empresa fictícia de climatização, só para ilustrar).
 // As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
 
 function Antes() {
@@ -16,7 +17,7 @@ function Antes() {
         <span className="flex items-center gap-[0.6em]">
           <span className="flex h-[2.4em] w-[2.4em] items-center justify-center rounded-full bg-[#29ABE2] text-[1.3em] text-white">❄</span>
           <span className="leading-none">
-            <span className="block text-[1.7em] font-bold text-[#1F3A93]">SUA EMPRESA</span>
+            <span className="block text-[1.7em] font-bold text-[#1F3A93]">MOVEAR</span>
             <span className="block text-[1em] italic text-[#F7941D]">Climatização</span>
           </span>
         </span>
@@ -70,7 +71,7 @@ function Antes() {
       </div>
 
       <div className="bg-[#333] px-[3em] py-[0.6em] text-center text-[0.7em] text-[#aaa]">
-        © 2014 Sua Empresa Climatização · Todos os direitos reservados
+        © 2014 MoveAR Climatização · Todos os direitos reservados
       </div>
     </div>
   );
@@ -149,14 +150,14 @@ function Depois({ on }: { on: boolean }) {
           </span>
         )}
 
-        {/* conteúdo */}
-        <div className="relative z-10 flex h-full flex-col">
-          <div className="flex items-center justify-between px-[3em] py-[1.3em]">
+        {/* conteúdo: tudo no mesmo grid, com margem de 3em dos dois lados */}
+        <div className="relative z-10 flex h-full flex-col px-[3em]">
+          <div className="flex items-center justify-between py-[1.3em]">
             <span className="flex items-center gap-[0.6em]">
               <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.65em] bg-gradient-to-br from-[#BAE6FD] to-[#2563EB]">
                 <Snowflake className="h-[1.15em] w-[1.15em] text-white" strokeWidth={2.4} />
               </span>
-              <span className="font-display text-[1.2em] font-bold tracking-[-0.02em]">Sua Empresa</span>
+              <span className="font-display text-[1.25em] font-bold tracking-[-0.02em]">Move<span className="text-[#7DD3FC]">AR</span></span>
             </span>
             <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/70">
               <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
@@ -164,44 +165,61 @@ function Depois({ on }: { on: boolean }) {
             <span className="rounded-full bg-white px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#041228]">Agendar visita</span>
           </div>
 
-          <div className="flex flex-1 flex-col justify-center px-[3em] pb-[2em] sm:max-w-[52%]">
-            <p className="flex items-center gap-[0.6em] text-[0.78em] font-medium uppercase tracking-[0.28em] text-[#7DD3FC]">
-              <span className="h-px w-[2.4em] bg-[#7DD3FC]" /> Climatização residencial e comercial
-            </p>
-            <div className="mt-[0.7em] grid font-display text-[4.4em] font-bold leading-[0.92] tracking-[-0.045em]">
-              <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
-                Tá calor aí?
-                <span className="block font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-[#FDBA74]">A gente resolve.</span>
-              </p>
-              <p className={`[grid-area:1/1] transition-all delay-300 duration-700 ${on ? "opacity-100" : "translate-y-[0.3em] opacity-0 blur-sm"}`}>
-                Frio na medida.
-                <span className="block bg-gradient-to-r from-[#E0F2FE] via-[#7DD3FC] to-[#38BDF8] bg-clip-text pb-[0.08em] font-accent text-[1.08em] font-normal italic tracking-[-0.02em] text-transparent">Sem dor de cabeça.</span>
-              </p>
-            </div>
-            <p className="mt-[1em] max-w-[27em] text-[1.02em] leading-relaxed text-white/70">
-              Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
-            </p>
-            <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
-              <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#041228]">
-                Pedir orçamento
-                <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#041228] text-white">→</span>
+          <div className="grid flex-1 items-center sm:grid-cols-2">
+            <div>
+              <span className="inline-flex items-center gap-[0.5em] rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 px-[0.9em] py-[0.35em] text-[0.75em] font-semibold text-[#BAE6FD]">
+                <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> Instalação e manutenção
               </span>
-              <span className="flex items-center gap-[0.5em] rounded-full border border-white/25 bg-white/[0.04] px-[1.3em] py-[0.75em] text-[0.95em] font-medium text-white/90 backdrop-blur">
-                <MessageCircle className="h-[1.15em] w-[1.15em] text-[#4ADE80]" /> WhatsApp
-              </span>
+              <div className="mt-[0.9em] grid font-display text-[4.2em] font-bold leading-[0.95] tracking-[-0.045em]">
+                <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
+                  Tá calor aí?
+                  <span className="block text-[#FDBA74]">A gente resolve.</span>
+                </p>
+                <p className={`[grid-area:1/1] transition-all delay-300 duration-700 ${on ? "opacity-100" : "translate-y-[0.3em] opacity-0 blur-sm"}`}>
+                  Frio na medida.
+                  <span className="block text-[#7DD3FC]">Sem dor de cabeça.</span>
+                </p>
+              </div>
+              <p className="mt-[1em] max-w-[24em] text-[1.02em] leading-relaxed text-white/70">
+                Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
+              </p>
+              <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
+                <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#041228]">
+                  Pedir orçamento
+                  <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#041228] text-white">→</span>
+                </span>
+                <span className="flex items-center gap-[0.5em] rounded-full border border-white/25 bg-white/[0.04] px-[1.3em] py-[0.75em] text-[0.95em] font-medium text-white/90 backdrop-blur">
+                  <WhatsAppIcon className="h-[1.15em] w-[1.15em]" colorido /> WhatsApp
+                </span>
+              </div>
             </div>
-            <p className="mt-[1.6em] hidden sm:flex items-center gap-[0.9em] text-[0.8em] text-white/50">
-              <span>Casas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-              <span>Apartamentos</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-              <span>Lojas</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-              <span>Escritórios</span><span className="h-[0.25em] w-[0.25em] rounded-full bg-white/30" />
-              <span>Clínicas</span>
-            </p>
+          </div>
+
+          {/* faixa de benefícios alinhada ao mesmo grid */}
+          <div className="hidden sm:grid grid-cols-3 border-t border-white/10 py-[1.2em]">
+            {[
+              [Wrench, "Instalação limpa", "sem sujeira e sem quebra-quebra"],
+              [Clock, "Técnico no horário", "você recebe o aviso antes"],
+              [CalendarCheck, "Manutenção lembrada", "a gente avisa quando é a hora"],
+            ].map(([Ic, t, d], i) => {
+              const Icone = Ic as typeof Wrench;
+              return (
+                <div key={t as string} className={`flex items-center gap-[0.8em] ${i ? "border-l border-white/10 pl-[1.4em]" : ""}`}>
+                  <span className="flex h-[2.2em] w-[2.2em] flex-none items-center justify-center rounded-[0.6em] bg-white/[0.06]">
+                    <Icone className="h-[1.1em] w-[1.1em] text-[#7DD3FC]" />
+                  </span>
+                  <span className="leading-tight">
+                    <span className="block text-[0.85em] font-semibold">{t as string}</span>
+                    <span className="block text-[0.72em] text-white/55">{d as string}</span>
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* cartão de temperatura, flutuando na cena */}
-        <div className="absolute bottom-[9%] right-[3.5%] z-10 hidden sm:block w-[13em] rounded-[1.2em] border border-white/15 bg-[#041228]/60 p-[1.1em] backdrop-blur-xl shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]">
+        {/* cartão de temperatura, preso logo abaixo do aparelho */}
+        <div className="absolute z-10 hidden sm:block w-[14em] -translate-x-1/2 rounded-[1.2em] border border-white/15 bg-[#041228]/60 p-[1.1em] backdrop-blur-xl shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]" style={{ left: `${AR.x}%`, top: "53%" }}>
           <div className="flex items-center justify-between text-[0.75em] text-white/60">
             <span>Sala de estar</span>
             <span className={`flex items-center gap-[0.35em] ${on ? "text-[#4ADE80]" : "text-[#FDBA74]"}`}>
@@ -235,7 +253,7 @@ function Depois({ on }: { on: boolean }) {
 const points = [
   { Icon: MousePointerClick, title: "Entende na hora", text: "O visitante sabe o que você faz antes de rolar a página." },
   { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, sem zoom e sem texto cortado." },
-  { Icon: MessageCircle, title: "Leva até a conversa", text: "Cada seção aponta para o mesmo lugar: falar com você." },
+  { Icon: WhatsAppIcon, title: "Leva até a conversa", text: "Cada seção aponta para o mesmo lugar: falar com você." },
 ];
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
