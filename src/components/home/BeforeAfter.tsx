@@ -136,7 +136,7 @@ function Depois({ on }: { on: boolean }) {
         />
 
         {/* névoa fria saindo do aparelho */}
-        <div className={`ba-mist-wrap absolute h-[62%] w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 10}%` }}>
+        <div className={`ba-mist-wrap absolute h-[52%] w-[34%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 10}%`, clipPath: "polygon(13% 0, 87% 0, 100% 100%, 0 100%)" }}>
           {[0, 1].map((k) => (
             <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
               <rect width="200" height="340" filter="url(#ba-fog)" />
@@ -223,31 +223,49 @@ function Depois({ on }: { on: boolean }) {
           </div>
         </div>
 
-        {/* controle do aparelho: um widget de app, encaixado no canto do ar-condicionado */}
+        {/* temperatura dentro do jato de ar: um leque de vidro fosco com a névoa correndo por dentro */}
         <div
-          className={`absolute z-10 hidden sm:block w-[14.5em] rounded-[1.3em] border border-white/15 bg-[#06182F]/85 p-[1.1em] backdrop-blur-xl shadow-[0_1.8em_3.5em_-1em_rgba(0,0,0,0.7)] transition-transform duration-700 ${on ? "translate-y-0" : "translate-y-[0.4em]"}`}
-          style={{ left: `${AR.x + 6}%`, top: "41%" }}
+          className={`absolute z-10 hidden sm:block h-[12.5em] w-[22em] -translate-x-1/2 transition-all duration-[1200ms] ${on ? "opacity-100" : "opacity-80"}`}
+          style={{ left: `${AR.x}%`, top: "47%", WebkitMaskImage: "linear-gradient(to bottom, #000 62%, transparent 100%)", maskImage: "linear-gradient(to bottom, #000 62%, transparent 100%)" }}
         >
-          <div className="flex items-center justify-between text-[0.75em]">
-            <span className="font-semibold text-white/85">Sala de estar</span>
-            <span className={`flex items-center gap-[0.35em] rounded-full px-[0.6em] py-[0.15em] ${on ? "bg-[#4ADE80]/15 text-[#4ADE80]" : "bg-[#FB923C]/15 text-[#FDBA74]"}`}>
-              <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> {on ? "Ligado" : "Desligado"}
+          <div
+            className="absolute inset-0 backdrop-blur-[6px]"
+            style={{
+              clipPath: "polygon(13% 0, 87% 0, 100% 100%, 0 100%)",
+              background: on
+                ? "linear-gradient(180deg, rgba(224,242,254,0.30), rgba(125,211,252,0.10) 55%, rgba(125,211,252,0.02))"
+                : "linear-gradient(180deg, rgba(253,186,116,0.22), rgba(251,146,60,0.06) 60%, transparent)",
+            }}
+          />
+          <svg className="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 220 125" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <clipPath id="ba-leque"><polygon points="28.6,0 191.4,0 220,125 0,125" /></clipPath>
+              <linearGradient id="ba-borda" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stopColor="#E0F2FE" stopOpacity="0.9" />
+                <stop offset="1" stopColor="#7DD3FC" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <g clipPath="url(#ba-leque)" className={`transition-opacity duration-1000 ${on ? "opacity-60" : "opacity-0"}`}>
+              <rect className="ba-mist" width="220" height="250" y="-125" filter="url(#ba-fog)" />
+            </g>
+            <line x1="28.6" y1="0.5" x2="191.4" y2="0.5" stroke="#E0F2FE" strokeOpacity="0.9" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+            <polyline points="28.6,0 0,125" fill="none" stroke="url(#ba-borda)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+            <polyline points="191.4,0 220,125" fill="none" stroke="url(#ba-borda)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          </svg>
+
+          <div className="relative flex h-full flex-col items-center pt-[1.1em] text-center">
+            <span className="flex items-center gap-[0.45em] text-[0.72em] font-semibold uppercase tracking-[0.22em] text-white/75">
+              <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80] shadow-[0_0_0.6em_#4ADE80]" : "bg-[#FB923C]"}`} />
+              Sala de estar
             </span>
-          </div>
-          <div className="mt-[0.5em] flex items-end justify-between">
-            <p className="font-display text-[3em] font-bold leading-none tracking-[-0.04em] tabular-nums">
-              {temp}<span className={`align-top text-[0.45em] ${on ? "text-[#7DD3FC]" : "text-[#FDBA74]"}`}>°C</span>
+            <p className="mt-[0.15em] font-display text-[4.4em] font-light leading-none tracking-[-0.05em] tabular-nums [text-shadow:0_0.1em_0.6em_rgba(4,18,40,0.5)]">
+              {temp}<span className={`align-top text-[0.4em] font-medium ${on ? "text-[#BAE6FD]" : "text-[#FDBA74]"}`}>°C</span>
             </p>
-            <span className="mb-[0.3em] flex items-end gap-[0.18em]" aria-hidden="true">
-              {[0.5, 0.8, 1.1, 1.4].map((h, i) => (
-                <span key={h} className={`w-[0.3em] rounded-full transition-colors duration-500 ${on && i < 3 ? "bg-[#7DD3FC]" : "bg-white/20"}`} style={{ height: `${h}em` }} />
+            <p className="mt-[0.5em] flex gap-[1.1em] text-[0.72em] font-semibold text-white/55">
+              {["Frio", "Auto", "Silêncio"].map((m, i) => (
+                <span key={m} className={on && i === 0 ? "text-white underline decoration-[#7DD3FC] decoration-2 underline-offset-[0.4em]" : ""}>{m}</span>
               ))}
-            </span>
-          </div>
-          <div className="mt-[0.8em] grid grid-cols-3 gap-[0.35em] text-[0.7em] font-semibold">
-            {["Frio", "Auto", "Silêncio"].map((m, i) => (
-              <span key={m} className={`rounded-[0.6em] py-[0.45em] text-center ${on && i === 0 ? "bg-[#7DD3FC] text-[#041228]" : "bg-white/[0.06] text-white/60"}`}>{m}</span>
-            ))}
+            </p>
           </div>
         </div>
       </div>
