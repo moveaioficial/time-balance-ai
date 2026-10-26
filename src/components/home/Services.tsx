@@ -1,4 +1,4 @@
-import { Monitor, PenTool, LayoutGrid, Boxes, ArrowUpRight } from "lucide-react";
+import { Monitor, PenTool, LayoutGrid, Boxes } from "lucide-react";
 import { useContactModal } from "@/components/ui/ContactModal";
 
 const services = [
@@ -62,7 +62,6 @@ export function Services() {
                 <span className="flex h-14 w-14 items-center justify-center rounded-2xl text-white shadow-lg" style={{ background: "var(--brand-gradient)" }}>
                   <s.icon className="h-6 w-6" strokeWidth={2} />
                 </span>
-                <ArrowUpRight className="h-6 w-6 text-[#551F7E] opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0" />
               </div>
               <h3 className="relative mt-8 text-3xl font-bold text-[#0C0416]">{s.title}</h3>
               <p className="relative mt-3 text-base leading-relaxed text-[#3E3650]">{s.text}</p>

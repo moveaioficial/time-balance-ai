@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MousePointerClick, Smartphone, ChevronsLeftRight, Snowflake, Wrench, Clock, CalendarCheck } from "lucide-react";
+import { MousePointerClick, Smartphone, ChevronsLeftRight, Snowflake, Wrench, Clock, CalendarCheck, Check } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
 // Antes e depois arrastável do MESMO site (MoveAR, empresa fictícia de climatização, só para ilustrar).
@@ -150,27 +150,28 @@ function Depois({ on }: { on: boolean }) {
           </span>
         )}
 
-        {/* conteúdo: tudo no mesmo grid, com margem de 3em dos dois lados */}
-        <div className="relative z-10 flex h-full flex-col px-[3em]">
-          <div className="flex items-center justify-between py-[1.3em]">
+        {/* conteúdo: cabeçalho separado por borda, abertura em duas colunas e faixa de benefícios, tudo na mesma margem */}
+        <div className="relative z-10 flex h-full flex-col">
+          <header className="flex items-center justify-between border-b border-white/10 bg-[#041228]/45 px-[3em] py-[1em] backdrop-blur-md">
             <span className="flex items-center gap-[0.6em]">
               <span className="flex h-[2.1em] w-[2.1em] items-center justify-center rounded-[0.65em] bg-gradient-to-br from-[#BAE6FD] to-[#2563EB]">
                 <Snowflake className="h-[1.15em] w-[1.15em] text-white" strokeWidth={2.4} />
               </span>
               <span className="font-display text-[1.25em] font-bold tracking-[-0.02em]">Move<span className="text-[#7DD3FC]">AR</span></span>
             </span>
-            <span className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/70">
-              <span>Residencial</span><span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
-            </span>
+            <nav className="hidden sm:flex items-center gap-[1.8em] text-[0.85em] text-white/65">
+              <span className="relative text-white">Residencial<span className="absolute -bottom-[0.55em] left-0 h-[0.15em] w-full rounded-full bg-[#7DD3FC]" /></span>
+              <span>Empresas</span><span>Planos PMOC</span><span>Contato</span>
+            </nav>
             <span className="rounded-full bg-white px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#041228]">Agendar visita</span>
-          </div>
+          </header>
 
-          <div className="grid flex-1 items-center sm:grid-cols-2">
+          <div className="grid flex-1 items-center px-[3em] sm:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-[0.5em] rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 px-[0.9em] py-[0.35em] text-[0.75em] font-semibold text-[#BAE6FD]">
                 <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> Instalação e manutenção
               </span>
-              <div className="mt-[0.9em] grid font-display text-[4.2em] font-bold leading-[0.95] tracking-[-0.045em]">
+              <div className="mt-[0.2em] grid font-display text-[4.2em] font-bold leading-[0.95] tracking-[-0.045em]">
                 <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
                   Tá calor aí?
                   <span className="block text-[#FDBA74]">A gente resolve.</span>
@@ -180,11 +181,11 @@ function Depois({ on }: { on: boolean }) {
                   <span className="block text-[#7DD3FC]">Sem dor de cabeça.</span>
                 </p>
               </div>
-              <p className="mt-[1em] max-w-[24em] text-[1.02em] leading-relaxed text-white/70">
+              <p className="mt-[0.9em] max-w-[24em] text-[1.02em] leading-relaxed text-white/70">
                 Instalação limpa, técnico no horário e manutenção que você nem precisa lembrar.
               </p>
-              <div className="mt-[1.5em] flex flex-wrap items-center gap-[0.8em]">
-                <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#041228]">
+              <div className="mt-[1.4em] flex flex-wrap items-center gap-[0.8em]">
+                <span className="flex items-center gap-[0.6em] rounded-full bg-white py-[0.75em] pl-[1.5em] pr-[0.75em] text-[0.95em] font-semibold text-[#041228] shadow-[0_0.8em_2em_-0.6em_rgba(125,211,252,0.6)]">
                   Pedir orçamento
                   <span className="flex h-[1.7em] w-[1.7em] items-center justify-center rounded-full bg-[#041228] text-white">→</span>
                 </span>
@@ -192,11 +193,15 @@ function Depois({ on }: { on: boolean }) {
                   <WhatsAppIcon className="h-[1.15em] w-[1.15em]" colorido /> WhatsApp
                 </span>
               </div>
+              <p className="mt-[1.2em] flex flex-wrap gap-x-[1.4em] gap-y-[0.3em] text-[0.78em] text-white/60">
+                <span className="flex items-center gap-[0.4em]"><Check className="h-[1.1em] w-[1.1em] text-[#4ADE80]" /> Orçamento em até 24 h</span>
+                <span className="flex items-center gap-[0.4em]"><Check className="h-[1.1em] w-[1.1em] text-[#4ADE80]" /> Garantia por escrito</span>
+              </p>
             </div>
           </div>
 
           {/* faixa de benefícios alinhada ao mesmo grid */}
-          <div className="hidden sm:grid grid-cols-3 border-t border-white/10 py-[1.2em]">
+          <div className="hidden sm:grid grid-cols-3 border-t border-white/10 bg-[#041228]/30 px-[3em] py-[1.1em]">
             {[
               [Wrench, "Instalação limpa", "sem sujeira e sem quebra-quebra"],
               [Clock, "Técnico no horário", "você recebe o aviso antes"],
@@ -218,21 +223,32 @@ function Depois({ on }: { on: boolean }) {
           </div>
         </div>
 
-        {/* cartão de temperatura, preso logo abaixo do aparelho */}
-        <div className="absolute z-10 hidden sm:block w-[14em] -translate-x-1/2 rounded-[1.2em] border border-white/15 bg-[#041228]/60 p-[1.1em] backdrop-blur-xl shadow-[0_1.5em_3em_-1em_rgba(0,0,0,0.6)]" style={{ left: `${AR.x}%`, top: "53%" }}>
-          <div className="flex items-center justify-between text-[0.75em] text-white/60">
-            <span>Sala de estar</span>
-            <span className={`flex items-center gap-[0.35em] ${on ? "text-[#4ADE80]" : "text-[#FDBA74]"}`}>
+        {/* controle do aparelho: um widget de app, encaixado no canto do ar-condicionado */}
+        <div
+          className={`absolute z-10 hidden sm:block w-[14.5em] rounded-[1.3em] border border-white/15 bg-[#06182F]/85 p-[1.1em] backdrop-blur-xl shadow-[0_1.8em_3.5em_-1em_rgba(0,0,0,0.7)] transition-transform duration-700 ${on ? "translate-y-0" : "translate-y-[0.4em]"}`}
+          style={{ left: `${AR.x + 6}%`, top: "41%" }}
+        >
+          <div className="flex items-center justify-between text-[0.75em]">
+            <span className="font-semibold text-white/85">Sala de estar</span>
+            <span className={`flex items-center gap-[0.35em] rounded-full px-[0.6em] py-[0.15em] ${on ? "bg-[#4ADE80]/15 text-[#4ADE80]" : "bg-[#FB923C]/15 text-[#FDBA74]"}`}>
               <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> {on ? "Ligado" : "Desligado"}
             </span>
           </div>
-          <p className="mt-[0.3em] font-display text-[3.2em] font-bold leading-none tracking-[-0.04em] tabular-nums">
-            {temp}<span className={`align-top text-[0.5em] ${on ? "text-[#7DD3FC]" : "text-[#FDBA74]"}`}>°C</span>
-          </p>
-          <div className="mt-[0.7em] h-[0.35em] overflow-hidden rounded-full bg-white/10">
-            <div className="h-full rounded-full bg-gradient-to-r from-[#38BDF8] to-[#BAE6FD] transition-all duration-[1400ms]" style={{ width: on ? "62%" : "0%" }} />
+          <div className="mt-[0.5em] flex items-end justify-between">
+            <p className="font-display text-[3em] font-bold leading-none tracking-[-0.04em] tabular-nums">
+              {temp}<span className={`align-top text-[0.45em] ${on ? "text-[#7DD3FC]" : "text-[#FDBA74]"}`}>°C</span>
+            </p>
+            <span className="mb-[0.3em] flex items-end gap-[0.18em]" aria-hidden="true">
+              {[0.5, 0.8, 1.1, 1.4].map((h, i) => (
+                <span key={h} className={`w-[0.3em] rounded-full transition-colors duration-500 ${on && i < 3 ? "bg-[#7DD3FC]" : "bg-white/20"}`} style={{ height: `${h}em` }} />
+              ))}
+            </span>
           </div>
-          <p className="mt-[0.5em] text-[0.72em] text-white/55">{on ? "Modo silencioso · filtro limpo" : "Ambiente abafado"}</p>
+          <div className="mt-[0.8em] grid grid-cols-3 gap-[0.35em] text-[0.7em] font-semibold">
+            {["Frio", "Auto", "Silêncio"].map((m, i) => (
+              <span key={m} className={`rounded-[0.6em] py-[0.45em] text-center ${on && i === 0 ? "bg-[#7DD3FC] text-[#041228]" : "bg-white/[0.06] text-white/60"}`}>{m}</span>
+            ))}
+          </div>
         </div>
       </div>
 
