@@ -77,10 +77,24 @@ function Antes() {
   );
 }
 
-// Ponto de onde sai o ar frio (centro do aparelho na foto de fundo), em % do quadro. Usado pela onda fria e pela área de clique.
+// Ponto de onde sai o ar frio (centro do aparelho), em % do quadro. Usado pela onda fria e pela área de clique.
+// No celular o quadro fica em pé: o aparelho sobe para o centro do topo e o texto desce.
 const AR = { x: 71, y: 34 };
+const AR_CEL = { x: 50, y: 20 };
+type Ponto = typeof AR;
 
-function Depois({ on }: { on: boolean }) {
+function useCelular() {
+  const [cel, setCel] = useState(() => typeof window !== "undefined" && window.matchMedia("(max-width: 639px)").matches);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const fn = () => setCel(mq.matches);
+    mq.addEventListener("change", fn);
+    return () => mq.removeEventListener("change", fn);
+  }, []);
+  return cel;
+}
+
+function Depois({ on, ar, cel }: { on: boolean; ar: Ponto; cel: boolean }) {
   // a temperatura desce de 31° para 22° quando o ar liga
   const [temp, setTemp] = useState(31);
   useEffect(() => {
@@ -123,7 +137,7 @@ function Depois({ on }: { on: boolean }) {
         </svg>
 
         {/* o aparelho, recortado, flutuando no azul do site */}
-        <div className="absolute hidden sm:block w-[34%] -translate-x-1/2" style={{ left: `${AR.x}%`, top: "22%" }}>
+        <div className="absolute w-[64%] sm:w-[34%] -translate-x-1/2" style={{ left: `${ar.x}%`, top: cel ? "11%" : "22%" }}>
           <div className={`absolute -inset-[18%] rounded-full bg-[radial-gradient(closest-side,rgba(125,211,252,0.35),transparent)] blur-[2em] transition-opacity duration-[1500ms] ${on ? "opacity-100" : "opacity-40"}`} />
           <img src="/img/clima-ar-recorte.webp" alt="" className="relative w-full drop-shadow-[0_2.4em_2.4em_rgba(0,0,0,0.55)]" />
           <div className={`absolute inset-0 rounded-[1em] bg-[#7DD3FC] mix-blend-multiply transition-opacity duration-[1500ms] ${on ? "opacity-20" : "opacity-0"}`} />
@@ -131,12 +145,12 @@ function Depois({ on }: { on: boolean }) {
 
         {/* luz fria que o aparelho joga na parede quando liga */}
         <div
-          className={`pointer-events-none absolute h-[70%] w-[34%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(125,211,252,0.45),transparent)] blur-[1.5em] transition-opacity duration-[1500ms] ${on ? "opacity-100" : "opacity-0"}`}
-          style={{ left: `${AR.x}%`, top: `${AR.y}%` }}
+          className={`pointer-events-none absolute h-[40%] w-[64%] sm:h-[70%] sm:w-[34%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(125,211,252,0.45),transparent)] blur-[1.5em] transition-opacity duration-[1500ms] ${on ? "opacity-100" : "opacity-0"}`}
+          style={{ left: `${ar.x}%`, top: `${ar.y}%` }}
         />
 
         {/* névoa fria saindo do aparelho */}
-        <div className={`ba-mist-wrap absolute h-[62%] w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${AR.x}%`, top: `${AR.y + 10}%` }}>
+        <div className={`ba-mist-wrap absolute h-[32%] w-[56%] sm:h-[62%] sm:w-[38%] -translate-x-1/2 transition-opacity duration-1000 ${on ? "opacity-100" : "opacity-0"}`} style={{ left: `${ar.x}%`, top: `${ar.y + (cel ? 7 : 10)}%` }}>
           {[0, 1].map((k) => (
             <svg key={k} className="ba-mist absolute inset-x-0 top-0 h-[170%] w-full" style={{ animationDelay: `${k * -3.5}s` }} viewBox="0 0 200 340" preserveAspectRatio="none">
               <rect width="200" height="340" filter="url(#ba-fog)" />
@@ -145,7 +159,7 @@ function Depois({ on }: { on: boolean }) {
         </div>
 
         {!on && (
-          <span className="ba-pulse absolute flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full border border-white/15 bg-[#041228]/80 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur" style={{ left: `${AR.x}%`, top: `${AR.y - 2}%` }}>
+          <span className="ba-pulse absolute flex -translate-x-1/2 items-center gap-[0.5em] whitespace-nowrap rounded-full border border-white/15 bg-[#041228]/80 px-[1em] py-[0.5em] text-[0.8em] font-semibold backdrop-blur" style={{ left: `${ar.x}%`, top: `${ar.y - 2}%` }}>
             <span className="h-[0.55em] w-[0.55em] rounded-full bg-[#FB923C]" /> Toque para ligar
           </span>
         )}
@@ -166,12 +180,12 @@ function Depois({ on }: { on: boolean }) {
             <span className="rounded-full bg-white px-[1.2em] py-[0.55em] text-[0.85em] font-semibold text-[#041228]">Agendar visita</span>
           </header>
 
-          <div className="grid flex-1 items-center px-[3em] sm:grid-cols-2">
+          <div className="grid flex-1 items-end pb-[2.6em] px-[3em] sm:items-center sm:pb-0 sm:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-[0.5em] rounded-full border border-[#7DD3FC]/30 bg-[#7DD3FC]/10 px-[0.9em] py-[0.35em] text-[0.75em] font-semibold text-[#BAE6FD]">
                 <span className={`h-[0.5em] w-[0.5em] rounded-full ${on ? "bg-[#4ADE80]" : "bg-[#FB923C]"}`} /> Instalação e manutenção
               </span>
-              <div className="mt-[0.2em] grid font-display text-[4.2em] font-bold leading-[0.95] tracking-[-0.045em]">
+              <div className="mt-[0.2em] grid font-display text-[3.4em] sm:text-[4.2em] font-bold leading-[0.95] tracking-[-0.045em]">
                 <p className={`[grid-area:1/1] transition-all duration-700 ${on ? "translate-y-[-0.2em] opacity-0 blur-sm" : "opacity-100"}`}>
                   Tá calor aí?
                   <span className="block text-[#FDBA74]">A gente resolve.</span>
@@ -225,14 +239,14 @@ function Depois({ on }: { on: boolean }) {
 
         {/* temperatura escrita direto na névoa: sem cartão, só o texto com sombra para destacar no branco */}
         <div
-          className={`pointer-events-none absolute z-10 hidden sm:flex -translate-x-1/2 flex-col items-center text-center transition-all duration-[1200ms] ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[0.6em]"}`}
-          style={{ left: `${AR.x}%`, top: "52%", textShadow: "0 0.08em 0.5em rgba(3,13,28,0.85), 0 0 1.4em rgba(3,13,28,0.6)" }}
+          className={`pointer-events-none absolute z-10 flex -translate-x-1/2 flex-col items-center text-center transition-all duration-[1200ms] ${on ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[0.6em]"}`}
+          style={{ left: `${ar.x}%`, top: cel ? "33%" : "52%", textShadow: "0 0.08em 0.5em rgba(3,13,28,0.85), 0 0 1.4em rgba(3,13,28,0.6)" }}
         >
           <span className="flex items-center gap-[0.45em] text-[0.72em] font-semibold uppercase tracking-[0.24em] text-white/90">
             <span className="h-[0.5em] w-[0.5em] rounded-full bg-[#4ADE80] shadow-[0_0_0.6em_#4ADE80]" />
             Sala de estar
           </span>
-          <p className="mt-[0.1em] font-display text-[4.6em] font-light leading-none tracking-[-0.05em] tabular-nums text-white">
+          <p className="mt-[0.1em] font-display text-[3.6em] sm:text-[4.6em] font-light leading-none tracking-[-0.05em] tabular-nums text-white">
             {temp}<span className="align-top text-[0.4em] font-medium text-[#BAE6FD]">°C</span>
           </p>
           <p className="mt-[0.35em] flex gap-[1.1em] text-[0.72em] font-semibold text-white/70">
@@ -244,14 +258,14 @@ function Depois({ on }: { on: boolean }) {
       </div>
 
       {/* lufada de névoa que cobre e limpa o site quando o ar liga */}
-      <div className={`ba-burst pointer-events-none absolute inset-0 z-[15] ${on ? "ba-burst-on" : ""}`} style={{ transformOrigin: `${AR.x}% ${AR.y}%` }}>
+      <div className={`ba-burst pointer-events-none absolute inset-0 z-[15] ${on ? "ba-burst-on" : ""}`} style={{ transformOrigin: `${ar.x}% ${ar.y}%` }}>
         <svg className="h-full w-full" viewBox="0 0 400 225" preserveAspectRatio="none"><rect width="400" height="225" filter="url(#ba-fog)" /></svg>
       </div>
 
       {/* calor por cima do site: some em onda a partir do aparelho quando o ar liga */}
       <div
         className={`ba-heat pointer-events-none absolute inset-0 z-20 ${on ? "ba-cool" : ""}`}
-        style={{ ["--x" as string]: `${AR.x}%`, ["--y" as string]: `${AR.y}%` }}
+        style={{ ["--x" as string]: `${ar.x}%`, ["--y" as string]: `${ar.y}%` }}
       />
     </div>
   );
@@ -270,6 +284,8 @@ export function BeforeAfter() {
   const [touched, setTouched] = useState(false);
   const [arLigado, setArLigado] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
+  const cel = useCelular();
+  const ar = cel ? AR_CEL : AR;
 
   // o ar-condicionado do site novo liga sozinho quando o divisor revela boa parte do "depois"
   useEffect(() => {
@@ -341,7 +357,7 @@ export function BeforeAfter() {
             <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
               <Antes />
               <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-                <Depois on={arLigado} />
+                <Depois on={arLigado} ar={ar} cel={cel} />
               </div>
             </div>
 
@@ -366,13 +382,13 @@ export function BeforeAfter() {
             />
 
             {/* área de clique sobre o aparelho do site novo (fica acima do arraste) */}
-            {pos < AR.x - 14 && (
+            {pos < ar.x - 14 && (
               <button
                 type="button"
                 onClick={() => { stopHint(); setArLigado(true); }}
                 aria-label="Ligar o ar-condicionado do site de exemplo"
-                className="absolute z-10 hidden sm:block h-[24%] w-[26%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl"
-                style={{ left: `${AR.x}%`, top: `${AR.y}%` }}
+                className="absolute z-10 h-[16%] w-[60%] sm:h-[24%] sm:w-[26%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl"
+                style={{ left: `${ar.x}%`, top: `${ar.y}%` }}
               />
             )}
           </div>
