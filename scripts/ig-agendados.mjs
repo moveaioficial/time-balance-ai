@@ -2,7 +2,7 @@
 // Roda no GitHub Actions (.github/workflows/instagram-agendado.yml), sem depender de nenhum PC ligado.
 //
 // agenda.json: [{ "slug": "teste-do-eleitor", "quando": "2026-10-25T11:00:00-03:00" }, ...]
-// As imagens (01.jpg, 02.jpg...) e a legenda-instagram.txt ficam em public/ig/<slug>/ e são servidas por www.moveai.tech.
+// As imagens e vídeos (01.jpg, 02.mp4...) ou um reel.mp4, e a legenda-instagram.txt, ficam em public/ig/<slug>/ e são servidos por www.moveai.tech.
 // O token vem do segredo IG_TOKEN do repositório e nunca é impresso.
 //
 // Segurança contra post duplicado: antes de publicar, confere as legendas dos últimos 25 posts do perfil.
@@ -36,7 +36,7 @@ async function call(method, endpoint, params = {}) {
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function esperar(id) {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 40; i++) {  // vídeo demora mais para processar que foto
     const s = await call('GET', id, { fields: 'status_code' });
     if (s.status_code === 'FINISHED') return;
     if (['ERROR', 'EXPIRED'].includes(s.status_code)) throw new Error(`container ${id}: ${s.status_code}`);
@@ -70,19 +70,29 @@ for (const item of devidos) {
     const pasta = path.join(raiz, 'public/ig', item.slug);
     const legenda = fs.readFileSync(path.join(pasta, 'legenda-instagram.txt'), 'utf8').replace(/\r\n/g, '\n').trim();
     if (jaPostadas.has(legenda.split('\n')[0].trim())) { console.log(`${item.slug}: já publicado, pulando.`); continue; }
-    const fotos = fs.readdirSync(pasta).filter(f => /^\d+\.jpe?g$/i.test(f)).sort();
-    if (fotos.length < 2 || fotos.length > 20) throw new Error(`precisa de 2 a 20 JPEGs, achei ${fotos.length}`);
-    const urls = fotos.map(f => `${BASE}/ig/${item.slug}/${f}`);
+    // Reel: a pasta tem um reel.mp4. Carrossel: 01.jpg, 02.mp4, 03.jpg... (fotos e vídeos na ordem do número).
+    const reel = fs.existsSync(path.join(pasta, 'reel.mp4'));
+    const itens = reel ? ['reel.mp4'] : fs.readdirSync(pasta).filter(f => /^\d+\.(jpe?g|mp4)$/i.test(f)).sort();
+    if (!reel && (itens.length < 2 || itens.length > 20)) throw new Error(`precisa de 2 a 20 itens (JPEG ou MP4), achei ${itens.length}`);
+    const urls = itens.map(f => `${BASE}/ig/${item.slug}/${f}`);
     for (const u of urls) {
       const r = await fetch(u, { method: 'HEAD' });
-      if (!r.ok) throw new Error(`imagem fora do ar: ${u} (${r.status})`);
+      if (!r.ok) throw new Error(`arquivo fora do ar: ${u} (${r.status})`);
     }
-    const filhos = [];
-    for (const u of urls) filhos.push((await call('POST', `${id}/media`, { image_url: u, is_carousel_item: 'true' })).id);
-    for (const f of filhos) await esperar(f);
-    const car = await call('POST', `${id}/media`, { media_type: 'CAROUSEL', children: filhos.join(','), caption: legenda });
-    await esperar(car.id);
-    const pub = await call('POST', `${id}/media_publish`, { creation_id: car.id });
+    let criacao;
+    if (reel) {
+      criacao = (await call('POST', `${id}/media`, { media_type: 'REELS', video_url: urls[0], caption: legenda, share_to_feed: 'true' })).id;
+    } else {
+      const filhos = [];
+      for (const u of urls) {
+        const video = /\.mp4$/i.test(u);
+        filhos.push((await call('POST', `${id}/media`, video ? { media_type: 'VIDEO', video_url: u, is_carousel_item: 'true' } : { image_url: u, is_carousel_item: 'true' })).id);
+      }
+      for (const f of filhos) await esperar(f);
+      criacao = (await call('POST', `${id}/media`, { media_type: 'CAROUSEL', children: filhos.join(','), caption: legenda })).id;
+    }
+    await esperar(criacao);
+    const pub = await call('POST', `${id}/media_publish`, { creation_id: criacao });
     const post = await call('GET', pub.id, { fields: 'permalink' });
     aviso(`${item.slug}: publicado em ${post.permalink}`);
   } catch (e) {
