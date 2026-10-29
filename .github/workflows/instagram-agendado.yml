@@ -1,15 +1,21 @@
-# Publica os carrosséis agendados em public/ig/agenda.json, sem depender de PC ligado.
-# Roda de 30 em 30 minutos, das 7h às 21h30 (horário de Brasília, UTC-3).
+# Publica os posts agendados em public/ig/agenda.json, sem depender de PC ligado.
+# O cron do GitHub atrasa horas, então cada rodada fica de vigília por até ~5h40, confere a agenda a cada minuto
+# e publica no minuto certo. Antes de terminar, chama a próxima rodada enquanto houver post marcado.
+# Também começa na hora quando a agenda muda (push) e pode ser chamado à mão (workflow_dispatch).
 # Precisa do segredo IG_TOKEN em Settings > Secrets and variables > Actions.
 name: Instagram agendado
 
 on:
+  push:
+    branches: [main]
+    paths: ["public/ig/agenda.json"]
   schedule:
-    - cron: "*/10 10-23,0 * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch: {}
 
 permissions:
   contents: read
+  actions: write
 
 concurrency:
   group: instagram-agendado
@@ -18,14 +24,16 @@ concurrency:
 jobs:
   publicar:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 350
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Publicar o que estiver na hora
+      - name: Vigiar a agenda e publicar na hora
         env:
           IG_TOKEN: ${{ secrets.IG_TOKEN }}
           IG_API_VERSION: v26.0
+          ESPERA_MIN: "340"
+          GITHUB_TOKEN: ${{ github.token }}
         run: node scripts/ig-agendados.mjs
