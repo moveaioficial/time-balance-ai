@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { MousePointerClick, Smartphone, ChevronsLeftRight, Snowflake, Wrench, Clock, CalendarCheck, Check } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { AntesCelular, DepoisCelular } from "@/components/home/ConfeitariaCelular";
 
 // Antes e depois arrastável do MESMO site (MoveAR, empresa fictícia de climatização, só para ilustrar).
 // As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
@@ -355,9 +356,10 @@ export function BeforeAfter() {
             style={{ containerType: "inline-size" }}
           >
             <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
-              <Antes />
+              {/* no celular, a confeitaria; no computador, o ar-condicionado */}
+              {cel ? <AntesCelular /> : <Antes />}
               <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-                <Depois on={arLigado} ar={ar} cel={cel} />
+                {cel ? <DepoisCelular /> : <Depois on={arLigado} ar={ar} cel={cel} />}
               </div>
             </div>
 
@@ -382,7 +384,7 @@ export function BeforeAfter() {
             />
 
             {/* área de clique sobre o aparelho do site novo (fica acima do arraste) */}
-            {pos < ar.x - 14 && (
+            {!cel && pos < ar.x - 14 && (
               <button
                 type="button"
                 onClick={() => { stopHint(); setArLigado(true); }}

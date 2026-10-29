@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { Analytics } from "@vercel/analytics/react";
 import { ContactModalProvider } from "@/components/ui/ContactModal";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { TabReturn } from "@/components/TabReturn";
 import Index from "./pages/Index";
 
 // Páginas secundárias carregadas sob demanda (reduz o bundle inicial)
@@ -26,6 +27,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
+          <TabReturn />
           <Suspense fallback={<div className="min-h-screen bg-background" />}>
             <Routes>
               <Route path="/" element={<Index />} />

@@ -254,26 +254,10 @@
   .animate-marquee { animation: marquee 40s linear infinite; }
 
   /* Logo com troca de cor no hover (BrandLogo) */
-  .logo-mask {
-    position: relative;
-    display: inline-block;
-    aspect-ratio: 595 / 222;
-    background: #fff;
-    -webkit-mask: var(--logo) center / contain no-repeat;
-    mask: var(--logo) center / contain no-repeat;
-  }
-  .logo-mask::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #4DDDE7, #A78BFA, #58A6FF, #4DDDE7);
-    background-size: 300% 100%;
-    opacity: 0;
-    transition: opacity .35s ease;
-  }
-  .logo-link:hover .logo-mask::after,
-  .logo-link:focus-visible .logo-mask::after { opacity: 1; animation: logo-flow 2.4s linear infinite; }
-  @keyframes logo-flow { to { background-position: 300% 0; } }
+  .brand-logo { display: inline-block; aspect-ratio: 600 / 186; }
+  .brand-logo .brand-word { stroke: #fff; transition: stroke .35s ease; }
+  .logo-link:hover .brand-logo .brand-word,
+  .logo-link:focus-visible .brand-logo .brand-word { stroke: var(--grad); }
 
   /* Animação da abertura (HeroVisual): site feio, clique em "Ativar a Move", site bom. Ciclo de 18s.
      O site feio rola, o cursor clica no botão (39%), a faixa de luz troca o site e o site bom rola também. */
