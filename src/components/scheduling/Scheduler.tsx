@@ -15,7 +15,7 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { downloadIcs, googleCalendarUrl, outlookCalendarUrl, type CalendarEvent } from "@/lib/calendar-links";
 
 const WHATSAPP_URL =
-  "https://wa.me/5511971858103?text=" +
+  "https://wa.me/5511945689265?text=" +
   encodeURIComponent("Olá! Preenchi o formulário no site da Move AI e quero marcar uma conversa.");
 
 type Status = "loading" | "ready" | "booking" | "done" | "unavailable";
@@ -102,7 +102,7 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
       description: [
         "Conversa de 30 minutos com a equipe da Move AI.",
         booking.meetLink ? `Google Meet: ${booking.meetLink}` : "",
-        "Dúvidas: https://wa.me/5511971858103",
+        "Dúvidas: https://wa.me/5511945689265",
       ]
         .filter(Boolean)
         .join("\n"),
