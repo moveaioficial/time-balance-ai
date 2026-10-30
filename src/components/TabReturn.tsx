@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 // Quando a pessoa troca de aba, o título da aba do site pisca entre duas frases para chamar de volta.
 // Ao voltar, o título original volta na hora. Não grava nada e não usa cookie.
-const FRASES = ["Ei, volta aqui!", "Análise gratuita da marca"];
+const FRASES = ["Cliente perdido não avisa", "Análise gratuita da sua empresa"];
 
 export function TabReturn() {
   useEffect(() => {
