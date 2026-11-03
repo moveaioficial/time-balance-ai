@@ -93,7 +93,10 @@ async function publicar(item) {
   }
   let criacao;
   if (reel) {
-    criacao = (await call('POST', `${id}/media`, { media_type: 'REELS', video_url: urls[0], caption: legenda, share_to_feed: 'true' })).id;
+    // Reel só na aba de Reels, fora da grade dos posts (pedido do Rafa, 03/11/2026); capa.jpg na pasta vira a capa
+    const dados = { media_type: 'REELS', video_url: urls[0], caption: legenda, share_to_feed: 'false' };
+    if (local.includes('capa.jpg')) dados.cover_url = `${BASE}/ig/${item.slug}/capa.jpg`;
+    criacao = (await call('POST', `${id}/media`, dados)).id;
   } else {
     const filhos = [];
     for (const u of urls) {
