@@ -5,15 +5,15 @@ import { WHATSAPP_URL } from "@/lib/contato";
 const faqs = [
   {
     q: "Quanto custa?",
-    a: "Depende do escopo. Depois da análise gratuita, você recebe uma proposta com valor fechado, para saber exatamente o que está contratando.",
+    a: "Depende do que você precisa. Depois da análise gratuita, você recebe uma proposta com valor fechado e sabe exatamente o que está contratando.",
   },
   {
     q: "Quanto tempo leva?",
-    a: "O prazo vai por escrito na proposta, junto com o escopo. Uma landing page sai bem mais rápido que um site completo com marca nova, e a gente te diz isso logo no começo.",
+    a: "O prazo vai por escrito na proposta, junto com tudo o que vai ser feito. Uma landing page sai bem mais rápido que um site completo com marca nova, e a gente te diz isso logo no começo.",
   },
   {
     q: "Como funcionam os 3 dias de teste?",
-    a: "É o seu período para conhecer o nosso jeito de trabalhar antes de seguir com a gente. Os detalhes entram na proposta, por escrito.",
+    a: "São 3 dias para você conhecer o nosso jeito de trabalhar antes de decidir se segue com a gente. Os detalhes entram na proposta, por escrito.",
   },
   {
     q: "Já tenho site e logo. Vocês fazem redesign?",
@@ -48,8 +48,8 @@ export function Faq() {
             </a>{" "}
             que a gente responde.</p>
           <p className="mt-3 text-white/70">
-            Quer ver as etapas? Está em <a href="#processo" className="text-[#00C3D0] hover:underline">como trabalhamos</a>. E tem um exemplo real em{" "}
-            <a href="#na-pratica" className="text-[#00C3D0] hover:underline">na prática</a>.
+            As etapas estão em <a href="#processo" className="text-[#00C3D0] hover:underline">como trabalhamos</a>. Um exemplo de antes e depois está mais acima, na seção{" "}
+            <a href="#na-pratica" className="text-[#00C3D0] hover:underline">Na prática</a>.
           </p>
         </div>
         <div className="divide-y divide-white/10 border-y border-white/10">

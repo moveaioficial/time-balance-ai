@@ -275,7 +275,7 @@ function Depois({ on, ar, cel }: { on: boolean; ar: Ponto; cel: boolean }) {
 const points = [
   { Icon: MousePointerClick, title: "Entende na hora", text: "O visitante sabe o que você faz antes de rolar a página." },
   { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, sem zoom e sem texto cortado." },
-  { Icon: WhatsAppIcon, title: "Leva até a conversa", text: "Cada seção aponta para o mesmo lugar: falar com você." },
+  { Icon: WhatsAppIcon, title: "Leva até a conversa", text: "Cada parte da página leva o visitante a falar com você." },
 ];
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);

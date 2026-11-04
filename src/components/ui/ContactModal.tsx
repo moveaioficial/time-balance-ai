@@ -129,7 +129,7 @@ export function ContactModalProvider({ children }: { children: React.ReactNode }
       // Conta como conversão: o Vercel Analytics registra uma visita em /obrigado, sem sair da página
       (window as unknown as { va?: (e: string, p: object) => void }).va?.("pageview", { route: "/obrigado", path: "/obrigado" });
     } catch {
-      setError("Erro ao enviar. Tente novamente ou fale conosco pelo WhatsApp.");
+      setError("Não deu para enviar. Tente de novo ou chame a gente no WhatsApp.");
     } finally {
       setLoading(false);
     }

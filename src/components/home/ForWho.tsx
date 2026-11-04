@@ -3,7 +3,7 @@ import { Sprout, RefreshCw, Target } from "lucide-react";
 const cases = [
   { icon: Sprout, title: "Está começando", text: "e precisa aparecer do jeito certo desde o primeiro cliente: marca, site e um Instagram que passa confiança." },
   { icon: RefreshCw, title: "Já existe há anos", text: "mas o site e as redes não acompanharam. A empresa é melhor do que parece na internet." },
-  { icon: Target, title: "Quer resultado, não jargão", text: "e prefere alguém que explique o que vai fazer, por que e quanto custa, sem enrolação." },
+  { icon: Target, title: "Quer conversa sem enrolação", text: "e prefere alguém que explique o que vai fazer, por quê e quanto custa, sem jargão." },
 ];
 
 export function ForWho() {

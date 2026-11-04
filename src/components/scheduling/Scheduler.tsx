@@ -199,8 +199,8 @@ export function Scheduler({ lead, onClose }: { lead: Lead; onClose: () => void }
         {header}
         <div className="rounded-xl border border-border bg-background/40 p-5 text-center">
           <p className="text-sm text-muted-foreground mb-4">
-            Não conseguimos carregar a agenda agora. Nossa equipe vai entrar em contato — ou, se preferir, fale com a
-            gente pelo WhatsApp.
+            Não conseguimos carregar a agenda agora. A gente vai entrar em contato com você. Se preferir, chame a gente
+            no WhatsApp.
           </p>
           <div className="flex flex-col sm:flex-row gap-2 justify-center">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-gradient px-5 py-2.5 text-sm">

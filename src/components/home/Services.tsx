@@ -20,14 +20,14 @@ const services = [
     icon: LayoutGrid,
     n: "03",
     title: "Redes sociais",
-    text: "Posts e carrosséis todo mês, com padrão visual e texto que soa como gente. Conteúdo que faz a pessoa parar e lembrar de você.",
+    text: "Posts e carrosséis todo mês, com padrão visual e texto que soa como gente. A ideia é a pessoa parar no seu post e lembrar de você quando precisar.",
     tags: ["Carrosséis", "Posts", "Padrão visual"],
   },
   {
     icon: Boxes,
     n: "04",
     title: "Produto digital",
-    text: "Ferramentas web sob medida para a sua operação, quando o seu negócio pede algo que nenhum sistema pronto resolve.",
+    text: "Sistema feito sob medida para o dia a dia da sua empresa, quando nenhum programa pronto dá conta.",
     tags: ["Sistemas internos", "Painéis", "Sob medida"],
   },
 ];
@@ -41,7 +41,7 @@ export function Services() {
         <div className="max-w-3xl reveal">
           <p className="kicker">O que fazemos</p>
           <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-[#0C0416]">
-            Quatro frentes. O mesmo <span className="accent-word">cuidado</span>.
+            Quatro serviços, feitos com o mesmo <span className="accent-word">cuidado</span>.
           </h2>
           <p className="mt-6 text-lg text-[#3E3650] leading-relaxed">
             Você pode começar por uma delas ou juntar todas. O importante é a sua empresa parecer, em todo lugar, a empresa que ela é.

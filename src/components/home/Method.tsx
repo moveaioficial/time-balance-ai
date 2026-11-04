@@ -16,8 +16,8 @@ export function Method() {
           IA no <span className="accent-word">método</span>. Gente no comando.
         </h2>
         <p className="reveal mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-white/75">
-          A inteligência artificial deixa o nosso time pequeno rápido como um time grande. Mas quem decide, revisa e assina cada entrega somos nós.
-          Você não compra tecnologia: compra um site, uma marca e um conteúdo que funcionam.
+          Com IA, um time pequeno como o nosso trabalha no ritmo de um time grande. Mas quem decide, revisa e assina cada entrega somos nós.
+          E o que chega até você são o site, a marca e os posts, prontos para usar.
         </p>
 
         <div className="mt-16 grid md:grid-cols-3 gap-5">

@@ -13,7 +13,7 @@ export function Process() {
           <div className="lg:sticky lg:top-28 reveal">
             <p className="kicker">Como trabalhamos</p>
             <h2 className="mt-5 text-4xl sm:text-5xl font-bold tracking-[-0.03em] leading-[1.05]">
-              Do primeiro papo ao site no ar, <span className="accent-word">sem mistério</span>.
+              Do primeiro papo à entrega, <span className="accent-word">sem mistério</span>.
             </h2>
             <div className="mt-10 inline-flex items-center gap-5 rounded-2xl p-6 pr-8 text-white" style={{ background: "var(--brand-gradient)" }}>
               <span className="font-display text-6xl font-bold leading-none">3</span>

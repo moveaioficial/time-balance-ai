@@ -21,7 +21,7 @@ export function Footer() {
         <div>
           <Link to="/" className="logo-link inline-flex"><BrandLogo className="h-9" /></Link>
           <p className="mt-5 max-w-sm text-white/65 leading-relaxed">
-            Estúdio digital de site, marca, redes sociais e produto digital para pequenas e médias empresas.
+            Estúdio digital que cuida do site, da marca, das redes e dos sistemas de pequenas e médias empresas.
           </p>
           <div className="mt-6 flex gap-3">
             {[
