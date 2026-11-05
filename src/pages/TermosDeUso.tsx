@@ -11,7 +11,7 @@ export default function TermosDeUso() {
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Termos de Uso</h1>
         <p className="text-sm text-muted-foreground mb-10">
-          Última atualização: 23 de outubro de 2026
+          Última atualização: 5 de novembro de 2026
         </p>
 
         <div className="prose prose-invert prose-sm max-w-none space-y-8 text-muted-foreground leading-relaxed">
@@ -50,7 +50,7 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">5. Propriedade Intelectual</h2>
             <p>
-              Os textos, o design, a marca e o código deste site são da Move AI ou usados com licença, e são protegidos pela legislação brasileira de direitos autorais e de propriedade intelectual. Algumas fotos e vídeos de exemplo vêm de bancos de imagens gratuitos (Unsplash e Pexels), usados conforme as licenças deles. Os negócios mostrados nos exemplos do site, como a confeitaria e a barbearia, são fictícios.
+              Os textos, o design, a marca e o código deste site são da Move AI ou usados com licença, e são protegidos pela legislação brasileira de direitos autorais e de propriedade intelectual. Algumas fotos e vídeos de exemplo vêm de bancos de imagens gratuitos (Unsplash e Pexels), usados conforme as licenças deles. Os negócios mostrados nos exemplos do site, como a confeitaria e a barbearia, são fictícios. As pessoas das fotos não têm relação com a Move AI nem com esses negócios.
             </p>
           </section>
 

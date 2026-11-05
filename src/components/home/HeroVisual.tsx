@@ -5,7 +5,7 @@ import icone from "@/assets/move-ai-icone-app.webp";
 // A casca é CSS (classes hv-* em index.css), ciclo de 18s. A cena da calda, do granulado e da cereja (DocesCena.tsx) é um
 // canvas que só carrega depois da primeira pintura, no computador. No celular nada disso aparece nem baixa.
 // Com movimento reduzido, mostra só o site bom, parado no topo, com a cena no quadro final.
-// A confeitaria (Move Doces, movedoces.com.br) é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
+// A confeitaria (Move Doces, movedoces.exemplo) é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
 
 const DocesCena = lazy(() => import("@/components/home/DocesCena"));
 const SERIFA = "Fraunces, Georgia, serif";
@@ -16,7 +16,7 @@ function SiteFeio() {
       <div className="hv-scroll-a flex flex-col">
         <div className="flex justify-between bg-[#E75480] px-[3cqw] py-[0.8cqw] text-[1.8cqw] text-white">
           <span>☎ (11) 0000-0000</span>
-          <span>contato@movedoces.com.br</span>
+          <span>contato@movedoces.exemplo</span>
         </div>
         <div className="flex items-center justify-between px-[3cqw] py-[1.8cqw]">
           <span className="text-[4.6cqw] text-[#C71585]" style={{ fontFamily: "'Brush Script MT', 'Comic Sans MS', cursive" }}>Move Doces</span>
@@ -172,13 +172,14 @@ export function HeroVisual() {
         <div className="animate-float" style={{ ["--r" as string]: "0deg" }}>
          <div className="hv-bump">
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 shadow-[0_50px_140px_-30px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.04)] [transform:rotateY(-7deg)_rotateX(2deg)]">
+            <span className="absolute bottom-3 right-3 z-30 rounded bg-black/75 px-2 py-1 text-[11px] font-semibold leading-none text-white">Exemplo fictício</span>
             <div className="flex items-center gap-1.5 bg-[#1A1226] px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#FF5F57]/80" />
               <span className="h-3 w-3 rounded-full bg-[#FEBC2E]/80" />
               <span className="h-3 w-3 rounded-full bg-[#28C840]/80" />
               <span className="ml-3 grid flex-1 max-w-[260px] rounded-full bg-white/[0.07] px-3 py-1 font-mono text-[11px]">
-                <span className="hv-off [grid-area:1/1] truncate text-[#FF8A80]">⚠ Não seguro · movedoces.com.br</span>
-                <span className="hv-on [grid-area:1/1] truncate text-white/75">🔒 movedoces.com.br</span>
+                <span className="hv-off [grid-area:1/1] truncate text-[#FF8A80]">⚠ Não seguro · movedoces.exemplo</span>
+                <span className="hv-on [grid-area:1/1] truncate text-white/75">🔒 movedoces.exemplo</span>
               </span>
 
               {/* Botão que "ativa a Move", na própria barra do navegador */}
