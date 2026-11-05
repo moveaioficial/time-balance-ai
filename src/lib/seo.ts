@@ -16,9 +16,9 @@ export interface PageSeo {
 export const SEO: Record<string, PageSeo> = {
   home: {
     path: "/",
-    title: "Site, marca e redes para empresas em Guarulhos | Move AI",
+    title: "Site, marca e redes para a sua empresa | Move AI",
     description:
-      "Estúdio digital de Guarulhos que cuida do site, da marca e das redes da sua empresa. Peça uma análise gratuita da sua presença digital.",
+      "Estúdio digital que cuida do site, da marca e das redes da sua empresa. Peça uma análise gratuita da sua presença digital.",
   },
   termos: {
     path: "/termos-de-uso",

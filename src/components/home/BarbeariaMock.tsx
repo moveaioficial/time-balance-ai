@@ -188,7 +188,7 @@ export function DepoisBarbearia({ ativo, interativo }: { ativo: boolean; interat
             <p className="hidden sm:block max-w-[17em] text-[1.9em] font-semibold leading-[1.02]" style={{ fontFamily: CONDENSADA }}>
               “Marquei 16:40 e sentei na cadeira às 16:40.”
             </p>
-            <p className="mt-[0.5em] hidden sm:block text-[0.8em] text-[#F1ECE3]/80">Diego, cliente · avaliação de exemplo</p>
+            <p className="mt-[0.5em] hidden sm:block text-[0.8em] text-[#F1ECE3]/80">Diego · depoimento fictício</p>
             <p className="mt-[0.9em] flex items-center gap-[0.4em] text-[0.8em] font-medium">
               <MapPin className="h-[1.1em] w-[1.1em] text-[#E8695E]" /> Rua Exemplo, 40 · Guarulhos · ter a sáb, 9h às 20h
             </p>
@@ -269,7 +269,7 @@ export function DepoisBarbearia({ ativo, interativo }: { ativo: boolean; interat
           </button>
 
           <div className="mt-[0.8em] flex flex-wrap items-center justify-between gap-x-[1em] gap-y-[0.3em] text-[0.75em] text-[#5B5249]">
-            <span className="tabular-nums">{s.nome} · {s.min} min · R$ {s.preco}</span>
+            <span className="tabular-nums">{s.nome} · {s.min} min · R$ {s.preco} (preço de exemplo)</span>
             <span className="flex items-center gap-[0.35em]">
               <span className="flex flex-none gap-[0.08em] text-[#C8342A]">
                 {[0, 1, 2, 3, 4].map((k) => <Star key={k} className="h-[1em] w-[1em] fill-current" strokeWidth={0} />)}

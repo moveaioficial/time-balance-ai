@@ -10,7 +10,7 @@ import { AntesBarbearia, DepoisBarbearia } from "@/components/home/BarbeariaMock
 const points = [
   { Icon: MousePointerClick, title: "Entende na hora", text: "O visitante sabe o que você faz antes de rolar a página." },
   { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, sem zoom e sem texto cortado." },
-  { Icon: WhatsAppIcon, title: "Leva até a conversa", text: "Cada parte da página leva o visitante a falar com você." },
+  { Icon: WhatsAppIcon, title: "Chama para a conversa", text: "Cada parte da página convida o visitante a falar com você." },
 ];
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
@@ -96,7 +96,7 @@ export function BeforeAfter() {
             Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. É a mesma barbearia, contada de outro jeito. No site novo, dá até para marcar um horário.
+            Arraste e compare. É a mesma barbearia, contada de outro jeito. No site novo, dá até para marcar um horário. (A barbearia é fictícia, só para ilustrar.)
           </p>
         </div>
 
