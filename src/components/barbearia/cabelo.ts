@@ -296,7 +296,7 @@ export class CabeloPalavra {
     c.moveTo(x, y);
     c.lineTo(x + Math.cos(a) * this.pl[k], y + Math.sin(a) * this.pl[k]);
     c.stroke();
-    if (alt < H * 0.06) {
+    if (alt < H * 0.035) {
       this.monteX[bin] += 1.5;
       if (bin > 0) this.monteX[bin - 1] += 0.8;
       if (bin < this.monteX.length - 1) this.monteX[bin + 1] += 0.8;
