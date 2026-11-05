@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import icone from "@/assets/move-ai-icone-app.webp";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 
-// Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito e é rolado também.
-// Tudo em CSS (classes hv-* em index.css), ciclo de 18s. Com movimento reduzido, mostra só o site bom, parado no topo.
+// Animação da abertura: um site fraco é rolado, o cursor clica em "Ativar a Move" e o mesmo site aparece bem feito.
+// A casca é CSS (classes hv-* em index.css), ciclo de 18s. A cena da calda, do granulado e da cereja (DocesCena.tsx) é um
+// canvas que só carrega depois da primeira pintura, no computador. No celular nada disso aparece nem baixa.
+// Com movimento reduzido, mostra só o site bom, parado no topo, com a cena no quadro final.
 // A confeitaria (Move Doces, movedoces.com.br) é fictícia, só para ilustrar. Fotos: Unsplash (licença gratuita).
+
+const DocesCena = lazy(() => import("@/components/home/DocesCena"));
+const SERIFA = "Fraunces, Georgia, serif";
 
 function SiteFeio() {
   return (
@@ -75,169 +79,88 @@ const produtos = [
   { src: "/img/confeitaria-tortas.webp", t: "Tortas e fatias", d: "Todo dia na vitrine" },
 ];
 
-const passos = [
-  ["1", "Escolha no cardápio", "Sabores, tamanhos e recheios."],
-  ["2", "Confirme no WhatsApp", "Data, horário e um sinal."],
-  ["3", "Retire fresquinho", "Ou receba em casa."],
-];
-
-// Montagem de abertura da confeitaria: farinha, cobertura e decoração (Pexels 8477794, 8477936 e 8478028).
-// Cada trecho toca alguns segundos e passa para o próximo com fusão suave.
-const cenas = [
-  { src: "/video/confeitaria-1.mp4", inicio: 1 },
-  { src: "/video/confeitaria-2.mp4", inicio: 4 },
-  { src: "/video/confeitaria-3.mp4", inicio: 3 },
-];
-const DURACAO_CENA = 3.2;
-
-function Montagem() {
-  const [atual, setAtual] = useState(0);
-  const refs = useRef<(HTMLVideoElement | null)[]>([]);
-
-  useEffect(() => {
-    const v = refs.current[atual];
-    if (!v) return;
-    v.currentTime = cenas[atual].inicio;
-    v.play().catch(() => {});
-    const t = window.setTimeout(() => setAtual((i) => (i + 1) % cenas.length), DURACAO_CENA * 1000);
-    return () => clearTimeout(t);
-  }, [atual]);
+function SiteBom({ cena }: { cena: boolean }) {
+  const [pronta, setPronta] = useState(false);
+  const aoFicarPronta = useCallback(() => setPronta(true), []);
 
   return (
-    <>
-      {cenas.map((c, i) => (
-        <video
-          key={c.src}
-          ref={(el) => { refs.current[i] = el; }}
-          src={c.src}
-          poster={i === 0 ? "/img/confeitaria-hero.webp" : undefined}
-          muted
-          playsInline
-          preload="auto"
-          className={`hv-cena absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${i === atual ? "opacity-100" : "opacity-0"}`}
-        />
-      ))}
-    </>
-  );
-}
-
-function SiteBom({ video }: { video: boolean }) {
-  return (
-    <div className="absolute inset-0 overflow-hidden bg-[#FBF6F0] text-[#2B1D16]">
+    <div className="absolute inset-0 overflow-hidden bg-[#FFF3DF] text-[#47210F]">
       <div className="hv-scroll-b flex flex-col">
-        {/* Abertura com foto em tela cheia */}
-        <div className="relative h-[44cqw] shrink-0 overflow-hidden">
-          {video ? (
-            <Montagem />
-          ) : (
-            <img src="/img/confeitaria-hero.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+        {/* Abertura: a palavra vira bolo */}
+        <div className="relative h-[66cqw] shrink-0 overflow-hidden">
+          {/* a palavra em texto segura o lugar até o canvas chegar */}
+          <p className={`absolute inset-x-0 top-[9cqw] text-center text-[33cqw] font-black leading-[0.9] tracking-[-0.03em] text-[#F4A3B8] ${pronta ? "invisible" : ""}`} style={{ fontFamily: SERIFA }}>Doces</p>
+          {cena && (
+            <Suspense fallback={null}>
+              <DocesCena onPronto={aoFicarPronta} />
+            </Suspense>
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1B110C]/90 via-[#1B110C]/55 to-transparent" />
 
-          <div className="relative flex items-center justify-between px-[4cqw] py-[2.6cqw] text-white">
-            <span className="font-accent text-[3.8cqw] italic leading-none">Move Doces</span>
-            <span className="flex items-center gap-[2.6cqw] text-[1.75cqw] text-white/80">
-              <span>Cardápio</span><span>Encomendas</span><span>Onde estamos</span>
-              <span className="rounded-full bg-white px-[1.8cqw] py-[0.8cqw] font-semibold text-[#2B1D16]">Encomendar</span>
+          <div className="relative flex items-center justify-between px-[4cqw] py-[2.4cqw]">
+            <span className="text-[3cqw] font-black leading-none" style={{ fontFamily: SERIFA }}>Move Doces</span>
+            <span className="flex items-center gap-[2.6cqw] text-[1.75cqw] font-medium">
+              <span>Cardápio</span><span>Sabores</span><span>Onde estamos</span>
+              <span className="bg-[#47210F] px-[1.8cqw] py-[0.9cqw] font-semibold text-[#FFF3DF]">Ver cardápio</span>
             </span>
           </div>
 
-          <div className="relative px-[4cqw] pt-[3cqw] text-white">
-            <p className="hv-in text-[1.5cqw] font-semibold uppercase tracking-[0.28em] text-[#F2C9A0]">Confeitaria artesanal</p>
-            <p className="mt-[1.2cqw] max-w-[62%] font-accent text-[6.8cqw] leading-[0.95]">
-              {["Bolo", "de", "verdade,", "feito"].map((w, i) => (
+          <div className="absolute inset-x-0 bottom-[5cqw] flex items-end justify-between gap-[3cqw] px-[4cqw]">
+            <p className="max-w-[58cqw] text-[5.4cqw] font-semibold leading-[1.02] tracking-[-0.01em]" style={{ fontFamily: SERIFA }}>
+              {["Bolo", "de", "verdade,", "feito", "todo", "dia."].map((w, i) => (
                 <span key={w} className="hv-word inline-block" style={{ animationDelay: `${0.05 + i * 0.07}s` }}>{w}&nbsp;</span>
               ))}
-              <span className="hv-word inline-block italic text-[#F2C9A0]" style={{ animationDelay: "0.35s" }}>todo dia.</span>
             </p>
-            <div className="hv-in mt-[2.4cqw] flex gap-[1.4cqw]" style={{ animationDelay: "0.2s" }}>
-              <span className="rounded-full bg-[#F2C9A0] px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold text-[#2B1D16]">Ver cardápio</span>
-              <span className="flex items-center gap-[0.8cqw] rounded-full border border-white/50 px-[2.6cqw] py-[1.2cqw] text-[1.8cqw] font-semibold"><WhatsAppIcon className="h-[2.2cqw] w-[2.2cqw]" colorido /> Pedir pelo WhatsApp</span>
-            </div>
+            <p className="hv-in max-w-[28cqw] pb-[0.6cqw] text-[1.8cqw] leading-snug" style={{ animationDelay: "0.2s" }}>
+              Confeitaria artesanal. Sai do forno de madrugada e chega à vitrine às 8h.
+            </p>
           </div>
         </div>
 
         {/* sabores correndo */}
-        <div className="overflow-hidden whitespace-nowrap bg-[#2B1D16] py-[1.1cqw] text-[1.7cqw] font-semibold uppercase tracking-[0.2em] text-[#F2C9A0]">
+        <div className="overflow-hidden whitespace-nowrap bg-[#47210F] py-[1.1cqw] text-[1.7cqw] font-semibold text-[#FFF3DF]">
           <div className="hv-marq inline-block">
             {[0, 1].map((k) => (
-              <span key={k}>Pistache ✦ Red velvet ✦ Ninho com morango ✦ Brigadeiro belga ✦ Limão siciliano ✦ Doce de leite ✦&nbsp;</span>
+              <span key={k}>Pistache · Red velvet · Ninho com morango · Brigadeiro belga · Limão siciliano · Doce de leite ·&nbsp;</span>
             ))}
           </div>
         </div>
 
         {/* Mais pedidos */}
-        <div className="px-[4cqw] pt-[3cqw]">
-          <div className="hv-in flex items-end justify-between" style={{ animationDelay: "0.3s" }}>
-            <p className="font-accent text-[3.4cqw] leading-none">Mais pedidos</p>
-            <p className="text-[1.6cqw] font-semibold text-[#9A5B34]">Ver tudo →</p>
-          </div>
+        <div className="bg-[#F4A3B8] px-[4cqw] py-[3cqw]">
+          <p className="text-[4.4cqw] font-black leading-none" style={{ fontFamily: SERIFA }}>Mais pedidos</p>
           <div className="mt-[2cqw] grid grid-cols-3 gap-[2cqw]">
             {produtos.map((p, i) => (
-              <div key={p.t} className="hv-in [perspective:60cqw]" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
-                <img src={p.src} alt="" loading="lazy" decoding="async" className={`aspect-[4/3] w-full rounded-[1.2cqw] object-cover ${i === 0 ? "hv-tilt" : ""}`} />
-                <p className="mt-[1cqw] text-[1.8cqw] font-semibold">{p.t}</p>
-                <p className="text-[1.5cqw] text-[#2B1D16]/55">{p.d}</p>
+              <div key={p.t} className="[perspective:60cqw]">
+                <img src={p.src} alt="" loading="lazy" decoding="async" className={`aspect-[4/3] w-full object-cover ${i === 0 ? "hv-tilt" : ""}`} />
+                <p className="mt-[1cqw] text-[1.9cqw] font-semibold">{p.t}</p>
+                <p className="text-[1.6cqw]">{p.d}</p>
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Como encomendar */}
-        <div className="mx-[4cqw] mt-[4cqw] rounded-[2cqw] bg-[#F3E6D8] p-[3.4cqw]">
-          <p className="font-accent text-[3.4cqw] leading-none">Encomendar é simples</p>
-          <div className="mt-[2.4cqw] grid grid-cols-3 gap-[2.4cqw]">
-            {passos.map(([n, t, d]) => (
-              <div key={n}>
-                <p className="font-accent text-[5cqw] italic leading-none text-[#B4532A]">{n}</p>
-                <p className="mt-[0.8cqw] text-[1.9cqw] font-semibold">{t}</p>
-                <p className="mt-[0.3cqw] text-[1.5cqw] text-[#2B1D16]/60">{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Faixa com foto */}
-        <div className="relative mx-[4cqw] mt-[3cqw] h-[20cqw] shrink-0 overflow-hidden rounded-[2cqw]">
-          <img src="/img/confeitaria-doces.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-[#1B110C]/55" />
-          <div className="relative flex h-full items-center justify-between px-[3.4cqw] text-white">
-            <p className="font-accent text-[4cqw] leading-none">
-              Feito de madrugada.<br /><span className="italic text-[#F2C9A0]">Na vitrine às 8h.</span>
-            </p>
-            <span className="rounded-full bg-white px-[2.4cqw] py-[1.1cqw] text-[1.7cqw] font-semibold text-[#2B1D16]">Encomendar</span>
-          </div>
-        </div>
-
-        <div className="mt-[3cqw] flex items-center justify-between bg-[#2B1D16] px-[4cqw] py-[2.6cqw] text-[1.5cqw] text-white/70">
-          <span className="font-accent text-[2.6cqw] italic text-white">Move Doces</span>
-          <span>Ter a dom · 8h às 19h</span>
-          <span>@movedoces</span>
         </div>
       </div>
     </div>
   );
 }
 
-// granulado colorido (posição em %, cor, giro e atraso)
-const cores = ["#F472B6", "#FDE68A", "#7DD3FC", "#A78BFA", "#FB923C", "#FFFFFF"];
-const granulado = Array.from({ length: 34 }, (_, i) => ({ x: (i * 29) % 100, c: cores[i % cores.length], r: (i * 47) % 180, d: ((i * 13) % 10) * 0.035 }));
-
-// notificações de pedido (fictícias, como a confeitaria)
-const pedidos = [
-  { t: "Novo pedido · Move Doces", d: "Bolo de pistache para sábado, 15h" },
-  { t: "Encomenda confirmada", d: "Caixa com 30 doces finos" },
-];
-
 // faíscas que saem do botão no clique (ângulos em graus)
 const sparks = [-80, -55, -30, -10, 10, 30, 55, 80, -120, 120, -150, 150];
 
 export function HeroVisual() {
-  // o vídeo só carrega no desktop, onde a animação aparece
-  const [video, setVideo] = useState(false);
+  // a cena só carrega no computador, onde a animação aparece, e depois que a página já pintou
+  const [cena, setCena] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px) and (prefers-reduced-motion: no-preference)");
-    setVideo(mq.matches);
+    if (!window.matchMedia("(min-width: 1024px)").matches) return;
+    const w = window as Window & { requestIdleCallback?: (f: () => void, o?: { timeout: number }) => number };
+    const iniciar = () => {
+      if (w.requestIdleCallback) w.requestIdleCallback(() => setCena(true), { timeout: 2500 });
+      else window.setTimeout(() => setCena(true), 1200);
+    };
+    if (document.readyState === "complete") iniciar();
+    else {
+      window.addEventListener("load", iniciar, { once: true });
+      return () => window.removeEventListener("load", iniciar);
+    }
   }, []);
 
   return (
@@ -284,25 +207,7 @@ export function HeroVisual() {
             <div className="relative aspect-[4/3] w-full overflow-hidden" style={{ containerType: "inline-size" }}>
               <SiteFeio />
               <div className="hv-good absolute inset-0">
-                <SiteBom video={video} />
-              </div>
-              {/* granulado que cai quando a Move ativa */}
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {granulado.map((g, i) => (
-                  <span key={i} className="hv-sprinkle absolute top-0 h-[1.8cqw] w-[0.55cqw] rounded-full" style={{ left: `${g.x}%`, background: g.c, ["--rot" as string]: `${g.r}deg`, animationDelay: `${g.d}s` }} />
-                ))}
-              </div>
-              {/* pedidos chegando no WhatsApp */}
-              <div className="pointer-events-none absolute right-[2.4cqw] top-[2.4cqw] flex w-[44%] flex-col gap-[1.2cqw]">
-                {pedidos.map((p, i) => (
-                  <div key={p.t} className={`${["hv-toast1", "hv-toast2"][i]} flex items-center gap-[1.4cqw] rounded-[1.6cqw] bg-white/95 p-[1.4cqw] text-[#111] shadow-[0_2cqw_4cqw_-1cqw_rgba(0,0,0,0.5)]`}>
-                    <span className="flex h-[4.4cqw] w-[4.4cqw] flex-none items-center justify-center rounded-[1.1cqw] bg-[#25D366]"><WhatsAppIcon className="h-[2.6cqw] w-[2.6cqw] text-white" /></span>
-                    <span className="min-w-0 leading-tight">
-                      <span className="block text-[1.5cqw] font-semibold">{p.t}</span>
-                      <span className="block truncate text-[1.35cqw] text-[#555]">{p.d}</span>
-                    </span>
-                  </div>
-                ))}
+                <SiteBom cena={cena} />
               </div>
               <span className="hv-edge pointer-events-none absolute inset-y-0 w-[4px] -translate-x-1/2 bg-[#4DDDE7] shadow-[0_0_40px_12px_rgba(0,195,208,0.65)]" />
               <span className="hv-flash pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(77,221,231,0.55),transparent_60%)]" />

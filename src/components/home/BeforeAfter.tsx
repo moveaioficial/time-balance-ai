@@ -1,35 +1,53 @@
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { memo, useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
 import { MousePointerClick, Smartphone, ChevronsLeftRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { AntesBarbearia, DepoisBarbearia } from "@/components/home/BarbeariaMock";
 
 // Antes e depois arrastável do MESMO site: a Barbearia Move, fictícia, só para ilustrar (ver BarbeariaMock.tsx).
-// O mesmo exemplo vale para o celular e para o computador. As medidas internas são em "em": o quadro define o
-// tamanho base (maior no celular), e tudo escala junto.
+// As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
+// O divisor NÃO passa pelo estado do React: cada movimento só muda o recorte e a posição da alça, direto no estilo.
+// Assim, arrastar não redesenha nenhum componente, nem no celular fraco.
 
 const points = [
   { Icon: MousePointerClick, title: "Entende na hora", text: "O visitante sabe o que você faz antes de rolar a página." },
   { Icon: Smartphone, title: "Pensado no celular", text: "Fica bom na tela pequena, sem zoom e sem texto cortado." },
-  { Icon: WhatsAppIcon, title: "Chama para a conversa", text: "Cada parte da página convida o visitante a falar com você." },
+  { Icon: WhatsAppIcon, title: "Leva até a conversa", text: "Cada parte da página leva o visitante a falar com você." },
 ];
 
 const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-export function BeforeAfter() {
-  const [pos, setPos] = useState(50);
-  const [touched, setTouched] = useState(false);
-  const [ativo, setAtivo] = useState(false);
-  const frameRef = useRef<HTMLDivElement>(null);
-  const arrastando = useRef(false);
+const Antes = memo(AntesBarbearia);
+const Depois = memo(DepoisBarbearia);
 
-  // o site novo "marca" um horário sozinho quando o divisor revela boa parte do "depois"
-  useEffect(() => {
-    if (pos <= 35) setAtivo(true);
-  }, [pos]);
+export function BeforeAfter() {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const recorte = useRef<HTMLDivElement>(null);
+  const alca = useRef<HTMLDivElement>(null);
+  const campo = useRef<HTMLInputElement>(null);
+  const arrastando = useRef(false);
+  const tocou = useRef(false);
+  const pendente = useRef<number | null>(null);
+  const quadroRaf = useRef(0);
+
+  const aplicar = useCallback((p: number) => {
+    if (recorte.current) recorte.current.style.clipPath = `inset(0 0 0 ${p}%)`;
+    if (alca.current) alca.current.style.left = `${p}%`;
+    if (campo.current) campo.current.value = String(p);
+  }, []);
+
+  // no máximo uma atualização por quadro, por mais rápido que o dedo mexa
+  const moverPos = useCallback((p: number) => {
+    pendente.current = p;
+    if (quadroRaf.current) return;
+    quadroRaf.current = requestAnimationFrame(() => {
+      quadroRaf.current = 0;
+      if (pendente.current !== null) aplicar(pendente.current);
+    });
+  }, [aplicar]);
 
   // Enquanto ninguém mexe, o divisor vai e volta sozinho a cada poucos segundos para mostrar que dá para arrastar.
   useEffect(() => {
-    if (touched || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const el = frameRef.current;
     if (!el) return;
 
@@ -40,14 +58,16 @@ export function BeforeAfter() {
     const legMs = 1100;
 
     const sweep = () => {
+      if (tocou.current) return;
       const start = performance.now();
       const step = (now: number) => {
+        if (tocou.current) return;
         const t = (now - start) / legMs;
         const leg = Math.min(Math.floor(t), path.length - 2);
         const k = Math.min(t - leg, 1);
-        setPos(path[leg] + (path[leg + 1] - path[leg]) * ease(k));
+        aplicar(path[leg] + (path[leg + 1] - path[leg]) * ease(k));
         if (t < path.length - 1) raf = requestAnimationFrame(step);
-        else timer = window.setTimeout(() => visible && sweep(), 4500);
+        else timer = window.setTimeout(() => visible && sweep(), 6500);
       };
       raf = requestAnimationFrame(step);
     };
@@ -56,30 +76,26 @@ export function BeforeAfter() {
       const was = visible;
       visible = entry.isIntersecting;
       if (visible && !was) timer = window.setTimeout(sweep, 900);
-      if (!visible) { cancelAnimationFrame(raf); clearTimeout(timer); setPos(50); }
+      if (!visible) {
+        cancelAnimationFrame(raf);
+        clearTimeout(timer);
+        if (!tocou.current) aplicar(50);
+      }
     }, { threshold: 0.5 });
     io.observe(el);
 
     return () => { io.disconnect(); cancelAnimationFrame(raf); clearTimeout(timer); };
-  }, [touched]);
+  }, [aplicar]);
 
-  // reduzir movimento: sem a varredura automática, o exemplo já aparece com o horário marcado
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setAtivo(true);
-  }, []);
+  const stopHint = () => { tocou.current = true; };
 
-  const stopHint = () => setTouched(true);
-
-  // Arraste feito à mão (e não por um input range por cima de tudo), para os botões do site de exemplo
-  // continuarem clicáveis. O input fica para o teclado e para leitores de tela.
   const moverPara = (clientX: number) => {
     const r = frameRef.current?.getBoundingClientRect();
     if (!r) return;
-    setPos(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)));
+    moverPos(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)));
   };
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     stopHint();
-    if ((e.target as HTMLElement).closest("button, [data-ba-interativo]")) return;
     arrastando.current = true;
     e.currentTarget.setPointerCapture(e.pointerId);
     moverPara(e.clientX);
@@ -96,7 +112,7 @@ export function BeforeAfter() {
             Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. É a mesma barbearia, contada de outro jeito. No site novo, dá até para marcar um horário. (A barbearia é fictícia, só para ilustrar.)
+            Arraste e compare. É a mesma barbearia, contada de outro jeito. (A barbearia é fictícia, só para ilustrar.)
           </p>
         </div>
 
@@ -115,29 +131,30 @@ export function BeforeAfter() {
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
             className="relative aspect-[3/4] sm:aspect-[16/9] w-full cursor-ew-resize touch-pan-y overflow-hidden rounded-3xl ring-1 ring-white/10 shadow-[0_40px_120px_-40px_rgba(85,31,126,0.8)] select-none"
-            style={{ containerType: "inline-size" }}
+            style={{ containerType: "inline-size", contain: "layout paint" }}
           >
             <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
-              <AntesBarbearia />
-              <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-                <DepoisBarbearia ativo={ativo} interativo={pos < 50} />
+              <Antes />
+              <div ref={recorte} className="absolute inset-0 will-change-[clip-path]" style={{ clipPath: "inset(0 0 0 50%)" }}>
+                <Depois />
               </div>
             </div>
 
             <input
+              ref={campo}
               type="range"
               min={0}
               max={100}
               step={0.5}
-              value={pos}
-              onChange={(e) => setPos(Number(e.target.value))}
+              defaultValue={50}
+              onInput={(e) => aplicar(Number(e.currentTarget.value))}
               onKeyDown={stopHint}
               onFocus={stopHint}
               aria-label="Arraste para comparar o antes e o depois"
               className="peer pointer-events-none absolute inset-0 h-full w-full opacity-0"
             />
 
-            <div className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_20px_rgba(0,195,208,0.8)] peer-focus-visible:[&>span]:ring-[#00C3D0]" style={{ left: `${pos}%` }}>
+            <div ref={alca} className="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_20px_rgba(0,195,208,0.8)] peer-focus-visible:[&>span]:ring-[#00C3D0]" style={{ left: "50%" }}>
               <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#0C0416] shadow-xl ring-4 ring-[#00C3D0]/30">
                 <ChevronsLeftRight className="h-5 w-5" />
               </span>
