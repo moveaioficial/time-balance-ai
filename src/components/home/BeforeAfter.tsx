@@ -18,14 +18,8 @@ const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 export function BeforeAfter() {
   const [pos, setPos] = useState(50);
   const [touched, setTouched] = useState(false);
-  const [ativo, setAtivo] = useState(false);
   const frameRef = useRef<HTMLDivElement>(null);
   const arrastando = useRef(false);
-
-  // o site novo "marca" um horário sozinho quando o divisor revela boa parte do "depois"
-  useEffect(() => {
-    if (pos <= 35) setAtivo(true);
-  }, [pos]);
 
   // Enquanto ninguém mexe, o divisor vai e volta sozinho a cada poucos segundos para mostrar que dá para arrastar.
   useEffect(() => {
@@ -63,11 +57,6 @@ export function BeforeAfter() {
     return () => { io.disconnect(); cancelAnimationFrame(raf); clearTimeout(timer); };
   }, [touched]);
 
-  // reduzir movimento: sem a varredura automática, o exemplo já aparece com o horário marcado
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) setAtivo(true);
-  }, []);
-
   const stopHint = () => setTouched(true);
 
   // Arraste feito à mão (e não por um input range por cima de tudo), para os botões do site de exemplo
@@ -79,7 +68,7 @@ export function BeforeAfter() {
   };
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     stopHint();
-    if ((e.target as HTMLElement).closest("button, [data-ba-interativo]")) return;
+    if ((e.target as HTMLElement).closest("a, button")) return;
     arrastando.current = true;
     e.currentTarget.setPointerCapture(e.pointerId);
     moverPara(e.clientX);
@@ -96,7 +85,7 @@ export function BeforeAfter() {
             Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. É a mesma barbearia, contada de outro jeito. No site novo, dá até para marcar um horário. (A barbearia é fictícia, só para ilustrar.)
+            Arraste e compare. É a mesma barbearia, contada de outro jeito. No site novo, a máquina corta o nome na sua frente. (A barbearia é fictícia, só para ilustrar.)
           </p>
         </div>
 
@@ -120,7 +109,7 @@ export function BeforeAfter() {
             <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
               <AntesBarbearia />
               <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${pos}%)` }}>
-                <DepoisBarbearia ativo={ativo} interativo={pos < 50} />
+                <DepoisBarbearia interativo={pos < 80} />
               </div>
             </div>
 

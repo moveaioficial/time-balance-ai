@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 const TermosDeUso = lazy(() => import("./pages/TermosDeUso"));
 const PoliticaDePrivacidade = lazy(() => import("./pages/PoliticaDePrivacidade"));
 const Obrigado = lazy(() => import("./pages/Obrigado"));
+const BarbeariaMove = lazy(() => import("./pages/exemplos/BarbeariaMove"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // 04/11/2026: saíram Toaster, Sonner, TooltipProvider e QueryClientProvider, que vieram do
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/termos-de-uso" element={<TermosDeUso />} />
           <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidade />} />
           <Route path="/obrigado" element={<Obrigado />} />
+          <Route path="/exemplos/barbearia-move" element={<BarbeariaMove />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

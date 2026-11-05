@@ -38,6 +38,12 @@ export const SEO: Record<string, PageSeo> = {
     description: "Recebemos o seu pedido de análise gratuita. A Move AI responde pelo WhatsApp ou pelo e-mail que você deixou.",
     noindex: true,
   },
+  barbearia: {
+    path: "/exemplos/barbearia-move",
+    title: "Barbearia Move, um site de exemplo | Move AI",
+    description: "Site de exemplo feito pela Move AI. A Barbearia Move não existe: nomes, preços e depoimentos são inventados para mostrar o que dá para fazer.",
+    noindex: true,
+  },
   naoEncontrada: {
     path: "/404",
     title: "Página não encontrada | Move AI",

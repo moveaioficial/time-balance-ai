@@ -7,6 +7,11 @@
       "permanent": true
     },
     {
+      "source": "/exemplos/barbearia-move/",
+      "destination": "/exemplos/barbearia-move",
+      "permanent": true
+    },
+    {
       "source": "/:rota(termos-de-uso|politica-de-privacidade|obrigado)/",
       "destination": "/:rota",
       "permanent": true
@@ -24,6 +29,10 @@
     {
       "source": "/obrigado",
       "destination": "/obrigado/index.html"
+    },
+    {
+      "source": "/exemplos/barbearia-move",
+      "destination": "/exemplos/barbearia-move/index.html"
     }
   ],
   "headers": [
