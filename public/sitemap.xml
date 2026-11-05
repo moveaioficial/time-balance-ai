@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Só páginas que podem aparecer no Google. /obrigado e a 404 têm noindex e ficam de fora. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.moveai.tech/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://www.moveai.tech/termos-de-uso</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://www.moveai.tech/politica-de-privacidade</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-10-23</lastmod>
   </url>
 </urlset>

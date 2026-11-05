@@ -1,11 +1,12 @@
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { usePageTitle } from "@/hooks/use-page-title";
+import { useSeo } from "@/hooks/use-page-title";
+import { SEO } from "@/lib/seo";
 
 export default function PoliticaDePrivacidade() {
-  usePageTitle("Política de Privacidade | Move AI");
+  useSeo(SEO.privacidade);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
+      <main className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         <Breadcrumbs items={[{ label: "Política de Privacidade", to: "/politica-de-privacidade" }]} />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Política de Privacidade</h1>
@@ -21,7 +22,7 @@ export default function PoliticaDePrivacidade() {
             </p>
             <p className="mt-2">
               Contato para qualquer assunto de privacidade e dados pessoais:{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">moveaioficial@gmail.com</a>.
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline underline-offset-2">moveaioficial@gmail.com</a>.
             </p>
           </section>
 
@@ -94,7 +95,7 @@ export default function PoliticaDePrivacidade() {
             </ul>
             <p className="mt-2">
               É só escrever para{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">moveaioficial@gmail.com</a>. Confirmamos o recebimento assim que lermos e respondemos por completo em até 15 dias. Você também pode reclamar na Autoridade Nacional de Proteção de Dados (ANPD).
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline underline-offset-2">moveaioficial@gmail.com</a>. Confirmamos o recebimento assim que lermos e respondemos por completo em até 15 dias. Você também pode reclamar na Autoridade Nacional de Proteção de Dados (ANPD).
             </p>
           </section>
 
@@ -105,7 +106,7 @@ export default function PoliticaDePrivacidade() {
             </p>
           </section>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

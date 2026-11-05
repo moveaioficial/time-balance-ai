@@ -8,8 +8,11 @@ import { BeforeAfter } from "@/components/home/BeforeAfter";
 import { ForWho } from "@/components/home/ForWho";
 import { Faq } from "@/components/home/Faq";
 import { FinalCta } from "@/components/home/FinalCta";
+import { useSeo } from "@/hooks/use-page-title";
+import { SEO } from "@/lib/seo";
 
 const Index = () => {
+  useSeo(SEO.home);
   return (
     <Layout>
       <Hero />

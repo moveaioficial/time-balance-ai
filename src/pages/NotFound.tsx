@@ -1,9 +1,10 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { useContactModal } from "@/components/ui/ContactModal";
 import { WHATSAPP_URL } from "@/lib/contato";
+import { useSeo } from "@/hooks/use-page-title";
+import { SEO } from "@/lib/seo";
 
 // Link quebrado não pode ser beco sem saída: a 404 leva para as partes principais do site
 const atalhos = [
@@ -16,17 +17,7 @@ const atalhos = [
 const NotFound = () => {
   const { openModal } = useContactModal();
 
-  useEffect(() => {
-    document.title = "Página não encontrada | Move AI";
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex";
-    document.head.appendChild(meta);
-    return () => {
-      document.title = "Move AI";
-      meta.remove();
-    };
-  }, []);
+  useSeo(SEO.naoEncontrada);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

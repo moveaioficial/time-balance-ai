@@ -130,7 +130,7 @@ function SiteBom({ video }: { video: boolean }) {
           {video ? (
             <Montagem />
           ) : (
-            <img src="/img/confeitaria-hero.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <img src="/img/confeitaria-hero.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
           )}
           <div className="absolute inset-0 bg-gradient-to-r from-[#1B110C]/90 via-[#1B110C]/55 to-transparent" />
 
@@ -175,7 +175,7 @@ function SiteBom({ video }: { video: boolean }) {
           <div className="mt-[2cqw] grid grid-cols-3 gap-[2cqw]">
             {produtos.map((p, i) => (
               <div key={p.t} className="hv-in [perspective:60cqw]" style={{ animationDelay: `${0.35 + i * 0.08}s` }}>
-                <img src={p.src} alt="" className={`aspect-[4/3] w-full rounded-[1.2cqw] object-cover ${i === 0 ? "hv-tilt" : ""}`} />
+                <img src={p.src} alt="" loading="lazy" decoding="async" className={`aspect-[4/3] w-full rounded-[1.2cqw] object-cover ${i === 0 ? "hv-tilt" : ""}`} />
                 <p className="mt-[1cqw] text-[1.8cqw] font-semibold">{p.t}</p>
                 <p className="text-[1.5cqw] text-[#2B1D16]/55">{p.d}</p>
               </div>
@@ -199,7 +199,7 @@ function SiteBom({ video }: { video: boolean }) {
 
         {/* Faixa com foto */}
         <div className="relative mx-[4cqw] mt-[3cqw] h-[20cqw] shrink-0 overflow-hidden rounded-[2cqw]">
-          <img src="/img/confeitaria-doces.webp" alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <img src="/img/confeitaria-doces.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-[#1B110C]/55" />
           <div className="relative flex h-full items-center justify-between px-[3.4cqw] text-white">
             <p className="font-accent text-[4cqw] leading-none">
@@ -265,7 +265,7 @@ export function HeroVisual() {
                 <span className="hv-ring absolute inset-0 rounded-full border-2 border-[#A78BFA]" style={{ animationDelay: "0.25s" }} />
                 <div className="relative flex items-center gap-2 overflow-hidden whitespace-nowrap rounded-full border border-white/20 bg-white/[0.06] py-1 pl-1 pr-3.5">
                   <span className="hv-on absolute inset-0" style={{ background: "var(--brand-gradient)" }} />
-                  <img src={icone} alt="" className="relative h-5 w-5 rounded-md" />
+                  <img src={icone} alt="" loading="lazy" decoding="async" className="relative h-5 w-5 rounded-md" />
                   <span className="relative grid font-display text-[12px] font-semibold leading-none text-white">
                     <span className="hv-off [grid-area:1/1]">Ativar a Move</span>
                     <span className="hv-on [grid-area:1/1]">Move ativada ✦</span>

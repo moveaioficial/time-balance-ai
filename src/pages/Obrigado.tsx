@@ -1,23 +1,15 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2, Instagram } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { usePageTitle } from "@/hooks/use-page-title";
+import { useSeo } from "@/hooks/use-page-title";
+import { SEO } from "@/lib/seo";
 import { INSTAGRAM_URL, PRAZO_RESPOSTA, WHATSAPP_URL } from "@/lib/contato";
 
 /** Página de obrigado: cada visita aqui é um pedido de análise enviado (conversão no Vercel Analytics). */
 export default function Obrigado() {
-  usePageTitle("Pedido recebido | Move AI");
-
-  // Não deve aparecer no Google
-  useEffect(() => {
-    const meta = document.createElement("meta");
-    meta.name = "robots";
-    meta.content = "noindex";
-    document.head.appendChild(meta);
-    return () => meta.remove();
-  }, []);
+  // noindex: não deve aparecer no Google (o HTML do build já vem com a tag)
+  useSeo(SEO.obrigado);
 
   return (
     <div className="min-h-screen bg-background text-foreground">

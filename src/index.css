@@ -411,40 +411,26 @@
     94%, 100% { opacity: 0; transform: translateX(10%); }
   }
 
-  /* "Depois" do antes e depois: o site começa "quente" e esfria em onda quando o ar liga */
-  .ba-heat {
-    --r: 0%;
-    background: linear-gradient(160deg, rgba(251, 146, 60, 0.7), rgba(194, 65, 12, 0.7));
-    mix-blend-mode: color;
-    -webkit-mask-image: radial-gradient(circle at var(--x) var(--y), transparent var(--r), #000 calc(var(--r) + 14%));
-    mask-image: radial-gradient(circle at var(--x) var(--y), transparent var(--r), #000 calc(var(--r) + 14%));
-    transition: --r 1.8s cubic-bezier(.3, .6, .2, 1);
+  /* "Na prática": site de exemplo da barbearia (BarbeariaMock.tsx) */
+  .bb-drift { animation: bb-drift 16s cubic-bezier(.45, 0, .55, 1) infinite alternate; transform-origin: 50% 30%; }
+  @keyframes bb-drift { from { transform: scale(1.08) translate3d(1.5%, 0, 0); } to { transform: scale(1) translate3d(0, 0, 0); } }
+  .bb-listras { animation: bb-listras 3.2s linear infinite; }
+  @keyframes bb-listras { to { transform: translateY(8px); } }
+  .bb-swap { display: inline-block; animation: bb-swap 260ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes bb-swap { from { opacity: 0; transform: translateY(0.35em); filter: blur(3px); } }
+  .bb-press { animation: bb-press 320ms cubic-bezier(.23, 1, .32, 1) both; }
+  @keyframes bb-press { 0% { transform: scale(0.9); } 60% { transform: scale(1.04); } 100% { transform: none; } }
+  .bb-toast {
+    opacity: 0;
+    transform: translateY(-0.8em) scale(0.96);
+    transform-origin: top right;
+    transition: opacity 200ms ease-out, transform 200ms ease-out;
   }
-  .ba-heat.ba-cool { --r: 170%; }
-  .ba-mist-wrap {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 45%, transparent 92%), radial-gradient(55% 90% at 50% 10%, #000 30%, transparent 80%);
-    -webkit-mask-composite: source-in;
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 45%, transparent 92%), radial-gradient(55% 90% at 50% 10%, #000 30%, transparent 80%);
-    mask-composite: intersect;
+  .bb-toast.bb-toast-on {
+    opacity: 1;
+    transform: none;
+    transition: opacity 320ms cubic-bezier(.23, 1, .32, 1), transform 420ms cubic-bezier(.23, 1, .32, 1);
   }
-  .ba-mist { animation: ba-mist 7s linear infinite both; }
-  .ba-burst { opacity: 0; }
-  .ba-burst-on { animation: ba-burst 2.4s cubic-bezier(.2, .7, .3, 1) both; }
-  .ba-wind path { stroke-dasharray: 220 140; animation: ba-wind 14s linear infinite; }
-  @keyframes ba-wind { to { stroke-dashoffset: -720; } }
-  .ba-pulse { animation: ba-pulse 1.6s ease-in-out infinite; }
-  @keyframes ba-mist {
-    0% { opacity: 0; transform: translateY(-40%) scaleX(.8); }
-    18% { opacity: 1; }
-    82% { opacity: 1; }
-    100% { opacity: 0; transform: translateY(0) scaleX(1.15); }
-  }
-  @keyframes ba-burst {
-    0% { opacity: 0; transform: scale(.4); }
-    22% { opacity: .95; transform: scale(1.05); }
-    100% { opacity: 0; transform: scale(1.35); }
-  }
-  @keyframes ba-pulse { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.08); } }
 
   .reveal {
     opacity: 0;
@@ -454,7 +440,8 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-float, .animate-marquee, .mesh span, .hv *, .ba-mist, .ba-burst-on, .ba-pulse, .ba-wind path { animation: none !important; }
+    .animate-float, .animate-marquee, .mesh span, .hv *, .bb-drift, .bb-listras, .bb-swap, .bb-press { animation: none !important; }
+    .bb-toast, .bb-toast.bb-toast-on { transition: none; }
     .hv-good { clip-path: none; }
     .hv-off, .hv-edge, .hv-flash, .hv-ring, .hv-halo, .hv-shock, .hv-spark { opacity: 0; }
     .hv-in, .hv-on, .hv-word { opacity: 1; }

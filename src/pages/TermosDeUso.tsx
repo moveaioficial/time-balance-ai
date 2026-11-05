@@ -1,11 +1,12 @@
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { usePageTitle } from "@/hooks/use-page-title";
+import { useSeo } from "@/hooks/use-page-title";
+import { SEO } from "@/lib/seo";
 
 export default function TermosDeUso() {
-  usePageTitle("Termos de Uso | Move AI");
+  useSeo(SEO.termos);
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
+      <main className="max-w-3xl mx-auto px-6 py-16 lg:py-24">
         <Breadcrumbs items={[{ label: "Termos de Uso", to: "/termos-de-uso" }]} />
 
         <h1 className="text-3xl sm:text-4xl font-bold mb-2">Termos de Uso</h1>
@@ -49,7 +50,7 @@ export default function TermosDeUso() {
           <section>
             <h2 className="text-lg font-semibold text-foreground mb-3">5. Propriedade Intelectual</h2>
             <p>
-              Os textos, o design, a marca e o código deste site são da Move AI ou usados com licença, e são protegidos pela legislação brasileira de direitos autorais e de propriedade intelectual. Algumas fotos e vídeos de exemplo vêm de bancos de imagens gratuitos (Unsplash e Pexels), usados conforme as licenças deles. Os negócios mostrados nos exemplos do site, como a confeitaria e a empresa de climatização, são fictícios.
+              Os textos, o design, a marca e o código deste site são da Move AI ou usados com licença, e são protegidos pela legislação brasileira de direitos autorais e de propriedade intelectual. Algumas fotos e vídeos de exemplo vêm de bancos de imagens gratuitos (Unsplash e Pexels), usados conforme as licenças deles. Os negócios mostrados nos exemplos do site, como a confeitaria e a barbearia, são fictícios.
             </p>
           </section>
 
@@ -88,13 +89,13 @@ export default function TermosDeUso() {
             <h2 className="text-lg font-semibold text-foreground mb-3">10. Contato</h2>
             <p>
               Em caso de dúvidas sobre estes Termos, entre em contato pelo e-mail{" "}
-              <a href="mailto:moveaioficial@gmail.com" className="text-primary hover:underline">
+              <a href="mailto:moveaioficial@gmail.com" className="text-primary underline underline-offset-2">
                 moveaioficial@gmail.com
               </a>.
             </p>
           </section>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
