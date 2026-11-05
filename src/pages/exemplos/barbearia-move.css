@@ -153,6 +153,7 @@
 /* equipe */
 .bm-equipe { padding: clamp(72px, 10vw, 160px) var(--margem) clamp(72px, 12vw, 200px); padding-right: max(var(--margem), 40px); }
 .bm-equipe h2 { max-width: 9em; }
+.bm-equipe-aviso { margin-top: 16px; max-width: 36em; font-size: 16px; }
 .bm-equipe-grade { display: grid; gap: 40px; margin-top: 48px; }
 .bm-barbeiro .bm-foto { aspect-ratio: 4 / 5; }
 .bm-barbeiro img { filter: grayscale(1) contrast(1.06); transition: filter 320ms ease-out; }
@@ -214,8 +215,9 @@
 /* como chegar */
 .bm-chegar { display: grid; gap: 36px; padding: clamp(72px, 10vw, 150px) var(--margem); padding-right: max(var(--margem), 40px); }
 .bm-mapa { display: block; width: 100%; height: auto; }
-.bm-endereco { font-family: var(--display); font-size: clamp(24px, 2.6vw, 38px); line-height: 1.08; margin: 22px 0 16px; }
-.bm-chegar-texto > p:not(.bm-endereco) { max-width: 32em; }
+.bm-endereco { font-family: var(--display); font-size: clamp(24px, 2.6vw, 38px); line-height: 1.08; margin: 22px 0 4px; }
+.bm-endereco-aviso { margin: 0 0 16px; font-weight: 600; }
+.bm-chegar-texto > p:not(.bm-endereco, .bm-endereco-aviso) { max-width: 32em; }
 .bm-chegar table { margin: 24px 0 28px; border-collapse: collapse; width: 100%; max-width: 440px; }
 .bm-chegar caption { text-align: left; font-weight: 600; padding-bottom: 8px; }
 .bm-chegar th, .bm-chegar td { text-align: left; font-weight: 400; padding: 9px 0; border-top: 2px solid var(--osso-2); }

@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useSeo } from "@/hooks/use-page-title";
 import { SEO } from "@/lib/seo";
-import { WHATSAPP_URL } from "@/lib/contato";
+import { WHATSAPP_NUMBER } from "@/lib/contato";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { PalavraCabelo, type PalavraCabeloHandle } from "@/components/barbearia/PalavraCabelo";
 import { CampoDegrade, PENTES } from "@/components/barbearia/cabelo";
@@ -18,26 +18,27 @@ import "./barbearia-move.css";
 // Fotos do Pexels (licença gratuita com uso comercial), em public/img/barbearia/:
 //   cadeira        Sofía Marquet              pexels.com/photo/18173343
 //   salao          Pavel Danilyuk             pexels.com/photo/7518739
-//   poste-cafe     Maria Orlova               pexels.com/photo/4947554
+//   poste          Maria Orlova               pexels.com/photo/4947554
 //   fade-perfil    Brian Silva                pexels.com/photo/39559324
 //   fade-linha     Brian Silva                pexels.com/photo/39559270
 //   fade-maquina   Brian Silva                pexels.com/photo/39559262
-//   pente          Alexander Mass             pexels.com/photo/33461079
 //   toalha         Mathias Reding             pexels.com/photo/20405689
 //   cachos         Matheus Wladeka            pexels.com/photo/6487911
 //   navalha        Erik Mclean                pexels.com/photo/9456810
 //   ferramentas    RDNE Stock project         pexels.com/photo/7697490
 //   jorge          ENIO ENGENHEIRO            pexels.com/photo/39218966
 //   beto           alexandre saraiva carniato pexels.com/photo/5188606
-//   kaique         Mateus Cordeiro            pexels.com/photo/28208787
+//   kaique         Ben Khatry                 pexels.com/photo/20302331
+// Cadeira, poste, salão e toalha estão recortadas para não mostrar marca, letreiro ou rótulo de terceiros.
 
 gsap.registerPlugin(ScrollTrigger);
 
 const IMG = "/img/barbearia/";
 const FIM = "fim-do-exemplo";
+const WHATSAPP_EXEMPLO = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Vim pelo exemplo da Barbearia Move")}`;
 
 const SERVICOS = [
-  { nome: "Corte", preco: 45, tempo: "40 min", nota: "Tesoura ou máquina, lavado e finalizado.", foto: "pente" },
+  { nome: "Corte", preco: 45, tempo: "40 min", nota: "Tesoura ou máquina, lavado e finalizado.", foto: "fade-perfil" },
   { nome: "Degradê", preco: 55, tempo: "50 min", nota: "Do pente 3 à navalha, sem degrau.", foto: "fade-linha" },
   { nome: "Barba com toalha quente", preco: 40, tempo: "30 min", nota: "Toalha, navalha e óleo no final.", foto: "toalha" },
   { nome: "Corte e barba", preco: 85, tempo: "1 h 10", nota: "A cadeira é sua por mais de uma hora.", foto: "navalha" },
@@ -46,9 +47,9 @@ const SERVICOS = [
 ];
 
 const EQUIPE = [
-  { nome: "Jorge", papel: "Dono. Abriu a casa e ainda pega a primeira cadeira.", foto: "jorge" },
-  { nome: "Beto", papel: "Barba e toalha quente. Conversa só se você quiser.", foto: "beto" },
-  { nome: "Kaique", papel: "Degradê e desenho. É ele que os meninos pedem.", foto: "kaique" },
+  { nome: "Jorge", papel: "Dono. Abriu a casa e ainda pega a primeira cadeira.", foto: "jorge", alt: "Homem de óculos e camisa azul segurando uma navalha" },
+  { nome: "Beto", papel: "Barba e toalha quente. Conversa só se você quiser.", foto: "beto", alt: "Homem de barba sorrindo, com uma tesoura na palma da mão" },
+  { nome: "Kaique", papel: "Degradê e desenho. É ele que os meninos pedem.", foto: "kaique", alt: "Homem de camisa branca e avental segurando uma tesoura" },
 ];
 
 const GALERIA = [
@@ -57,12 +58,12 @@ const GALERIA = [
   { foto: "cachos", nome: "Laterais baixas, cachos em cima" },
   { foto: "salao", nome: "A casa num sábado" },
   { foto: "fade-maquina", nome: "Máquina no acabamento" },
-  { foto: "pente", nome: "Pente e máquina no social" },
+  { foto: "ferramentas", nome: "Navalha, tesoura e pente" },
 ];
 
 const COMANDAS = [
   { n: "0412", item: "Degradê", valor: "R$ 55", texto: "Marquei às 16:40 e sentei na cadeira às 16:40. Nunca tinha visto isso em barbearia.", quem: "Diego, 29" },
-  { n: "0433", item: "Corte infantil", valor: "R$ 40", texto: "O Theo chorava em todo barbeiro. Aqui pediu para voltar na semana seguinte.", quem: "Patrícia, mãe do Theo" },
+  { n: "0433", item: "Corte", valor: "R$ 45", texto: "O Theo chorava em todo barbeiro. Aqui pediu para voltar na semana seguinte.", quem: "Patrícia, mãe do Theo" },
   { n: "0451", item: "Corte e barba", valor: "R$ 85", texto: "Vim pela barba e fiquei para o café. Agora volto de quinze em quinze dias.", quem: "Seu Antônio, 67" },
 ];
 
@@ -147,7 +148,7 @@ function Abertura() {
       <div className="bm-abertura-rodape">
         <div>
           <h1>Você senta de um jeito e levanta de outro.</h1>
-          <p>Barbearia Move: corte, barba e degradê com hora marcada, em Guarulhos.</p>
+          <p>Barbearia Move: corte, barba e degradê com hora marcada.</p>
         </div>
         <div className="bm-abertura-acao">
           <BotaoMarcar claro />
@@ -315,7 +316,7 @@ function Mapa() {
         <text x="290" y="176">Avenida da Ponte</text>
         <text x="418" y="326">Rua Exemplo</text>
         <text x="228" y="475">Rua do Pente</text>
-        <text transform="translate(514 300) rotate(90)">Rua da Tesoura</text>
+        <text transform="translate(514 345) rotate(90)">Rua da Tesoura</text>
       </g>
       <text x="598" y="356" fill="#F0E9DC" fontFamily="Inter, sans-serif" fontSize="16" fontWeight="600">Praça</text>
       {/* caminho */}
@@ -500,13 +501,13 @@ export default function BarbeariaMove() {
           <div className="bm-casa-texto">
             <h2 data-aparar>Três cadeiras e nenhuma pressa.</h2>
             <p data-sobe>
-              A Barbearia Move abriu em 2011 numa garagem da Vila Galvão. Hoje são três cadeiras vermelhas, café passado na hora e o jogo na TV quando tem jogo.
+              A Barbearia Move abriu em 2015. Hoje são três cadeiras vermelhas, café passado na hora e o jogo na TV quando tem jogo.
             </p>
             <p data-sobe>
-              Cada cliente fica 40 minutos na cadeira, porque é o tempo que um corte bem feito leva. Por isso a gente trabalha com hora marcada: você chega, senta e ninguém fica olhando o relógio.
+              Cada cliente tem a cadeira só para si, sem encaixe de outro em cima. Por isso a gente trabalha com hora marcada: você chega, senta e ninguém fica olhando o relógio.
             </p>
             <div className="bm-casa-menor" data-parallax="-14">
-              <FotoNavalha src="poste-cafe" alt="Poste de barbeiro na vitrine, com a máquina de café logo abaixo" />
+              <FotoNavalha src="poste" alt="Poste de barbeiro aceso na vitrine" />
             </div>
           </div>
         </section>
@@ -517,10 +518,11 @@ export default function BarbeariaMove() {
 
         <section className="bm-equipe" id="equipe">
           <h2 data-aparar>Quem segura a máquina</h2>
+          <p className="bm-equipe-aviso">Equipe fictícia. Fotos de banco; as pessoas não têm relação com a Move AI nem com a barbearia.</p>
           <div className="bm-equipe-grade">
             {EQUIPE.map((p, i) => (
               <article key={p.nome} className={`bm-barbeiro bm-barbeiro-${i}`} data-parallax={[-6, 5, -10][i]}>
-                <FotoNavalha src={p.foto} alt={`${p.nome}, barbeiro`} />
+                <FotoNavalha src={p.foto} alt={p.alt} />
                 <h3>{p.nome}</h3>
                 <p>{p.papel}</p>
               </article>
@@ -532,7 +534,7 @@ export default function BarbeariaMove() {
           <div className="bm-galeria-trilho" ref={trilho}>
             <div className="bm-galeria-abre">
               <h2 data-aparar>Saiu daqui.</h2>
-              <p>Alguns cortes da semana. Peça pelo nome ou mostre uma foto, que a gente diz se fica bom em você.</p>
+              <p>Alguns cortes de exemplo. Peça pelo nome ou mostre uma foto, que a gente diz se fica bom em você.</p>
             </div>
             {GALERIA.map((g, i) => (
               <figure key={g.foto} className={`bm-galeria-foto bm-galeria-foto-${i % 3}`}>
@@ -564,7 +566,8 @@ export default function BarbeariaMove() {
           <Mapa />
           <div className="bm-chegar-texto">
             <h2 data-aparar>Como chegar</h2>
-            <p className="bm-endereco">Rua Exemplo, 40<br />Vila Galvão, Guarulhos</p>
+            <p className="bm-endereco">Rua Exemplo, 40<br />Vila do Pente</p>
+            <p className="bm-endereco-aviso">(endereço fictício)</p>
             <p>Quem vem pela Avenida da Ponte entra na segunda à direita. O poste fica na calçada e dá para ver da esquina. Dá para parar na rua depois das 10h.</p>
             <table>
               <caption>Horário de funcionamento</caption>
@@ -593,16 +596,16 @@ export default function BarbeariaMove() {
         <div>
           <h2>Até aqui, tudo de mentira.</h2>
           <p>
-            A Barbearia Move não existe. Nomes, preços, endereço e depoimentos foram inventados, e o botão de marcar horário só traz você até aqui. O site é de verdade: foi a Move AI que fez, e faz um assim para a sua empresa.
+            A Barbearia Move não existe. Nomes, preços, endereço e depoimentos foram inventados, e o botão de marcar horário só traz você até aqui. O site é de verdade: foi a Move AI que fez, e a gente faz um site para a sua empresa, do tamanho que ela precisa.
           </p>
         </div>
         <div className="bm-fim-acoes">
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="bm-botao">
+          <a href={WHATSAPP_EXEMPLO} target="_blank" rel="noopener noreferrer" className="bm-botao">
             <span className="bm-botao-listras" aria-hidden="true" />
             <span className="bm-botao-txt"><WhatsAppIcon className="bm-icone" /> Falar com a Move AI</span>
           </a>
           <Link to="/" className="bm-link">Voltar para o site da Move AI</Link>
-          <p className="bm-creditos">Fotos do Pexels: Sofía Marquet, Pavel Danilyuk, Maria Orlova, Brian Silva, Alexander Mass, Mathias Reding, Matheus Wladeka, Erik Mclean, RDNE Stock project, ENIO ENGENHEIRO, alexandre saraiva carniato e Mateus Cordeiro. As pessoas das fotos não têm relação com esta barbearia inventada.</p>
+          <p className="bm-creditos">Fotos do Pexels: Sofía Marquet, Pavel Danilyuk, Maria Orlova, Brian Silva, Mathias Reding, Matheus Wladeka, Erik Mclean, RDNE Stock project, ENIO ENGENHEIRO, alexandre saraiva carniato e Ben Khatry. As pessoas das fotos não têm relação com esta barbearia inventada.</p>
         </div>
       </footer>
 
