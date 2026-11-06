@@ -1,7 +1,7 @@
 import { useId } from "react";
 
 // Logo da Move AI (versão nova, A1 com traço 14, escolhida em 29/10/2026), desenhada em SVG.
-// Em repouso: "move" branco e "AI" ciano. No hover do link pai (.logo-link), o "move" ganha o degradê da marca correndo.
+// Em repouso: "move" branco e "AI" roxo. No hover do link pai (.logo-link), o "move" ganha o degradê da marca correndo.
 export function BrandLogo({ className = "" }: { className?: string }) {
   const id = useId().replace(/:/g, "");
   return (
@@ -24,7 +24,7 @@ export function BrandLogo({ className = "" }: { className?: string }) {
             <path d="M370 70H450A40 40 0 1 0 438.3 98.3" />
           </g>
         </g>
-        <path stroke="#00C3D0" strokeWidth="14" d="M480 110L514 30L548 110M491.9 82H536.1M574 30V110" />
+        <path stroke="#A45CFF" strokeWidth="14" d="M480 110L514 30L548 110M491.9 82H536.1M574 30V110" />
       </g>
     </svg>
   );
