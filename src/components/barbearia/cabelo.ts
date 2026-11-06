@@ -45,6 +45,7 @@ interface OpcoesPalavra {
   dpr: number;
   maxFios: number;
   faixasPorLinha: number;
+  alinharEsquerda?: boolean;
   onMaquina: (e: EstadoMaquina) => void;
 }
 
@@ -134,7 +135,7 @@ export class CabeloPalavra {
       linhas.forEach((l, i) => {
         const lm = c.measureText(l);
         const lw = lm.actualBoundingBoxLeft + lm.actualBoundingBoxRight;
-        const x = caixa.x + (caixa.w - lw) / 2 + lm.actualBoundingBoxLeft;
+        const x = caixa.x + (this.op.alinharEsquerda ? 0 : (caixa.w - lw) / 2) + lm.actualBoundingBoxLeft;
         c.fillText(l, x, topo + capa + i * capa * (1 + vao));
         esq = Math.min(esq, x - lm.actualBoundingBoxLeft);
         dir = Math.max(dir, x + lm.actualBoundingBoxRight);

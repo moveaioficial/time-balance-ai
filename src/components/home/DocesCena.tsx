@@ -389,7 +389,8 @@ const CICLO = 18000;
 const INICIO = 7200;
 const FIM = 17640;
 
-export default function DocesCena({ onPronto }: { onPronto: () => void }) {
+// `parada`: desenha só o quadro final, sem animação (usado no celular, no antes e depois).
+export default function DocesCena({ onPronto, parada: soQuadroFinal = false }: { onPronto: () => void; parada?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -403,7 +404,7 @@ export default function DocesCena({ onPronto }: { onPronto: () => void }) {
     let ultimo = 0;
     let parada = false;
     let cicloAtual = -1;
-    const reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduz = soQuadroFinal || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const relogio = canvas.closest(".hv")?.querySelector<HTMLElement>(".hv-good");
 
     const agora = () => {
@@ -474,7 +475,8 @@ export default function DocesCena({ onPronto }: { onPronto: () => void }) {
       clearTimeout(timer);
       io.disconnect();
     };
-  }, [onPronto]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- a cena é montada uma vez; trocar o callback não pode refazê-la
+  }, [soQuadroFinal]);
 
   return <canvas ref={ref} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
 }
