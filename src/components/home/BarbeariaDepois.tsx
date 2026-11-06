@@ -1,18 +1,19 @@
 import { useEffect, useRef } from "react";
 import "@fontsource/bowlby-one/latin-400.css";
 import { aparelhoFraco, CabeloPalavra, FONTE_PALAVRA, type EstadoMaquina } from "@/components/barbearia/cabelo";
+import { ArrowRight, Check } from "lucide-react";
 import { Maquina, Poste } from "@/components/barbearia/Maquina";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { BarbeariaFotos } from "@/components/home/BarbeariaFotos";
 
 // O "depois" da seção "Na prática" no computador: só a primeira dobra da landing da Barbearia Move, dentro da moldura.
-// A máquina corta a promessa até ela ficar legível; ao lado, o resultado (a foto do degradê), o preço e a reserva.
+// A máquina corta a promessa até ela ficar legível; ao lado, as fotos trocam cortadas (BarbeariaFotos.tsx).
 // Os botões são só visuais. Este arquivo só carrega quando a seção chega perto da tela; não usa GSAP.
-// Foto do Pexels (licença gratuita com uso comercial), em public/img/barbearia/:
-//   fade-perfil  Brian Silva  pexels.com/photo/39559324 (espelhada, para o rosto olhar para o texto)
+// Fotos do Pexels (licença gratuita com uso comercial), em public/img/barbearia/:
+//   fade-perfil  Brian Silva    pexels.com/photo/39559324 (espelhada, para o rosto olhar para o texto)
+//   cadeira      Sofía Marquet  pexels.com/photo/18173343 (recortada para não mostrar rótulos)
 
 const DISPLAY: React.CSSProperties = { fontFamily: "'Bowlby One', 'Arial Black', sans-serif" };
-const HORARIOS = ["16h40", "17h20", "18h00", "18h40"];
-const ESCOLHIDO = 1;
+const BENEFICIOS = ["Degradê do pente à navalha", "Barba com toalha quente", "De segunda a sábado"];
 
 export default function BarbeariaDepois() {
   const quadro = useRef<HTMLDivElement>(null);
@@ -50,8 +51,8 @@ export default function BarbeariaDepois() {
       const em = w / 80;
       palavra?.destruir();
       palavra = new CabeloPalavra(cv, {
-        linhas: ["HORA MARCADA,", "CORTE NA", "RÉGUA."],
-        caixa: { x: 3 * em, y: 7.6 * em, w: 45 * em, h: 19.4 * em },
+        linhas: ["CORTE NA RÉGUA,", "BARBA NO", "CAPRICHO."],
+        caixa: { x: 3 * em, y: 7.4 * em, w: 45 * em, h: 18.6 * em },
         alinharEsquerda: true,
         corLetra: "#F0E9DC",
         largura: w,
@@ -111,16 +112,9 @@ export default function BarbeariaDepois() {
 
   return (
     <div ref={quadro} className="absolute inset-0 overflow-hidden bg-[#C4291C] text-[#F0E9DC]" style={{ fontFamily: "Inter, sans-serif" }}>
-      {/* o resultado: a foto ocupa a altura toda, separada por uma faixa de poste de barbearia */}
-      <div className="absolute inset-y-0 right-0 w-[28em] overflow-hidden bg-[#6C7178]">
-        <img src="/img/barbearia/fade-perfil.webp" alt="" decoding="async" className="h-full w-full -scale-x-100 object-cover object-[50%_32%]" />
-        <div className="absolute inset-x-[1.4em] bottom-[1.4em] flex items-center justify-between gap-[1em] bg-[#120E0B] px-[1.2em] py-[0.9em]">
-          <div>
-            <p className="text-[1.3em] leading-none" style={DISPLAY}>Corte e barba</p>
-            <p className="mt-[0.45em] text-[0.9em] leading-none text-[#F0E9DC]/80">Em uma hora, você sai pronto.</p>
-          </div>
-          <p className="flex-none text-[2.1em] leading-none text-[#F2B632]" style={DISPLAY}>R$ 85</p>
-        </div>
+      {/* as fotos, que trocam cortadas, separadas do texto por uma faixa de poste de barbearia */}
+      <div className="absolute inset-y-0 right-0 w-[28em]">
+        <BarbeariaFotos />
       </div>
       <div
         className="absolute inset-y-0 right-[28em] w-[1.1em]"
@@ -137,31 +131,29 @@ export default function BarbeariaDepois() {
           <span className="text-[1.6em] leading-none" style={DISPLAY}>Barbearia Move</span>
         </span>
         <span className="flex gap-[1.5em] text-[0.95em] font-semibold">
-          <span>Serviços</span><span>Preços</span><span>Como chegar</span>
+          <span>Cortes</span><span>Preços</span><span>Como chegar</span>
         </span>
       </div>
 
-      {/* a venda: promessa, horário e o botão */}
-      <div className="absolute bottom-[2.2em] left-[3em] w-[45em]">
-        <p className="text-[1.3em] font-semibold leading-[1.25]">
-          Escolha o horário, chegue e sente na cadeira. Sem esperar a sua vez.
+      {/* a venda: subtítulo, o que a pessoa leva e os botões */}
+      <div className="absolute bottom-[2.4em] left-[3em] w-[45em]">
+        <p className="max-w-[31em] text-[1.3em] font-semibold leading-[1.25]">
+          Degradê sem marca de máquina, barba feita na navalha e aquele cuidado que faz você voltar.
         </p>
-        <div className="mt-[1em] flex items-center gap-[0.6em]">
-          <span className="mr-[0.3em] text-[1em] font-bold">Hoje:</span>
-          {HORARIOS.map((h, i) => (
-            <span
-              key={h}
-              className={`border-[0.12em] border-[#F0E9DC] px-[0.8em] py-[0.45em] text-[1em] font-bold leading-none ${i === ESCOLHIDO ? "bg-[#F0E9DC] text-[#120E0B]" : ""}`}
-            >
-              {h}
-            </span>
+        <ul className="mt-[1em] flex flex-wrap gap-x-[1.5em] gap-y-[0.4em] text-[1em] font-semibold">
+          {BENEFICIOS.map((b) => (
+            <li key={b} className="flex items-center gap-[0.4em]">
+              <Check className="h-[1.1em] w-[1.1em] text-[#F2B632]" strokeWidth={3.5} aria-hidden="true" /> {b}
+            </li>
           ))}
-        </div>
-        <div className="mt-[1em] flex items-center gap-[1.2em]">
+        </ul>
+        <div className="mt-[1.3em] flex items-center gap-[1em]">
           <span className="inline-flex items-center gap-[0.5em] whitespace-nowrap bg-[#120E0B] px-[1.1em] py-[0.8em] text-[1.5em] leading-none text-[#F0E9DC] shadow-[0.22em_0.22em_0_#F2B632]" style={DISPLAY}>
-            <WhatsAppIcon className="h-[1.1em] w-[1.1em]" colorido /> Reservar minha cadeira
+            Quero esse corte <ArrowRight className="h-[1em] w-[1em]" strokeWidth={3} aria-hidden="true" />
           </span>
-          <span className="text-[1em] font-semibold leading-tight">Confirma em<br />uma mensagem.</span>
+          <span className="whitespace-nowrap border-[0.14em] border-[#F0E9DC] px-[1.1em] py-[0.8em] text-[1.15em] font-bold leading-none">
+            Ver cortes e preços
+          </span>
         </div>
       </div>
     </div>
