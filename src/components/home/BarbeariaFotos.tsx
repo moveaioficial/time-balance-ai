@@ -9,25 +9,25 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const pasta = "/img/barbearia/";
 const FOTOS = [
-  { src: `${pasta}lateral-risca.webp`, pos: "50% 30%" },
-  { src: `${pasta}risca-maquina.webp`, pos: "45% 50%" },
-  { src: `${pasta}fade-barba.webp`, pos: "45% 40%" },
+  { src: `${pasta}lateral-risca.webp`, pos: "40% 50%" },
+  { src: `${pasta}risca-maquina.webp`, pos: "50% 55%" },
+  { src: `${pasta}fade-barba.webp`, pos: "50% 40%" },
   { src: `${pasta}maquina-dourada.webp`, pos: "60% 50%" },
-  { src: `${pasta}nuca-pb.webp`, pos: "40% 50%" },
-  { src: `${pasta}pente-maquina.webp`, pos: "50% 50%" },
+  { src: `${pasta}nuca-pb.webp`, pos: "50% 20%" },
+  { src: `${pasta}pente-maquina.webp`, pos: "50% 55%" },
   { src: `${pasta}risca-perfil.webp`, pos: "45% 50%" },
   { src: `${pasta}pente-pb.webp`, pos: "55% 45%" },
-  { src: `${pasta}pente-navalha.webp`, pos: "45% 60%" },
+  { src: `${pasta}pente-navalha.webp`, pos: "50% 70%" },
 ];
 
-// posição de cada quadro numa grade de 12 × 12, para os tamanhos variarem sem deixar buraco
+// quadros do mesmo tamanho, perto de 6:5, para qualquer foto caber neles sem cortar a cabeça
 const QUADROS = [
-  "col-[1/8] row-[1/6]",
-  "col-[8/13] row-[1/5]",
-  "col-[8/13] row-[5/9]",
-  "col-[1/5] row-[6/13]",
-  "col-[5/8] row-[6/9]",
-  "col-[5/13] row-[9/13]",
+  "col-[1/7] row-[1/5]",
+  "col-[7/13] row-[1/5]",
+  "col-[1/7] row-[5/9]",
+  "col-[7/13] row-[5/9]",
+  "col-[1/7] row-[9/13]",
+  "col-[7/13] row-[9/13]",
 ];
 
 const TIPOS = ["tesoura", "tiras", "rasgo"] as const;

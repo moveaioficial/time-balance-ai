@@ -10,6 +10,7 @@ import { BarbeariaFotos } from "@/components/home/BarbeariaFotos";
 // Os botões são só visuais. Este arquivo só carrega quando a seção chega perto da tela; não usa GSAP.
 
 const DISPLAY: React.CSSProperties = { fontFamily: "'Bowlby One', 'Arial Black', sans-serif" };
+const GRAO = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.12"/></filter><rect width="240" height="240" filter="url(#g)"/></svg>')}`;
 const BENEFICIOS = ["Degradê sem degrau", "Barba com toalha quente", "Segunda a sábado"];
 
 export default function BarbeariaDepois() {
@@ -109,6 +110,14 @@ export default function BarbeariaDepois() {
 
   return (
     <div ref={quadro} className="absolute inset-0 overflow-hidden bg-[#C4291C] text-[#F0E9DC]" style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* o vermelho com grão de papel, as listras do poste bem de leve e as bordas mais escuras */}
+      <div
+        className="absolute inset-y-0 left-0 right-[36em]"
+        style={{
+          backgroundImage: `url("${GRAO}"), repeating-linear-gradient(135deg, rgba(0,0,0,0.075) 0 2.4em, transparent 2.4em 4.8em), radial-gradient(120% 90% at 30% 35%, transparent 45%, rgba(40,4,0,0.42) 100%)`,
+        }}
+      />
+
       {/* as fotos, que trocam cortadas, separadas do texto por uma faixa de poste de barbearia */}
       <div className="absolute inset-y-0 right-0 w-[36em]">
         <BarbeariaFotos />
@@ -147,11 +156,11 @@ export default function BarbeariaDepois() {
             </li>
           ))}
         </ul>
-        <div className="mt-[1.2em] flex items-center gap-[1em]">
-          <span className="inline-flex items-center gap-[0.5em] whitespace-nowrap bg-[#120E0B] px-[1.1em] py-[0.8em] text-[1.5em] leading-none text-[#F0E9DC] shadow-[0.22em_0.22em_0_#F2B632]" style={DISPLAY}>
+        <div className="mt-[1.2em] flex items-stretch gap-[1em]">
+          <span className="inline-flex items-center gap-[0.5em] whitespace-nowrap bg-[#120E0B] px-[1.1em] py-[0.8em] text-[1.5em] leading-none text-[#F0E9DC]" style={DISPLAY}>
             Quero esse corte <ArrowRight className="h-[1em] w-[1em]" strokeWidth={3} aria-hidden="true" />
           </span>
-          <span className="whitespace-nowrap border-[0.14em] border-[#F0E9DC] px-[1.1em] py-[0.8em] text-[1.15em] font-bold leading-none">
+          <span className="inline-flex items-center whitespace-nowrap border-[0.14em] border-[#F0E9DC] px-[1.1em] text-[1.15em] font-bold leading-none">
             Ver cortes e preços
           </span>
         </div>
