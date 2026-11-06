@@ -124,7 +124,7 @@ export function BeforeAfter() {
             Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. É a mesma empresa, contada de outro jeito. (O negócio é inventado por nós, para ilustrar. Não é cliente da Move.)
+            Arraste e compare. É a mesma empresa, contada de outro jeito.
           </p>
         </div>
 
