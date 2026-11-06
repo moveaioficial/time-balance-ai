@@ -1,9 +1,10 @@
-import { memo, useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
+import { memo, useCallback, useEffect, useRef, useSyncExternalStore, type PointerEvent as ReactPointerEvent } from "react";
 import { MousePointerClick, Smartphone, ChevronsLeftRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { AntesBarbearia, DepoisBarbearia } from "@/components/home/BarbeariaMock";
+import { AntesDoces, DepoisDoces } from "@/components/home/DocesMock";
 
-// Antes e depois arrastável do MESMO site: a Barbearia Move, fictícia, só para ilustrar (ver BarbeariaMock.tsx).
+// Antes e depois arrastável do MESMO site: no computador, a Barbearia Move; no celular, a Move Doces. As duas são inventadas.
 // As medidas internas são em "em": o quadro define o tamanho base (maior no celular), e tudo escala junto.
 // O divisor NÃO passa pelo estado do React: cada movimento só muda o recorte e a posição da alça, direto no estilo.
 // Assim, arrastar não redesenha nenhum componente, nem no celular fraco.
@@ -18,8 +19,19 @@ const ease = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 
 
 const Antes = memo(AntesBarbearia);
 const Depois = memo(DepoisBarbearia);
+const AntesCelular = memo(AntesDoces);
+const DepoisCelular = memo(DepoisDoces);
+
+const CONSULTA_CELULAR = "(max-width: 639px)";
+const assinar = (avisar: () => void) => {
+  const m = window.matchMedia(CONSULTA_CELULAR);
+  m.addEventListener("change", avisar);
+  return () => m.removeEventListener("change", avisar);
+};
+const lerCelular = () => window.matchMedia(CONSULTA_CELULAR).matches;
 
 export function BeforeAfter() {
+  const celular = useSyncExternalStore(assinar, lerCelular, () => false);
   const frameRef = useRef<HTMLDivElement>(null);
   const recorte = useRef<HTMLDivElement>(null);
   const alca = useRef<HTMLDivElement>(null);
@@ -112,7 +124,7 @@ export function BeforeAfter() {
             Mesmo site. <span className="accent-word">Outra</span> primeira impressão.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-white/75">
-            Arraste e compare. É a mesma barbearia, contada de outro jeito. (A barbearia é inventada por nós, para ilustrar. Não é cliente da Move.)
+            Arraste e compare. É a mesma empresa, contada de outro jeito. (O negócio é inventado por nós, para ilustrar. Não é cliente da Move.)
           </p>
         </div>
 
@@ -125,7 +137,7 @@ export function BeforeAfter() {
           <div
             ref={frameRef}
             role="group"
-            aria-label="Exemplo de antes e depois do site de uma barbearia fictícia"
+            aria-label={`Exemplo de antes e depois do site de uma ${celular ? "confeitaria" : "barbearia"}`}
             onPointerDown={onPointerDown}
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
@@ -134,9 +146,9 @@ export function BeforeAfter() {
             style={{ containerType: "inline-size", contain: "layout paint" }}
           >
             <div className="absolute inset-0 text-[2.5cqw] sm:text-[1.25cqw]">
-              <Antes />
+              {celular ? <AntesCelular /> : <Antes />}
               <div ref={recorte} className="absolute inset-0 will-change-[clip-path]" style={{ clipPath: "inset(0 0 0 50%)" }}>
-                <Depois />
+                {celular ? <DepoisCelular /> : <Depois />}
               </div>
             </div>
 

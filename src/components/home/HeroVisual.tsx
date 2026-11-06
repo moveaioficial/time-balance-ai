@@ -172,7 +172,6 @@ export function HeroVisual() {
         <div className="animate-float" style={{ ["--r" as string]: "0deg" }}>
          <div className="hv-bump">
           <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/20 shadow-[0_50px_140px_-30px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.04)] [transform:rotateY(-7deg)_rotateX(2deg)]">
-            <span className="absolute bottom-3 right-3 z-30 rounded bg-black/75 px-2 py-1 text-[11px] font-semibold leading-none text-white">Exemplo fictício</span>
             <div className="flex items-center gap-1.5 bg-[#1A1226] px-4 py-3">
               <span className="h-3 w-3 rounded-full bg-[#FF5F57]/80" />
               <span className="h-3 w-3 rounded-full bg-[#FEBC2E]/80" />
