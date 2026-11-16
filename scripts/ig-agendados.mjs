@@ -77,7 +77,9 @@ async function publicar(item) {
   const jaPostadas = new Set((recentes.data || []).map(m => (m.caption || '').split('\n')[0].trim()).filter(Boolean));
   const pasta = path.join(raiz, 'public/ig', item.slug);
   const legenda = (await (await fetch(`${BASE}/ig/${item.slug}/legenda-instagram.txt`)).text()).replace(/\r\n/g, '\n').trim();
-  if (jaPostadas.has(legenda.split('\n')[0].trim())) { console.log(`${item.slug}: já publicado, pulando.`); return; }
+  // IG_REPUBLICAR=slug1,slug2 libera republicar de proposito um post com a mesma 1a linha (ex.: apresentacao refeita).
+  const republicar = (process.env.IG_REPUBLICAR || '').split(',').map(x => x.trim()).includes(item.slug);
+  if (!republicar && jaPostadas.has(legenda.split('\n')[0].trim())) { console.log(`${item.slug}: já publicado, pulando.`); return; }
   // Reel: a pasta tem um reel.mp4. Carrossel: 01.jpg, 02.mp4, 03.jpg... (fotos e vídeos na ordem do número).
   // A lista de arquivos vem do repositório; os arquivos em si são lidos do site.
   // post agendado depois que a vigília começou: atualiza a cópia do repositório para achar a pasta
