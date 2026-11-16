@@ -37,7 +37,7 @@ export function AntesBarbearia() {
 
       {/* "slider" com uma foto qualquer escurecida e esticada */}
       <div className="relative flex h-[17em] sm:h-[15em] items-center justify-center overflow-hidden text-center">
-        <img src="/img/barbearia-antes.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-fill opacity-45 saturate-[0.4] sepia-[0.35]" />
+        <img src="/img/barbearia-antes.webp" alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-45 saturate-[0.4] sepia-[0.35]" />
         <span className="absolute left-[0.8em] text-[2.6em] text-white/60">‹</span>
         <span className="absolute right-[0.8em] text-[2.6em] text-white/60">›</span>
         <div className="relative px-[3em]">
