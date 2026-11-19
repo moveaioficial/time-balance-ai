@@ -380,15 +380,14 @@ const trilha = (() => {
     }
     amostras.push(...chegada);
     fimScroll = H - innerHeight - 4;
-    const d = "M" + amostras.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join("L");
-    path.setAttribute("d", d); fantasma.setAttribute("d", d);
+    pontosTxt = amostras.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`);
+    fantasma.setAttribute("d", "M" + pontosTxt.join("L"));
     tabela = []; ymax = []; total = 0;
     amostras.forEach(([x, y], i) => {
       if (i) total += Math.hypot(x - amostras[i - 1][0], y - amostras[i - 1][1]);
       tabela.push([total, x, y]);
       ymax.push(Math.max(y, i ? ymax[i - 1] : y));
     });
-    path.style.strokeDasharray = total;
     alvos = alvosEl.map((el) => ({ el, y: el.getBoundingClientRect().top + scrollY - desvio(el) + 30 }));
   }
 
@@ -396,14 +395,14 @@ const trilha = (() => {
     let lo = 0, hi = tabela.length - 1;
     while (lo < hi) { const m = (lo + hi) >> 1; tabela[m][0] < L ? (lo = m + 1) : (hi = m); }
     const b = tabela[lo], a = tabela[Math.max(0, lo - 1)], f = b[0] - a[0] ? (L - a[0]) / (b[0] - a[0]) : 0;
-    return [a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
+    return [a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f, lo];
   }
   function comprimentoNoY(y) {
     let lo = 0, hi = ymax.length - 1;
     while (lo < hi) { const m = (lo + hi) >> 1; ymax[m] < y ? (lo = m + 1) : (hi = m); }
     return tabela[lo][0];
   }
-  let ultimoOffset = -1;
+  let ultimoOffset = -1, pontosTxt = [];
   function quadro() {
     if (!tabela.length) return;
     const f = Math.max(0, 1 - scrollY / (innerHeight * 0.6)), celular = innerWidth < 900;
@@ -415,9 +414,11 @@ const trilha = (() => {
     const novo = atual + (alvo - atual) * (reduzido ? 1 : celular ? 0.06 : 0.12);
     if (Math.abs(novo - atual) < 0.05 && ultimoOffset >= 0) return; // parado: não mexe no DOM
     atual = novo;
-    ultimoOffset = total - atual;
-    path.style.strokeDashoffset = ultimoOffset;
-    const [x, y] = noComprimento(atual);
+    ultimoOffset = atual;
+    const [x, y, i] = noComprimento(atual);
+    // desenha só o trecho já percorrido; o tracejado do SVG (stroke-dasharray) falha
+    // em alguns celulares numa linha tão longa e mostrava o caminho inteiro
+    path.setAttribute("d", i > 0 && atual > 0.5 ? "M" + pontosTxt.slice(0, i).join("L") + `L${x.toFixed(1)},${y.toFixed(1)}` : "");
     cabeca.style.transform = `translate(${x}px, ${y}px)`;
     // o ponto sai do lugar e vira a cabeça da linha: começa quadrado, do tamanho do ponto, e vai virando bolinha
     const andando = ligada && atual > 1.5;
