@@ -2,6 +2,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { iniciarRede } from "./rede.js";
+import { inject as medirVisitas } from "@vercel/analytics";
+import { injectSpeedInsights } from "@vercel/speed-insights";
+
+// estatísticas de visita e de velocidade da Vercel (sem cookie)
+medirVisitas();
+injectSpeedInsights();
 import { rodarIntro as introEstilhaco } from "./intro-estilhaco.js";
 import { rodarIntro as introMergulho } from "./intro-mergulho.js";
 // qual intro roda: "mergulho" (nova) ou "estilhaco" (a anterior). Para comparar: ?intro=quebra ou ?intro=mergulho
