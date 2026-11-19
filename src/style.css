@@ -569,3 +569,14 @@ body { font-size: 17px; }
   .faq-painel { padding: 0; grid-template-columns: 1fr; }
 }
 @media (max-width: 900px) { .hero-sub { padding-inline: 20px; } }
+
+/* cards: o Safari do iPhone às vezes ignora o backface-visibility quando o card tem filhos posicionados,
+   e a frente aparecia por baixo do verso. Além de girar, cada lado some de fato na metade da virada. */
+.face { transition: visibility 0s linear 0.42s; }
+.verso { visibility: hidden; }
+.flip.virado .frente { visibility: hidden; }
+.flip.virado .verso { visibility: visible; }
+@media (hover: hover) { .flip:hover .frente { visibility: hidden; } .flip:hover .verso { visibility: visible; } }
+@media (prefers-reduced-motion: reduce) { .face { transition: none; } }
+/* no celular o verso precisa de mais altura para a lista caber inteira */
+@media (max-width: 600px) { .flip { aspect-ratio: 5 / 8; min-height: 470px; } }
