@@ -46,14 +46,15 @@
     {"@type": "WebSite", "@id": "https://www.moveai.tech/#site", "name": "Move AI", "url": "https://www.moveai.tech/", "inLanguage": "pt-BR", "publisher": {"@id": "https://www.moveai.tech/#empresa"}}
   ]}
   </script>
-  <!-- decide a intro antes do primeiro quadro: só na primeira visita e nunca com movimento reduzido.
+  <!-- decide a intro antes do primeiro quadro: só na primeira visita, nunca no celular e nunca com movimento reduzido.
        ATENÇÃO: este script tem o hash liberado na Content-Security-Policy do vercel.json. Se mudar uma vírgula dele, recalcule o hash. -->
   <script>
     try {
       var forca = location.search.indexOf("intro") > -1;
       var viu = localStorage.getItem("move-intro");
       var calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      document.documentElement.classList.add(forca || (!viu && !calmo) ? "com-intro" : "sem-intro");
+      var celular = matchMedia("(max-width: 900px)").matches;
+      document.documentElement.classList.add(forca || (!viu && !calmo && !celular) ? "com-intro" : "sem-intro");
     } catch (e) { document.documentElement.classList.add("sem-intro"); }
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };

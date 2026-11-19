@@ -406,9 +406,13 @@ const trilha = (() => {
   let ultimoOffset = -1;
   function quadro() {
     if (!tabela.length) return;
-    const f = Math.max(0, 1 - scrollY / (innerHeight * 0.6)), yAlvo = scrollY + innerHeight * 0.62 + (inicioY - innerHeight * 0.62) * f;
+    const f = Math.max(0, 1 - scrollY / (innerHeight * 0.6)), celular = innerWidth < 900;
+    let yAlvo = scrollY + innerHeight * 0.62 + (inicioY - innerHeight * 0.62) * f;
+    // no celular a linha corre reta pela borda; se acompanhasse a rolagem ponto a ponto, pareceria parada.
+    // Ela avança em trechos de meia tela e se desenha com animação a cada trecho.
+    if (celular) { const passo = innerHeight * 0.45; yAlvo = Math.max(inicioY, Math.floor((yAlvo + innerHeight * 0.2 * (1 - f)) / passo) * passo); }
     const alvo = ligada ? (scrollY >= fimScroll ? total : comprimentoNoY(yAlvo)) : 0;
-    const novo = atual + (alvo - atual) * (reduzido ? 1 : 0.12);
+    const novo = atual + (alvo - atual) * (reduzido ? 1 : celular ? 0.06 : 0.12);
     if (Math.abs(novo - atual) < 0.05 && ultimoOffset >= 0) return; // parado: não mexe no DOM
     atual = novo;
     ultimoOffset = total - atual;
