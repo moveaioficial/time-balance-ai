@@ -580,3 +580,117 @@ body { font-size: 17px; }
 @media (prefers-reduced-motion: reduce) { .face { transition: none; } }
 /* no celular o verso precisa de mais altura para a lista caber inteira */
 @media (max-width: 600px) { .flip { aspect-ratio: 5 / 8; min-height: 470px; } }
+
+/* ======================= v8: contato, menu do celular e ajustes ======================= */
+/* janela do formulário (mesmo formulário do site anterior, no visual novo) */
+.janela { --fg: #f4f1ec; --muted: rgba(244, 241, 236, 0.72); --line: rgba(244, 241, 236, 0.16); position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; color: var(--fg); }
+.janela[hidden] { display: none; }
+.janela-fundo { position: absolute; inset: 0; background: rgba(8, 4, 14, 0.72); opacity: 0; transition: opacity 0.25s; }
+.janela-caixa { position: relative; width: min(100%, 460px); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; background: #140c22; border: 1px solid var(--line); border-radius: 22px; padding: 30px 26px 24px; box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.8); opacity: 0; transform: translateY(16px) scale(0.98); transition: opacity 0.25s, transform 0.3s var(--ease); }
+.janela-caixa.larga { width: min(100%, 560px); }
+.janela.on .janela-fundo, .janela.on .janela-caixa { opacity: 1; transform: none; }
+.janela-caixa:focus { outline: none; }
+.janela-x { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+.janela-x:hover { color: var(--fg); background: rgba(255, 255, 255, 0.06); }
+.janela-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.janela-titulo { font: 600 clamp(24px, 3vw, 28px)/1.1 var(--display); letter-spacing: -0.03em; padding-right: 40px; }
+.janela-sub { color: var(--muted); font-size: 15px; margin-top: 10px; }
+.form { display: grid; gap: 14px; margin-top: 22px; }
+.form-isca { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.campo { display: grid; gap: 6px; font-size: 14px; font-weight: 500; }
+.campo small { color: var(--muted); font-weight: 400; }
+.campo input, .campo textarea { width: 100%; font: 400 16px/1.4 Inter, system-ui, sans-serif; color: var(--fg); background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; transition: border-color 0.2s, background 0.2s; }
+.campo textarea { resize: vertical; min-height: 88px; }
+.campo input::placeholder, .campo textarea::placeholder { color: rgba(244, 241, 236, 0.38); }
+.campo input:focus, .campo textarea:focus { outline: none; border-color: var(--cyan); background: rgba(255, 255, 255, 0.08); }
+.campo [aria-invalid] { border-color: #ff8a8a; }
+.campo-erro { font-style: normal; font-size: 13px; color: #ff9d9d; }
+.campo-erro:empty { display: none; }
+.aceite { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.aceite input { width: 20px; height: 20px; flex: none; margin-top: 1px; accent-color: #00c3d0; }
+.aceite a, .form-erro a { color: #d4b6ff; text-decoration: underline; text-underline-offset: 3px; }
+.form-erro { font-size: 14px; color: #ffb4b4; }
+.form-enviar { width: 100%; margin-top: 4px; }
+.form-enviar:disabled { opacity: 0.55; cursor: not-allowed; }
+.agenda-ok { color: #7fe9c0; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.agenda-dias { display: flex; gap: 8px; overflow-x: auto; margin: 20px -4px 0; padding: 2px 4px 8px; scrollbar-width: thin; }
+.agenda-dias button, .agenda-horas button { border: 1px solid var(--line); background: rgba(255, 255, 255, 0.04); color: var(--fg); border-radius: 12px; cursor: pointer; font: inherit; }
+.agenda-dias button { min-width: 64px; flex: none; display: grid; gap: 2px; padding: 8px 10px; font-size: 12px; text-transform: capitalize; }
+.agenda-dias button b { font-size: 15px; }
+.agenda-dias button:disabled { opacity: 0.35; cursor: not-allowed; }
+.agenda-horas { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; margin: 14px 0 16px; }
+.agenda-horas button { min-height: 44px; font-size: 15px; }
+.agenda-dias [aria-selected="true"], .agenda-horas [aria-selected="true"] { border-color: #00c3d0; background: rgba(0, 195, 208, 0.16); }
+.agenda-carregando, .agenda-caixa p { color: var(--muted); margin: 22px 0 6px; }
+.agenda-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 16px; }
+.agenda-acoes .link-seta { background-color: transparent; border: 0; color: var(--fg); cursor: pointer; font: inherit; }
+.agenda-depois { display: block; margin: 14px auto 0; background: none; border: 0; color: var(--muted); font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; min-height: 44px; }
+.agenda-quando { font: 600 19px/1.3 var(--display); margin-top: 12px; }
+.agenda-feito .btn { margin-top: 16px; }
+.btn-wa svg, .wa-flutuante svg { fill: currentColor; }
+.btn-wa { gap: 10px; }
+.btn-wa svg { width: 18px; height: 18px; }
+html.janela-aberta { overflow: hidden; }
+
+/* aviso quando o mailto não abre nenhum app */
+.aviso-email { position: fixed; left: 50%; bottom: 20px; z-index: 90; transform: translateX(-50%); width: min(calc(100% - 32px), 520px); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 14px 46px 14px 18px; border-radius: 16px; background: #140c22; color: #f4f1ec; border: 1px solid rgba(244, 241, 236, 0.16); box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.8); font-size: 14.5px; }
+.aviso-email p { width: 100%; color: rgba(244, 241, 236, 0.75); }
+.aviso-email a, .aviso-email button { color: #f4f1ec; font: inherit; font-weight: 500; text-decoration: underline; text-underline-offset: 3px; background: none; border: 0; padding: 6px 0; cursor: pointer; }
+.aviso-email .aviso-x { position: absolute; right: 6px; top: 6px; width: 40px; height: 40px; text-decoration: none; font-size: 22px; color: rgba(244, 241, 236, 0.6); }
+
+/* botão flutuante de WhatsApp */
+.wa-flutuante { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 45; width: 58px; height: 58px; border-radius: 50%; background: #25d366; color: #fff; display: grid; place-items: center; box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.55); transition: transform 0.3s var(--ease), opacity 0.3s; }
+.wa-flutuante svg { width: 28px; height: 28px; }
+.wa-flutuante:hover { transform: scale(1.07); }
+.wa-flutuante::after { content: ""; position: absolute; inset: 0; border-radius: 50%; animation: waPulso 3.6s ease-out infinite; }
+@keyframes waPulso { 0%, 55% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); } 85%, 100% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); } }
+html.com-intro .wa-flutuante, html.janela-aberta .wa-flutuante, html.menu-aberto .wa-flutuante { opacity: 0; pointer-events: none; }
+.rodape-base { padding-bottom: 92px; }
+
+/* menu hambúrguer (até 1000 px) */
+.topo-menu { display: none; order: 3; width: 44px; height: 44px; flex: none; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; place-content: center; gap: 4px; padding: 0; }
+.topo-menu span { display: block; width: 17px; height: 1.8px; border-radius: 2px; background: var(--fg); transition: transform 0.3s var(--ease), opacity 0.2s; }
+.menu-aberto .topo-menu span:nth-child(1) { transform: translateY(5.8px) rotate(45deg); }
+.menu-aberto .topo-menu span:nth-child(2) { opacity: 0; }
+.menu-aberto .topo-menu span:nth-child(3) { transform: translateY(-5.8px) rotate(-45deg); }
+.menu-movel { pointer-events: auto; position: absolute; left: 0; right: 0; top: 100%; display: grid; padding: 8px var(--lado) 20px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 30px 50px -30px rgba(0, 0, 0, 0.6); animation: menuEntra 0.3s var(--ease); }
+.menu-movel[hidden] { display: none; }
+.menu-movel a { display: flex; align-items: center; min-height: 52px; font: 500 20px/1.2 var(--display); letter-spacing: -0.02em; color: var(--fg); border-bottom: 1px solid var(--line); }
+.menu-movel a:last-child { border-bottom: 0; color: var(--acento); }
+@keyframes menuEntra { from { opacity: 0; transform: translateY(-8px); } }
+@media (max-width: 1000px) {
+  .topo-menu { display: grid; }
+  .topo-barra { gap: 10px; }
+  .topo .cta { margin-left: auto; }
+}
+@media (max-width: 380px) {
+  .topo-logo img { height: 22px; }
+  .topo .cta { padding-left: 12px; font-size: 13px; gap: 8px; }
+  .cta-ponto { display: none; }
+}
+
+/* aba do Google: a consulta encolhe e o "Google" fica sempre inteiro */
+.serp-aba { overflow: visible; text-overflow: clip; }
+.serp-aba-q { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.serp-aba-fim { flex: none; white-space: pre; }
+@media (max-width: 600px) { .serp-aba { max-width: calc(100% - 64px); } .serp-aba-pesq { display: none; } }
+
+/* a linha passa por trás dos cards, inclusive quando eles deslizam */
+.flips { position: relative; z-index: 5; }
+
+/* PARADO um pouco mais fechado */
+.ht-3 { letter-spacing: -0.045em; }
+
+/* frase de impacto com mais presença no celular */
+@media (max-width: 900px) {
+  .fr-1 { font-size: 14vw; }
+  .fr-2 { font-size: 6vw; }
+  .fr-3 { font-size: 13vw; margin-top: 0.34em; }
+}
+@media (prefers-reduced-motion: reduce) { .wa-flutuante::after { animation: none; } .janela-caixa, .janela-fundo { transition: none; } }
+
+/* cabeçalho do celular: CTA mais enxuto para caber com o menu; rodapé empilhado nas telas estreitas */
+@media (max-width: 600px) { :root { --gutter: 22px; } }
+@media (max-width: 430px) { .topo .cta { padding: 0 16px; } .topo .cta .cta-seta { display: none; } }
+@media (max-width: 340px) { .topo-logo img { height: 20px; } .topo .cta { padding: 0 12px; } .topo-barra { gap: 8px; } }
+@media (max-width: 420px) { .rodape-grade { grid-template-columns: 1fr; gap: 28px; } }

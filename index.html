@@ -113,13 +113,22 @@
         <a href="#solucoes">Soluções</a>
         <a href="#faq">Dúvidas</a>
       </nav>
-      <a href="#analise" class="cta">
+      <button type="button" class="topo-menu" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <a href="#analise" class="cta" data-formulario>
         <span class="cta-ponto" aria-hidden="true"></span>
         <span class="cta-longo">Onde estou perdendo clientes?</span>
         <span class="cta-curto">Onde perco clientes?</span>
         <span class="cta-seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
       </a>
     </div>
+    <nav class="menu-movel" id="menu-movel" aria-label="Seções" hidden>
+      <a href="#busca">O problema</a>
+      <a href="#caminho">O que a gente enxerga</a>
+      <a href="#metodo">Como a gente move</a>
+      <a href="#solucoes">Soluções</a>
+      <a href="#faq">Dúvidas</a>
+      <a href="#analise">Análise gratuita</a>
+    </nav>
   </header>
 
   <main id="conteudo">
@@ -134,7 +143,7 @@
         </h1>
         <p class="hero-sub">Todo dia, tem cliente que passa pela sua empresa na tela do celular e segue em frente quando o que encontra não convence. A Move transforma a presença digital da sua empresa para que ela seja a escolhida.</p>
         <div class="hero-acoes h-anima">
-          <a href="#analise" class="btn">Começar pela análise gratuita <span class="seta">→</span></a>
+          <a href="#analise" class="btn" data-formulario>Começar pela análise gratuita <span class="seta">→</span></a>
           <a href="#busca" class="link-seta">Ver como o cliente te procura ↓</a>
         </div>
       </div>
@@ -151,7 +160,7 @@
         <div class="serp" aria-hidden="true">
           <div class="serp-navegador">
             <span class="serp-pontos"><i></i><i></i><i></i></span>
-            <span class="serp-aba"><svg class="serp-g" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><span class="serp-aba-q">dentista perto de mim</span> - Pesquisa Google</span>
+            <span class="serp-aba"><svg class="serp-g" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><span class="serp-aba-q">dentista perto de mim</span><span class="serp-aba-fim"> - <span class="serp-aba-pesq">Pesquisa </span>Google</span></span>
           </div>
           <div class="serp-url">google.com/search?q=<span class="serp-url-q">dentista+perto+de+mim</span></div>
           <div class="serp-topo">
@@ -218,7 +227,6 @@
               <h3 class="face-titulo">Análise</h3>
               <p class="face-lead">Onde a sua empresa está hoje.</p>
               <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
-              <span class="face-espelho" aria-hidden="true">ANÁLISE</span>
             </div>
             <div class="face verso">
               <p class="face-kicker"><span>O que a gente faz</span><span>01</span></p>
@@ -241,7 +249,6 @@
               <h3 class="face-titulo">Plano</h3>
               <p class="face-lead">O que mexer primeiro.</p>
               <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
-              <span class="face-espelho" aria-hidden="true">PLANO</span>
             </div>
             <div class="face verso">
               <p class="face-kicker"><span>O que a gente faz</span><span>02</span></p>
@@ -264,7 +271,6 @@
               <h3 class="face-titulo">Movimento</h3>
               <p class="face-lead">A gente faz. Você acompanha.</p>
               <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
-              <span class="face-espelho" aria-hidden="true">MOVIMENTO</span>
             </div>
             <div class="face verso">
               <p class="face-kicker"><span>O que a gente faz</span><span>03</span></p>
@@ -350,8 +356,8 @@
       <div class="analise-lado">
         <p class="sec-sub">Mande o seu site ou o seu Instagram. A gente devolve uma análise com o que ajustar primeiro, sem compromisso.</p>
         <div class="hero-acoes">
-          <a class="btn" href="https://wa.me/5511945689265?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Move%20AI%20e%20quero%20a%20an%C3%A1lise%20gratuita%20da%20presen%C3%A7a%20digital%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer">Quero minha análise <span class="seta">→</span></a>
-          <a class="link-seta" href="mailto:moveaioficial@gmail.com?subject=An%C3%A1lise%20gratuita">Prefiro mandar por e-mail</a>
+          <a class="btn" data-formulario href="https://wa.me/5511945689265?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Move%20AI%20e%20quero%20a%20an%C3%A1lise%20gratuita%20da%20presen%C3%A7a%20digital%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer">Quero minha análise <span class="seta">→</span></a>
+          <a class="link-seta" href="mailto:moveaioficial@gmail.com?subject=An%C3%A1lise%20gratuita%20da%20presen%C3%A7a%20digital">Prefiro mandar por e-mail</a>
         </div>
       </div>
     </section>
@@ -367,6 +373,7 @@
           <a href="https://www.instagram.com/moveai.oficial" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
           <a href="https://www.linkedin.com/company/moveaioficial/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
           <a href="https://wa.me/5511945689265" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.4-1.6-1-2-2l1-1-1-2z"/></svg></a>
+          <a href="mailto:moveaioficial@gmail.com?subject=Contato%20pelo%20site%20da%20Move%20AI" aria-label="E-mail"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></a>
         </div>
       </div>
       <div>
@@ -383,7 +390,7 @@
         <p class="rodape-kicker">Fale com a gente</p>
         <ul class="rodape-lista">
           <li><a href="https://wa.me/5511945689265" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
-          <li><a href="mailto:moveaioficial@gmail.com">moveaioficial@gmail.com</a></li>
+          <li><a href="mailto:moveaioficial@gmail.com?subject=Contato%20pelo%20site%20da%20Move%20AI">moveaioficial@gmail.com</a></li>
           <li>Guarulhos, SP</li>
         </ul>
       </div>

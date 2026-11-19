@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import { iniciarRede } from "./rede.js";
 import { inject as medirVisitas } from "@vercel/analytics";
 import { injectSpeedInsights } from "@vercel/speed-insights";
+import { iniciarContato } from "./contato.js";
 
 // estatísticas de visita e de velocidade da Vercel (sem cookie)
 medirVisitas();
@@ -34,6 +35,21 @@ if (!reduzido) {
   if (comIntro) lenis.stop();
 }
 const velocidade = () => (lenis ? lenis.velocity : 0);
+iniciarContato({ aoAbrir: () => lenis?.stop(), aoFechar: () => lenis?.start() });
+
+/* ---------- menu do celular ---------- */
+const botaoMenu = $(".topo-menu"), menuMovel = $("#menu-movel");
+function menuAberto(abre) {
+  menuMovel.hidden = !abre;
+  botaoMenu.setAttribute("aria-expanded", String(abre));
+  botaoMenu.setAttribute("aria-label", abre ? "Fechar menu" : "Abrir menu");
+  raiz.classList.toggle("menu-aberto", abre);
+}
+botaoMenu.addEventListener("click", () => menuAberto(menuMovel.hidden));
+menuMovel.addEventListener("click", (e) => { if (e.target.closest("a")) menuAberto(false); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !menuMovel.hidden) { menuAberto(false); botaoMenu.focus(); } });
+document.addEventListener("click", (e) => { if (!menuMovel.hidden && !e.target.closest(".topo")) menuAberto(false); });
+addEventListener("resize", () => { if (innerWidth > 1000 && !menuMovel.hidden) menuAberto(false); }, { passive: true });
 $$('a[href^="#"]').forEach((a) =>
   a.addEventListener("click", (e) => {
     const alvo = $(a.getAttribute("href"));
@@ -135,7 +151,7 @@ function entradaHero() {
     .fromTo(".hero-sub", { y: 24 }, { y: 0, duration: 1.1 }, 0.3)
     .fromTo(".hero .h-anima", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 1, stagger: 0.08 }, 0.6)
     .add(() => lenis?.start(), 0.5)
-    .add(() => { trilha.ligar(); proximidadeLigada = true; medirLetras(); if (!fino) ondaToque(); }, 1.5)
+    .add(() => { trilha.ligar(); proximidadeLigada = true; medirLetras(); if (!fino) { ondaToque(); ondaOcasional(); } }, 1.5)
     .add(() => ScrollTrigger.refresh(), 1.75);
 }
 
@@ -157,6 +173,18 @@ if (fino && !reduzido) {
       if (Math.abs(nw - s._w) > 0.05 || Math.abs(ng - s._g) > 0.5) { s._w = nw; s._g = ng; pinta(s); }
     });
   });
+}
+// no celular (sem mouse), de tempos em tempos uma onda discreta passa por uma linha do título, quase sempre "PARADO"
+function ondaOcasional() {
+  const linhas = [".ht-3", ".ht-3", ".ht-3", ".ht-1", ".ht-2"];
+  const vez = () => setTimeout(() => {
+    if (!document.hidden && scrollY < innerHeight * 0.5 && !raiz.classList.contains("janela-aberta")) {
+      const chs = $$(`.hero-titulo ${linhas[(Math.random() * linhas.length) | 0]} .ch`);
+      gsap.to(chs, { keyframes: [{ _w: (i, s) => (s._bw > 120 ? s._bw - 24 : s._bw + 20), _g: (i, s) => s._bg - 160, duration: 0.6 }, { _w: (i, s) => s._bw, _g: (i, s) => s._bg, duration: 0.95 }], stagger: 0.05, ease: "sine.inOut", onUpdate() { this.targets().forEach(pinta); } });
+    }
+    vez();
+  }, rnd(6000, 9000));
+  vez();
 }
 // no toque, uma onda passa pelas letras uma vez
 function ondaToque() {
@@ -371,11 +399,12 @@ const trilha = (() => {
       chegada = lado ? peloLado : porBaixo;
     }
     const amostras = [[pts[0].x, pts[0].y]];
+    let volta = null;
     for (let i = 1; i < pts.length; i++) {
       const b = pts[i];
       let a = pts[i - 1];
       if (a.tipo === "circulo") a = { x: a.fx, y: a.fy };
-      if (b.tipo === "circulo") { amostras.push(...cruzar(a, { x: b.cx + b.rx, y: b.cy }, true), ...elipse(b)); continue; }
+      if (b.tipo === "circulo") { amostras.push(...cruzar(a, { x: b.cx + b.rx, y: b.cy }, true)); volta = [amostras.length - 1]; amostras.push(...elipse(b)); volta.push(amostras.length - 1); continue; }
       amostras.push(...(i === 1 || Math.abs(a.x - b.x) >= 2 ? cruzar(a, b) : vertical(a, b, W, a.reto)));
     }
     amostras.push(...chegada);
@@ -388,6 +417,7 @@ const trilha = (() => {
       tabela.push([total, x, y]);
       ymax.push(Math.max(y, i ? ymax[i - 1] : y));
     });
+    trechoVolta = volta ? [tabela[volta[0]][0], tabela[volta[1]][0]] : null;
     alvos = alvosEl.map((el) => ({ el, y: el.getBoundingClientRect().top + scrollY - desvio(el) + 30 }));
   }
 
@@ -402,7 +432,7 @@ const trilha = (() => {
     while (lo < hi) { const m = (lo + hi) >> 1; ymax[m] < y ? (lo = m + 1) : (hi = m); }
     return tabela[lo][0];
   }
-  let ultimoOffset = -1, pontosTxt = [];
+  let ultimoOffset = -1, pontosTxt = [], trechoVolta = null;
   function quadro() {
     if (!tabela.length) return;
     const f = Math.max(0, 1 - scrollY / (innerHeight * 0.6)), celular = innerWidth < 900;
@@ -411,7 +441,13 @@ const trilha = (() => {
     // Ela avança em trechos de meia tela e se desenha com animação a cada trecho.
     if (celular) { const passo = innerHeight * 0.45; yAlvo = Math.max(inicioY, Math.floor((yAlvo + innerHeight * 0.2 * (1 - f)) / passo) * passo); }
     const alvo = ligada ? (scrollY >= fimScroll ? total : comprimentoNoY(yAlvo)) : 0;
-    const novo = atual + (alvo - atual) * (reduzido ? 1 : celular ? 0.06 : 0.12);
+    let passo = (alvo - atual) * (reduzido ? 1 : celular ? 0.06 : 0.12);
+    // a volta em "PARADA" se desenha devagar, em cerca de 3 s, para dar tempo de ver a palavra destacada
+    if (!reduzido && trechoVolta && atual > trechoVolta[0] - 30 && atual < trechoVolta[1]) {
+      const lim = (trechoVolta[1] - trechoVolta[0]) / ((celular ? 3.4 : 2.8) * 60);
+      passo = Math.max(-lim * 4, Math.min(lim, passo));
+    }
+    const novo = atual + passo;
     if (Math.abs(novo - atual) < 0.05 && ultimoOffset >= 0) return; // parado: não mexe no DOM
     atual = novo;
     ultimoOffset = atual;
@@ -484,8 +520,3 @@ new ResizeObserver(([e]) => {
   clearTimeout(refazer); refazer = setTimeout(() => ScrollTrigger.refresh(), 160);
 }).observe($("main"));
 document.fonts?.ready.then(() => { ScrollTrigger.refresh(); proximidadeLigada && medirLetras(); });
-
-/* ---------- conversão: clique no WhatsApp ou no e-mail vira uma visita em /obrigado no Vercel Analytics (sem cookie) ---------- */
-document.addEventListener("click", (e) => {
-  if (e.target.closest?.('a[href*="wa.me/"], a[href^="mailto:"]')) window.va?.("pageview", { route: "/obrigado", path: "/obrigado" });
-});
