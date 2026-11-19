@@ -1,21 +1,22 @@
 # Move AI
 
-> Estúdio digital que cuida do site, da marca, das redes sociais e dos sistemas de pequenas e médias empresas. A IA é o jeito de trabalhar do estúdio, e não o produto vendido. O primeiro passo é uma análise gratuita da presença digital da empresa.
+> Estúdio digital de Guarulhos, SP, que transforma a presença digital de empresas: Google, site, redes sociais, marca e sistemas trabalhando juntos, para o cliente encontrar, confiar e escolher a empresa. O primeiro passo é uma análise gratuita da presença digital.
 
-Os negócios que aparecem nos exemplos do site (a confeitaria e a barbearia) são fictícios. A Move AI não divulga preço no site: cada trabalho é contratado por proposta escrita, com escopo, prazo e valor.
+As empresas, notas e números da busca de exemplo no site são fictícios. A Move AI não divulga preço no site: cada trabalho é contratado por proposta escrita, com escopo, prazo e valor.
 
 ## Páginas
 
-- [Página inicial](https://www.moveai.tech/): serviços, método, exemplo de antes e depois, para quem é, como trabalhamos e dúvidas frequentes
+- [Página inicial](https://www.moveai.tech/): o caminho que o cliente faz até a empresa (Google, Instagram, marca, site e conversa), o método em três etapas (análise, plano e movimento), as soluções, as dúvidas frequentes e a análise gratuita
 - [Termos de uso](https://www.moveai.tech/termos-de-uso): regras do site e como funciona a contratação por proposta
-- [Política de privacidade](https://www.moveai.tech/politica-de-privacidade): dados coletados no formulário e na agenda, para que servem e como pedir para apagar
+- [Política de privacidade](https://www.moveai.tech/politica-de-privacidade): dados recebidos pelo WhatsApp e pelo e-mail, estatísticas anônimas de visita e como pedir para apagar
 
-## Serviços
+## Soluções
 
-- [Sites](https://www.moveai.tech/#servicos): site institucional, landing page e redesign
-- [Marca](https://www.moveai.tech/#servicos): logo, paleta, tipografia e guia de uso
-- [Redes sociais](https://www.moveai.tech/#servicos): posts e carrosséis todo mês, com padrão visual
-- [Produto digital](https://www.moveai.tech/#servicos): sistema feito sob medida para o dia a dia da empresa
+- [Ser encontrado](https://www.moveai.tech/#solucoes): Perfil da Empresa no Google, presença no Maps e site preparado para busca
+- [Ser lembrado](https://www.moveai.tech/#solucoes): posicionamento, identidade visual e guia de uso da marca
+- [Ser seguido](https://www.moveai.tech/#solucoes): social media, posts, carrosséis, Reels e stories
+- [Ser escolhido](https://www.moveai.tech/#solucoes): site, página de captação e materiais de venda que levam ao WhatsApp
+- [Seguir crescendo](https://www.moveai.tech/#solucoes): estratégia digital, acompanhamento mensal e sistemas sob medida
 
 ## Contato
 

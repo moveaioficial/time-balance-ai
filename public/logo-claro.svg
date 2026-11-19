@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 600 186" width="1200" height="372">
+  <title>Move AI</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#140F1C" stroke-width="20" d="M10 110V45A35 35 0 0 1 80 45V110M80 45A35 35 0 0 1 150 45V136A26 26 0 0 0 176 162H196"/>
+    <g stroke="#140F1C" stroke-width="14">
+      <circle cx="216" cy="70" r="40"/>
+      <path d="M276 30L312 110L348 30"/>
+      <path d="M370 70H450A40 40 0 1 0 438.3 98.3"/>
+    </g>
+    <path stroke="#5B1F8E" stroke-width="14" d="M480 110L514 30L548 110M491.9 82H536.1M574 30V110"/>
+  </g>
+</svg>

@@ -1,115 +1,400 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Site, marca e redes para a sua empresa | Move AI</title>
-    <meta name="description" content="Estúdio digital que cuida do site, da marca e das redes da sua empresa. Peça uma análise gratuita da sua presença digital." />
-    <meta name="author" content="Move AI" />
-    <meta name="theme-color" content="#07040C" />
-    <link rel="canonical" href="https://www.moveai.tech/" />
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Presença digital para a sua empresa | Move AI</title>
+  <meta name="description" content="A Move transforma a presença digital da sua empresa: Google, site, redes e marca trabalhando juntos. Peça uma análise gratuita." />
+  <meta name="theme-color" content="#0a0710" />
+  <link rel="canonical" href="https://www.moveai.tech/" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Move AI" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://www.moveai.tech/" />
+  <meta property="og:title" content="O futuro não fica parado | Move AI" />
+  <meta property="og:description" content="A Move transforma a presença digital da sua empresa: Google, site, redes e marca trabalhando juntos. Peça uma análise gratuita." />
+  <meta property="og:image" content="https://www.moveai.tech/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="O futuro não fica parado. Análise gratuita da presença digital da sua empresa. Move AI, moveai.tech" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="O futuro não fica parado | Move AI" />
+  <meta name="twitter:description" content="A Move transforma a presença digital da sua empresa: Google, site, redes e marca trabalhando juntos. Peça uma análise gratuita." />
+  <meta name="twitter:image" content="https://www.moveai.tech/og-image.png" />
+  <meta name="twitter:image:alt" content="O futuro não fica parado. Análise gratuita da presença digital da sua empresa. Move AI, moveai.tech" />
+  <link rel="preload" href="/fonts/inter-latin-260c81a4.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/anybody-titulos-3f5c9881.woff2" as="font" type="font/woff2" crossorigin />
+  <script type="application/ld+json">
+  {"@context": "https://schema.org", "@graph": [
+    {"@type": "ProfessionalService", "@id": "https://www.moveai.tech/#empresa", "name": "Move AI", "url": "https://www.moveai.tech/",
+      "logo": "https://www.moveai.tech/apple-touch-icon.png", "image": "https://www.moveai.tech/og-image.png",
+      "description": "Estúdio digital que transforma a presença digital da sua empresa: site, marca, redes, Google e sistemas.",
+      "email": "moveaioficial@gmail.com", "telephone": "+55 11 94568-9265", "areaServed": "BR",
+      "address": {"@type": "PostalAddress", "addressLocality": "Guarulhos", "addressRegion": "SP", "addressCountry": "BR"},
+      "sameAs": ["https://www.instagram.com/moveai.oficial", "https://www.linkedin.com/company/moveaioficial/"],
+      "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Soluções da Move AI", "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ser encontrado", "description": "Perfil da Empresa no Google, presença no Maps e site preparado para busca."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ser lembrado", "description": "Posicionamento, identidade visual e guia de uso da marca."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ser seguido", "description": "Social media, posts, carrosséis, Reels e stories."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ser escolhido", "description": "Site, página de captação e materiais de venda que levam ao WhatsApp."}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Seguir crescendo", "description": "Estratégia digital, acompanhamento mensal e sistemas sob medida."}}
+      ]}},
+    {"@type": "WebSite", "@id": "https://www.moveai.tech/#site", "name": "Move AI", "url": "https://www.moveai.tech/", "inLanguage": "pt-BR", "publisher": {"@id": "https://www.moveai.tech/#empresa"}}
+  ]}
+  </script>
+  <!-- decide a intro antes do primeiro quadro: só na primeira visita e nunca com movimento reduzido.
+       ATENÇÃO: este script tem o hash liberado na Content-Security-Policy do vercel.json. Se mudar uma vírgula dele, recalcule o hash. -->
+  <script>
+    try {
+      var forca = location.search.indexOf("intro") > -1;
+      var viu = localStorage.getItem("move-intro");
+      var calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.documentElement.classList.add(forca || (!viu && !calmo) ? "com-intro" : "sem-intro");
+    } catch (e) { document.documentElement.classList.add("sem-intro"); }
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <!-- INTRO: a sala antiga, a TV quebra e o vidro estilhaça revelando a Move -->
+  <div class="intro" id="intro">
+    <div class="intro-palco" aria-hidden="true">
+      <picture>
+        <source media="(max-aspect-ratio: 1/1)" srcset="/intro/sala-vertical.webp" />
+        <img class="intro-sala" src="/intro/sala.webp" alt="" width="1824" height="862" loading="lazy" fetchpriority="high" decoding="async" />
+      </picture>
+      <div class="intro-tela">
+        <div class="tv-imagem">
+          <div class="tv-site">
+            <p class="ts-faixa"><span>EM CONSTRUÇÃO</span></p>
+            <p class="ts-titulo">Bem-vindo ao nosso site!</p>
+            <p class="ts-links"><u>Quem somos</u> | <u>Produtos</u> | <u>Contato</u></p>
+            <p class="ts-cont">Você é o visitante nº <b>000127</b></p>
+            <p class="ts-data">Atualizado em 12/03/2009</p>
+          </div>
+          <div class="tv-barras"></div>
+          <canvas class="tv-ruido" width="160" height="120"></canvas>
+          <div class="tv-flash"></div>
+        </div>
+        <svg class="tv-racha" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+        <div class="tv-vidro"></div>
+      </div>
+    </div>
+    <svg class="intro-rachas" aria-hidden="true"></svg>
+    <div class="intro-clarao" aria-hidden="true"></div>
+    <canvas class="intro-cacos" aria-hidden="true"></canvas>
+    <button class="intro-pular" type="button">Pular intro <span aria-hidden="true">→</span></button>
+  </div>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Move AI" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:url" content="https://www.moveai.tech/" />
-    <meta property="og:title" content="Site, marca e redes para a sua empresa | Move AI" />
-    <meta property="og:description" content="Estúdio digital que cuida do site, da marca e das redes da sua empresa. Peça uma análise gratuita da sua presença digital." />
-    <meta property="og:image" content="https://www.moveai.tech/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Logo da Move AI" />
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="atmos" aria-hidden="true"></div>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://www.moveai.tech/og-image.png" />
-    <meta name="twitter:image:alt" content="Logo da Move AI" />
-    <meta name="twitter:title" content="Site, marca e redes para a sua empresa | Move AI" />
-    <meta name="twitter:description" content="Estúdio digital que cuida do site, da marca e das redes da sua empresa. Peça uma análise gratuita da sua presença digital." />
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ProfessionalService",
-          "@id": "https://www.moveai.tech/#empresa",
-          "name": "Move AI",
-          "url": "https://www.moveai.tech/",
-          "logo": "https://www.moveai.tech/apple-touch-icon.png",
-          "image": "https://www.moveai.tech/og-image.png",
-          "description": "Estúdio digital. Cuida do site, da marca, das redes sociais e dos sistemas de pequenas e médias empresas.",
-          "email": "moveaioficial@gmail.com",
-          "telephone": "+55 11 94568-9265",
-          "areaServed": "BR",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Guarulhos",
-            "addressRegion": "SP",
-            "addressCountry": "BR"
-          },
-          "sameAs": [
-            "https://www.instagram.com/moveai.oficial",
-            "https://www.linkedin.com/company/moveaioficial/"
-          ],
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Serviços da Move AI",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Sites",
-                  "description": "Site institucional, landing page e redesign."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Marca",
-                  "description": "Logo, paleta, tipografia e guia de uso."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Redes sociais",
-                  "description": "Posts e carrosséis todo mês, com padrão visual."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Produto digital",
-                  "description": "Sistema feito sob medida para o dia a dia da empresa."
-                }
-              }
-            ]
-          }
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://www.moveai.tech/#site",
-          "name": "Move AI",
-          "url": "https://www.moveai.tech/",
-          "inLanguage": "pt-BR",
-          "publisher": {
-            "@id": "https://www.moveai.tech/#empresa"
-          }
-        }
-      ]
-    }
-    </script>
-  </head>
+  <!-- A linha: o traço da Move que atravessa o site -->
+  <div class="trilha" aria-hidden="true">
+    <svg id="trilha-svg"><path id="trilha-fantasma" /><path id="trilha-path" /></svg>
+    <div class="trilha-cabeca"></div>
+  </div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <header class="topo">
+    <div class="topo-barra">
+      <a href="#inicio" class="topo-logo" aria-label="Move AI, início">
+        <img class="logo-esc" src="/logo-escuro.svg" alt="" width="104" height="32" />
+        <img class="logo-cla" src="/logo-claro.svg" alt="" width="104" height="32" />
+      </a>
+      <nav class="topo-nav" aria-label="Seções">
+        <a href="#busca">O problema</a>
+        <a href="#metodo">Como movemos</a>
+        <a href="#solucoes">Soluções</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+      <a href="#analise" class="cta">
+        <span class="cta-ponto" aria-hidden="true"></span>
+        <span class="cta-longo">Onde estou perdendo clientes?</span>
+        <span class="cta-curto">Onde perco clientes?</span>
+        <span class="cta-seta" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg></span>
+      </a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- 1. ABERTURA -->
+    <section class="hero" id="inicio" data-atmos="noite">
+      <canvas class="rede" aria-hidden="true"></canvas>
+      <div class="hero-centro">
+        <h1 class="hero-titulo" aria-label="O futuro não fica parado.">
+          <span class="ht ht-1" aria-hidden="true">O FUTURO</span>
+          <span class="ht ht-2" aria-hidden="true">NÃO FICA</span>
+          <span class="ht ht-3" aria-hidden="true">PARADO<i class="ponto-final">.</i></span>
+        </h1>
+        <p class="hero-sub">Todo dia, tem cliente que passa pela sua empresa na tela do celular e segue em frente quando o que encontra não convence. A Move transforma a presença digital da sua empresa para que ela seja a escolhida.</p>
+        <div class="hero-acoes h-anima">
+          <a href="#analise" class="btn">Começar pela análise gratuita <span class="seta">→</span></a>
+          <a href="#busca" class="link-seta">Ver como o cliente te procura ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. O PROBLEMA: a pesquisa no Google, percorrida com a rolagem -->
+    <section class="busca-sec" id="busca" data-ancora="dir" data-y="topo" data-atmos="roxo">
+      <div class="busca-palco">
+        <div class="busca-texto">
+          <p class="rotulo">Agora mesmo</p>
+          <h2 class="sec-titulo">Alguém está procurando <em>o que você vende.</em></h2>
+          <p class="sec-sub">Em poucos segundos, a pessoa compara fotos, notas e horários e decide quem merece o clique. Se a sua empresa fica lá embaixo, ela escolhe outra.</p>
+        </div>
+        <div class="serp" aria-hidden="true">
+          <div class="serp-navegador">
+            <span class="serp-pontos"><i></i><i></i><i></i></span>
+            <span class="serp-aba"><svg class="serp-g" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><span class="serp-aba-q">dentista perto de mim</span> - Pesquisa Google</span>
+          </div>
+          <div class="serp-url">google.com/search?q=<span class="serp-url-q">dentista+perto+de+mim</span></div>
+          <div class="serp-topo">
+            <div class="serp-barra"><span class="serp-q"></span><span class="cursor">|</span><svg class="serp-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="serp-div"></span><svg class="serp-lupa" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></div>
+          </div>
+          <div class="serp-abas"><b>Todas</b><span>Maps</span><span>Imagens</span><span>Notícias</span><span>Vídeos</span><span>Mais</span></div>
+          <div class="serp-janela">
+            <div class="serp-lista">
+              <p class="serp-qtd">Cerca de 2.130.000 resultados (0,42 segundos)</p>
+              <p class="serp-titulo-pack">Empresas</p>
+              <div class="serp-mapa"><i class="pin p1">A</i><i class="pin p2">B</i><i class="pin p3">C</i><i class="pin voce"></i></div>
+              <ol class="serp-res"></ol>
+            </div>
+            <div class="serp-foco"><b>Esta é a sua empresa.</b><span class="serp-pos"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. O CAMINHO DO CLIENTE -->
+    <section class="caminho" id="caminho" data-atmos="noite">
+      <div class="sec-cabeca" data-ancora="dir" data-y="base">
+        <p class="rotulo">E não para no Google</p>
+        <h2 class="sec-titulo">Antes de te chamar, o cliente passa por <em>cinco lugares.</em></h2>
+        <p class="sec-sub">Em cada um, a sua empresa ganha ou perde a confiança dele. A gente olha o caminho inteiro e mostra onde ele está travando.</p>
+      </div>
+      <ol class="paradas" data-ancora="centro" data-y="topo">
+        <li class="parada" data-alvo><span class="parada-num">01</span><h3>Google</h3><p class="parada-acao">Busca pelo seu nome ou pelo que você faz.</p>
+          <div class="estados"><p class="estado parado"><b>Parado</b> Perfil sem foto, horário errado, avaliação sem resposta.</p><p class="estado movendo"><b>Em movimento</b> Perfil completo, fotos reais e cada avaliação respondida.</p></div></li>
+        <li class="parada" data-alvo><span class="parada-num">02</span><h3>Instagram</h3><p class="parada-acao">Confere se a empresa está viva.</p>
+          <div class="estados"><p class="estado parado"><b>Parado</b> Último post de meses atrás, cada arte de um jeito.</p><p class="estado movendo"><b>Em movimento</b> Perfil com padrão visual e post bem feito.</p></div></li>
+        <li class="parada" data-alvo><span class="parada-num">03</span><h3>Marca</h3><p class="parada-acao">Forma a primeira impressão, antes de qualquer palavra.</p>
+          <div class="estados"><p class="estado parado"><b>Parado</b> Logo pixelado, uma cor no site e outra na fachada.</p><p class="estado movendo"><b>Em movimento</b> Uma identidade só, reconhecida em qualquer tela.</p></div></li>
+        <li class="parada" data-alvo><span class="parada-num">04</span><h3>Site</h3><p class="parada-acao">Procura o que você vende e se dá para confiar.</p>
+          <div class="estados"><p class="estado parado"><b>Parado</b> Demora para abrir no celular e não diz o que você faz.</p><p class="estado movendo"><b>Em movimento</b> Abre rápido, explica em segundos e leva ao contato.</p></div></li>
+        <li class="parada" data-alvo><span class="parada-num">05</span><h3>Conversa</h3><p class="parada-acao">Chama no WhatsApp ou vai embora.</p>
+          <div class="estados"><p class="estado parado"><b>Parado</b> Nenhum botão à vista e um caminho longo até você.</p><p class="estado movendo"><b>Em movimento</b> Contato a um toque, em todo lugar onde o cliente estiver.</p></div></li>
+      </ol>
+      <span class="ancora-fim" data-ancora="centro" data-y="topo"></span>
+    </section>
+
+    <!-- 4. FRASE DE IMPACTO: responde à abertura -->
+    <section class="frase" data-ancora="dir" data-y="topo" data-circula=".fr-3" data-atmos="azul">
+      <h2 class="frase-texto">
+        <span class="ht fr-1">A SUA EMPRESA</span>
+        <span class="ht fr-2">TAMBÉM NÃO PRECISA FICAR</span>
+        <span class="ht fr-3">PARADA<i class="ponto-final">.</i></span>
+      </h2>
+    </section>
+
+    <!-- 5. COMO A GENTE MOVE: cards que viram -->
+    <section class="metodo" id="metodo" data-ancora="esq" data-y="topo" data-off="70" data-atmos="papel">
+      <div class="sec-cabeca">
+        <p class="rotulo">Como a gente move</p>
+        <h2 class="sec-titulo">Três etapas. <em>Nenhum pacote empurrado.</em></h2>
+        <p class="sec-sub">Primeiro a gente entende onde a sua empresa está. Depois decide com você o que mexer. Só então coloca a mão na massa.</p>
+      </div>
+      <div class="flips" data-ancora="esq" data-y="base">
+        <article class="flip" data-alvo>
+          <div class="flip-in">
+            <div class="face frente">
+              <p class="face-kicker"><span>Etapa 01</span><span>Ler</span></p>
+              <img class="face-foto" src="/etapas/analise.webp" alt="Busca de cafeteria com mapa e avaliações" width="640" height="853" loading="lazy" decoding="async" />
+              <h3 class="face-titulo">Análise</h3>
+              <p class="face-lead">Onde a sua empresa está hoje.</p>
+              <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
+              <span class="face-espelho" aria-hidden="true">ANÁLISE</span>
+            </div>
+            <div class="face verso">
+              <p class="face-kicker"><span>O que a gente faz</span><span>01</span></p>
+              <p class="verso-lead">Olhamos a sua empresa do jeito que um cliente olha.</p>
+              <ul class="verso-lista">
+                <li>Google: fotos, horários e avaliações</li>
+                <li>Instagram: frequência e padrão visual</li>
+                <li>Site: velocidade e caminho até o contato</li>
+                <li>Concorrência: como os primeiros aparecem</li>
+              </ul>
+            </div>
+          </div>
+          <button class="flip-toque" type="button" aria-pressed="false" aria-label="Virar o card Análise"></button>
+        </article>
+        <article class="flip" data-alvo>
+          <div class="flip-in">
+            <div class="face frente">
+              <p class="face-kicker"><span>Etapa 02</span><span>Decidir</span></p>
+              <img class="face-foto" src="/etapas/plano.webp" alt="Quadro com as prioridades da cafeteria" width="640" height="853" loading="lazy" decoding="async" />
+              <h3 class="face-titulo">Plano</h3>
+              <p class="face-lead">O que mexer primeiro.</p>
+              <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
+              <span class="face-espelho" aria-hidden="true">PLANO</span>
+            </div>
+            <div class="face verso">
+              <p class="face-kicker"><span>O que a gente faz</span><span>02</span></p>
+              <p class="verso-lead">Você recebe por escrito o que mexer primeiro.</p>
+              <ul class="verso-lista">
+                <li>Prioridades em ordem de impacto</li>
+                <li>O que cada mudança resolve no negócio</li>
+                <li>O que pode ficar para depois</li>
+                <li>Prazo de cada etapa</li>
+              </ul>
+            </div>
+          </div>
+          <button class="flip-toque" type="button" aria-pressed="false" aria-label="Virar o card Plano"></button>
+        </article>
+        <article class="flip" data-alvo>
+          <div class="flip-in">
+            <div class="face frente">
+              <p class="face-kicker"><span>Etapa 03</span><span>Mover</span></p>
+              <img class="face-foto" src="/etapas/movimento.webp" alt="Cliente chamando a cafeteria pelo celular" width="640" height="853" loading="lazy" decoding="async" />
+              <h3 class="face-titulo">Movimento</h3>
+              <p class="face-lead">A gente faz. Você acompanha.</p>
+              <p class="face-dica"><span>Virar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v4h-4"/></svg></p>
+              <span class="face-espelho" aria-hidden="true">MOVIMENTO</span>
+            </div>
+            <div class="face verso">
+              <p class="face-kicker"><span>O que a gente faz</span><span>03</span></p>
+              <p class="verso-lead">A gente executa e você acompanha cada passo.</p>
+              <ul class="verso-lista">
+                <li>Site, Google, redes e marca na mesma equipe</li>
+                <li>Entregas por etapa, uma de cada vez</li>
+                <li>Conversa direta com quem faz</li>
+                <li>Depois da entrega, seguimos por perto</li>
+              </ul>
+            </div>
+          </div>
+          <button class="flip-toque" type="button" aria-pressed="false" aria-label="Virar o card Movimento"></button>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. SOLUÇÕES: organizadas pelo que a empresa precisa -->
+    <section class="solucoes" id="solucoes" data-atmos="papel">
+      <div class="sec-cabeca">
+        <p class="rotulo">Soluções</p>
+        <h2 class="sec-titulo">Cada negócio pede <em>um movimento diferente.</em></h2>
+        <p class="sec-sub">Cada uma cuida de uma parte do caminho que o cliente faz até te chamar. A sua empresa começa pela que mais pesa hoje.</p>
+      </div>
+      <ul class="lista-sol" data-ancora="esq" data-y="base">
+        <li class="sol" data-alvo>
+          <span class="sol-num">01</span>
+          <div class="sol-cab"><p class="sol-kicker">Ser encontrado</p><h3>Aparecer quando procuram você</h3><p>Quem busca o que você vende encontra a sua empresa com informação certa e boa impressão.</p></div>
+          <ul class="tags"><li>Perfil da Empresa no Google</li><li>Presença no Maps</li><li>Site preparado para busca</li><li>Informações iguais em todo lugar</li></ul>
+        </li>
+        <li class="sol" data-alvo>
+          <span class="sol-num">02</span>
+          <div class="sol-cab"><p class="sol-kicker">Ser lembrado</p><h3>Uma marca que fica na cabeça</h3><p>Posicionamento claro e identidade consistente, do logo à fachada, do Instagram ao cartão.</p></div>
+          <ul class="tags"><li>Posicionamento de marca</li><li>Identidade visual</li><li>Redesign de logo e artes</li><li>Guia de uso da marca</li></ul>
+        </li>
+        <li class="sol" data-alvo>
+          <span class="sol-num">03</span>
+          <div class="sol-cab"><p class="sol-kicker">Ser seguido</p><h3>Redes com padrão e assunto certo</h3><p>Conteúdo pensado para o seu público, para o perfil parecer vivo e passar confiança.</p></div>
+          <ul class="tags"><li>Social media</li><li>Posts e carrosséis</li><li>Reels</li><li>Stories</li></ul>
+        </li>
+        <li class="sol" data-alvo>
+          <span class="sol-num">04</span>
+          <div class="sol-cab"><p class="sol-kicker">Ser escolhido</p><h3>Do clique à conversa</h3><p>Site e materiais que explicam rápido o que você faz e levam o cliente até o WhatsApp.</p></div>
+          <ul class="tags"><li>Site e página de captação</li><li>Caminho até o WhatsApp</li><li>Apresentação e proposta comercial</li><li>Materiais de venda</li></ul>
+        </li>
+        <li class="sol" data-alvo>
+          <span class="sol-num">05</span>
+          <div class="sol-cab"><p class="sol-kicker">Seguir crescendo</p><h3>Presença que evolui todo mês</h3><p>Estratégia, medição e ajustes, com um plano claro para o próximo passo.</p></div>
+          <ul class="tags"><li>Estratégia digital</li><li>Acompanhamento mensal</li><li>Relatórios</li><li>Sistemas sob medida</li></ul>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 7. DÚVIDAS -->
+    <section class="faq" id="faq" data-ancora="esq" data-y="base" data-off="-120" data-atmos="roxo">
+      <div class="faq-painel">
+        <div class="faq-cabeca">
+          <p class="rotulo">Dúvidas</p>
+          <h2 class="sec-titulo">Antes de decidir, <em>você vai querer saber.</em></h2>
+          <p class="sec-sub">Não achou a sua pergunta? Manda no <a class="link-seta" href="https://wa.me/5511945689265" target="_blank" rel="noopener noreferrer">WhatsApp</a> que a gente responde.</p>
+        </div>
+        <div class="faq-lista">
+          <details class="faq-item"><summary>Como saber se a minha empresa precisa melhorar a presença digital?<span class="faq-mais" aria-hidden="true"></span></summary><p>Faça o teste do cliente: pesquise o que você vende, na sua região, pelo celular. Se a sua empresa não aparece entre as primeiras, aparece sem fotos ou com informação desatualizada, ou se o Instagram está parado há meses, tem cliente indo embora sem você saber.</p></details>
+          <details class="faq-item"><summary>O que acontece depois da análise gratuita?<span class="faq-mais" aria-hidden="true"></span></summary><p>Você recebe o que encontramos e o que mexeríamos primeiro. Se fizer sentido seguir, mandamos uma proposta com escopo, prazo e valor por escrito. Se não fizer, você fica com a análise e decide com calma.</p></details>
+          <details class="faq-item"><summary>Preciso contratar tudo de uma vez?<span class="faq-mais" aria-hidden="true"></span></summary><p>Não. Dá para começar pelo que mais pesa hoje, como o Perfil da Empresa no Google ou o site, e seguir para o resto depois. O plano mostra a ordem que faz sentido para o seu caso.</p></details>
+          <details class="faq-item"><summary>Quanto custa?<span class="faq-mais" aria-hidden="true"></span></summary><p>Depende do que a sua empresa precisa. Depois da análise, você recebe uma proposta com valor fechado e sabe exatamente o que está contratando, sem pacote pronto.</p></details>
+          <details class="faq-item"><summary>Quanto tempo leva para ver a mudança?<span class="faq-mais" aria-hidden="true"></span></summary><p>Algumas mudanças, como completar o Perfil da Empresa no Google, a gente faz logo no começo. Outras, como uma marca nova ou um site do zero, levam mais tempo. O prazo de cada etapa vai por escrito antes de começar.</p></details>
+          <details class="faq-item"><summary>Como eu sei se está dando resultado?<span class="faq-mais" aria-hidden="true"></span></summary><p>No acompanhamento mensal, a gente combina com você o que medir, como contatos pelo WhatsApp, pedidos de rota no Google e visitas no site.</p></details>
+          <details class="faq-item"><summary>Como funciona depois da entrega?<span class="faq-mais" aria-hidden="true"></span></summary><p>Você continua falando direto com quem fez. Se quiser seguir em movimento, existe o acompanhamento mensal, com ajustes e conversa sobre o próximo passo.</p></details>
+          <details class="faq-item"><summary>A Move atende o meu tipo de negócio?<span class="faq-mais" aria-hidden="true"></span></summary><p>O trabalho serve para negócios de segmentos diferentes, como loja, salão, escritório ou clínica. O que muda é por onde começar, e é isso que a análise mostra.</p></details>
+        </div>
+      </div>
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Como saber se a minha empresa precisa melhorar a presença digital?", "acceptedAnswer": {"@type": "Answer", "text": "Faça o teste do cliente: pesquise o que você vende, na sua região, pelo celular. Se a sua empresa não aparece entre as primeiras, aparece sem fotos ou com informação desatualizada, ou se o Instagram está parado há meses, tem cliente indo embora sem você saber."}}, {"@type": "Question", "name": "O que acontece depois da análise gratuita?", "acceptedAnswer": {"@type": "Answer", "text": "Você recebe o que encontramos e o que mexeríamos primeiro. Se fizer sentido seguir, mandamos uma proposta com escopo, prazo e valor por escrito. Se não fizer, você fica com a análise e decide com calma."}}, {"@type": "Question", "name": "Preciso contratar tudo de uma vez?", "acceptedAnswer": {"@type": "Answer", "text": "Não. Dá para começar pelo que mais pesa hoje, como o Perfil da Empresa no Google ou o site, e seguir para o resto depois. O plano mostra a ordem que faz sentido para o seu caso."}}, {"@type": "Question", "name": "Quanto custa?", "acceptedAnswer": {"@type": "Answer", "text": "Depende do que a sua empresa precisa. Depois da análise, você recebe uma proposta com valor fechado e sabe exatamente o que está contratando, sem pacote pronto."}}, {"@type": "Question", "name": "Quanto tempo leva para ver a mudança?", "acceptedAnswer": {"@type": "Answer", "text": "Algumas mudanças, como completar o Perfil da Empresa no Google, a gente faz logo no começo. Outras, como uma marca nova ou um site do zero, levam mais tempo. O prazo de cada etapa vai por escrito antes de começar."}}, {"@type": "Question", "name": "Como eu sei se está dando resultado?", "acceptedAnswer": {"@type": "Answer", "text": "No acompanhamento mensal, a gente combina com você o que medir, como contatos pelo WhatsApp, pedidos de rota no Google e visitas no site."}}, {"@type": "Question", "name": "Como funciona depois da entrega?", "acceptedAnswer": {"@type": "Answer", "text": "Você continua falando direto com quem fez. Se quiser seguir em movimento, existe o acompanhamento mensal, com ajustes e conversa sobre o próximo passo."}}, {"@type": "Question", "name": "A Move atende o meu tipo de negócio?", "acceptedAnswer": {"@type": "Answer", "text": "O trabalho serve para negócios de segmentos diferentes, como loja, salão, escritório ou clínica. O que muda é por onde começar, e é isso que a análise mostra."}}]}</script>
+    </section>
+
+    <!-- 8. ANÁLISE GRATUITA -->
+    <section class="analise" id="analise" data-ancora="dir" data-y="topo" data-off="120" data-atmos="roxo">
+      <div class="analise-texto">
+        <p class="rotulo">Análise gratuita</p>
+        <h2 class="sec-titulo">Como a sua empresa aparece <em>hoje</em> no digital?</h2>
+        <p class="analise-prazo">A gente responde em até 24 horas úteis.</p>
+      </div>
+      <div class="analise-lado">
+        <p class="sec-sub">Mande o seu site ou o seu Instagram. A gente devolve uma análise com o que ajustar primeiro, sem compromisso.</p>
+        <div class="hero-acoes">
+          <a class="btn" href="https://wa.me/5511945689265?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Move%20AI%20e%20quero%20a%20an%C3%A1lise%20gratuita%20da%20presen%C3%A7a%20digital%20da%20minha%20empresa." target="_blank" rel="noopener noreferrer">Quero minha análise <span class="seta">→</span></a>
+          <a class="link-seta" href="mailto:moveaioficial@gmail.com?subject=An%C3%A1lise%20gratuita">Prefiro mandar por e-mail</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé: colunas em cima e a logo gigante que entra pelas laterais -->
+  <footer class="rodape">
+    <div class="rodape-grade">
+      <div class="rodape-sobre">
+        <a href="#inicio" aria-label="Move AI, início"><img src="/logo-escuro.svg" alt="Move AI" class="rodape-logo" width="117" height="36" loading="lazy" /></a>
+        <p class="rodape-desc">Estúdio digital que transforma a presença digital da sua empresa: site, marca, redes, Google e sistemas.</p>
+        <div class="rodape-redes">
+          <a href="https://www.instagram.com/moveai.oficial" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg></a>
+          <a href="https://www.linkedin.com/company/moveaioficial/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a>
+          <a href="https://wa.me/5511945689265" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.4-1.6-1-2-2l1-1-1-2z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <p class="rodape-kicker">Navegue</p>
+        <ul class="rodape-lista">
+          <li><a href="#busca">O problema</a></li>
+          <li><a href="#metodo">Como movemos</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#faq">Dúvidas</a></li>
+          <li><a href="#analise">Análise gratuita</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="rodape-kicker">Fale com a gente</p>
+        <ul class="rodape-lista">
+          <li><a href="https://wa.me/5511945689265" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="mailto:moveaioficial@gmail.com">moveaioficial@gmail.com</a></li>
+          <li>Guarulhos, SP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="rodape-base">
+      <p>© 2026 Move AI. Todos os direitos reservados.</p>
+      <div><a href="/termos-de-uso">Termos de Uso</a><a href="/politica-de-privacidade">Política de Privacidade</a></div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
