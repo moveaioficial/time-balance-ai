@@ -7,7 +7,7 @@ const SB_URL = import.meta.env.VITE_SUPABASE_URL;
 const SB_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 const EMAIL = "moveaioficial@gmail.com";
 // link oficial do botão flutuante do site anterior (src/lib/contato.ts, pedido pelo Rafa em 16/11/2026)
-export const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5511966235414&text=Ol%C3%A1%2C+tudo+bem%3F+Vim+pelo+site+da+Move+AI.+Quero+agilizar+processos+e+melhorar+o+desempenho+da+minha+empresa+com+IA.+Podemos+conversar%3F&type=phone_number&app_absent=0";
+export const WHATSAPP_URL = "https://api.whatsapp.com/send/?phone=5511966235414&text=Ol%C3%A1%21+Vim+pelo+site+da+Move+AI.+Sinto+que+a+presen%C3%A7a+digital+da+minha+empresa+n%C3%A3o+mostra+o+que+ela+vale+e+quero+mudar+isso.+Podemos+conversar%3F&type=phone_number&app_absent=0";
 const WHATSAPP_AGENDA = "https://wa.me/5511966235414?text=" + encodeURIComponent("Olá! Preenchi o formulário no site da Move AI e quero marcar uma conversa.");
 const TZ = "America/Sao_Paulo";
 const FECHA_EM = 12;
